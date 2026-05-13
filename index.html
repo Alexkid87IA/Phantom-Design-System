@@ -343,7 +343,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 32px;
+    padding: 24px 48px;
   }
   .menu-logo {
     display: flex;
@@ -382,58 +382,80 @@
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 0 32px;
+    padding: 0 48px;
   }
   .menu-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 0;
     width: 100%;
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   .menu-links {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0;
   }
   .menu-link {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(32px, 4vw, 52px);
-    color: rgba(255,255,255,0.3);
+    font-size: clamp(36px, 5vw, 64px);
+    color: rgba(255,255,255,0.2);
     text-decoration: none;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    padding: 8px 0;
-    transition: color 0.15s var(--ease);
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    padding: 10px 0;
+    transition: color 0.2s var(--ease), transform 0.2s var(--ease);
     position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .menu-link-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.15);
+    transition: color 0.2s var(--ease);
+    min-width: 28px;
   }
   .menu-link:hover {
     color: #fff;
+    transform: translateX(8px);
   }
-  .menu-link::before {
-    content: '';
-    position: absolute;
-    left: -16px;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    width: 8px;
-    height: 8px;
-    border-radius: 9999px;
-    background: var(--phantom-violet);
-    transition: transform 0.18s var(--ease);
+  .menu-link:hover .menu-link-num {
+    color: var(--phantom-violet);
   }
-  .menu-link:hover::before {
-    transform: translateY(-50%) scale(1);
+  .menu-link:nth-child(1):hover { color: var(--rainbow-pink); }
+  .menu-link:nth-child(2):hover { color: var(--phantom-violet); }
+  .menu-link:nth-child(3):hover { color: var(--rainbow-yellow); }
+  .menu-link:nth-child(4):hover { color: var(--rainbow-green); }
+  .menu-link:nth-child(5):hover { color: var(--rainbow-orange); }
+  .menu-link:nth-child(6):hover { color: var(--rainbow-blue); }
+  .menu-link:nth-child(7):hover { color: var(--rainbow-red); }
+
+  @keyframes menuSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
+  .menu-overlay.open .menu-link {
+    animation: menuSlideIn 0.4s var(--ease-out-quart) backwards;
+  }
+  .menu-overlay.open .menu-link:nth-child(1) { animation-delay: 0.05s; }
+  .menu-overlay.open .menu-link:nth-child(2) { animation-delay: 0.1s; }
+  .menu-overlay.open .menu-link:nth-child(3) { animation-delay: 0.15s; }
+  .menu-overlay.open .menu-link:nth-child(4) { animation-delay: 0.2s; }
+  .menu-overlay.open .menu-link:nth-child(5) { animation-delay: 0.25s; }
+  .menu-overlay.open .menu-link:nth-child(6) { animation-delay: 0.3s; }
+  .menu-overlay.open .menu-link:nth-child(7) { animation-delay: 0.35s; }
 
   .menu-side {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-left: 60px;
-    border-left: 1px solid rgba(255,255,255,0.08);
+    border-left: 2px solid rgba(255,255,255,0.06);
   }
   .menu-side-top {
     padding-top: 8px;
@@ -448,10 +470,10 @@
   }
   .menu-side-text {
     font-family: var(--font-body);
-    font-size: 15px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.5;
-    max-width: 280px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.55;
+    max-width: 320px;
   }
   .menu-side-text strong { color: #fff; }
 
@@ -459,14 +481,14 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 16px 28px;
+    padding: 18px 32px;
     background: var(--rainbow-yellow);
     color: var(--ink);
-    border: 2.5px solid var(--ink);
+    border: 2.5px solid var(--rainbow-yellow);
     border-radius: 9999px;
-    box-shadow: 4px 4px 0 0 rgba(255,255,255,0.15);
+    box-shadow: 4px 4px 0 0 var(--phantom-violet);
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     text-decoration: none;
     letter-spacing: -0.01em;
@@ -474,20 +496,25 @@
     align-self: flex-start;
   }
   .menu-cta:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 0 rgba(255,255,255,0.15);
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0 0 var(--phantom-violet);
   }
 
   .menu-ghosts {
     position: absolute;
     right: -20px;
     bottom: -30px;
-    opacity: 0.04;
+    opacity: 0.03;
     pointer-events: none;
+  }
+  .menu-ghost-float {
+    position: absolute;
+    pointer-events: none;
+    animation: float 3s ease-in-out infinite;
   }
 
   .menu-bottom {
-    padding: 20px 32px;
+    padding: 20px 48px;
     border-top: 1px solid rgba(255,255,255,0.06);
     display: flex;
     justify-content: space-between;
@@ -498,16 +525,16 @@
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.2);
   }
   .menu-bottom-links {
     display: flex;
-    gap: 20px;
+    gap: 24px;
   }
   .menu-bottom-link {
     font-family: var(--font-body);
     font-size: 13px;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.3);
     text-decoration: none;
     transition: color 0.15s var(--ease);
   }
@@ -516,10 +543,10 @@
   @media (max-width: 960px) {
     .mobile-burger { top: 16px; right: 16px; width: 46px; height: 46px; border-radius: 14px; }
     .menu-top { padding: 16px 20px; }
-    .menu-body { padding: 0 20px; }
+    .menu-body { padding: 0 24px; }
     .menu-grid { grid-template-columns: 1fr; }
     .menu-side { display: none; }
-    .menu-link { font-size: 36px; padding: 10px 0; }
+    .menu-link { font-size: 38px; padding: 12px 0; }
     .menu-close { width: 46px; height: 46px; border-radius: 14px; }
     .menu-bottom { padding: 16px 20px; }
     .menu-bottom-links { display: none; }
@@ -1652,6 +1679,37 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
+  .services-grid:not(.expanded) .agent-card-mini:nth-child(n+9) {
+    display: none;
+  }
+  .agents-show-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 24px auto 0;
+    padding: 14px 28px;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 9999px;
+    box-shadow: 4px 4px 0 0 var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform 0.12s var(--ease), box-shadow 0.12s var(--ease);
+  }
+  .agents-show-more:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+  .agents-show-more .arrow {
+    transition: transform 0.2s var(--ease);
+  }
+  .agents-show-more.expanded .arrow {
+    transform: rotate(180deg);
+  }
 
   .agent-card-mini {
     border: 2px solid var(--ink);
@@ -1990,6 +2048,7 @@
     .services-header { flex-direction: column; align-items: flex-start; gap: 24px; }
     .services-aside { text-align: left; }
     .services-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .services-grid:not(.expanded) .agent-card-mini:nth-child(n+7) { display: none; }
     .case-grid { grid-template-columns: 1fr; }
     .testimony { grid-template-columns: 1fr; text-align: center; justify-items: center; }
     .pricing-grid { grid-template-columns: 1fr; }
@@ -2043,6 +2102,7 @@
     .phone { width: 260px; height: 562px; }
     .mobile-headline { font-size: 36px; }
     .services-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid:not(.expanded) .agent-card-mini:nth-child(n+5) { display: none; }
     .stats-grid { grid-template-columns: 1fr; }
     .stat-number { font-size: 40px; }
     .footer-bottom { grid-template-columns: 1fr; gap: 32px; }
@@ -2995,6 +3055,10 @@
       </div>
 
     </div>
+    <button class="agents-show-more" id="agents-show-more">
+      <span class="agents-show-more-text">Voir les 20 agents</span>
+      <span class="arrow">↓</span>
+    </button>
   </div>
 </section>
 
@@ -3468,13 +3532,13 @@
   <div class="menu-body">
     <div class="menu-grid">
       <div class="menu-links">
-        <a class="menu-link" href="#comment">Comment</a>
-        <a class="menu-link" href="#dashboard">Dashboard</a>
-        <a class="menu-link" href="#agents">Agents</a>
-        <a class="menu-link" href="#resultats">R&eacute;sultats</a>
-        <a class="menu-link" href="#tarifs">Tarifs</a>
-        <a class="menu-link" href="#equipe">&Eacute;quipe</a>
-        <a class="menu-link" href="#faq">FAQ</a>
+        <a class="menu-link" href="#comment"><span class="menu-link-num">01</span>Comment</a>
+        <a class="menu-link" href="#dashboard"><span class="menu-link-num">02</span>Dashboard</a>
+        <a class="menu-link" href="#agents"><span class="menu-link-num">03</span>Agents</a>
+        <a class="menu-link" href="#resultats"><span class="menu-link-num">04</span>R&eacute;sultats</a>
+        <a class="menu-link" href="#tarifs"><span class="menu-link-num">05</span>Tarifs</a>
+        <a class="menu-link" href="#equipe"><span class="menu-link-num">06</span>&Eacute;quipe</a>
+        <a class="menu-link" href="#faq"><span class="menu-link-num">07</span>FAQ</a>
       </div>
       <div class="menu-side">
         <div class="menu-side-top">
@@ -3600,6 +3664,19 @@
   }, { threshold: 0.5 });
 
   counters.forEach(function(el) { observer.observe(el); });
+})();
+
+// ── Agents show more / less ──
+(function() {
+  var btn = document.getElementById('agents-show-more');
+  var grid = document.querySelector('.services-grid');
+  if (!btn || !grid) return;
+  var textEl = btn.querySelector('.agents-show-more-text');
+  btn.addEventListener('click', function() {
+    var isExpanded = grid.classList.toggle('expanded');
+    btn.classList.toggle('expanded', isExpanded);
+    textEl.textContent = isExpanded ? 'Voir moins' : 'Voir les 20 agents';
+  });
 })();
 </script>
 
