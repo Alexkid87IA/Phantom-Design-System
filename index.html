@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
-  html { background: #FFFFFF; scroll-behavior: smooth; }
+  html { background: #FFFFFF; scroll-behavior: smooth; overflow-x: clip; }
   body { background: #FFFFFF; overflow-x: clip; }
   ::selection { background: #FFD400; color: #0A0A0A; }
   strong { font-weight: 600; }
@@ -3626,8 +3626,13 @@
   var count = slideEls.length;
 
   function onScroll() {
+    if (window.innerWidth <= 960) {
+      track.style.transform = '';
+      return;
+    }
     var rect = outer.getBoundingClientRect();
     var scrollable = outer.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) return;
     var progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
     track.style.transform = 'translateX(' + (progress * (count - 1) * -100) + 'vw)';
   }
