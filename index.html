@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
-  html { background: #FFFFFF; }
+  html { background: #FFFFFF; scroll-behavior: smooth; }
   body { background: #FFFFFF; overflow-x: clip; }
   ::selection { background: #FFD400; color: #0A0A0A; }
   strong { font-weight: 600; }
@@ -291,6 +291,12 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
+    transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+  }
+  .nav-dock.hidden {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    pointer-events: none;
   }
   .nav-dock-inner {
     display: inline-flex;
@@ -298,17 +304,17 @@
     gap: 2px;
     padding: 6px;
     border-radius: 9999px;
-    background: rgba(255,255,255,0.78);
+    background: rgba(10,10,10,0.92);
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    border: 1px solid rgba(10,10,10,0.06);
-    box-shadow: 0 16px 50px -10px rgba(10,10,10,0.18), 0 1px 0 0 rgba(10,10,10,0.04);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 60px -10px rgba(10,10,10,0.4), 0 0 0 1px rgba(255,255,255,0.05);
   }
   .nav-dock-ghost {
     width: 32px;
     height: 32px;
-    margin-left: 4px;
-    margin-right: 8px;
+    margin-left: 6px;
+    margin-right: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,61 +325,57 @@
     font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
-    color: var(--ink);
+    color: rgba(255,255,255,0.55);
     letter-spacing: -0.01em;
     cursor: pointer;
     background: transparent;
     border: none;
     transition: all 0.18s var(--ease);
+    text-decoration: none;
   }
-  .nav-item:hover { background: rgba(10,10,10,0.04); }
+  .nav-item:hover { color: #fff; background: rgba(255,255,255,0.08); }
   .nav-item.active {
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(10,10,10,0.08), inset 0 0 0 1px rgba(10,10,10,0.05);
+    color: #fff;
+    background: var(--phantom-violet);
+    font-weight: 600;
   }
   .nav-cta {
-    margin-left: 6px;
+    margin-left: 4px;
     padding: 10px 18px;
-    background: var(--ink);
-    color: #fff;
+    background: var(--rainbow-yellow);
+    color: var(--ink);
     border: none;
     border-radius: 9999px;
     font-size: 13px;
     font-family: var(--font-body);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
     cursor: pointer;
     white-space: nowrap;
+    text-decoration: none;
+    transition: all 0.18s var(--ease);
   }
+  .nav-cta:hover { background: #fff; }
   .nav-cta-short { display: none; }
-
-  .nav-dock {
-    transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
-  }
-  .nav-dock.hidden {
-    transform: translateX(-50%) translateY(100px);
-    opacity: 0;
-    pointer-events: none;
-  }
   .nav-close {
     width: 28px;
     height: 28px;
     border-radius: 9999px;
-    background: rgba(10,10,10,0.06);
+    background: rgba(255,255,255,0.1);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-size: 14px;
-    color: var(--ink-40);
+    color: rgba(255,255,255,0.4);
     margin-left: 4px;
     transition: all 0.15s var(--ease);
     flex-shrink: 0;
   }
   .nav-close:hover {
-    background: rgba(10,10,10,0.12);
-    color: var(--ink);
+    background: rgba(255,255,255,0.18);
+    color: #fff;
   }
   .nav-toggle {
     position: fixed;
@@ -383,11 +385,11 @@
     width: 44px;
     height: 44px;
     border-radius: 9999px;
-    background: rgba(255,255,255,0.85);
+    background: rgba(10,10,10,0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(10,10,10,0.08);
-    box-shadow: 0 4px 20px rgba(10,10,10,0.12);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(10,10,10,0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -405,7 +407,7 @@
   .nav-toggle-bar {
     width: 18px;
     height: 2px;
-    background: var(--ink);
+    background: #fff;
     border-radius: 2px;
     position: relative;
   }
@@ -415,7 +417,7 @@
     position: absolute;
     width: 18px;
     height: 2px;
-    background: var(--ink);
+    background: #fff;
     border-radius: 2px;
     left: 0;
   }
@@ -1844,7 +1846,7 @@
     .nav-cta { padding: 8px 14px; font-size: 12px; }
     .nav-cta-full { display: none; }
     .nav-cta-short { display: inline; }
-    .nav-dock-ghost { width: 26px; height: 26px; margin-right: 4px; }
+    .nav-dock-ghost { width: 26px; height: 26px; margin-left: 4px; margin-right: 4px; }
   }
   @media (max-width: 600px) {
     .nav-dock-inner { padding: 4px; }
@@ -2671,7 +2673,7 @@
 <!-- ════════════════════════════════════════════════════════════
      SERVICES — Catalogue d'agents
      ════════════════════════════════════════════════════════════ -->
-<section class="services">
+<section class="services" id="agents">
   <div class="services-inner">
     <div class="services-header">
       <div>
@@ -2875,7 +2877,7 @@
 <!-- ════════════════════════════════════════════════════════════
      CASE STUDY — Sushi Boy
      ════════════════════════════════════════════════════════════ -->
-<section class="case-study">
+<section class="case-study" id="travail">
   <div class="case-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; Cas client &middot; Sushi Boy</div>
 
@@ -2931,7 +2933,7 @@
 <!-- ════════════════════════════════════════════════════════════
      ÉQUIPE
      ════════════════════════════════════════════════════════════ -->
-<section class="team">
+<section class="team" id="equipe">
   <div class="team-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; L'&eacute;quipe</div>
     <h2 class="team-headline reveal reveal-d1">50 ans d'exp&eacute;rience cumulée.<br><span class="muted">60M d'abonn&eacute;s g&eacute;r&eacute;s.</span></h2>
@@ -3069,7 +3071,7 @@
 <!-- ════════════════════════════════════════════════════════════
      PRICING
      ════════════════════════════════════════════════════════════ -->
-<section class="pricing">
+<section class="pricing" id="tarifs">
   <div class="pricing-inner">
     <div class="pricing-header">
       <div class="eyebrow reveal">&mdash; Tarifs</div>
@@ -3143,7 +3145,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
-<section class="faq">
+<section class="faq" id="faq">
   <div class="faq-inner">
     <div class="faq-layout">
       <div>
@@ -3309,16 +3311,16 @@
     <div class="nav-dock-ghost">
       <svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:#6E3CFF">
         <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
-        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
-        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/>
       </svg>
     </div>
-    <button class="nav-item" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Agents</button>
-    <button class="nav-item active" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Travail</button>
-    <button class="nav-item" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Tarifs</button>
-    <button class="nav-item nav-hide-mobile" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Équipe</button>
-    <button class="nav-item nav-hide-mobile" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Journal</button>
-    <button class="nav-cta"><span class="nav-cta-full">Je me lance &#8599;</span><span class="nav-cta-short">Go &#8599;</span></button>
+    <a class="nav-item" href="#agents" data-nav>Agents</a>
+    <a class="nav-item" href="#travail" data-nav>Travail</a>
+    <a class="nav-item" href="#tarifs" data-nav>Tarifs</a>
+    <a class="nav-item nav-hide-mobile" href="#equipe" data-nav>&Eacute;quipe</a>
+    <a class="nav-item nav-hide-mobile" href="#faq" data-nav>FAQ</a>
+    <a class="nav-cta" href="#tarifs"><span class="nav-cta-full">Je me lance &#8599;</span><span class="nav-cta-short">Go &#8599;</span></a>
     <button class="nav-close" id="nav-close" aria-label="Fermer le menu">&#10005;</button>
   </div>
 </nav>
@@ -3340,6 +3342,29 @@
     dock.classList.remove('hidden');
     toggle.classList.remove('visible');
   });
+})();
+
+// Scroll spy — highlight active nav item
+(function() {
+  var links = document.querySelectorAll('[data-nav]');
+  var sections = [];
+  links.forEach(function(l) {
+    var id = l.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ el: el, link: l });
+  });
+  if (!sections.length) return;
+  function update() {
+    var scrollY = window.scrollY + window.innerHeight * 0.4;
+    var active = null;
+    sections.forEach(function(s) {
+      if (s.el.offsetTop <= scrollY) active = s;
+    });
+    links.forEach(function(l) { l.classList.remove('active'); });
+    if (active) active.link.classList.add('active');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
 (function() {
