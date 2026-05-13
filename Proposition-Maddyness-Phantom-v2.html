@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phantom × Maddyness — Proposition commerciale</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --phantom-violet: #6E3CFF;
+  --phantom-violet-50: #F2EDFF;
+  --phantom-violet-100: #E3D6FF;
+  --phantom-violet-200: #C5ADFF;
+  --phantom-violet-400: #9472FF;
+  --phantom-violet-600: #5A26EB;
+  --phantom-violet-800: #3D14A8;
+  --rainbow-red: #FF4D2E;
+  --rainbow-orange: #FF8A1F;
+  --rainbow-yellow: #FFD400;
+  --rainbow-green: #00D26A;
+  --rainbow-blue: #0066FF;
+  --rainbow-pink: #FF2D87;
+  --red-100: #FFE2DA; --red-600: #DE2C0F;
+  --orange-100: #FFEBD2; --orange-600: #DB6A00;
+  --yellow-100: #FFF3B0; --yellow-600: #C8A300;
+  --green-100: #CFF5E0; --green-600: #00A050;
+  --blue-100: #D6E4FF; --blue-600: #0049CC;
+  --pink-100: #FFD4E5; --pink-600: #D6126A;
+  --ink: #0A0A0A;
+  --ink-90: #1A1A1A;
+  --ink-80: #2B2B2B;
+  --ink-60: #4A4A4A;
+  --ink-40: #767676;
+  --ink-30: #9B9B9B;
+  --ink-20: #C6C6C6;
+  --ink-10: #E5E5E5;
+  --ink-05: #F2F2F2;
+  --paper: #FFFFFF;
+  --paper-warm: #F7F6F2;
+  --font-display: 'Space Grotesk', 'SF Pro Display', system-ui, sans-serif;
+  --font-body: 'Geist', 'Inter Tight', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  --shadow-pop: 6px 6px 0 0 var(--ink);
+  --shadow-pop-lg: 8px 8px 0 0 var(--ink);
+  --shadow-pop-violet: 6px 6px 0 0 var(--phantom-violet);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-xl: 28px; --r-full: 9999px;
+  --grad-rainbow: linear-gradient(90deg, var(--rainbow-red) 0%, var(--rainbow-orange) 18%, var(--rainbow-yellow) 36%, var(--rainbow-green) 54%, var(--rainbow-blue) 72%, var(--phantom-violet) 88%, var(--rainbow-pink) 100%);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--rainbow-yellow); color: var(--ink); }
+strong { color: var(--ink); font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+
+/* ── SLIDE ── */
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px clamp(24px, 6vw, 120px);
+  position: relative;
+  overflow: hidden;
+}
+.slide-inner { max-width: 1280px; width: 100%; margin: 0 auto; }
+
+/* ── TYPE ── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.eyebrow--violet { color: var(--phantom-violet-600); }
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+h3 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+h4 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+p, li { font-size: 17px; line-height: 1.55; color: var(--ink-60); }
+p.lead { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.45; color: var(--ink-60); }
+
+/* ── GHOST ── */
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes ghostDiag {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(8px, -12px) rotate(-4deg); }
+}
+@keyframes ghostRainbow {
+  0%   { color: #FF2D87; }
+  16%  { color: #FF8A1F; }
+  33%  { color: #FFD400; }
+  50%  { color: #00D26A; }
+  66%  { color: #0066FF; }
+  83%  { color: #6E3CFF; }
+  100% { color: #FF2D87; }
+}
+.deco-ghost { position: absolute; pointer-events: none; opacity: 0.06; }
+
+/* ── SLIDE VARIANTS ── */
+.slide--cover { background: var(--ink); color: #fff; text-align: center; align-items: center; }
+.slide--cover h1 { color: #fff; }
+.slide--dark { background: var(--ink); color: #fff; }
+.slide--dark h2, .slide--dark h3, .slide--dark h4 { color: #fff; }
+.slide--dark p, .slide--dark li { color: rgba(255,255,255,0.6); }
+.slide--dark strong { color: #fff; }
+.slide--dark .eyebrow { color: var(--phantom-violet-200); }
+.slide--warm { background: var(--paper-warm); }
+.slide--violet { background: var(--phantom-violet); color: #fff; }
+.slide--violet h2 { color: #fff; }
+.slide--violet p, .slide--violet li { color: rgba(255,255,255,0.8); }
+.slide--violet .eyebrow { color: rgba(255,255,255,0.45); }
+.slide--yellow { background: var(--rainbow-yellow); color: var(--ink); }
+.slide--yellow h2 { color: var(--ink); }
+.slide--yellow p { color: var(--ink-80); }
+
+/* ── LAYOUT ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.mt-8 { margin-top: 8px; } .mt-12 { margin-top: 12px; } .mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; } .mt-32 { margin-top: 32px; } .mt-40 { margin-top: 40px; }
+.mt-48 { margin-top: 48px; } .mt-64 { margin-top: 64px; }
+
+/* ── POP CARD ── */
+.pop-card {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-pop);
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.pop-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 0 var(--ink);
+}
+.pop-card--dark {
+  background: rgba(255,255,255,0.06);
+  border: 2.5px solid rgba(255,255,255,0.12);
+  box-shadow: none;
+  color: #fff;
+}
+.pop-card--dark:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 rgba(255,255,255,0.15);
+}
+.pop-card--dark h4 { color: #fff; }
+.pop-card--dark p { color: rgba(255,255,255,0.6); }
+
+/* ── TAGS ── */
+.tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.tag::before { content: ''; width: 5px; height: 5px; border-radius: 9999px; background: currentColor; }
+.tag-violet { background: var(--phantom-violet-50); color: var(--phantom-violet-600); }
+.tag-red    { background: var(--red-100); color: var(--red-600); }
+.tag-yellow { background: var(--yellow-100); color: var(--yellow-600); }
+.tag-orange { background: var(--orange-100); color: var(--orange-600); }
+.tag-green  { background: var(--green-100); color: var(--green-600); }
+.tag-blue   { background: var(--blue-100); color: var(--blue-600); }
+.tag-pink   { background: var(--pink-100); color: var(--pink-600); }
+
+/* ── STAT CARD ── */
+.stat-card {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-pop);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.stat-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 0 var(--ink);
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  transition: transform 0.25s var(--ease);
+}
+.stat-card:hover .stat-num { transform: scale(1.08); }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+/* ── FLOW ── */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.flow-step { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+.flow-circle {
+  width: 72px; height: 72px;
+  border-radius: 9999px;
+  border: 2.5px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  background: var(--paper);
+  box-shadow: var(--shadow-pop);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.flow-circle:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--ink); }
+.flow-arrow { font-size: 24px; color: var(--ink-20); flex: 0 0 auto; }
+.flow-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-40); max-width: 100px;
+}
+
+/* ── PIPELINE ── */
+.pipeline { display: flex; gap: 0; margin-top: 48px; }
+.pipeline-step {
+  flex: 1;
+  padding: 28px 22px;
+  border: 2.5px solid var(--ink);
+  position: relative;
+  transition: transform 0.2s var(--ease);
+}
+.pipeline-step:first-child { border-radius: var(--r-lg) 0 0 var(--r-lg); }
+.pipeline-step:last-child { border-radius: 0 var(--r-lg) var(--r-lg) 0; }
+.pipeline-step + .pipeline-step { border-left: none; }
+.pipeline-step:hover { transform: translateY(-4px); }
+.pipeline-num {
+  font-family: var(--font-display); font-size: 14px; font-weight: 700;
+  width: 28px; height: 28px; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.pipeline-arrow {
+  position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; background: var(--paper); border: 2.5px solid var(--ink);
+  border-radius: 9999px; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; z-index: 2; color: var(--ink);
+}
+
+/* ── APPLY BOX ── */
+.apply-box {
+  background: var(--phantom-violet-50);
+  border: 2.5px solid var(--phantom-violet);
+  border-radius: var(--r-lg);
+  padding: 24px 28px;
+  box-shadow: 4px 4px 0 0 var(--phantom-violet);
+}
+.apply-box p { color: var(--ink); font-size: 15px; line-height: 1.55; }
+.apply-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--phantom-violet-600); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.apply-label::before { content: ''; width: 5px; height: 5px; border-radius: 9999px; background: var(--phantom-violet); }
+
+/* ── TEAM ── */
+.team-card {
+  padding: 28px;
+  text-align: center;
+}
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 24px;
+  margin: 0 auto 16px;
+  border: 2.5px solid var(--ink);
+}
+.team-name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 22px; letter-spacing: -0.02em;
+}
+.team-role {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-40); margin-top: 6px;
+}
+.team-bio {
+  font-family: var(--font-body); font-size: 14px;
+  color: var(--ink-60); line-height: 1.5; margin-top: 14px;
+}
+
+/* ── DELIVERABLE ── */
+.deliverable {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-pop);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.deliverable:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 0 var(--ink);
+}
+
+/* ── CLIENTS ── */
+.clients-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-top: 40px;
+}
+.client-pill {
+  font-family: var(--font-display); font-weight: 600; font-size: 15px;
+  padding: 12px 22px; border-radius: var(--r-full);
+  border: 2.5px solid var(--ink); background: var(--paper);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transition: all 0.2s var(--ease);
+}
+.client-pill:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+
+/* ── PRICING ── */
+.tier {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: 36px 28px;
+  background: var(--paper);
+  box-shadow: var(--shadow-pop);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  position: relative;
+}
+.tier:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 0 var(--ink);
+}
+.tier--highlight {
+  border-color: var(--phantom-violet);
+  box-shadow: var(--shadow-pop-violet);
+  transform: translateY(-12px);
+}
+.tier--highlight:hover {
+  transform: translateY(-12px) translate(-3px, -3px);
+  box-shadow: 9px 9px 0 0 var(--phantom-violet);
+}
+.tier-badge {
+  position: absolute; top: -14px; left: 24px;
+  background: var(--phantom-violet); color: #fff;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: var(--r-full);
+  border: 2.5px solid var(--ink); box-shadow: 3px 3px 0 0 var(--ink);
+}
+.tier-name {
+  font-family: var(--font-display); font-size: 24px;
+  font-weight: 700; letter-spacing: -0.02em;
+}
+.tier-price {
+  font-family: var(--font-display); font-size: 48px;
+  font-weight: 700; margin: 14px 0 2px;
+  letter-spacing: -0.04em;
+}
+.tier-period {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--ink-40); letter-spacing: 0.08em;
+}
+.tier-list {
+  list-style: none; margin-top: 24px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.tier-list li {
+  font-size: 14px; color: var(--ink-60);
+  padding: 10px 0; border-bottom: 1px solid rgba(10,10,10,0.08);
+  display: flex; gap: 10px; align-items: center;
+}
+.tier-list li:last-child { border-bottom: none; }
+.check {
+  width: 18px; height: 18px; border-radius: 9999px;
+  background: var(--ink); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+}
+.check--violet { background: var(--phantom-violet); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-size: 17px; font-weight: 600;
+  padding: 18px 34px; border-radius: 14px;
+  border: 2.5px solid var(--ink);
+  background: var(--rainbow-yellow); color: var(--ink);
+  cursor: pointer; box-shadow: var(--shadow-pop);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  letter-spacing: -0.01em; text-decoration: none;
+}
+.btn:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 0 var(--ink); }
+.btn:active { transform: translate(6px, 6px); box-shadow: 0 0 0 0 var(--ink); }
+.btn--violet { background: var(--phantom-violet); color: #fff; }
+
+/* ── CASE CARD ── */
+.case-card {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-pop-lg);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.case-card:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 0 var(--ink); }
+.case-top { padding: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
+.case-stats {
+  display: flex; gap: 32px;
+  padding: 28px 32px; border-top: 2.5px solid var(--ink);
+}
+.case-stat-item { text-align: center; flex: 1; }
+.case-stat-num {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 36px; line-height: 1; letter-spacing: -0.03em;
+}
+.case-stat-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 6px; opacity: 0.6;
+}
+
+/* ── STEP CARD ── */
+.step-card {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-pop);
+  background: var(--paper);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.step-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 0 var(--ink); }
+.step-num {
+  width: 48px; height: 48px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 24px; font-weight: 700;
+  margin-bottom: 20px; border: 2px solid var(--ink);
+}
+
+/* ── MISC ── */
+.slide-num {
+  position: absolute; top: 32px; right: clamp(24px, 6vw, 120px);
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.1em; color: var(--ink-20);
+}
+.slide--dark .slide-num, .slide--violet .slide-num { color: rgba(255,255,255,0.2); }
+.rainbow-bar { height: 4px; background: var(--grad-rainbow); border-radius: 2px; }
+.confidential {
+  position: fixed; bottom: 16px; right: 24px;
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-20); z-index: 100; pointer-events: none;
+}
+.big-num {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(80px, 12vw, 160px); line-height: 0.85;
+  letter-spacing: -0.05em; color: var(--ink-10);
+  position: absolute; pointer-events: none;
+}
+.slide--dark .big-num { color: rgba(255,255,255,0.04); }
+.cover-ghost { width: 100px; height: 100px; margin: 0 auto 48px; animation: ghostFloat 2.4s ease-in-out infinite; }
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-out-quart), transform 0.6s var(--ease-out-quart);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .flow { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+  .slide { padding: 60px 24px; }
+  .pipeline { flex-direction: column; }
+  .pipeline-step { border-radius: var(--r-lg) !important; }
+  .pipeline-step + .pipeline-step { border-left: 2.5px solid var(--ink); border-top: none; }
+  .pipeline-arrow { display: none; }
+  .case-stats { flex-direction: column; gap: 16px; }
+}
+@media (max-width: 600px) {
+  .slide { padding: 48px 16px; }
+  h1 { font-size: 48px; }
+  h2 { font-size: 36px; }
+  .stat-num { font-size: 40px; }
+  .case-stat-num { font-size: 28px; }
+  .clients-row { gap: 8px; }
+  .client-pill { font-size: 13px; padding: 10px 16px; }
+}
+
+/* ── BURGER NAV ── */
+.nav-burger {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 101;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--ink);
+  border: 2.5px solid var(--ink);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.nav-burger:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+.nav-burger-bar {
+  width: 20px; height: 2.5px;
+  background: #fff; border-radius: 2px;
+  position: relative;
+  transition: background 0.2s;
+}
+.nav-burger-bar::before,
+.nav-burger-bar::after {
+  content: ''; position: absolute;
+  width: 20px; height: 2.5px;
+  background: #fff; border-radius: 2px; left: 0;
+  transition: transform 0.3s var(--ease), top 0.3s var(--ease);
+}
+.nav-burger-bar::before { top: -7px; }
+.nav-burger-bar::after { top: 7px; }
+.nav-burger.open .nav-burger-bar { background: transparent; }
+.nav-burger.open .nav-burger-bar::before { top: 0; transform: rotate(45deg); }
+.nav-burger.open .nav-burger-bar::after { top: 0; transform: rotate(-45deg); }
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--ink);
+  flex-direction: column;
+  overflow-y: auto;
+}
+.nav-overlay.open { display: flex; }
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 22px;
+  letter-spacing: -0.03em; color: #fff;
+}
+
+.nav-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+}
+.nav-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 0; width: 100%;
+  max-width: 1100px; margin: 0 auto;
+}
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.nav-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 52px);
+  color: rgba(255,255,255,0.2);
+  text-decoration: none;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  padding: 8px 0;
+  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+  display: flex; align-items: baseline; gap: 14px;
+}
+.nav-link-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.12);
+  min-width: 28px;
+  transition: color 0.2s var(--ease);
+}
+.nav-link:hover { color: #fff; transform: translateX(8px); }
+.nav-link:hover .nav-link-num { color: var(--phantom-violet); }
+.nav-link:nth-child(1):hover { color: var(--rainbow-pink); }
+.nav-link:nth-child(2):hover { color: var(--phantom-violet-200); }
+.nav-link:nth-child(3):hover { color: var(--rainbow-yellow); }
+.nav-link:nth-child(4):hover { color: var(--rainbow-green); }
+.nav-link:nth-child(5):hover { color: var(--rainbow-orange); }
+.nav-link:nth-child(6):hover { color: var(--rainbow-blue); }
+.nav-link:nth-child(7):hover { color: var(--rainbow-red); }
+.nav-link:nth-child(8):hover { color: var(--rainbow-pink); }
+
+@keyframes navSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.nav-overlay.open .nav-link {
+  animation: navSlideIn 0.35s var(--ease-out-quart) backwards;
+}
+.nav-overlay.open .nav-link:nth-child(1) { animation-delay: 0.03s; }
+.nav-overlay.open .nav-link:nth-child(2) { animation-delay: 0.06s; }
+.nav-overlay.open .nav-link:nth-child(3) { animation-delay: 0.09s; }
+.nav-overlay.open .nav-link:nth-child(4) { animation-delay: 0.12s; }
+.nav-overlay.open .nav-link:nth-child(5) { animation-delay: 0.15s; }
+.nav-overlay.open .nav-link:nth-child(6) { animation-delay: 0.18s; }
+.nav-overlay.open .nav-link:nth-child(7) { animation-delay: 0.21s; }
+.nav-overlay.open .nav-link:nth-child(8) { animation-delay: 0.24s; }
+
+.nav-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 60px;
+  border-left: 2px solid rgba(255,255,255,0.06);
+  gap: 32px;
+}
+.nav-side-ghost {
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-side-ghost svg {
+  width: 180px; height: 180px;
+  opacity: 0.2;
+  animation: ghostDiag 3s ease-in-out infinite, ghostRainbow 1.8s linear infinite;
+}
+.nav-site-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 28px;
+  background: var(--rainbow-yellow);
+  color: var(--ink);
+  border: 2.5px solid var(--rainbow-yellow);
+  border-radius: var(--r-full);
+  box-shadow: 4px 4px 0 0 var(--phantom-violet);
+  font-family: var(--font-body);
+  font-size: 16px; font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+  align-self: flex-start;
+}
+.nav-site-link:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 0 var(--phantom-violet);
+}
+
+.nav-bottom {
+  padding: 20px 48px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-bottom-left {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.2);
+}
+.nav-bottom-right {
+  font-family: var(--font-body);
+  font-size: 13px; color: rgba(255,255,255,0.3);
+}
+.nav-bottom-right a { color: var(--phantom-violet-200); text-decoration: none; }
+.nav-bottom-right a:hover { color: #fff; }
+
+@media (max-width: 960px) {
+  .nav-grid { grid-template-columns: 1fr; }
+  .nav-side { display: none; }
+  .nav-body { padding: 0 24px; }
+  .nav-top { padding: 24px; }
+  .nav-bottom { padding: 16px 24px; }
+  .nav-link { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="confidential">Confidentiel &mdash; Mai 2026</div>
+
+<!-- ── Burger ── -->
+<button class="nav-burger" id="navBurger" aria-label="Menu">
+  <div class="nav-burger-bar"></div>
+</button>
+
+<!-- ── Nav overlay ── -->
+<nav class="nav-overlay" id="navOverlay">
+  <div class="nav-top">
+    <div class="nav-logo">
+      <svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      <span class="nav-logo-text">phantom</span>
+    </div>
+  </div>
+  <div class="nav-body">
+    <div class="nav-grid">
+      <div class="nav-links">
+        <a class="nav-link" href="#constat"><span class="nav-link-num">01</span>Le constat</a>
+        <a class="nav-link" href="#promesse"><span class="nav-link-num">02</span>Notre r&eacute;ponse</a>
+        <a class="nav-link" href="#equipe"><span class="nav-link-num">03</span>L'&eacute;quipe</a>
+        <a class="nav-link" href="#pipeline"><span class="nav-link-num">04</span>Pipeline &eacute;ditorial</a>
+        <a class="nav-link" href="#formats"><span class="nav-link-num">05</span>Formats &amp; rendez-vous</a>
+        <a class="nav-link" href="#studio"><span class="nav-link-num">06</span>Studio cr&eacute;atif</a>
+        <a class="nav-link" href="#pricing"><span class="nav-link-num">07</span>Pricing</a>
+        <a class="nav-link" href="#contact"><span class="nav-link-num">08</span>Contact</a>
+      </div>
+      <div class="nav-side">
+        <div class="nav-side-ghost">
+          <svg viewBox="0 0 200 200" fill="none">
+            <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+            <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+            <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+          </svg>
+        </div>
+        <a href="https://phantom-design-system.vercel.app/" target="_blank" class="nav-site-link">Voir le site Phantom &rarr;</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-bottom">
+    <div class="nav-bottom-left">Confidentiel &mdash; Mai 2026</div>
+    <div class="nav-bottom-right"><a href="https://phantom-design-system.vercel.app/" target="_blank">phantom-design-system.vercel.app</a></div>
+  </div>
+</nav>
+
+<!-- ═══════════ SLIDE 01 — COVER ═══════════ -->
+<section class="slide slide--cover" id="cover">
+  <div class="slide-inner" style="text-align:center">
+    <div class="cover-ghost">
+      <svg viewBox="0 0 200 200" fill="none" style="width:100%;height:100%;color:var(--phantom-violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+    <div class="rainbow-bar reveal" style="width:120px;height:6px;margin:0 auto 40px"></div>
+    <h1 class="reveal">phantom</h1>
+    <div class="reveal reveal-d1" style="font-family:var(--font-display);font-size:clamp(22px,2.5vw,30px);font-weight:500;color:rgba(255,255,255,0.2);margin:24px 0">&times;</div>
+    <h1 class="reveal reveal-d2" style="font-size:clamp(42px,6vw,76px);font-weight:500;color:rgba(255,255,255,0.5)">maddyness</h1>
+    <p class="reveal reveal-d3" style="color:rgba(255,255,255,0.35);font-size:17px;margin-top:24px">Proposition commerciale &mdash; Mai 2026</p>
+    <div class="reveal reveal-d4" style="display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.1);padding:8px 22px;border-radius:var(--r-full);margin-top:48px">Confidentiel</div>
+  </div>
+  <svg class="deco-ghost" viewBox="0 0 200 200" fill="none" style="width:350px;height:350px;right:-80px;bottom:-60px;color:#fff;opacity:0.03;animation:ghostDiag 4s ease-in-out infinite,ghostRainbow 2s linear infinite">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<!-- ═══════════ SLIDE 02 — LE CONSTAT ═══════════ -->
+<section class="slide" id="constat">
+  <span class="slide-num">02</span>
+  <div class="slide-inner">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Le constat</p>
+    <h2 class="reveal reveal-d1">Maddyness a un probl&egrave;me<br>de <span style="color:var(--rainbow-red)">mon&eacute;tisation</span>.</h2>
+    <div class="grid-2 mt-48">
+      <div class="reveal reveal-d2">
+        <p class="lead">Les marques ach&egrave;tent du brand content quand un m&eacute;dia peut <strong>garantir des impressions</strong>. Sans stats sociales fortes et sans trafic direct significatif, il n'y a pas de deal.</p>
+        <p class="mt-24">Le contenu est bon. Les chiffres ne suivent pas. Pas de communaut&eacute; captive, pas de r&eacute;flexe de retour, pas d'audiences v&eacute;rifiables pour les annonceurs.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px" class="reveal reveal-d3">
+        <div class="pop-card" style="background:var(--red-100)">
+          <div class="tags" style="margin-bottom:10px"><span class="tag tag-red">Probl&egrave;me</span></div>
+          <h4>Stats social insuffisantes</h4>
+          <p class="mt-8" style="font-size:14px">Pas assez de reach et d'engagement pour convaincre un annonceur d'investir.</p>
+        </div>
+        <div class="pop-card" style="background:var(--orange-100)">
+          <div class="tags" style="margin-bottom:10px"><span class="tag tag-orange">Probl&egrave;me</span></div>
+          <h4>Trafic direct faible</h4>
+          <p class="mt-8" style="font-size:14px">Les visiteurs passent par Google. Pas de communaut&eacute; captive.</p>
+        </div>
+        <div class="pop-card" style="background:var(--ink-05)">
+          <div class="tags" style="margin-bottom:10px"><span class="tag" style="background:var(--ink-10);color:var(--ink-60)">R&eacute;sultat</span></div>
+          <h4 style="color:var(--ink-60)">Impossible de vendre du brand content</h4>
+          <p class="mt-8" style="font-size:14px">Pas de minimum garanti d'impressions = pas de deal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 03 — LA PROMESSE ═══════════ -->
+<section class="slide slide--dark" id="promesse">
+  <span class="slide-num">03</span>
+  <div class="slide-inner" style="text-align:center">
+    <p class="eyebrow reveal">&mdash; Notre r&eacute;ponse</p>
+    <h2 class="reveal reveal-d1" style="color:#fff">On construit la <span style="color:var(--rainbow-yellow)">machine</span><br>qui te permet de vendre<br>du brand content.</h2>
+    <p class="lead mt-32 reveal reveal-d2" style="max-width:700px;margin-left:auto;margin-right:auto;color:rgba(255,255,255,0.45)">Pas un one-shot. Un syst&egrave;me qui tourne : des humains qui d&eacute;cident, de l'IA qui ex&eacute;cute &agrave; &eacute;chelle industrielle, et des humains qui valident tout avant publication.</p>
+
+    <div class="flow mt-64 reveal reveal-d3">
+      <div class="flow-step">
+        <div class="flow-circle" style="border-color:var(--rainbow-yellow);background:var(--yellow-100);color:var(--yellow-600);box-shadow:6px 6px 0 0 var(--rainbow-yellow)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:28px;height:28px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="flow-label" style="color:rgba(255,255,255,0.5)">L'humain d&eacute;cide</div>
+      </div>
+      <div class="flow-arrow" style="color:rgba(255,255,255,0.15)">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-circle" style="border-color:var(--phantom-violet);background:var(--phantom-violet-50);color:var(--phantom-violet);box-shadow:6px 6px 0 0 var(--phantom-violet)">
+          <svg viewBox="0 0 200 200" fill="none" style="width:32px;height:32px"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/></svg>
+        </div>
+        <div class="flow-label" style="color:rgba(255,255,255,0.5)">L'IA ex&eacute;cute</div>
+      </div>
+      <div class="flow-arrow" style="color:rgba(255,255,255,0.15)">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-circle" style="border-color:var(--rainbow-green);background:var(--green-100);color:var(--green-600);box-shadow:6px 6px 0 0 var(--rainbow-green)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:28px;height:28px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="flow-label" style="color:rgba(255,255,255,0.5)">L'humain valide</div>
+      </div>
+    </div>
+  </div>
+  <svg class="deco-ghost" viewBox="0 0 200 200" fill="none" style="width:200px;height:200px;left:-40px;bottom:40px;color:#fff;animation:ghostFloat 3s ease-in-out infinite">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<!-- ═══════════ SLIDE 04 — L'ÉQUIPE ═══════════ -->
+<section class="slide slide--warm" id="equipe">
+  <span class="slide-num">04</span>
+  <div class="slide-inner">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Qui on est</p>
+    <h2 class="reveal reveal-d1">50 ans d'exp&eacute;rience.<br><span style="color:var(--ink-30)">60M d'abonn&eacute;s g&eacute;r&eacute;s.</span></h2>
+    <p class="lead mt-24 reveal reveal-d2">L'IA sans expert produit du bruit. <strong>Nous produisons des r&eacute;sultats.</strong></p>
+
+    <div class="grid-3 mt-48">
+      <div class="pop-card team-card reveal reveal-d1">
+        <div class="team-avatar" style="background:var(--phantom-violet);color:#fff">AQ</div>
+        <div class="team-name">Alex Quilghini</div>
+        <div class="team-role">Co-fondateur &middot; Strat&eacute;gie &amp; Social</div>
+        <div class="team-bio">20 ans dans le digital et le social media. Pr&eacute;sident de plusieurs groupes m&eacute;dias. 30M d'abonn&eacute;s g&eacute;r&eacute;s entre la France, le Mexique et les &Eacute;tats-Unis.</div>
+      </div>
+      <div class="pop-card team-card reveal reveal-d2">
+        <div class="team-avatar" style="background:var(--rainbow-pink);color:#fff">LF</div>
+        <div class="team-name">Lancelot Feral</div>
+        <div class="team-role">Co-fondateur &middot; Produit &amp; Architecture</div>
+        <div class="team-bio">15 ans d'exp&eacute;rience. +10 projets digitaux &agrave; forte envergure. 30M d'abonn&eacute;s entre France, Mexique, &Eacute;tats-Unis, Allemagne, Asie et Afrique.</div>
+      </div>
+      <div class="pop-card team-card reveal reveal-d3">
+        <div class="team-avatar" style="background:var(--rainbow-green);color:#fff">JM</div>
+        <div class="team-name">J&eacute;r&ocirc;me Musialak</div>
+        <div class="team-role">Co-fondateur &middot; CTO &amp; SEO</div>
+        <div class="team-bio">Ancien CTO de plusieurs groupes m&eacute;dias et industries tech. Expert SEO et architecture technique. Rien ne sort sans rigueur.</div>
+      </div>
+    </div>
+
+    <div class="mt-32 reveal reveal-d4" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <div class="stat-card" style="background:var(--phantom-violet);color:#fff;flex:1;min-width:180px">
+        <div class="stat-num">45M</div>
+        <div class="stat-label">vues mensuelles</div>
+      </div>
+      <div class="stat-card" style="background:var(--rainbow-yellow);color:var(--ink);flex:1;min-width:180px">
+        <div class="stat-num">&times;7</div>
+        <div class="stat-label">cadence &eacute;dito</div>
+      </div>
+      <div class="stat-card" style="background:var(--rainbow-pink);color:#fff;flex:1;min-width:180px">
+        <div class="stat-num">14j</div>
+        <div class="stat-label">1er livrable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 05 — L'HUMAIN D'ABORD ═══════════ -->
+<section class="slide slide--violet" id="humain">
+  <span class="slide-num">05</span>
+  <div class="slide-inner">
+    <p class="eyebrow reveal">&mdash; &Eacute;tape z&eacute;ro</p>
+    <h2 class="reveal reveal-d1" style="color:#fff">Avant toute IA,<br>un humain d&eacute;cide.</h2>
+    <div class="grid-2 mt-48">
+      <div class="reveal reveal-d2">
+        <p class="lead" style="color:rgba(255,255,255,0.85)">L'IA n'a pas d'opinion &eacute;ditoriale. Elle ne sait pas quels sujets vont r&eacute;sonner avec la communaut&eacute; startup. Elle ne comprend pas la culture Maddyness.</p>
+        <p class="mt-24" style="color:rgba(255,255,255,0.65)">Avant de lancer le moindre pipeline, un r&eacute;f&eacute;rent senior plonge dans votre univers : tech, startup, innovation, lev&eacute;es, culture fondateur. Il d&eacute;finit les territoires &eacute;ditoriaux, les angles, le ton, les formats.</p>
+        <p class="mt-24" style="color:rgba(255,255,255,0.65)">Il identifie les <strong style="color:#fff">rendez-vous r&eacute;currents sponsorisables</strong> &mdash; les formats que les marques tech voudront associer &agrave; leur nom. C'est cette r&eacute;flexion humaine qui transforme du contenu en <strong style="color:#fff">inventaire publicitaire</strong>.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px" class="reveal reveal-d3">
+        <div style="background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.15);border-radius:var(--r-lg);padding:22px">
+          <div class="tags" style="margin-bottom:10px"><span class="tag" style="background:rgba(255,255,255,0.15);color:#fff">Strat&eacute;gie</span></div>
+          <h4 style="color:#fff">Choix des sujets &amp; angles</h4>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Quels territoires &eacute;ditoriaux pour Maddyness ? Funding, deep tech, portraits fondateurs, scale-up...</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.15);border-radius:var(--r-lg);padding:22px">
+          <div class="tags" style="margin-bottom:10px"><span class="tag" style="background:rgba(255,255,255,0.15);color:#fff">&Eacute;ditorial</span></div>
+          <h4 style="color:#fff">Ligne &amp; ton</h4>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">10 commandements du post parfait. Guide r&eacute;dactionnel. Mots interdits, mots d&eacute;fendus. Personnalités de r&eacute;dacteurs distinctes.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.15);border-radius:var(--r-lg);padding:22px">
+          <div class="tags" style="margin-bottom:10px"><span class="tag" style="background:rgba(255,255,255,0.15);color:#fff">Mon&eacute;tisation</span></div>
+          <h4 style="color:#fff">Rendez-vous sponsorisables</h4>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">&laquo; Startup de la semaine &raquo;, &laquo; Le chiffre du jour &raquo;, &laquo; Fondateur &times; Fondateur &raquo; — chaque format = un inventaire annonceur.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="deco-ghost" viewBox="0 0 200 200" fill="none" style="width:200px;height:200px;right:-40px;bottom:40px;color:#fff;opacity:0.08;animation:ghostFloat 3s ease-in-out infinite">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<!-- ═══════════ SLIDE 06 — LE PIPELINE ÉDITORIAL ═══════════ -->
+<section class="slide" id="pipeline">
+  <span class="slide-num">06</span>
+  <div class="big-num" style="top:60px;right:clamp(24px,6vw,120px)">06</div>
+  <div class="slide-inner">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Production &eacute;ditoriale</p>
+    <h2 class="reveal reveal-d1">4 couches de validation.<br><span style="color:var(--phantom-violet)">Aucun m&eacute;dia en France</span> ne fait &ccedil;a.</h2>
+    <p class="lead mt-16 reveal reveal-d2" style="max-width:750px">Ce n'est pas &laquo; g&eacute;n&eacute;rer un article avec ChatGPT &raquo;. On a construit un pipeline &eacute;ditorial complet en 4 &eacute;tapes qui tournent en parall&egrave;le. Pour N articles, on lance N pipelines simultan&eacute;es.</p>
+
+    <div class="pipeline reveal reveal-d3">
+      <div class="pipeline-step" style="background:var(--blue-100)">
+        <div class="pipeline-num" style="background:var(--rainbow-blue);color:#fff">1</div>
+        <h4>R&eacute;dacteur IA</h4>
+        <p style="font-size:13px;margin-top:8px">Premier jet complet : angle contrarian, sc&egrave;ne d'ouverture incarn&eacute;e, blocs enrichis. Chaque r&eacute;dacteur a une personnalit&eacute; &eacute;ditoriale distincte.</p>
+        <div class="pipeline-arrow">&rarr;</div>
+      </div>
+      <div class="pipeline-step" style="background:var(--red-100)">
+        <div class="pipeline-num" style="background:var(--rainbow-red);color:#fff">2</div>
+        <h4>Fact-checker</h4>
+        <p style="font-size:13px;margin-top:8px">Extrait chaque fait, date, chiffre, nom. V&eacute;rifie via sources. Marque confirm&eacute;/faux/impr&eacute;cis.</p>
+        <div class="pipeline-arrow">&rarr;</div>
+      </div>
+      <div class="pipeline-step" style="background:var(--phantom-violet-50)">
+        <div class="pipeline-num" style="background:var(--phantom-violet);color:#fff">3</div>
+        <h4>R&eacute;dac chef IA</h4>
+        <p style="font-size:13px;margin-top:8px">Critique structure, ton, H2, ouverture, conclusion, liens internes, clich&eacute;s. Rien ne passe sans son feu vert.</p>
+        <div class="pipeline-arrow">&rarr;</div>
+      </div>
+      <div class="pipeline-step" style="background:var(--green-100)">
+        <div class="pipeline-num" style="background:var(--rainbow-green);color:#fff">4</div>
+        <h4>Correcteur</h4>
+        <p style="font-size:13px;margin-top:8px">R&eacute;&eacute;crit les passages flag&eacute;s, int&egrave;gre les corrections factuelles. Article final pr&ecirc;t &agrave; publier.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap" class="reveal reveal-d4">
+      <div class="stat-card" style="background:var(--ink);color:#fff;flex:1;min-width:150px">
+        <div class="stat-num" style="font-size:42px">395+</div>
+        <div class="stat-label">articles Origines</div>
+      </div>
+      <div class="stat-card" style="background:var(--ink);color:#fff;flex:1;min-width:150px">
+        <div class="stat-num" style="font-size:42px">700+</div>
+        <div class="stat-label">articles Huberman Lab</div>
+      </div>
+      <div class="stat-card" style="background:var(--ink);color:#fff;flex:1;min-width:150px">
+        <div class="stat-num" style="font-size:42px">4</div>
+        <div class="stat-label">couches de validation</div>
+      </div>
+    </div>
+
+    <div class="apply-box mt-32 reveal">
+      <div class="apply-label">Appliqu&eacute; &agrave; Maddyness</div>
+      <p>Articles tech, guides startup, dossiers lev&eacute;es de fonds, fiches pratiques, enqu&ecirc;tes sectorielles. Volume massif, qualit&eacute; industrialis&eacute;e. SEO optimis&eacute; pour Google Discover.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 07 — FORMATS VIRAUX & RENDEZ-VOUS ═══════════ -->
+<section class="slide slide--dark" id="formats">
+  <span class="slide-num">07</span>
+  <div class="slide-inner">
+    <p class="eyebrow reveal">&mdash; Formats &amp; rendez-vous</p>
+    <h2 class="reveal reveal-d1">Le vrai levier,<br>c'est le <span style="color:var(--rainbow-yellow)">rendez-vous</span>.</h2>
+    <p class="lead mt-16 reveal reveal-d2" style="max-width:700px;color:rgba(255,255,255,0.5)">Pas le one-shot viral. Le format r&eacute;current que l'audience attend &mdash; et que les marques veulent sponsoriser.</p>
+
+    <div class="grid-2 mt-48">
+      <div>
+        <h4 class="reveal reveal-d2" style="color:var(--rainbow-pink);margin-bottom:16px">4 formats carrousel propri&eacute;taires</h4>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="pop-card pop-card--dark reveal reveal-d2" style="padding:18px 22px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4 style="font-size:16px">Enqu&ecirc;te soci&eacute;t&eacute;</h4>
+              <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);font-size:9px">Investigation</span>
+            </div>
+            <p style="font-size:13px;margin-top:6px">Format donn&eacute;es + r&eacute;cit. Chiffres cl&eacute;s, angle fort.</p>
+          </div>
+          <div class="pop-card pop-card--dark reveal reveal-d3" style="padding:18px 22px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4 style="font-size:16px">Portrait carri&egrave;re</h4>
+              <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);font-size:9px">Storytelling</span>
+            </div>
+            <p style="font-size:13px;margin-top:6px">Parcours de vie, le&ccedil;ons, d&eacute;cisions pivots.</p>
+          </div>
+          <div class="pop-card pop-card--dark reveal reveal-d3" style="padding:18px 22px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4 style="font-size:16px">Liste &eacute;motionnelle</h4>
+              <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);font-size:9px">Listicle</span>
+            </div>
+            <p style="font-size:13px;margin-top:6px">Format viral natif. Partage &eacute;motionnel.</p>
+          </div>
+          <div class="pop-card pop-card--dark reveal reveal-d4" style="padding:18px 22px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4 style="font-size:16px">Carnet art &amp; culture</h4>
+              <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);font-size:9px">Visuel</span>
+            </div>
+            <p style="font-size:13px;margin-top:6px">Format magazine. Visuel + &eacute;dito culture.</p>
+          </div>
+        </div>
+        <p class="mt-16 reveal" style="font-size:13px;color:rgba(255,255,255,0.3)">+ vid&eacute;o courte (Reels, TikTok, Shorts) &middot; posts &eacute;ditoriaux &middot; stories &amp; threads &middot; newsletters visuelles</p>
+      </div>
+      <div class="reveal reveal-d3">
+        <h4 style="color:var(--rainbow-yellow);margin-bottom:16px">Appliqu&eacute; &agrave; Maddyness</h4>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:var(--r-lg);padding:22px">
+            <h4 style="color:var(--rainbow-yellow);font-size:18px">&laquo; Startup de la semaine &raquo;</h4>
+            <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px">Portrait fondateur + m&eacute;triques. S&eacute;rie r&eacute;currente, sponsorisable par des fonds VC.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:var(--r-lg);padding:22px">
+            <h4 style="color:var(--rainbow-green);font-size:18px">&laquo; Le chiffre du jour &raquo;</h4>
+            <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px">Data viz quotidienne tech/startup. Format ultra-partageable.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:var(--r-lg);padding:22px">
+            <h4 style="color:var(--rainbow-pink);font-size:18px">&laquo; Fondateur &times; Fondateur &raquo;</h4>
+            <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px">Conversation crois&eacute;e. Thread LinkedIn + carrousel Insta.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:var(--r-lg);padding:22px">
+            <h4 style="color:var(--rainbow-blue);font-size:18px">&laquo; Tech en 60s &raquo;</h4>
+            <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px">Reel/TikTok explicatif. Format vertical, hook imm&eacute;diat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 08 — GROWTH & DISTRIBUTION ═══════════ -->
+<section class="slide slide--warm" id="growth">
+  <span class="slide-num">08</span>
+  <div class="slide-inner">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Growth &amp; distribution</p>
+    <h2 class="reveal reveal-d1">On ne mise pas<br>sur la <span style="color:var(--rainbow-green)">chance</span>.</h2>
+    <p class="lead mt-16 reveal reveal-d2" style="max-width:700px">On construit des syst&egrave;mes. Pas des coups de com'. Des m&eacute;caniques r&eacute;p&eacute;tables qui font grossir l'audience chaque semaine.</p>
+
+    <div class="grid-2 mt-48">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="pop-card reveal reveal-d2" style="background:var(--green-100)">
+          <h4>Communaut&eacute;s Facebook</h4>
+          <p class="mt-8" style="font-size:14px">On a op&eacute;r&eacute; des dizaines de communaut&eacute;s, mon&eacute;tis&eacute;es via Jellysmack et en direct.</p>
+        </div>
+        <div class="pop-card reveal reveal-d3">
+          <h4>Hooks optimis&eacute;s</h4>
+          <p class="mt-8" style="font-size:14px">Chaque format a des variantes test&eacute;es. Timing algorithmique de publication.</p>
+        </div>
+        <div class="pop-card reveal reveal-d3" style="background:var(--blue-100)">
+          <h4>SEO + Google Discover</h4>
+          <p class="mt-8" style="font-size:14px">Pre-rendering serverless pour les crawlers. Sitemaps dynamiques. Trafic organique massif.</p>
+        </div>
+        <div class="pop-card reveal reveal-d4">
+          <h4>Cross-posting natif</h4>
+          <p class="mt-8" style="font-size:14px">Adaptation native &agrave; chaque r&eacute;seau. Pas de copier-coller — chaque plateforme a son format.</p>
+        </div>
+      </div>
+      <div class="reveal reveal-d3">
+        <div style="background:var(--ink);border-radius:var(--r-xl);padding:36px;color:#fff">
+          <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--phantom-violet-200);margin-bottom:16px">&mdash; Preuves &middot; Origines Media</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:36px;color:var(--rainbow-pink)">2.12M</div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">FACEBOOK</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:36px;color:var(--rainbow-orange)">800K</div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">SNAPCHAT</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:36px;color:var(--rainbow-yellow)">261K</div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">INSTAGRAM</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:36px;color:var(--rainbow-green)">130K</div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">TIKTOK</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:36px;color:var(--rainbow-red)">100K</div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">YOUTUBE</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:36px;color:var(--phantom-violet-200)">43M</div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">REACH / MOIS</div>
+            </div>
+          </div>
+          <div class="rainbow-bar mt-24"></div>
+          <p style="font-size:14px;color:rgba(255,255,255,0.35);margin-top:16px;text-align:center">5 milliards de vues cumulées &middot; 9M d'interactions / mois</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 09 — STUDIO CRÉATIF ═══════════ -->
+<section class="slide" id="studio">
+  <span class="slide-num">09</span>
+  <div class="slide-inner">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Studio cr&eacute;atif IA</p>
+    <h2 class="reveal reveal-d1">Pas un freelance<br>avec <span style="color:var(--rainbow-orange)">Midjourney</span>.</h2>
+    <p class="lead mt-16 reveal reveal-d2" style="max-width:750px">Un studio de production complet. On g&eacute;n&egrave;re des covers d'articles, des carrousels, des vid&eacute;os UGC, des interviews IA &mdash; &agrave; la demande, en quelques minutes. Le tout conforme &agrave; votre charte.</p>
+
+    <div class="grid-2 mt-48">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="pop-card reveal reveal-d2" style="background:var(--orange-100)">
+          <h4>G&eacute;n&eacute;ration image &amp; vid&eacute;o</h4>
+          <p class="mt-8" style="font-size:14px">36+ mod&egrave;les image (GPT Image, Flux, Seedream...) et 12+ mod&egrave;les vid&eacute;o (Seedance, Kling, Veo...). On choisit le bon mod&egrave;le pour chaque usage.</p>
+          <div class="tags mt-12"><span class="tag tag-orange">Covers</span><span class="tag tag-orange">Carrousels</span><span class="tag tag-orange">Social</span></div>
+        </div>
+        <div class="pop-card reveal reveal-d3" style="background:var(--pink-100)">
+          <h4>Marketing Studio</h4>
+          <p class="mt-8" style="font-size:14px">Avatars IA, UGC, unboxing, product showcase, TV spots, virtual try-on. 8 modes de production vid&eacute;o pour les op&eacute;rations annonceurs.</p>
+          <div class="tags mt-12"><span class="tag tag-pink">Brand content</span><span class="tag tag-pink">Annonceurs</span></div>
+        </div>
+        <div class="pop-card reveal reveal-d4" style="background:var(--yellow-100)">
+          <h4>Photo produit IA</h4>
+          <p class="mt-8" style="font-size:14px">Studio shot, lifestyle, closeup, hero banner, social carousel, ad creative pack. 10 modes de shooting virtuel.</p>
+          <div class="tags mt-12"><span class="tag tag-yellow">E-commerce</span><span class="tag tag-yellow">Ads</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="pop-card reveal reveal-d2" style="background:var(--phantom-violet);color:#fff;border-color:var(--ink)">
+          <svg viewBox="0 0 200 200" fill="none" style="width:40px;height:40px;margin-bottom:12px;color:#fff"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="var(--phantom-violet)"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="var(--phantom-violet)"/></svg>
+          <h4 style="color:#fff;font-size:24px">Lya</h4>
+          <p style="font-size:12px;font-family:var(--font-mono);letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin:4px 0 12px">JOURNALISTE IA</p>
+          <p style="font-size:14px;color:rgba(255,255,255,0.8)">HeyGen LiveAvatar + ElevenLabs. Pr&eacute;-interview dynamique &mdash; questions adapt&eacute;es en temps r&eacute;el au t&eacute;moignage. Split-screen, montage automatis&eacute;. Format t&eacute;moignage vid&eacute;o scalable.</p>
+          <a href="https://www.origines.media/ecrire-mon-histoire" target="_blank" class="btn" style="margin-top:16px;font-size:14px;padding:12px 22px;background:var(--rainbow-yellow);color:var(--ink);border-color:var(--ink);box-shadow:4px 4px 0 0 var(--ink)">Voir Lya en action &rarr;</a>
+        </div>
+        <div class="pop-card reveal reveal-d3" style="background:var(--ink);color:#fff;border-color:var(--ink)">
+          <h4 style="color:#fff">Pipeline interne</h4>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Covers d'articles g&eacute;n&eacute;r&eacute;es par univers th&eacute;matique. Export carrousels automatique (Puppeteer). Upload auto vers le CMS. Rien de manuel.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="apply-box mt-32 reveal">
+      <div class="apply-label">Appliqu&eacute; &agrave; Maddyness</div>
+      <p>Visuels brand content premium pour les op&eacute;rations annonceurs. Covers d'articles conformes &agrave; la charte Maddyness. Vid&eacute;os UGC et interviews IA de fondateurs. Le studio cr&eacute;atif devient un <strong>argument de vente</strong> pour les packages annonceurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 10 — L'INFRA TECHNIQUE ═══════════ -->
+<section class="slide slide--dark" id="infra">
+  <span class="slide-num">10</span>
+  <div class="slide-inner">
+    <p class="eyebrow reveal">&mdash; Infrastructure technique</p>
+    <h2 class="reveal reveal-d1">C'est pas du duct tape.<br>C'est un <span style="color:var(--phantom-violet-200)">OS pour m&eacute;dia</span>.</h2>
+    <p class="lead mt-16 reveal reveal-d2" style="max-width:700px;color:rgba(255,255,255,0.45)">Tout ce qui tourne en back pour que le contenu passe de l'id&eacute;e &agrave; la publication sans friction.</p>
+
+    <div class="grid-3 mt-48">
+      <div class="pop-card pop-card--dark reveal reveal-d1">
+        <div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--phantom-violet-200)">150+</div>
+        <h4 class="mt-8">Scripts Node.js</h4>
+        <p style="font-size:13px;margin-top:8px">Import, export, enrichissement, fix, audit, batch. L'outillage complet pour op&eacute;rer un m&eacute;dia &agrave; &eacute;chelle.</p>
+      </div>
+      <div class="pop-card pop-card--dark reveal reveal-d2">
+        <div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--rainbow-green)">MCP</div>
+        <h4 class="mt-8">Serveurs connect&eacute;s</h4>
+        <p style="font-size:13px;margin-top:8px">Sanity, Obsidian, Butterfly. Claude lit et &eacute;crit directement dans le CMS. Z&eacute;ro copier-coller.</p>
+      </div>
+      <div class="pop-card pop-card--dark reveal reveal-d3">
+        <div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--rainbow-yellow)">6</div>
+        <h4 class="mt-8">APIs connect&eacute;es</h4>
+        <p style="font-size:13px;margin-top:8px">Claude, GPT, Gemini, Pexels, TMDB, xAI Aurora. Chaque API a son r&ocirc;le dans le pipeline.</p>
+      </div>
+    </div>
+
+    <div class="grid-2 mt-24">
+      <div class="pop-card pop-card--dark reveal reveal-d3" style="padding:22px">
+        <h4 style="font-size:16px">Validation automatis&eacute;e</h4>
+        <p style="font-size:13px;margin-top:6px">V&eacute;rification liens internes/externes, slugs, images manquantes, blocs custom. Scripts de r&eacute;paration chirurgicaux par cat&eacute;gorie.</p>
+      </div>
+      <div class="pop-card pop-card--dark reveal reveal-d4" style="padding:22px">
+        <h4 style="font-size:16px">&Eacute;cosyst&egrave;me web complet</h4>
+        <p style="font-size:13px;margin-top:6px">React + TypeScript + Vite + Tailwind. Sanity CMS headless. Firebase Auth. Pre-rendering serverless. Sitemaps dynamiques.</p>
+      </div>
+    </div>
+  </div>
+  <svg class="deco-ghost" viewBox="0 0 200 200" fill="none" style="width:180px;height:180px;right:-30px;top:60px;color:#fff;animation:ghostDiag 3.5s ease-in-out infinite">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<!-- ═══════════ SLIDE 11 — L'HUMAIN À LA FIN ═══════════ -->
+<section class="slide slide--yellow">
+  <span class="slide-num" style="color:rgba(10,10,10,0.2)">11</span>
+  <div class="slide-inner" style="text-align:center">
+    <p class="eyebrow reveal" style="color:var(--ink-60)">&mdash; &Eacute;tape finale</p>
+    <h2 class="reveal reveal-d1">Et apr&egrave;s l'IA,<br>un humain valide <span style="color:var(--ink-80)">tout</span>.</h2>
+    <p class="lead mt-24 reveal reveal-d2" style="max-width:650px;margin:24px auto 0;color:var(--ink-60)">Rien ne sort sans relecture humaine. La direction &eacute;ditoriale est document&eacute;e, les r&egrave;gles sont claires, le contr&ocirc;le qualit&eacute; est humain de bout en bout.</p>
+
+    <div class="grid-3 mt-48" style="text-align:left">
+      <div class="pop-card reveal reveal-d2" style="background:#fff">
+        <h4>Ligne &eacute;ditoriale</h4>
+        <p class="mt-8" style="font-size:14px">Ton, style, positionnement document&eacute;s. Chaque article doit passer le test de la ligne avant publication.</p>
+      </div>
+      <div class="pop-card reveal reveal-d3" style="background:#fff">
+        <h4>Personnalités de r&eacute;dacteurs</h4>
+        <p class="mt-8" style="font-size:14px">Portraits robots d&eacute;taill&eacute;s : ton, sujets de pr&eacute;dilection, style d'&eacute;criture. Pas un g&eacute;n&eacute;rateur anonyme.</p>
+      </div>
+      <div class="pop-card reveal reveal-d4" style="background:#fff">
+        <h4>Guide CMS</h4>
+        <p class="mt-8" style="font-size:14px">Titre &lt; 70 caract&egrave;res, deck 2-4 lignes, paragraphes 3-5 lignes, pas de points d'exclamation. Des r&egrave;gles, pas du freestyle.</p>
+      </div>
+    </div>
+
+    <div class="reveal mt-40" style="background:var(--ink);border-radius:var(--r-xl);padding:32px 40px;display:inline-block;text-align:center;border:2.5px solid var(--ink);box-shadow:var(--shadow-pop-lg)">
+      <p style="font-family:var(--font-display);font-weight:700;font-size:24px;color:#fff;letter-spacing:-0.02em">L'IA ex&eacute;cute. L'humain d&eacute;cide, <span style="color:var(--rainbow-yellow)">avant</span> et <span style="color:var(--rainbow-green)">apr&egrave;s</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 12 — PREUVES ═══════════ -->
+<section class="slide" id="preuves">
+  <span class="slide-num">12</span>
+  <div class="slide-inner">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Preuves</p>
+    <h2 class="reveal reveal-d1">On l'a d&eacute;j&agrave; fait.</h2>
+
+    <div class="case-card mt-40 reveal reveal-d2" style="background:var(--rainbow-pink);color:#fff">
+      <div class="case-top">
+        <div>
+          <div class="tags" style="margin-bottom:12px">
+            <span class="tag" style="background:rgba(255,255,255,0.2);color:#fff">Social</span>
+            <span class="tag" style="background:rgba(255,255,255,0.2);color:#fff">&Eacute;dito</span>
+            <span class="tag" style="background:rgba(255,255,255,0.2);color:#fff">Vid&eacute;o</span>
+            <span class="tag" style="background:rgba(255,255,255,0.2);color:#fff">SEO</span>
+            <span class="tag" style="background:rgba(255,255,255,0.2);color:#fff">CMS</span>
+          </div>
+          <h3 style="color:#fff">Origines Media</h3>
+          <p style="color:rgba(255,255,255,0.7);font-size:15px;margin-top:8px">M&eacute;dia vid&eacute;o &mdash; Pipeline complet : social, &eacute;dito, vid&eacute;o, SEO, site, CMS, infra</p>
+        </div>
+        <svg viewBox="0 0 200 200" fill="none" style="width:56px;height:56px;color:#fff;flex-shrink:0;animation:ghostFloat 2.5s ease-in-out infinite"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="var(--rainbow-pink)"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="var(--rainbow-pink)"/></svg>
+      </div>
+      <div class="case-stats" style="border-color:rgba(255,255,255,0.2);background:rgba(0,0,0,0.1)">
+        <div class="case-stat-item">
+          <div class="case-stat-num" style="color:#fff">43M</div>
+          <div class="case-stat-label" style="color:rgba(255,255,255,0.5)">Reach / mois</div>
+        </div>
+        <div class="case-stat-item">
+          <div class="case-stat-num" style="color:#fff">5Mrd</div>
+          <div class="case-stat-label" style="color:rgba(255,255,255,0.5)">Vues totales</div>
+        </div>
+        <div class="case-stat-item">
+          <div class="case-stat-num" style="color:#fff">3M+</div>
+          <div class="case-stat-label" style="color:rgba(255,255,255,0.5)">Abonn&eacute;s</div>
+        </div>
+        <div class="case-stat-item">
+          <div class="case-stat-num" style="color:#fff">395+</div>
+          <div class="case-stat-label" style="color:rgba(255,255,255,0.5)">Articles</div>
+        </div>
+        <div class="case-stat-item">
+          <div class="case-stat-num" style="color:#fff">&times;7</div>
+          <div class="case-stat-label" style="color:rgba(255,255,255,0.5)">Cadence</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-40 reveal reveal-d3" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-40);text-align:center">&mdash; Ils nous ont d&eacute;j&agrave; fait confiance</p>
+    <div class="clients-row reveal reveal-d4">
+      <div class="client-pill" style="background:var(--red-100)">Coca-Cola</div>
+      <div class="client-pill" style="background:var(--orange-100)">Total</div>
+      <div class="client-pill" style="background:var(--yellow-100)">Michelin</div>
+      <div class="client-pill" style="background:var(--green-100)">Netflix</div>
+      <div class="client-pill" style="background:var(--blue-100)">Hugo Boss</div>
+      <div class="client-pill" style="background:var(--pink-100)">OM</div>
+      <div class="client-pill" style="background:var(--phantom-violet-50)">Melty</div>
+      <div class="client-pill" style="background:var(--red-100)">Minutebuzz</div>
+      <div class="client-pill" style="background:var(--orange-100)">i-Value</div>
+      <div class="client-pill" style="background:var(--green-100)">Thinkerview</div>
+      <div class="client-pill" style="background:var(--blue-100)">Allo Docteur</div>
+      <div class="client-pill" style="background:var(--yellow-100)">Newen France</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 13 — PRICING ═══════════ -->
+<section class="slide slide--warm" id="pricing">
+  <span class="slide-num">13</span>
+  <div class="slide-inner">
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="eyebrow eyebrow--violet reveal">&mdash; Pricing &middot; Maddyness</p>
+      <h2 class="reveal reveal-d1">Modules <span style="color:var(--phantom-violet)">activables</span>.</h2>
+      <p class="lead mt-16 reveal reveal-d2" style="max-width:600px;margin:16px auto 0">Chaque module s'active ind&eacute;pendamment. Tu composes l'offre qui correspond &agrave; tes priorit&eacute;s. Sans engagement.</p>
+    </div>
+    <div class="grid-3">
+      <div class="tier reveal reveal-d1">
+        <div class="tier-name">Social &amp; Growth</div>
+        <div class="tier-price" style="color:var(--ink)">2 900&euro;</div>
+        <div class="tier-period">/ mois &middot; sans engagement</div>
+        <ul class="tier-list">
+          <li><span class="check">&#10003;</span> Grille &eacute;ditoriale compl&egrave;te</li>
+          <li><span class="check">&#10003;</span> 4 formats carrousel propri&eacute;taires</li>
+          <li><span class="check">&#10003;</span> Rendez-vous &eacute;ditoriaux r&eacute;currents</li>
+          <li><span class="check">&#10003;</span> Growth hacking &amp; cross-posting</li>
+          <li><span class="check">&#10003;</span> Reports hebdo</li>
+        </ul>
+      </div>
+      <div class="tier tier--highlight reveal reveal-d2">
+        <div class="tier-badge">Recommand&eacute;</div>
+        <div class="tier-name">Social + &Eacute;ditorial</div>
+        <div class="tier-price">4 900&euro;</div>
+        <div class="tier-period">/ mois &middot; sans engagement</div>
+        <ul class="tier-list">
+          <li><span class="check check--violet">&#10003;</span> Tout Social &amp; Growth inclus</li>
+          <li><span class="check check--violet">&#10003;</span> Pipeline &eacute;ditorial IA (4 couches)</li>
+          <li><span class="check check--violet">&#10003;</span> Articles, dossiers, guides SEO</li>
+          <li><span class="check check--violet">&#10003;</span> Direction &eacute;ditoriale compl&egrave;te</li>
+          <li><span class="check check--violet">&#10003;</span> Google Discover optimization</li>
+          <li><span class="check check--violet">&#10003;</span> Call mensuel strat&eacute;gie</li>
+        </ul>
+      </div>
+      <div class="tier reveal reveal-d3">
+        <div class="tier-name">Full Studio</div>
+        <div class="tier-price" style="color:var(--ink)">7 900&euro;</div>
+        <div class="tier-period">/ mois &middot; sans engagement</div>
+        <ul class="tier-list">
+          <li><span class="check">&#10003;</span> Tout Social + &Eacute;ditorial</li>
+          <li><span class="check">&#10003;</span> Studio cr&eacute;atif IA complet</li>
+          <li><span class="check">&#10003;</span> Vid&eacute;o UGC &amp; brand content</li>
+          <li><span class="check">&#10003;</span> Lya &mdash; journaliste IA</li>
+          <li><span class="check">&#10003;</span> Assets annonceurs</li>
+          <li><span class="check">&#10003;</span> Data &amp; media kit dynamique</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-32 reveal" style="text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--ink-30)">Cancel anytime &middot; Tu restes parce que &ccedil;a marche</p>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 14 — BONUS FORMATS LONGS ═══════════ -->
+<section class="slide slide--dark">
+  <span class="slide-num">14</span>
+  <div class="slide-inner">
+    <div class="grid-2" style="align-items:center">
+      <div>
+        <div class="tags reveal"><span class="tag" style="background:var(--rainbow-yellow);color:var(--ink)">Bonus</span></div>
+        <h2 class="mt-16 reveal reveal-d1" style="color:#fff">On produit aussi<br>vos <span style="color:var(--rainbow-yellow)">formats longs</span>.</h2>
+        <p class="lead mt-24 reveal reveal-d2" style="color:rgba(255,255,255,0.55)">Podcasts, concepts YouTube, s&eacute;ries documentaires, interviews longues. On a cr&eacute;&eacute; et produit <strong style="color:#fff">une vingtaine de formats longs</strong> qui ont tous fait leurs preuves.</p>
+        <p class="mt-24 reveal reveal-d3" style="color:rgba(255,255,255,0.4);font-size:15px">Chaque programme a son concept, sa direction artistique, son mod&egrave;le de production. On sait les concevoir, les produire et les distribuer &agrave; grande &eacute;chelle.</p>
+        <div class="mt-32 reveal reveal-d4">
+          <a href="#" class="btn" style="font-size:16px;padding:16px 28px">Demander la brochure programmes &rarr;</a>
+        </div>
+      </div>
+      <div class="reveal reveal-d3" style="display:flex;flex-direction:column;gap:12px">
+        <div class="pop-card pop-card--dark" style="padding:20px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h4 style="font-size:17px">Podcasts</h4>
+            <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:9px">Audio</span>
+          </div>
+          <p style="font-size:13px;margin-top:6px">Conception, production, distribution. Formats interview, narrative, d&eacute;bat.</p>
+        </div>
+        <div class="pop-card pop-card--dark" style="padding:20px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h4 style="font-size:17px">Concepts YouTube</h4>
+            <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:9px">Vid&eacute;o</span>
+          </div>
+          <p style="font-size:13px;margin-top:6px">Formats propri&eacute;taires, s&eacute;ries r&eacute;currentes, habillage, montage.</p>
+        </div>
+        <div class="pop-card pop-card--dark" style="padding:20px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h4 style="font-size:17px">S&eacute;ries documentaires</h4>
+            <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:9px">Long format</span>
+          </div>
+          <p style="font-size:13px;margin-top:6px">Enqu&ecirc;tes, portraits, immersions. Production et post-production.</p>
+        </div>
+        <div class="pop-card pop-card--dark" style="padding:20px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h4 style="font-size:17px">Interviews longues</h4>
+            <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:9px">Talk</span>
+          </div>
+          <p style="font-size:13px;margin-top:6px">Format Thinkerview-style. Setup, captation, montage, distribution multi-plateforme.</p>
+        </div>
+        <div style="text-align:center;margin-top:8px">
+          <p style="font-family:var(--font-display);font-weight:700;font-size:48px;color:var(--rainbow-yellow)">20+</p>
+          <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Formats produits &amp; &eacute;prouv&eacute;s</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="deco-ghost" viewBox="0 0 200 200" fill="none" style="width:200px;height:200px;right:-40px;bottom:40px;color:#fff;opacity:0.05;animation:ghostFloat 3s ease-in-out infinite">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<!-- ═══════════ SLIDE 15 — LA MÉTHODE ═══════════ -->
+<section class="slide">
+  <span class="slide-num">15</span>
+  <div class="slide-inner" style="text-align:center">
+    <p class="eyebrow eyebrow--violet reveal">&mdash; Comment on d&eacute;marre</p>
+    <h2 class="reveal reveal-d1">3 &eacute;tapes. Z&eacute;ro friction.</h2>
+    <div class="rainbow-bar mt-32 reveal" style="width:200px;margin-left:auto;margin-right:auto"></div>
+    <div class="grid-3 mt-48" style="text-align:left">
+      <div class="step-card reveal reveal-d1">
+        <div class="step-num" style="background:var(--phantom-violet-50);color:var(--phantom-violet)">1</div>
+        <h4>Talk</h4>
+        <p class="mt-8" style="font-size:14px">20 min. On comprend vos enjeux Maddyness, on identifie les premiers leviers.</p>
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-30);margin-top:16px">20 min</div>
+      </div>
+      <div class="step-card reveal reveal-d2" style="background:var(--phantom-violet);color:#fff;border-color:var(--phantom-violet);box-shadow:6px 6px 0 0 var(--phantom-violet)">
+        <div class="step-num" style="background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.3)">2</div>
+        <h4 style="color:#fff">Deploy</h4>
+        <p class="mt-8" style="font-size:14px;color:rgba(255,255,255,0.75)">On active les agents. On configure le pipeline. Premiers contenus livr&eacute;s. Vous voyez les r&eacute;sultats avant de vous engager.</p>
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--phantom-violet-200);margin-top:16px">2 semaines</div>
+      </div>
+      <div class="step-card reveal reveal-d3">
+        <div class="step-num" style="background:var(--green-100);color:var(--rainbow-green)">3</div>
+        <h4>Operate &amp; Measure</h4>
+        <p class="mt-8" style="font-size:14px">On op&egrave;re, on mesure, on ajuste. Reports hebdo, call mensuel. Cancel anytime.</p>
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-30);margin-top:16px">continu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 16 — CTA ═══════════ -->
+<section class="slide slide--dark" id="contact" style="text-align:center">
+  <span class="slide-num">16</span>
+  <div class="slide-inner" style="display:flex;flex-direction:column;align-items:center">
+    <div style="width:72px;height:72px;margin-bottom:36px;animation:ghostFloat 2.4s ease-in-out infinite">
+      <svg viewBox="0 0 200 200" fill="none" style="width:100%;height:100%;animation:ghostRainbow 2s linear infinite">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+    <h2 class="reveal" style="color:#fff">Prochaine &eacute;tape.</h2>
+    <p class="lead mt-24 reveal reveal-d1" style="max-width:500px;color:rgba(255,255,255,0.4)">20 minutes. On parle de vos enjeux. On identifie les premiers leviers. Z&eacute;ro engagement.</p>
+    <div class="mt-40 reveal reveal-d2">
+      <a href="#" class="btn" style="font-size:19px;padding:22px 44px">Prendre un &eacute;change de 20 min &rarr;</a>
+    </div>
+    <div class="mt-48 reveal reveal-d3" style="display:flex;flex-direction:column;gap:6px;align-items:center">
+      <p style="color:rgba(255,255,255,0.6);font-size:15px;font-weight:600">Alex Quilghini</p>
+      <p style="color:rgba(255,255,255,0.3);font-size:13px">alex@origines.media</p>
+      <div class="rainbow-bar mt-32" style="width:200px"></div>
+      <p style="color:rgba(255,255,255,0.2);font-size:12px;font-family:var(--font-mono);letter-spacing:0.08em;margin-top:16px">Phantom &mdash; L'agence agentique</p>
+    </div>
+  </div>
+  <svg class="deco-ghost" viewBox="0 0 200 200" fill="none" style="width:280px;height:280px;left:-60px;bottom:-40px;color:#fff;opacity:0.04;animation:ghostDiag 4s ease-in-out infinite,ghostRainbow 2s linear infinite">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<script>
+(function() {
+  // Reveal
+  var els = document.querySelectorAll('.reveal');
+  if (els.length) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el) { observer.observe(el); });
+  }
+
+  // Burger nav
+  var burger = document.getElementById('navBurger');
+  var overlay = document.getElementById('navOverlay');
+  if (burger && overlay) {
+    burger.addEventListener('click', function() {
+      burger.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+    });
+    overlay.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        burger.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
