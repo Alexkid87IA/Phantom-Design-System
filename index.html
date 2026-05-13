@@ -15,6 +15,25 @@
   strong { font-weight: 600; }
   button { font-family: inherit; }
 
+  /* ── Stacking sections ── */
+  .stack {
+    position: relative;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -8px 40px -8px rgba(10,10,10,0.12);
+    margin-top: -28px;
+  }
+  .stack:first-of-type { margin-top: 0; }
+  .stack-1 { z-index: 2; }
+  .stack-2 { z-index: 3; }
+  .stack-3 { z-index: 4; }
+  .stack-4 { z-index: 5; }
+  .stack-5 { z-index: 6; }
+  .stack-6 { z-index: 7; }
+  .stack-7 { z-index: 8; }
+  .stack-8 { z-index: 9; }
+  .stack-9 { z-index: 10; }
+  .stack-10 { z-index: 11; }
+
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
@@ -2037,7 +2056,7 @@
 <!-- ════════════════════════════════════════════════════════════
      LE PROBLÈME
      ════════════════════════════════════════════════════════════ -->
-<section class="problem">
+<section class="problem stack stack-1">
   <div class="problem-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; Le probl&egrave;me</div>
     <h2 class="problem-headline reveal reveal-d1">Tu g&egrave;res ta bo&icirc;te.<br><span class="muted">Pas un</span> empire digital.</h2>
@@ -2076,7 +2095,7 @@
 <!-- ════════════════════════════════════════════════════════════
      BEFORE / AFTER — Vidéos
      ════════════════════════════════════════════════════════════ -->
-<section class="before-after">
+<section class="before-after stack stack-2">
   <div class="before-after-inner">
     <div class="before-after-header">
       <div class="eyebrow reveal" style="color:var(--phantom-violet)">&mdash; Avant / Apr&egrave;s</div>
@@ -2132,7 +2151,7 @@
 <!-- ════════════════════════════════════════════════════════════
      MANIFESTO — Comment ça marche
      ════════════════════════════════════════════════════════════ -->
-<section class="manifesto-outer" id="manifesto">
+<section class="manifesto-outer stack stack-3" id="manifesto">
   <div class="manifesto-sticky">
     <div class="manifesto-track" id="manifesto-track">
 
@@ -2223,7 +2242,7 @@
 <!-- ════════════════════════════════════════════════════════════
      PRODUCT — Dashboard mockup
      ════════════════════════════════════════════════════════════ -->
-<section class="product">
+<section class="product stack stack-4">
   <div class="product-inner">
     <div class="product-header">
       <div class="eyebrow reveal" style="color:#FFD400">&mdash; Ton espace</div>
@@ -2471,7 +2490,7 @@
 <!-- ════════════════════════════════════════════════════════════
      MOBILE — 3 écrans iPhone
      ════════════════════════════════════════════════════════════ -->
-<section class="mobile">
+<section class="mobile stack stack-5">
   <div class="mobile-inner">
     <div class="mobile-header">
       <div>
@@ -2670,7 +2689,7 @@
 <!-- ════════════════════════════════════════════════════════════
      SERVICES — Catalogue d'agents
      ════════════════════════════════════════════════════════════ -->
-<section class="services">
+<section class="services stack stack-6">
   <div class="services-inner">
     <div class="services-header">
       <div>
@@ -2851,7 +2870,7 @@
 <!-- ════════════════════════════════════════════════════════════
      CTA BANNER — Rupture
      ════════════════════════════════════════════════════════════ -->
-<section class="cta-banner" style="background:#FF2D87;color:#fff">
+<section class="cta-banner stack stack-7" style="background:#FF2D87;color:#fff">
   <svg viewBox="0 0 200 200" fill="none" class="cta-banner-ghost" style="width:260px;height:260px;color:rgba(255,255,255,0.12);right:-40px;bottom:-60px;animation:float 3s ease-in-out infinite">
     <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
     <ellipse cx="78" cy="92" rx="10" ry="15" fill="currentColor"/>
@@ -2874,7 +2893,7 @@
 <!-- ════════════════════════════════════════════════════════════
      CASE STUDY — Sushi Boy
      ════════════════════════════════════════════════════════════ -->
-<section class="case-study">
+<section class="case-study stack stack-8">
   <div class="case-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; Cas client &middot; Sushi Boy</div>
 
@@ -2930,7 +2949,7 @@
 <!-- ════════════════════════════════════════════════════════════
      ÉQUIPE
      ════════════════════════════════════════════════════════════ -->
-<section class="team">
+<section class="team stack stack-9">
   <div class="team-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; L'&eacute;quipe</div>
     <h2 class="team-headline reveal reveal-d1">50 ans d'exp&eacute;rience cumulée.<br><span class="muted">60M d'abonn&eacute;s g&eacute;r&eacute;s.</span></h2>
@@ -3049,7 +3068,7 @@
 <!-- ════════════════════════════════════════════════════════════
      TRUST BAR
      ════════════════════════════════════════════════════════════ -->
-<section class="trust">
+<section class="trust" style="position:relative;z-index:12">
   <div class="trust-inner">
     <div class="trust-label">&mdash; Ils nous ont d&eacute;j&agrave; fait confiance</div>
     <div class="trust-logos">
@@ -3068,7 +3087,7 @@
 <!-- ════════════════════════════════════════════════════════════
      PRICING
      ════════════════════════════════════════════════════════════ -->
-<section class="pricing">
+<section class="pricing stack stack-10">
   <div class="pricing-inner">
     <div class="pricing-header">
       <div class="eyebrow reveal">&mdash; Tarifs</div>
@@ -3142,7 +3161,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
-<section class="faq">
+<section class="faq" style="position:relative;z-index:13">
   <div class="faq-inner">
     <div class="faq-layout">
       <div>
@@ -3201,7 +3220,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FOOTER
      ════════════════════════════════════════════════════════════ -->
-<footer class="footer">
+<footer class="footer" style="position:relative;z-index:14;border-radius:28px 28px 0 0">
   <div class="footer-inner">
     <div class="eyebrow reveal" style="color:#FFD400">&mdash; L'agence agentique</div>
     <h2 class="footer-headline reveal reveal-d1">Le reste,<br>on l'op&egrave;re.</h2>
