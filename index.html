@@ -15,23 +15,7 @@
   strong { font-weight: 600; }
   button { font-family: inherit; }
 
-  /* ── Stacking sections ── */
-  .stack {
-    position: sticky;
-    top: 0;
-    border-radius: 28px 28px 0 0;
-    box-shadow: 0 -12px 50px -10px rgba(10,10,10,0.18);
-  }
-  .stack-1 { z-index: 10; }
-  .stack-2 { z-index: 20; }
-  .stack-3 { z-index: 30; }
-  .stack-4 { z-index: 40; }
-  .stack-5 { z-index: 50; }
-  .stack-6 { z-index: 60; }
-  .stack-7 { z-index: 70; }
-  .stack-8 { z-index: 80; }
-  .stack-9 { z-index: 85; }
-  .stack-10 { z-index: 90; }
+
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -572,9 +556,9 @@
   }
 
   /* ── Product showcase ── */
-  .product { padding: 140px 0; background: var(--ink); }
+  .product { padding: 80px 0; background: var(--ink); }
   .product-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
-  .product-header { text-align: center; margin-bottom: 64px; color: #fff; }
+  .product-header { text-align: center; margin-bottom: 40px; color: #fff; }
   .product-headline {
     font-family: var(--font-display);
     font-weight: 700;
@@ -1830,7 +1814,6 @@
     .hero-inner, .services-inner,
     .case-inner, .pricing-inner, .footer-inner { padding: 0 24px; }
     .hero-topbar-meta { display: none; }
-    .stack { position: relative; border-radius: 0; box-shadow: none; }
     .manifesto-outer { height: auto !important; }
     .manifesto-sticky { position: relative; height: auto; overflow: visible; }
     .manifesto-track { flex-direction: column; transform: none !important; }
@@ -2056,7 +2039,7 @@
 <!-- ════════════════════════════════════════════════════════════
      LE PROBLÈME
      ════════════════════════════════════════════════════════════ -->
-<section class="problem stack stack-1">
+<section class="problem">
   <div class="problem-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; Le probl&egrave;me</div>
     <h2 class="problem-headline reveal reveal-d1">Tu g&egrave;res ta bo&icirc;te.<br><span class="muted">Pas un</span> empire digital.</h2>
@@ -2095,7 +2078,7 @@
 <!-- ════════════════════════════════════════════════════════════
      BEFORE / AFTER — Vidéos
      ════════════════════════════════════════════════════════════ -->
-<section class="before-after stack stack-2">
+<section class="before-after">
   <div class="before-after-inner">
     <div class="before-after-header">
       <div class="eyebrow reveal" style="color:var(--phantom-violet)">&mdash; Avant / Apr&egrave;s</div>
@@ -2151,7 +2134,7 @@
 <!-- ════════════════════════════════════════════════════════════
      MANIFESTO — Comment ça marche
      ════════════════════════════════════════════════════════════ -->
-<section class="manifesto-outer" id="manifesto" style="position:relative;z-index:30">
+<section class="manifesto-outer" id="manifesto">
   <div class="manifesto-sticky">
     <div class="manifesto-track" id="manifesto-track">
 
@@ -2242,7 +2225,7 @@
 <!-- ════════════════════════════════════════════════════════════
      PRODUCT — Dashboard mockup
      ════════════════════════════════════════════════════════════ -->
-<section class="product stack stack-4">
+<section class="product">
   <div class="product-inner">
     <div class="product-header">
       <div class="eyebrow reveal" style="color:#FFD400">&mdash; Ton espace</div>
@@ -2490,7 +2473,7 @@
 <!-- ════════════════════════════════════════════════════════════
      MOBILE — 3 écrans iPhone
      ════════════════════════════════════════════════════════════ -->
-<section class="mobile stack stack-5">
+<section class="mobile">
   <div class="mobile-inner">
     <div class="mobile-header">
       <div>
@@ -2689,7 +2672,7 @@
 <!-- ════════════════════════════════════════════════════════════
      SERVICES — Catalogue d'agents
      ════════════════════════════════════════════════════════════ -->
-<section class="services stack stack-6">
+<section class="services">
   <div class="services-inner">
     <div class="services-header">
       <div>
@@ -2870,7 +2853,7 @@
 <!-- ════════════════════════════════════════════════════════════
      CTA BANNER — Rupture
      ════════════════════════════════════════════════════════════ -->
-<section class="cta-banner stack stack-7" style="background:#FF2D87;color:#fff">
+<section class="cta-banner" style="background:#FF2D87;color:#fff">
   <svg viewBox="0 0 200 200" fill="none" class="cta-banner-ghost" style="width:260px;height:260px;color:rgba(255,255,255,0.12);right:-40px;bottom:-60px;animation:float 3s ease-in-out infinite">
     <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
     <ellipse cx="78" cy="92" rx="10" ry="15" fill="currentColor"/>
@@ -2893,7 +2876,7 @@
 <!-- ════════════════════════════════════════════════════════════
      CASE STUDY — Sushi Boy
      ════════════════════════════════════════════════════════════ -->
-<section class="case-study stack stack-8">
+<section class="case-study">
   <div class="case-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; Cas client &middot; Sushi Boy</div>
 
@@ -2949,7 +2932,7 @@
 <!-- ════════════════════════════════════════════════════════════
      ÉQUIPE
      ════════════════════════════════════════════════════════════ -->
-<section class="team stack stack-9">
+<section class="team">
   <div class="team-inner">
     <div class="eyebrow reveal" style="color:var(--phantom-violet-600)">&mdash; L'&eacute;quipe</div>
     <h2 class="team-headline reveal reveal-d1">50 ans d'exp&eacute;rience cumulée.<br><span class="muted">60M d'abonn&eacute;s g&eacute;r&eacute;s.</span></h2>
@@ -3068,7 +3051,7 @@
 <!-- ════════════════════════════════════════════════════════════
      TRUST BAR
      ════════════════════════════════════════════════════════════ -->
-<section class="trust" style="position:relative;z-index:92">
+<section class="trust">
   <div class="trust-inner">
     <div class="trust-label">&mdash; Ils nous ont d&eacute;j&agrave; fait confiance</div>
     <div class="trust-logos">
@@ -3087,7 +3070,7 @@
 <!-- ════════════════════════════════════════════════════════════
      PRICING
      ════════════════════════════════════════════════════════════ -->
-<section class="pricing stack stack-10">
+<section class="pricing">
   <div class="pricing-inner">
     <div class="pricing-header">
       <div class="eyebrow reveal">&mdash; Tarifs</div>
@@ -3161,7 +3144,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
-<section class="faq" style="position:relative;z-index:93">
+<section class="faq">
   <div class="faq-inner">
     <div class="faq-layout">
       <div>
@@ -3220,7 +3203,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FOOTER
      ════════════════════════════════════════════════════════════ -->
-<footer class="footer" style="position:relative;z-index:94;border-radius:28px 28px 0 0">
+<footer class="footer">
   <div class="footer-inner">
     <div class="eyebrow reveal" style="color:#FFD400">&mdash; L'agence agentique</div>
     <h2 class="footer-headline reveal reveal-d1">Le reste,<br>on l'op&egrave;re.</h2>
