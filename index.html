@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
-  html, body { background: #FFFFFF; }
-  body { overflow-x: hidden; }
+  html, body { background: #FFFFFF; overflow-x: hidden; }
+  html { overflow-x: hidden; }
   ::selection { background: #FFD400; color: #0A0A0A; }
   strong { font-weight: 600; }
   button { font-family: inherit; }
@@ -845,8 +845,13 @@
   @media (max-width: 960px) {
     .browser-frame { border-radius: 12px; }
     .mock-sidebar { display: none; }
-    .mock-two-col { grid-template-columns: 1fr; }
+    .mock-two-col { display: none; }
     .mock-stats { grid-template-columns: repeat(2, 1fr); }
+    .mock-topbar { display: none; }
+    .mock-welcome-actions { display: none; }
+    .mock-welcome-title { font-size: 24px; }
+    .mock-stat-val { font-size: 26px; }
+    .mock-stat { padding: 12px; }
     .product { padding: 80px 0; }
     .product-inner { padding: 0 24px; }
   }
@@ -1810,8 +1815,10 @@
     .slide-title { font-size: 32px; }
     .slide-big-number { font-size: 180px; }
     .before-after-inner { padding: 0 24px; }
-    .before-after { padding: 80px 0; }
+    .before-after { padding: 80px 0; overflow: hidden; }
     .before-after-grid { gap: 30px; }
+    .ba-card { box-shadow: 4px 4px 0 0 var(--ink-30); }
+    .ba-card-avec { box-shadow: 4px 4px 0 0 var(--phantom-violet); }
     .services-header { flex-direction: column; align-items: flex-start; gap: 24px; }
     .services-aside { text-align: left; }
     .services-grid { grid-template-columns: 1fr 1fr 1fr; }
@@ -1839,10 +1846,21 @@
     .hero-ctas { flex-direction: column; }
     .hero-proof { flex-direction: column; align-items: flex-start; gap: 16px; }
     .card-title { font-size: 24px !important; }
-    .manifesto-slide { padding: 0 24px; }
+    .manifesto-outer { height: auto !important; }
+    .manifesto-sticky { position: relative; height: auto; overflow: visible; }
+    .manifesto-track { flex-direction: column; transform: none !important; }
+    .manifesto-slide { min-width: 100%; min-height: 100vh; padding: 60px 20px; }
+    .slide-content { padding: 32px 24px; border-radius: 20px; }
+    .slide-progress { display: none; }
+    .slide-ghost-2 { display: none; }
+    .slide-ring { display: none; }
+    .before-after-inner { padding: 0 16px; }
     .before-after-grid { grid-template-columns: 1fr; gap: 24px; }
     .ba-divider { position: static; transform: none; margin: -12px auto; }
-    .ba-card { margin: 0 auto; max-width: 400px; }
+    .ba-card { margin: 0 auto; max-width: 100%; box-shadow: 3px 3px 0 0 var(--ink-30); }
+    .ba-card-avec { box-shadow: 3px 3px 0 0 var(--phantom-violet); }
+    .ba-card-top { padding: 14px 16px 12px; }
+    .ba-card-bottom { padding: 12px 16px 16px; }
     .before-after-headline { font-size: 32px; }
     .slide-title { font-size: 28px; }
     .slide-body { font-size: 15px; }
@@ -1856,17 +1874,19 @@
     .browser-frame { border-radius: 10px; }
     .browser-dot { width: 8px; height: 8px; }
     .browser-url { font-size: 10px; padding: 4px 10px; }
-    .mock-app { min-height: 360px; flex-direction: column; }
-    .mock-topbar { height: 36px; padding: 0 12px; }
-    .mock-search { display: none; }
-    .mock-content { padding: 12px; gap: 10px; }
-    .mock-welcome-title { font-size: 22px; }
+    .mock-app { min-height: auto; flex-direction: column; }
+    .mock-topbar { display: none; }
+    .mock-content { padding: 14px; gap: 10px; }
+    .mock-welcome-date { font-size: 9px; }
+    .mock-welcome-title { font-size: 20px; }
+    .mock-welcome-row { flex-direction: column; align-items: flex-start; gap: 8px; }
     .mock-welcome-actions { display: none; }
     .mock-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
-    .mock-stat { padding: 10px; }
-    .mock-stat-val { font-size: 22px; }
-    .mock-two-col { grid-template-columns: 1fr; gap: 10px; }
-    .mock-chat-area { max-height: 160px; }
+    .mock-stat { padding: 10px; border-radius: 10px; }
+    .mock-stat-val { font-size: 20px; }
+    .mock-stat-label { font-size: 7px; }
+    .mock-stat-sub { font-size: 9px; }
+    .mock-two-col { display: none; }
     .phones { flex-direction: column; align-items: center; gap: 32px; }
     .phone { width: 260px; height: 562px; }
     .mobile-headline { font-size: 36px; }
