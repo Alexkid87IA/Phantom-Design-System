@@ -467,20 +467,29 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    overflow: visible;
   }
   .menu-side-ghost svg {
     width: auto;
-    height: 55%;
-    min-height: 200px;
-    max-height: 400px;
-    color: #6E3CFF;
-    opacity: 0.18;
-    filter: drop-shadow(0 0 60px rgba(110, 60, 255, 0.3));
-    animation: menuGhostFloat 2.4s ease-in-out infinite;
+    height: 70%;
+    min-height: 280px;
+    max-height: 500px;
+    opacity: 0.25;
+    filter: drop-shadow(0 0 80px rgba(110, 60, 255, 0.35));
+    animation: menuGhostDiag 3s ease-in-out infinite, menuGhostRainbow 1.8s linear infinite;
   }
-  @keyframes menuGhostFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  @keyframes menuGhostDiag {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(12px, -14px); }
+  }
+  @keyframes menuGhostRainbow {
+    0%   { color: #FF2D87; }
+    16%  { color: #FF8A1F; }
+    33%  { color: #FFD400; }
+    50%  { color: #00D26A; }
+    66%  { color: #0066FF; }
+    83%  { color: #6E3CFF; }
+    100% { color: #FF2D87; }
   }
   .menu-side-label {
     font-family: var(--font-mono);
@@ -520,19 +529,6 @@
   .menu-cta:hover {
     transform: translate(-3px, -3px);
     box-shadow: 7px 7px 0 0 var(--phantom-violet);
-  }
-
-  .menu-ghosts {
-    position: absolute;
-    right: -20px;
-    bottom: -30px;
-    opacity: 0.03;
-    pointer-events: none;
-  }
-  .menu-ghost-float {
-    position: absolute;
-    pointer-events: none;
-    animation: float 3s ease-in-out infinite;
   }
 
   .menu-bottom {
@@ -3570,10 +3566,8 @@
         <div class="menu-side-ghost">
           <svg viewBox="0 0 200 200" fill="none">
             <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
-            <ellipse cx="78" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.35"/>
-            <ellipse cx="122" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.35"/>
-            <circle cx="60" cy="118" r="6" fill="#FF2D87" opacity="0.25"/>
-            <circle cx="140" cy="118" r="6" fill="#FF2D87" opacity="0.25"/>
+            <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+            <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
           </svg>
         </div>
         <a class="menu-cta" href="#tarifs">Je me lance &#8599;</a>
@@ -3591,12 +3585,6 @@
     </div>
   </div>
 
-  <!-- Ghost décoratif -->
-  <svg class="menu-ghosts" viewBox="0 0 200 200" fill="none" style="width:300px;height:300px;color:#fff">
-    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
-    <ellipse cx="78" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.3"/>
-    <ellipse cx="122" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.3"/>
-  </svg>
 </div>
 
 <!-- Mobile sticky CTA -->
