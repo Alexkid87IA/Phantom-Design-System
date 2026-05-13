@@ -753,7 +753,6 @@
   .mock-app {
     display: flex;
     background: #fff;
-    min-height: 620px;
   }
 
   /* Sidebar */
@@ -988,10 +987,36 @@
     display: flex; align-items: center; justify-content: center;
   }
 
+  @media (max-width: 1440px) {
+    .mock-sidebar { width: 190px; }
+    .mock-ws-avatar { width: 26px; height: 26px; font-size: 11px; }
+    .mock-ws-name { font-size: 11px; }
+    .mock-nav-item { font-size: 11px; padding: 5px 8px; }
+    .mock-agent-row { font-size: 10px; padding: 4px 8px; }
+    .mock-support { padding: 10px; }
+    .mock-support-title { font-size: 11px; }
+    .mock-content { padding: 16px 20px; gap: 12px; }
+    .mock-welcome-title { font-size: 26px; }
+    .mock-stat-val { font-size: 26px; }
+    .mock-stat { padding: 10px; }
+    .mock-stat-label { font-size: 7px; }
+    .mock-stat-sub { font-size: 9px; }
+    .mock-feed-item { padding: 8px 12px; }
+    .mock-feed-text { font-size: 11px; }
+    .mock-msg { font-size: 11px; padding: 8px 12px; }
+    .mock-card-header { padding: 10px 14px; }
+    .mock-card-title { font-size: 12px; }
+    .mock-welcome-row { flex-wrap: wrap; gap: 8px; }
+    .mock-btn-outline { font-size: 10px; padding: 5px 10px; }
+    .mock-btn-primary { font-size: 10px; padding: 5px 12px; }
+    .mock-topbar { height: 40px; }
+    .product { padding: 60px 0; }
+    .product-headline { font-size: clamp(36px, 4vw, 56px); }
+    .product-header { margin-bottom: 28px; }
+  }
   @media (max-width: 960px) {
     .browser-frame { border-radius: 12px; }
     .mock-sidebar { display: none; }
-    .mock-app { min-height: auto; }
     .mock-two-col { display: none; }
     .mock-stats { grid-template-columns: repeat(2, 1fr); }
     .mock-topbar { display: none; }
