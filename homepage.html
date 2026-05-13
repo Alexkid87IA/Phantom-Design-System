@@ -345,6 +345,81 @@
   }
   .nav-cta-short { display: none; }
 
+  .nav-dock {
+    transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+  }
+  .nav-dock.hidden {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .nav-close {
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background: rgba(10,10,10,0.06);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--ink-40);
+    margin-left: 4px;
+    transition: all 0.15s var(--ease);
+    flex-shrink: 0;
+  }
+  .nav-close:hover {
+    background: rgba(10,10,10,0.12);
+    color: var(--ink);
+  }
+  .nav-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(10,10,10,0.08);
+    box-shadow: 0 4px 20px rgba(10,10,10,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .nav-toggle.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+  .nav-toggle-bar {
+    width: 18px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    position: relative;
+  }
+  .nav-toggle-bar::before,
+  .nav-toggle-bar::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    left: 0;
+  }
+  .nav-toggle-bar::before { top: -6px; }
+  .nav-toggle-bar::after { top: 6px; }
+
   /* ── Manifesto ── */
   /* ── Manifesto — Horizontal scroll ── */
   .manifesto-outer {
@@ -1368,7 +1443,12 @@
   }
   @media (max-width: 600px) {
     .problem-grid { grid-template-columns: 1fr; }
-    .team-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr; gap: 16px; }
+    .team-card { padding: 24px 16px; }
+    .team-avatar { width: 56px; height: 56px; font-size: 20px; margin-bottom: 12px; }
+    .team-name { font-size: 18px; }
+    .team-bio { font-size: 12px; }
+    .team-section-label { margin-top: 32px; padding-top: 32px; margin-bottom: 16px; }
     .trust-logos { gap: 32px; }
   }
 
@@ -1793,9 +1873,13 @@
     .services-grid { grid-template-columns: 1fr 1fr; }
     .stats-grid { grid-template-columns: 1fr; }
     .stat-number { font-size: 40px; }
-    .footer-bottom { grid-template-columns: 1fr; }
+    .footer-bottom { grid-template-columns: 1fr; gap: 32px; }
     .footer-ctas { flex-direction: column; }
-    .footer-legal { flex-direction: column; gap: 8px; }
+    .footer-headline { font-size: 36px; }
+    .footer-inner { padding: 0 16px; }
+    .footer-col-title { font-size: 11px; margin-bottom: 12px; }
+    .footer-links li { font-size: 13px; }
+    .footer-legal { flex-direction: column; gap: 8px; font-size: 11px; }
   }
 
   /* ── Floating background ghosts ── */
@@ -3188,9 +3272,16 @@
 </footer>
 
 <!-- ════════════════════════════════════════════════════════════
+     NAV TOGGLE (burger)
+     ════════════════════════════════════════════════════════════ -->
+<button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+  <span class="nav-toggle-bar"></span>
+</button>
+
+<!-- ════════════════════════════════════════════════════════════
      NAV DOCK (floating)
      ════════════════════════════════════════════════════════════ -->
-<nav class="nav-dock">
+<nav class="nav-dock" id="nav-dock">
   <div class="nav-dock-inner">
     <div class="nav-dock-ghost">
       <svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:#6E3CFF">
@@ -3205,10 +3296,29 @@
     <button class="nav-item nav-hide-mobile" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Équipe</button>
     <button class="nav-item nav-hide-mobile" onclick="this.parentNode.querySelector('.active')?.classList.remove('active');this.classList.add('active')">Journal</button>
     <button class="nav-cta"><span class="nav-cta-full">Je me lance &#8599;</span><span class="nav-cta-short">Go &#8599;</span></button>
+    <button class="nav-close" id="nav-close" aria-label="Fermer le menu">&#10005;</button>
   </div>
 </nav>
 
 <script>
+// Nav dock toggle
+(function() {
+  var dock = document.getElementById('nav-dock');
+  var toggle = document.getElementById('nav-toggle');
+  var close = document.getElementById('nav-close');
+  if (!dock || !toggle || !close) return;
+
+  close.addEventListener('click', function() {
+    dock.classList.add('hidden');
+    toggle.classList.add('visible');
+  });
+
+  toggle.addEventListener('click', function() {
+    dock.classList.remove('hidden');
+    toggle.classList.remove('visible');
+  });
+})();
+
 (function() {
   var outer = document.getElementById('manifesto');
   var track = document.getElementById('manifesto-track');
