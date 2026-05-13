@@ -141,9 +141,12 @@
     border-radius: 14px;
     cursor: pointer;
     border: 2px solid var(--ink);
-    transition: transform 0.08s var(--ease), box-shadow 0.08s var(--ease);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
     letter-spacing: -0.01em;
     text-decoration: none;
+  }
+  .btn:hover {
+    transform: translate(-3px, -3px);
   }
   .btn:active {
     transform: translate(5px, 5px);
@@ -154,16 +157,19 @@
     color: var(--ink);
     box-shadow: 5px 5px 0 0 #0A0A0A;
   }
+  .btn-yellow:hover { box-shadow: 8px 8px 0 0 #0A0A0A; }
   .btn-white {
     background: #fff;
     color: var(--ink);
     box-shadow: 5px 5px 0 0 #0A0A0A;
   }
+  .btn-white:hover { box-shadow: 8px 8px 0 0 #0A0A0A; }
   .btn-violet {
     background: var(--phantom-violet);
     color: #fff;
     box-shadow: 5px 5px 0 0 #0A0A0A;
   }
+  .btn-violet:hover { box-shadow: 8px 8px 0 0 #0A0A0A; }
 
   /* ── Social proof row ── */
   .hero-proof {
@@ -203,6 +209,11 @@
     box-shadow: 6px 6px 0 0 #0A0A0A;
     position: relative;
     overflow: hidden;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  .pop-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 0 #0A0A0A;
   }
 
   .hero-cards { display: flex; flex-direction: column; gap: 14px; padding-top: 0; }
@@ -1862,6 +1873,10 @@
     line-height: 1;
     letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
+    transition: transform 0.25s var(--ease);
+  }
+  .pop-card:hover .stat-number {
+    transform: scale(1.08);
   }
   .stat-label {
     font-family: var(--font-mono);
@@ -1940,6 +1955,7 @@
   }
   .pricing-card { padding: 32px; }
   .pricing-card.highlight { transform: translateY(-12px); }
+  .pricing-card.highlight:hover { transform: translateY(-12px) translate(-3px, -3px); }
 
   .pricing-tag {
     font-family: var(--font-mono);
