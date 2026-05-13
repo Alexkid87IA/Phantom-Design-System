@@ -531,6 +531,9 @@
     box-shadow: 7px 7px 0 0 var(--phantom-violet);
   }
 
+  .menu-mobile-cta { display: none; }
+  .menu-mobile-ghost { display: none; }
+
   .menu-bottom {
     padding: 20px 48px;
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -561,10 +564,55 @@
   @media (max-width: 960px) {
     .mobile-burger { top: 16px; right: 16px; width: 46px; height: 46px; border-radius: 14px; }
     .menu-top { padding: 16px 20px; }
-    .menu-body { padding: 0 24px; }
+    .menu-body { padding: 0 24px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
     .menu-grid { grid-template-columns: 1fr; }
     .menu-side { display: none; }
-    .menu-link { font-size: 38px; padding: 12px 0; }
+    .menu-link {
+      font-size: clamp(32px, 8vw, 48px);
+      padding: 10px 0;
+      color: rgba(255,255,255,0.25);
+    }
+    .menu-link-num { font-size: 10px; min-width: 24px; }
+    .menu-link:nth-child(1) { color: var(--rainbow-pink); }
+    .menu-link:nth-child(2) { color: var(--phantom-violet-400); }
+    .menu-link:nth-child(3) { color: var(--rainbow-yellow); }
+    .menu-link:nth-child(4) { color: var(--rainbow-green); }
+    .menu-link:nth-child(5) { color: var(--rainbow-orange); }
+    .menu-link:nth-child(6) { color: var(--rainbow-blue); }
+    .menu-link:nth-child(7) { color: var(--rainbow-red); }
+    .menu-mobile-cta {
+      display: block;
+      margin-top: 24px;
+    }
+    .menu-mobile-cta .menu-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: var(--rainbow-yellow);
+      color: var(--ink);
+      border: 2.5px solid var(--rainbow-yellow);
+      border-radius: 9999px;
+      box-shadow: 4px 4px 0 0 var(--phantom-violet);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .menu-mobile-ghost {
+      position: absolute;
+      right: -20px;
+      bottom: 80px;
+      pointer-events: none;
+      opacity: 0.2;
+    }
+    .menu-mobile-ghost svg {
+      width: 180px;
+      height: 180px;
+      filter: drop-shadow(0 0 40px rgba(110, 60, 255, 0.3));
+      animation: menuGhostDiag 3s ease-in-out infinite, menuGhostRainbow 1.8s linear infinite;
+    }
     .menu-close { width: 46px; height: 46px; border-radius: 14px; }
     .menu-bottom { padding: 16px 20px; }
     .menu-bottom-links { display: none; }
@@ -3561,6 +3609,17 @@
         </div>
         <a class="menu-cta" href="#tarifs">Je me lance &#8599;</a>
       </div>
+    </div>
+    <!-- Mobile only: CTA + ghost -->
+    <div class="menu-mobile-cta">
+      <a class="menu-cta" href="#tarifs">Je me lance &#8599;</a>
+    </div>
+    <div class="menu-mobile-ghost">
+      <svg viewBox="0 0 200 200" fill="none">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
     </div>
   </div>
 
