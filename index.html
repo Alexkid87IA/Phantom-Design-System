@@ -442,30 +442,25 @@
   /* ── Manifesto ── */
   /* ── Manifesto — Horizontal scroll ── */
   .manifesto-outer {
-    height: 500vh;
     position: relative;
   }
   .manifesto-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
+    position: relative;
   }
   .manifesto-track {
     display: flex;
-    height: 100%;
-    will-change: transform;
+    flex-direction: column;
   }
 
   .manifesto-slide {
-    min-width: 100vw;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: relative;
     overflow: hidden;
-    padding: 0 80px;
+    padding: 80px;
   }
 
   .slide-big-number {
@@ -1191,7 +1186,7 @@
   /* ── Before / After video ── */
   .before-after {
     padding: 120px 0;
-    background: transparent;
+    background: #fff;
     overflow: hidden;
     position: relative;
   }
@@ -1831,10 +1826,7 @@
     .hero-inner, .services-inner,
     .case-inner, .pricing-inner, .footer-inner { padding: 0 24px; }
     .hero-topbar-meta { display: none; }
-    .manifesto-outer { height: auto !important; }
-    .manifesto-sticky { position: relative; height: auto; overflow: visible; }
-    .manifesto-track { flex-direction: column; transform: none !important; }
-    .manifesto-slide { min-width: 100%; min-height: auto; padding: 60px 40px; }
+    .manifesto-slide { padding: 60px 40px; }
     .slide-content { padding: 36px 32px; border-radius: 22px; }
     .slide-progress { display: none; }
     .slide-ghost-2 { display: none; }
@@ -1873,7 +1865,7 @@
     .hero-ctas { flex-direction: column; }
     .hero-proof { flex-direction: column; align-items: flex-start; gap: 16px; }
     .card-title { font-size: 24px !important; }
-    .manifesto-slide { padding: 60px 20px; }
+    .manifesto-slide { min-height: auto; padding: 60px 20px; }
     .slide-content { padding: 28px 22px; border-radius: 18px; }
     .before-after-inner { padding: 0 16px; }
     .before-after-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -3360,36 +3352,7 @@
   });
 })();
 
-(function() {
-  var outer = document.getElementById('manifesto');
-  var track = document.getElementById('manifesto-track');
-  if (!outer || !track) return;
-
-  var slideEls = track.querySelectorAll('.manifesto-slide');
-  var count = slideEls.length;
-
-  function onScroll() {
-    var rect = outer.getBoundingClientRect();
-    var scrollable = outer.offsetHeight - window.innerHeight;
-    var progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
-    track.style.transform = 'translateX(' + (progress * (count - 1) * -100) + 'vw)';
-
-    var activeIndex = Math.min(Math.round(progress * (count - 1)), count - 1);
-    slideEls.forEach(function(slide, si) {
-      var bars = slide.querySelectorAll('.slide-progress-bar');
-      bars.forEach(function(bar, bi) {
-        if (si === activeIndex && bi === activeIndex) {
-          bar.classList.add('active');
-        } else {
-          bar.classList.remove('active');
-        }
-      });
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
+// Horizontal scroll removed — manifesto is now vertical
 
 // ── Scroll reveal (IntersectionObserver) ──
 (function() {
