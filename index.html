@@ -845,6 +845,7 @@
   @media (max-width: 960px) {
     .browser-frame { border-radius: 12px; }
     .mock-sidebar { display: none; }
+    .mock-app { min-height: auto; }
     .mock-two-col { display: none; }
     .mock-stats { grid-template-columns: repeat(2, 1fr); }
     .mock-topbar { display: none; }
@@ -1811,7 +1812,14 @@
     .hero-inner, .services-inner,
     .case-inner, .pricing-inner, .footer-inner { padding: 0 24px; }
     .hero-topbar-meta { display: none; }
-    .manifesto-slide { padding: 0 40px; }
+    .manifesto-outer { height: auto !important; }
+    .manifesto-sticky { position: relative; height: auto; overflow: visible; }
+    .manifesto-track { flex-direction: column; transform: none !important; }
+    .manifesto-slide { min-width: 100%; min-height: auto; padding: 60px 40px; }
+    .slide-content { padding: 36px 32px; border-radius: 22px; }
+    .slide-progress { display: none; }
+    .slide-ghost-2 { display: none; }
+    .slide-ring { display: none; }
     .slide-title { font-size: 32px; }
     .slide-big-number { font-size: 180px; }
     .before-after-inner { padding: 0 24px; }
@@ -1846,14 +1854,8 @@
     .hero-ctas { flex-direction: column; }
     .hero-proof { flex-direction: column; align-items: flex-start; gap: 16px; }
     .card-title { font-size: 24px !important; }
-    .manifesto-outer { height: auto !important; }
-    .manifesto-sticky { position: relative; height: auto; overflow: visible; }
-    .manifesto-track { flex-direction: column; transform: none !important; }
-    .manifesto-slide { min-width: 100%; min-height: 100vh; padding: 60px 20px; }
-    .slide-content { padding: 32px 24px; border-radius: 20px; }
-    .slide-progress { display: none; }
-    .slide-ghost-2 { display: none; }
-    .slide-ring { display: none; }
+    .manifesto-slide { padding: 60px 20px; }
+    .slide-content { padding: 28px 22px; border-radius: 18px; }
     .before-after-inner { padding: 0 16px; }
     .before-after-grid { grid-template-columns: 1fr; gap: 24px; }
     .ba-divider { position: static; transform: none; margin: -12px auto; }
