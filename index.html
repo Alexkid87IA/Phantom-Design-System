@@ -424,6 +424,148 @@
   .nav-toggle-bar::before { top: -6px; }
   .nav-toggle-bar::after { top: 6px; }
 
+  /* ── Mobile menu overlay ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+  .mobile-menu.open {
+    display: flex;
+    opacity: 1;
+  }
+  .mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .mobile-menu-link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 28px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 9999px;
+    transition: all 0.18s var(--ease);
+    letter-spacing: -0.02em;
+  }
+  .mobile-menu-link:hover,
+  .mobile-menu-link.active {
+    color: #fff;
+    background: var(--phantom-violet);
+  }
+  .mobile-menu-cta {
+    margin-top: 24px;
+    padding: 16px 40px;
+    background: var(--rainbow-yellow);
+    color: var(--ink);
+    border: none;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .mobile-menu-ghost {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.06;
+  }
+
+  /* ── Mobile sticky CTA ── */
+  .mobile-cta-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .mobile-cta-bar a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 24px;
+    background: var(--rainbow-yellow);
+    color: var(--ink);
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Mobile burger (visible only on mobile) ── */
+  .mobile-burger {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 101;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(10,10,10,0.25);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .mobile-burger-bar {
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    position: relative;
+  }
+  .mobile-burger-bar::before,
+  .mobile-burger-bar::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    left: 0;
+  }
+  .mobile-burger-bar::before { top: -6px; }
+  .mobile-burger-bar::after { top: 6px; }
+
   /* ── Manifesto ── */
   /* ── Manifesto — Horizontal scroll ── */
   .manifesto-outer {
@@ -1839,20 +1981,13 @@
     .pricing-card.highlight { transform: none; }
     .footer-bottom { grid-template-columns: 1fr 1fr; }
     .footer-ghosts { display: none; }
-    .nav-dock { bottom: 16px; left: 50%; right: auto; transform: translateX(-50%); width: auto; max-width: calc(100% - 32px); }
-    .nav-dock-inner { gap: 0; padding: 5px; }
-    .nav-item { padding: 8px 12px; font-size: 12px; }
-    .nav-item.nav-hide-mobile { display: none; }
-    .nav-cta { padding: 8px 14px; font-size: 12px; }
-    .nav-cta-full { display: none; }
-    .nav-cta-short { display: inline; }
-    .nav-dock-ghost { width: 26px; height: 26px; margin-left: 4px; margin-right: 4px; }
+    .nav-dock { display: none; }
+    .nav-toggle { display: none; }
+    .mobile-burger { display: flex; }
+    .mobile-cta-bar { display: block; }
+    .footer { padding-bottom: 80px; }
   }
   @media (max-width: 600px) {
-    .nav-dock-inner { padding: 4px; }
-    .nav-item { padding: 7px 10px; font-size: 11px; }
-    .nav-cta { padding: 8px 12px; font-size: 11px; margin-left: 2px; }
-    .nav-dock-ghost { width: 24px; height: 24px; margin-left: 2px; margin-right: 4px; }
     .hero-headline { font-size: 52px; }
     .hero-ctas { flex-direction: column; }
     .hero-proof { flex-direction: column; align-items: flex-start; gap: 16px; }
@@ -3327,6 +3462,34 @@
   </div>
 </nav>
 
+<!-- ════════════════════════════════════════════════════════════
+     MOBILE BURGER + MENU OVERLAY + STICKY CTA
+     ════════════════════════════════════════════════════════════ -->
+<button class="mobile-burger" id="mobile-burger" aria-label="Menu">
+  <span class="mobile-burger-bar"></span>
+</button>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" id="mobile-menu-close">&times;</button>
+  <a class="mobile-menu-link" href="#comment" data-mobile-nav>Comment</a>
+  <a class="mobile-menu-link" href="#dashboard" data-mobile-nav>Dashboard</a>
+  <a class="mobile-menu-link" href="#agents" data-mobile-nav>Agents</a>
+  <a class="mobile-menu-link" href="#resultats" data-mobile-nav>R&eacute;sultats</a>
+  <a class="mobile-menu-link" href="#tarifs" data-mobile-nav>Tarifs</a>
+  <a class="mobile-menu-link" href="#equipe" data-mobile-nav>&Eacute;quipe</a>
+  <a class="mobile-menu-link" href="#faq" data-mobile-nav>FAQ</a>
+  <a class="mobile-menu-cta" href="#tarifs">Je me lance &#8599;</a>
+  <svg class="mobile-menu-ghost" viewBox="0 0 200 200" fill="none" style="width:120px;height:120px;color:#6E3CFF">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+    <ellipse cx="78" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.3"/>
+    <ellipse cx="122" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.3"/>
+  </svg>
+</div>
+
+<div class="mobile-cta-bar" id="mobile-cta-bar">
+  <a href="#tarifs">Je me lance &#8599;</a>
+</div>
+
 <script>
 // Nav dock toggle
 (function() {
@@ -3367,6 +3530,30 @@
   }
   window.addEventListener('scroll', update, { passive: true });
   update();
+})();
+
+// Mobile menu
+(function() {
+  var burger = document.getElementById('mobile-burger');
+  var menu = document.getElementById('mobile-menu');
+  var closeBtn = document.getElementById('mobile-menu-close');
+  if (!burger || !menu || !closeBtn) return;
+
+  burger.addEventListener('click', function() {
+    menu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeMenu);
+
+  menu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
 })();
 
 (function() {
