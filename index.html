@@ -1050,15 +1050,17 @@
     .product-header { margin-bottom: 28px; }
   }
   @media (max-width: 960px) {
-    .browser-frame { border-radius: 12px; }
-    .mock-sidebar { display: none; }
-    .mock-two-col { display: none; }
-    .mock-stats { grid-template-columns: repeat(2, 1fr); }
-    .mock-topbar { display: none; }
-    .mock-welcome-actions { display: none; }
-    .mock-welcome-title { font-size: 24px; }
-    .mock-stat-val { font-size: 26px; }
-    .mock-stat { padding: 12px; }
+    .browser-frame {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .mock-app {
+      width: 1100px;
+      transform-origin: top left;
+      min-height: auto;
+    }
     .product { padding: 80px 0; }
     .product-inner { padding: 0 24px; }
   }
@@ -1648,7 +1650,8 @@
     .cta-banner-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
     .cta-banner-right { align-items: flex-start; }
     .cta-banner-sub { text-align: left; }
-    .team-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr; gap: 16px; }
+    .team-card { padding: 24px 16px; }
     .faq-layout { grid-template-columns: 1fr; gap: 40px; }
     .faq-headline { position: static; }
   }
@@ -2100,122 +2103,8 @@
     .product-header { margin-bottom: 32px; }
     .product-headline { font-size: 36px; }
     .product-sub { font-size: 14px; }
-    .browser-frame {
-      border-radius: 10px;
-      position: relative;
-      cursor: pointer;
-    }
-    .browser-frame::after {
-      content: 'Appuie pour agrandir ↗';
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(10,10,10,0.85);
-      color: #fff;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      z-index: 5;
-      pointer-events: none;
-      backdrop-filter: blur(8px);
-    }
-    .browser-frame.fullscreen::after { display: none; }
     .browser-dot { width: 8px; height: 8px; }
     .browser-url { font-size: 10px; padding: 4px 10px; }
-    .mock-app {
-      min-height: auto;
-      height: 56.25vw;
-      overflow: hidden;
-    }
-    .mock-sidebar { display: flex; width: 140px; padding: 8px 6px; }
-    .mock-ws { padding: 4px 6px; margin-bottom: 6px; gap: 6px; }
-    .mock-ws-avatar { width: 20px; height: 20px; font-size: 9px; border-radius: 5px; }
-    .mock-ws-name { font-size: 9px; }
-    .mock-ws-sub { font-size: 7px; }
-    .mock-section-title { font-size: 7px; padding: 2px 6px 3px; }
-    .mock-nav-item { font-size: 9px; padding: 3px 6px; gap: 4px; }
-    .mock-nav-item svg { width: 10px; height: 10px; }
-    .mock-nav-badge { font-size: 7px; padding: 0 3px; }
-    .mock-agent-row { font-size: 8px; padding: 2px 6px; gap: 4px; }
-    .mock-agent-row svg { width: 12px !important; height: 12px !important; }
-    .mock-agent-dot { width: 4px !important; height: 4px !important; }
-    .mock-agent-count { font-size: 7px; padding: 0 3px; }
-    .mock-support { display: none; }
-    .mock-user { display: none; }
-    .mock-topbar { display: flex; height: 28px; padding: 0 8px; }
-    .mock-breadcrumb { font-size: 8px; }
-    .mock-search { font-size: 8px; padding: 2px 8px; }
-    .mock-tag-green { font-size: 7px; padding: 2px 5px; }
-    .mock-btn-dark { font-size: 7px; padding: 3px 6px; }
-    .mock-content { padding: 8px; gap: 6px; }
-    .mock-welcome-date { font-size: 7px; }
-    .mock-welcome-title { font-size: 12px; }
-    .mock-welcome-actions { display: none; }
-    .mock-stats { grid-template-columns: repeat(4, 1fr); gap: 4px; }
-    .mock-stat { padding: 6px; border-radius: 6px; }
-    .mock-stat-val { font-size: 14px; }
-    .mock-stat-label { font-size: 6px; }
-    .mock-stat-sub { font-size: 7px; }
-    .mock-two-col { display: grid; gap: 6px; }
-    .mock-card-header { padding: 6px 8px; }
-    .mock-card-title { font-size: 9px; }
-    .mock-card-sub { font-size: 7px; }
-    .mock-feed-item { padding: 4px 8px; gap: 4px; }
-    .mock-feed-time { font-size: 7px; }
-    .mock-feed-text { font-size: 8px; }
-    .mock-feed-status { font-size: 6px; padding: 1px 4px; }
-    .mock-feed-item svg { width: 14px !important; height: 14px !important; }
-    .mock-msg { font-size: 8px; padding: 4px 8px; }
-    .mock-msg-input { font-size: 8px; padding: 4px 8px; }
-
-    .browser-frame.fullscreen {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 9999;
-      border-radius: 0;
-      border: none;
-      box-shadow: none;
-      display: flex;
-      flex-direction: column;
-    }
-    .browser-frame.fullscreen .browser-chrome {
-      border-radius: 0;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      cursor: pointer;
-    }
-    .browser-frame.fullscreen .browser-chrome::after {
-      content: '✕ Fermer';
-      margin-left: auto;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--ink-60);
-    }
-    .browser-frame.fullscreen .mock-app {
-      height: auto;
-      overflow: auto;
-      flex: 1;
-      -webkit-overflow-scrolling: touch;
-    }
-    .browser-frame.fullscreen .mock-sidebar { width: 160px; }
-    .browser-frame.fullscreen .mock-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
-    .browser-frame.fullscreen .mock-stat { padding: 10px; }
-    .browser-frame.fullscreen .mock-stat-val { font-size: 20px; }
-    .browser-frame.fullscreen .mock-stat-label { font-size: 7px; }
-    .browser-frame.fullscreen .mock-stat-sub { font-size: 8px; }
-    .browser-frame.fullscreen .mock-content { padding: 12px; gap: 8px; }
-    .browser-frame.fullscreen .mock-welcome-title { font-size: 16px; }
-    .browser-frame.fullscreen .mock-two-col { display: grid; grid-template-columns: 1fr; }
-    .browser-frame.fullscreen .mock-card-header { padding: 8px 10px; }
-    .browser-frame.fullscreen .mock-card-title { font-size: 11px; }
-    .browser-frame.fullscreen .mock-feed-text { font-size: 10px; }
-    .browser-frame.fullscreen .mock-feed-item { padding: 6px 10px; gap: 6px; }
-    .browser-frame.fullscreen .mock-msg { font-size: 10px; padding: 6px 10px; }
     .phones { flex-direction: column; align-items: center; gap: 32px; }
     .phone { width: 260px; height: 562px; }
     .mobile-headline { font-size: 36px; }
@@ -3803,23 +3692,34 @@
   });
 })();
 
-// ── Dashboard fullscreen on mobile ──
+// ── Dashboard scale on mobile ──
 (function() {
   var frame = document.querySelector('.browser-frame');
   if (!frame) return;
-  frame.addEventListener('click', function(e) {
-    if (window.innerWidth > 600) return;
-    if (frame.classList.contains('fullscreen')) return;
-    e.preventDefault();
-    frame.classList.add('fullscreen');
-    document.body.style.overflow = 'hidden';
-  });
-  frame.querySelector('.browser-chrome').addEventListener('click', function(e) {
-    if (!frame.classList.contains('fullscreen')) return;
-    e.stopPropagation();
-    frame.classList.remove('fullscreen');
-    document.body.style.overflow = '';
-  });
+  var mockApp = frame.querySelector('.mock-app');
+  if (!mockApp) return;
+
+  function scaleMock() {
+    if (window.innerWidth > 960) {
+      mockApp.style.transform = '';
+      mockApp.style.width = '';
+      mockApp.style.height = '';
+      frame.style.height = '';
+      return;
+    }
+    var containerW = frame.clientWidth;
+    var nativeW = 1100;
+    var s = containerW / nativeW;
+    mockApp.style.width = nativeW + 'px';
+    mockApp.style.transform = 'scale(' + s + ')';
+    mockApp.style.transformOrigin = 'top left';
+    var nativeH = mockApp.scrollHeight;
+    frame.style.height = (nativeH * s + frame.querySelector('.browser-chrome').offsetHeight) + 'px';
+    mockApp.style.height = nativeH + 'px';
+  }
+
+  scaleMock();
+  window.addEventListener('resize', scaleMock);
 })();
 </script>
 
