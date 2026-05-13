@@ -456,9 +456,31 @@
     justify-content: space-between;
     padding-left: 60px;
     border-left: 2px solid rgba(255,255,255,0.06);
+    position: relative;
   }
   .menu-side-top {
     padding-top: 8px;
+  }
+  .menu-side-ghost {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .menu-side-ghost svg {
+    width: auto;
+    height: 55%;
+    min-height: 200px;
+    max-height: 400px;
+    color: #6E3CFF;
+    opacity: 0.18;
+    filter: drop-shadow(0 0 60px rgba(110, 60, 255, 0.3));
+    animation: menuGhostFloat 2.4s ease-in-out infinite;
+  }
+  @keyframes menuGhostFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
   .menu-side-label {
     font-family: var(--font-mono);
@@ -3544,6 +3566,15 @@
         <div class="menu-side-top">
           <div class="menu-side-label">&mdash; L'agence agentique</div>
           <p class="menu-side-text">Des experts seniors + des agents IA qui font tourner ton digital. <strong>Strat&eacute;gie, contenu, r&eacute;putation, production.</strong></p>
+        </div>
+        <div class="menu-side-ghost">
+          <svg viewBox="0 0 200 200" fill="none">
+            <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+            <ellipse cx="78" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.35"/>
+            <ellipse cx="122" cy="92" rx="10" ry="15" fill="currentColor" opacity="0.35"/>
+            <circle cx="60" cy="118" r="6" fill="#FF2D87" opacity="0.25"/>
+            <circle cx="140" cy="118" r="6" fill="#FF2D87" opacity="0.25"/>
+          </svg>
         </div>
         <a class="menu-cta" href="#tarifs">Je me lance &#8599;</a>
       </div>
