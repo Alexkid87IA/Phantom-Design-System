@@ -19,19 +19,20 @@
   .stack {
     position: sticky;
     top: 0;
+    min-height: 100vh;
     border-radius: 28px 28px 0 0;
     box-shadow: 0 -12px 50px -10px rgba(10,10,10,0.18);
   }
-  .stack-1 { z-index: 2; }
-  .stack-2 { z-index: 3; }
-  .stack-3 { z-index: 4; }
-  .stack-4 { z-index: 5; }
-  .stack-5 { z-index: 6; }
-  .stack-6 { z-index: 7; }
-  .stack-7 { z-index: 8; }
-  .stack-8 { z-index: 9; }
-  .stack-9 { z-index: 10; }
-  .stack-10 { z-index: 11; }
+  .stack-1 { z-index: 10; }
+  .stack-2 { z-index: 20; }
+  .stack-3 { z-index: 30; }
+  .stack-4 { z-index: 40; }
+  .stack-5 { z-index: 50; }
+  .stack-6 { z-index: 60; }
+  .stack-7 { z-index: 70; }
+  .stack-8 { z-index: 80; }
+  .stack-9 { z-index: 85; }
+  .stack-10 { z-index: 90; }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -1825,6 +1826,7 @@
     .hero-inner, .services-inner,
     .case-inner, .pricing-inner, .footer-inner { padding: 0 24px; }
     .hero-topbar-meta { display: none; }
+    .stack { position: relative; min-height: auto; border-radius: 0; box-shadow: none; }
     .manifesto-slide { padding: 60px 40px; }
     .slide-content { padding: 36px 32px; border-radius: 22px; }
     .slide-progress { display: none; }
@@ -2142,7 +2144,7 @@
 <!-- ════════════════════════════════════════════════════════════
      MANIFESTO — Comment ça marche
      ════════════════════════════════════════════════════════════ -->
-<section class="manifesto-outer" id="manifesto" style="position:relative;z-index:4">
+<section class="manifesto-outer" id="manifesto" style="position:relative;z-index:30">
   <div class="manifesto-sticky">
     <div class="manifesto-track" id="manifesto-track">
 
@@ -3059,7 +3061,7 @@
 <!-- ════════════════════════════════════════════════════════════
      TRUST BAR
      ════════════════════════════════════════════════════════════ -->
-<section class="trust" style="position:relative;z-index:12">
+<section class="trust" style="position:relative;z-index:92">
   <div class="trust-inner">
     <div class="trust-label">&mdash; Ils nous ont d&eacute;j&agrave; fait confiance</div>
     <div class="trust-logos">
@@ -3152,7 +3154,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
-<section class="faq" style="position:relative;z-index:13">
+<section class="faq" style="position:relative;z-index:93">
   <div class="faq-inner">
     <div class="faq-layout">
       <div>
@@ -3211,7 +3213,7 @@
 <!-- ════════════════════════════════════════════════════════════
      FOOTER
      ════════════════════════════════════════════════════════════ -->
-<footer class="footer" style="position:relative;z-index:14;border-radius:28px 28px 0 0">
+<footer class="footer" style="position:relative;z-index:94;border-radius:28px 28px 0 0">
   <div class="footer-inner">
     <div class="eyebrow reveal" style="color:#FFD400">&mdash; L'agence agentique</div>
     <h2 class="footer-headline reveal reveal-d1">Le reste,<br>on l'op&egrave;re.</h2>
