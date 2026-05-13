@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Phantom — Deck commercial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --violet: #6E3CFF;
+    --yellow: #FFD400;
+    --pink: #FF2D87;
+    --orange: #FF8A1F;
+    --green: #00D26A;
+    --blue: #0066FF;
+    --red: #FF4D2E;
+    --paper: #FFFFFF;
+    --warm: #F7F6F2;
+    --font-d: 'Space Grotesk', sans-serif;
+    --font-b: 'Geist', system-ui, sans-serif;
+    --font-m: 'JetBrains Mono', monospace;
+  }
+
+  html, body { margin: 0; background: #1a1a1a; font-family: var(--font-b); }
+
+  deck-stage { display: block; }
+  deck-stage section {
+    width: 1920px; height: 1080px;
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;
+    position: relative;
+    padding: 80px 100px;
+    box-sizing: border-box;
+  }
+
+  /* Common type */
+  .eyebrow {
+    font-family: var(--font-m);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--violet);
+  }
+  .eyebrow.dark { color: var(--yellow); }
+  .h1 {
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: 180px;
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    margin: 0;
+  }
+  .h2 {
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: 120px;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  .h3 {
+    font-family: var(--font-d);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .body {
+    font-family: var(--font-b);
+    font-size: 28px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .body.muted { color: rgba(10,10,10,0.6); }
+
+  /* Slide chrome */
+  .slide-num {
+    position: absolute;
+    bottom: 36px;
+    right: 100px;
+    font-family: var(--font-m);
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    color: rgba(10,10,10,0.4);
+  }
+  .slide-num.light { color: rgba(255,255,255,0.5); }
+  .logo-strip {
+    position: absolute;
+    bottom: 36px;
+    left: 100px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -1.2px;
+    color: var(--ink);
+  }
+  .logo-strip.light { color: #fff; }
+  .logo-strip svg { width: 36px; height: 36px; }
+
+  /* Pop card */
+  .pop {
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    padding: 36px;
+    box-shadow: 10px 10px 0 0 var(--ink);
+    position: relative;
+  }
+  .pop.violet { background: var(--violet); color: #fff; }
+  .pop.yellow { background: var(--yellow); }
+  .pop.pink { background: var(--pink); color: #fff; }
+  .pop.green { background: var(--green); color: #fff; }
+
+  /* Tag */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-m);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+
+  .ghost-float { animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+</style>
+</head>
+<body>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Slide 1 — Titre. Tu commences fort. Phantom, on est une boîte digitale IA. La promesse tient en deux phrases : l'IA bosse, toi tu dors. C'est une provocation utile. Marque une pause, laisse infuser.",
+  "Slide 2 — Le problème. Trop de canaux à gérer, trop d'outils, trop d'agences pour des bouts. Le dirigeant TPE/PME se noie. C'est pas un problème d'IA, c'est un problème d'orchestration. Cible les douleurs concrètes : Instagram à poster, avis à répondre, photos à refaire, site qui rame.",
+  "Slide 3 — Le manifeste. Phantom n'est pas un SaaS, pas un chatbot, pas un outil. C'est un STUDIO qui livre, avec des agents IA dedans. Insiste sur le 'avec des humains qui pilotent'. C'est pas remplacer, c'est orchestrer.",
+  "Slide 4 — Le catalogue. 6 agents. Une équipe. Le client active les agents pertinents pour SA boîte. Pas de bundle imposé. Liste-les rapidement en montrant que chacun couvre un pan stratégique.",
+  "Slide 5 — La méthode. 3 étapes, pas plus. (1) On parle, (2) On déploie, (3) On pilote, tu mesures. Pas de tunnel SDR, pas de roadmap 6 mois.",
+  "Slide 6 — Cas client. Sushi Boy. Restaurateur. 3 mois. Les chiffres parlent. +47% engagement, 4.7 étoiles, ×2.1 commandes Uber Eats. Tu peux ajouter la citation du client si le timing le permet.",
+  "Slide 7 — Tarifs. Pas d'engagement long. Solo 490€, PME 1490€, Sur-mesure devis. Le mot-clé : flexibilité. Cancel anytime.",
+  "Slide 8 — Closing. 'On se parle ?' Donne le calendly, le téléphone, l'email. Reste poli, reste cool. Et termine sur la mascotte qui flotte."
+]
+</script>
+
+<deck-stage>
+
+  <!-- ── 01 · TITRE ── -->
+  <section data-screen-label="01 Titre" style="background:#FFFFFF;display:flex;flex-direction:column;justify-content:center">
+    <div style="position:absolute;top:80px;left:100px;right:100px;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-m);font-size:18px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(10,10,10,0.5)">
+      <span>— Pitch deck · Mai 2026</span>
+      <span>v2.0 · confidential</span>
+    </div>
+
+    <h1 class="h1">
+      <span style="-webkit-text-stroke:6px var(--ink);color:transparent">L'IA</span> qui bosse.<br>
+      Toi tu <span style="color:var(--violet)">dors.</span> 👻
+    </h1>
+
+    <p class="body" style="font-size:36px;margin-top:60px;max-width:1300px">
+      <strong>Phantom</strong> est l'agence digitale IA pour les TPE et PME. Une équipe d'experts + des agents IA qui gèrent tout ton écosystème en ligne. Social, avis, photos, site, brand. <strong>On gère.</strong>
+    </p>
+
+    <!-- Floating ghosts on the right -->
+    <div style="position:absolute;right:120px;top:240px;display:flex;flex-direction:column;gap:32px;align-items:flex-end">
+      <svg viewBox="0 0 200 200" fill="none" style="width:280px;color:var(--violet);filter:drop-shadow(0 20px 40px rgba(110,60,255,0.3))" class="ghost-float">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+
+    <div class="logo-strip">
+      <svg viewBox="0 0 200 200" fill="none" style="color:var(--violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num">01 / 08</div>
+  </section>
+
+  <!-- ── 02 · PROBLÈME ── -->
+  <section data-screen-label="02 Problème" style="background:var(--warm)">
+    <div class="eyebrow">— Le problème</div>
+    <h2 class="h2" style="margin-top:40px;max-width:1500px">
+      Tu gères ta boîte.<br>
+      <span style="color:rgba(10,10,10,0.4)">Pas un</span> empire digital.
+    </h2>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:120px">
+      <div class="pop" style="background:#fff">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:96px;line-height:1;letter-spacing:-0.04em;color:var(--red)">8</div>
+        <div class="body" style="font-size:24px;margin-top:18px"><strong>réseaux sociaux</strong> à animer chaque semaine.</div>
+      </div>
+      <div class="pop" style="background:#fff">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:96px;line-height:1;letter-spacing:-0.04em;color:var(--orange)">42</div>
+        <div class="body" style="font-size:24px;margin-top:18px"><strong>avis Google</strong> auxquels tu n'as pas répondu.</div>
+      </div>
+      <div class="pop" style="background:#fff">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:96px;line-height:1;letter-spacing:-0.04em;color:var(--green)">3 mois</div>
+        <div class="body" style="font-size:24px;margin-top:18px">qu'on te dit qu'<strong>il faut refaire ton site</strong>.</div>
+      </div>
+      <div class="pop" style="background:#fff">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:96px;line-height:1;letter-spacing:-0.04em;color:var(--blue)">∞</div>
+        <div class="body" style="font-size:24px;margin-top:18px">d'<strong>outils IA</strong> qui ne savent pas parler entre eux.</div>
+      </div>
+    </div>
+
+    <div class="body muted" style="margin-top:80px;font-size:32px;font-style:italic;max-width:1400px">
+      "J'ai pas besoin d'un outil de plus. J'ai besoin que quelqu'un s'en charge."
+    </div>
+
+    <div class="logo-strip">
+      <svg viewBox="0 0 200 200" fill="none" style="color:var(--violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num">02 / 08</div>
+  </section>
+
+  <!-- ── 03 · MANIFESTE ── -->
+  <section data-screen-label="03 Manifeste" style="background:var(--ink);color:#fff">
+    <div class="eyebrow dark">— Notre manifeste</div>
+    <h2 class="h2" style="margin-top:40px;color:#fff;max-width:1600px">
+      <span style="color:rgba(255,255,255,0.4)">Phantom n'est pas</span><br>
+      un SaaS.<br>
+      <span style="color:rgba(255,255,255,0.4)">Pas un chatbot. Pas un outil.</span><br>
+      C'est <span style="color:var(--yellow)">un studio</span> qui livre—<br>
+      <span style="color:rgba(255,255,255,0.4)">avec des agents IA dedans.</span>
+    </h2>
+
+    <div style="position:absolute;right:100px;bottom:140px;width:380px">
+      <svg viewBox="0 0 200 200" fill="none" style="width:100%;color:var(--yellow)" class="ghost-float">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+
+    <div class="logo-strip light">
+      <svg viewBox="0 0 200 200" fill="none" style="color:#fff">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num light">03 / 08</div>
+  </section>
+
+  <!-- ── 04 · CATALOGUE ── -->
+  <section data-screen-label="04 Catalogue" style="background:var(--paper)">
+    <div class="eyebrow">— Catalogue</div>
+    <h2 class="h2" style="margin-top:40px">6 agents. Une équipe.</h2>
+    <p class="body" style="font-size:28px;margin-top:28px;max-width:1400px;color:rgba(10,10,10,0.65)">
+      Active uniquement ceux dont tu as besoin. Combine comme tu veux. <strong style="color:#0A0A0A">Pas de bundle imposé.</strong>
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:80px">
+      <!-- Agent card template -->
+      <div class="pop" style="background:#fff;padding:32px">
+        <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--pink)">
+          <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+          <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+          <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        </svg>
+        <div class="h3" style="margin-top:24px">Social Manager</div>
+        <div class="body" style="font-size:20px;margin-top:14px;color:rgba(10,10,10,0.65)">TikTok, Insta, LinkedIn. Stratégie + production + scheduling.</div>
+      </div>
+      <div class="pop" style="background:#fff;padding:32px">
+        <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--yellow)">
+          <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+          <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+          <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        </svg>
+        <div class="h3" style="margin-top:24px">Avis Google</div>
+        <div class="body" style="font-size:20px;margin-top:14px;color:rgba(10,10,10,0.65)">Collecte, réponse, optimisation. Tes étoiles montent, ton SEO local aussi.</div>
+      </div>
+      <div class="pop" style="background:#fff;padding:32px">
+        <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--orange)">
+          <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+          <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+          <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        </svg>
+        <div class="h3" style="margin-top:24px">Photos Resto</div>
+        <div class="body" style="font-size:20px;margin-top:14px;color:rgba(10,10,10,0.65)">Tes plats sur Uber Eats / Deliveroo. Retouchés, recadrés, optimisés.</div>
+      </div>
+      <div class="pop" style="background:#fff;padding:32px">
+        <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--green)">
+          <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+          <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+          <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        </svg>
+        <div class="h3" style="margin-top:24px">SEO</div>
+        <div class="body" style="font-size:20px;margin-top:14px;color:rgba(10,10,10,0.65)">Pages, articles, mots-clés. Tu apparais en premier quand un client te cherche.</div>
+      </div>
+      <div class="pop" style="background:#fff;padding:32px">
+        <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--blue)">
+          <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+          <ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/>
+          <ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/>
+        </svg>
+        <div class="h3" style="margin-top:24px">Site Web</div>
+        <div class="body" style="font-size:20px;margin-top:14px;color:rgba(10,10,10,0.65)">Du brief au déploiement en 14 jours. Pas un template, un vrai site.</div>
+      </div>
+      <div class="pop" style="background:#fff;padding:32px">
+        <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--violet)">
+          <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+          <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+          <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        </svg>
+        <div class="h3" style="margin-top:24px">Brand B2C</div>
+        <div class="body" style="font-size:20px;margin-top:14px;color:rgba(10,10,10,0.65)">Tu passes de B2B à B2C ? On structure l'identité, le ton, l'écosystème.</div>
+      </div>
+    </div>
+
+    <div class="logo-strip">
+      <svg viewBox="0 0 200 200" fill="none" style="color:var(--violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num">04 / 08</div>
+  </section>
+
+  <!-- ── 05 · MÉTHODE ── -->
+  <section data-screen-label="05 Méthode" style="background:var(--violet);color:#fff">
+    <div class="eyebrow dark">— Comment ça marche</div>
+    <h2 class="h2" style="margin-top:40px;color:#fff">3 étapes. <span style="color:rgba(255,255,255,0.5)">Pas plus.</span></h2>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:140px">
+      <div>
+        <div style="font-family:var(--font-d);font-weight:700;font-size:240px;line-height:0.85;color:var(--yellow);letter-spacing:-0.05em">01</div>
+        <div class="h3" style="color:#fff;margin-top:30px;font-size:42px">Tu nous parles de ta boîte.</div>
+        <div class="body" style="color:rgba(255,255,255,0.75);margin-top:18px;font-size:22px">30 minutes en visio. On comprend ton business, tes clients, tes objectifs. Pas de SDR, pas de tunnel.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-d);font-weight:700;font-size:240px;line-height:0.85;color:var(--yellow);letter-spacing:-0.05em">02</div>
+        <div class="h3" style="color:#fff;margin-top:30px;font-size:42px">On déploie les bons agents.</div>
+        <div class="body" style="color:rgba(255,255,255,0.75);margin-top:18px;font-size:22px">On choisit les agents pertinents et on les configure pour TOI. Pas de template, pas de bundle.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-d);font-weight:700;font-size:240px;line-height:0.85;color:var(--yellow);letter-spacing:-0.05em">03</div>
+        <div class="h3" style="color:#fff;margin-top:30px;font-size:42px">L'équipe pilote. Tu mesures.</div>
+        <div class="body" style="color:rgba(255,255,255,0.75);margin-top:18px;font-size:22px">Tes KPIs, ton dashboard, tes résultats. Sans engagement long. Ça marche, tu continues.</div>
+      </div>
+    </div>
+
+    <div class="logo-strip light">
+      <svg viewBox="0 0 200 200" fill="none" style="color:#fff">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="var(--violet)"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="var(--violet)"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num light">05 / 08</div>
+  </section>
+
+  <!-- ── 06 · CAS CLIENT ── -->
+  <section data-screen-label="06 Cas client" style="background:var(--paper)">
+    <div class="eyebrow">— Cas client · Sushi Boy</div>
+    <h2 class="h2" style="margin-top:40px;max-width:1200px">
+      De <span style="text-decoration:line-through;color:rgba(10,10,10,0.3)">800</span> à <span style="color:var(--violet)">11&nbsp;400</span><br>
+      followers en 3 mois.
+    </h2>
+
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:60px;margin-top:80px;align-items:start">
+      <div>
+        <p class="body" style="font-size:24px;max-width:780px">Restaurant de 12 couverts à Marseille. On a déployé l'<strong>Agent Social</strong> + l'<strong>Agent Photos Resto</strong>. 142 posts produits, 8 collabs influence, 3 vidéos virales.</p>
+
+        <div class="pop" style="background:var(--yellow);margin-top:50px;padding:36px 40px">
+          <div class="body" style="font-size:32px;font-weight:600;line-height:1.2">"On a essayé 3 agences. Phantom est la seule qui a livré sans qu'on doive les suivre. Ils gèrent. C'est tout."</div>
+          <div style="margin-top:24px;font-family:var(--font-m);font-size:18px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(10,10,10,0.6)">— Yannick L., Sushi Boy</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <div class="pop" style="background:var(--violet);color:#fff">
+          <div style="font-family:var(--font-d);font-weight:700;font-size:84px;line-height:1;letter-spacing:-0.04em">+47%</div>
+          <div style="font-family:var(--font-m);font-size:16px;letter-spacing:0.1em;text-transform:uppercase;margin-top:14px;opacity:0.85">— Engagement Insta</div>
+        </div>
+        <div class="pop" style="background:var(--orange);color:#fff">
+          <div style="font-family:var(--font-d);font-weight:700;font-size:84px;line-height:1;letter-spacing:-0.04em">×2.1</div>
+          <div style="font-family:var(--font-m);font-size:16px;letter-spacing:0.1em;text-transform:uppercase;margin-top:14px;opacity:0.85">— Commandes Uber Eats</div>
+        </div>
+        <div class="pop" style="background:#fff">
+          <div style="font-family:var(--font-d);font-weight:700;font-size:84px;line-height:1;letter-spacing:-0.04em">4.7★</div>
+          <div style="font-family:var(--font-m);font-size:16px;letter-spacing:0.1em;text-transform:uppercase;margin-top:14px;color:rgba(10,10,10,0.6)">— Note Google · de 3.9</div>
+        </div>
+        <div class="pop" style="background:var(--pink);color:#fff">
+          <div style="font-family:var(--font-d);font-weight:700;font-size:84px;line-height:1;letter-spacing:-0.04em">142</div>
+          <div style="font-family:var(--font-m);font-size:16px;letter-spacing:0.1em;text-transform:uppercase;margin-top:14px;opacity:0.85">— Posts produits</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-strip">
+      <svg viewBox="0 0 200 200" fill="none" style="color:var(--violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num">06 / 08</div>
+  </section>
+
+  <!-- ── 07 · TARIFS ── -->
+  <section data-screen-label="07 Tarifs" style="background:var(--paper)">
+    <div class="eyebrow">— Tarifs</div>
+    <h2 class="h2" style="margin-top:40px">Pas d'engagement.<br><span style="color:var(--violet)">Que des résultats.</span></h2>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:100px;align-items:start">
+      <div class="pop" style="background:#fff;padding:44px">
+        <div class="eyebrow" style="font-size:18px">— TPE / Indépendant</div>
+        <div class="h2" style="font-size:80px;margin-top:14px">Solo</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:24px">
+          <span style="font-family:var(--font-d);font-weight:700;font-size:100px;letter-spacing:-0.04em;line-height:1">€490</span>
+          <span style="font-family:var(--font-m);font-size:20px;color:rgba(10,10,10,0.5)">/mois</span>
+        </div>
+        <div class="body" style="font-size:22px;margin-top:20px;color:rgba(10,10,10,0.65)">1 enjeu clair. Un seul agent activé.</div>
+        <ul style="list-style:none;padding:0;margin:30px 0 0">
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ 1 agent au choix</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ Reporting mensuel</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ Slack avec l'équipe</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0">✓ Cancel anytime</li>
+        </ul>
+      </div>
+
+      <div class="pop yellow" style="padding:44px;transform:translateY(-30px)">
+        <div class="eyebrow" style="font-size:18px;color:rgba(10,10,10,0.85)">— Le standard</div>
+        <div class="h2" style="font-size:80px;margin-top:14px">PME</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:24px">
+          <span style="font-family:var(--font-d);font-weight:700;font-size:100px;letter-spacing:-0.04em;line-height:1">€1490</span>
+          <span style="font-family:var(--font-m);font-size:20px;color:rgba(10,10,10,0.7)">/mois</span>
+        </div>
+        <div class="body" style="font-size:22px;margin-top:20px">Pour un écosystème à structurer. Jusqu'à 4 agents combinés.</div>
+        <ul style="list-style:none;padding:0;margin:30px 0 0">
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.2)">✓ 4 agents combinés</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.2)">✓ Reporting hebdo</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.2)">✓ Appel mensuel équipe</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.2)">✓ A/B testing</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0">✓ Score d'attribution</li>
+        </ul>
+      </div>
+
+      <div class="pop" style="background:#fff;padding:44px">
+        <div class="eyebrow" style="font-size:18px">— Multi-marques · Groupes</div>
+        <div class="h2" style="font-size:80px;margin-top:14px">Sur-mesure</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:24px">
+          <span style="font-family:var(--font-d);font-weight:700;font-size:100px;letter-spacing:-0.04em;line-height:1">Devis</span>
+        </div>
+        <div class="body" style="font-size:22px;margin-top:20px;color:rgba(10,10,10,0.65)">Multi-sites, transitions B2B→B2C, refonte complète.</div>
+        <ul style="list-style:none;padding:0;margin:30px 0 0">
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ Agents illimités</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ Équipe dédiée</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ Workshops stratégiques</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0;border-bottom:1px solid rgba(10,10,10,0.1)">✓ Roadmap brand 12 mois</li>
+          <li style="font-family:var(--font-b);font-size:20px;padding:10px 0">✓ White label possible</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="logo-strip">
+      <svg viewBox="0 0 200 200" fill="none" style="color:var(--violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num">07 / 08</div>
+  </section>
+
+  <!-- ── 08 · CLOSING ── -->
+  <section data-screen-label="08 Closing" style="background:var(--violet);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:80px 100px">
+    <div class="eyebrow dark">— Prêt ?</div>
+    <h1 class="h1" style="color:#fff;margin-top:30px;font-size:240px">
+      On gère.<br>
+      <span style="color:var(--yellow)">Toi tu vis.</span>
+    </h1>
+
+    <div style="display:flex;gap:80px;margin-top:80px">
+      <div>
+        <div class="eyebrow dark" style="font-size:18px">— Calendly</div>
+        <div class="body" style="color:#fff;font-size:34px;font-weight:600;margin-top:14px">phantom.fr/parler</div>
+      </div>
+      <div>
+        <div class="eyebrow dark" style="font-size:18px">— Email</div>
+        <div class="body" style="color:#fff;font-size:34px;font-weight:600;margin-top:14px">hello@phantom.fr</div>
+      </div>
+      <div>
+        <div class="eyebrow dark" style="font-size:18px">— Téléphone</div>
+        <div class="body" style="color:#fff;font-size:34px;font-weight:600;margin-top:14px">+33 6 12 34 56 78</div>
+      </div>
+    </div>
+
+    <!-- 3 floating ghosts in corner -->
+    <div style="position:absolute;right:100px;top:80px;display:flex;flex-direction:column;gap:24px;align-items:flex-end">
+      <svg viewBox="0 0 200 200" fill="none" style="width:140px;color:var(--yellow)" class="ghost-float">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      <svg viewBox="0 0 200 200" fill="none" style="width:100px;color:var(--pink);animation:float 3s ease-in-out infinite;animation-delay:0.4s">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+
+    <div class="logo-strip light">
+      <svg viewBox="0 0 200 200" fill="none" style="color:#fff">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="var(--violet)"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="var(--violet)"/>
+      </svg>
+      phantom
+    </div>
+    <div class="slide-num light">08 / 08</div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+
+</body>
+</html>

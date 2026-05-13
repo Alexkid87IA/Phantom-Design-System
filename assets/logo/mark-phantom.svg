@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <title>Phantom mark — mascot</title>
+  
+  <path d="M 20 100&#xA;           A 80 80 0 0 1 180 100&#xA;           L 180 160&#xA;           Q 160 182 140 160&#xA;           Q 120 182 100 160&#xA;           Q 80 182 60 160&#xA;           Q 40 182 20 160&#xA;           Z" fill="currentColor"></path>
+  
+  <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"></ellipse>
+  <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"></ellipse>
+  
+  <circle cx="60" cy="118" r="6" fill="#FF2D87" opacity="0.55"></circle>
+  <circle cx="140" cy="118" r="6" fill="#FF2D87" opacity="0.55"></circle>
+</svg>

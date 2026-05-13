@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+.grad{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;height:140px}
+.g{border-radius:14px;position:relative;overflow:hidden;border:1px solid var(--border)}
+.g .lbl{position:absolute;left:12px;bottom:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.92);padding:4px 8px;border-radius:6px;color:#0A0A0A}
+</style></head><body>
+<div class="card">
+  <div class="grad">
+    <div class="g" style="background:linear-gradient(90deg,#FF4D2E 0%,#FF8A1F 18%,#FFD400 36%,#00D26A 54%,#0066FF 72%,#6E3CFF 88%,#FF2D87 100%)"><span class="lbl">grad-rainbow</span></div>
+    <div class="g" style="background:radial-gradient(120% 100% at 20% 0%,#C5ADFF 0%,transparent 50%),radial-gradient(80% 60% at 100% 100%,#FFD4E5 0%,transparent 60%),linear-gradient(180deg,#F2EDFF,#FFFFFF)"><span class="lbl">grad-violet-haze</span></div>
+    <div class="g" style="background:radial-gradient(60% 80% at 30% 20%,#FFD4E5 0%,transparent 60%),radial-gradient(50% 70% at 80% 30%,#D6E4FF 0%,transparent 60%),radial-gradient(70% 90% at 50% 100%,#CFF5E0 0%,transparent 60%),#FFFFFF"><span class="lbl">grad-spectre</span></div>
+  </div>
+</div>
+</body></html>

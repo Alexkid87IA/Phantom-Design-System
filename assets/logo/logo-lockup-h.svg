@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none">
+  <title>Phantom logo lockup — mark + wordmark horizontal</title>
+  <g>
+    <path d="M 20 100&#xA;             A 80 80 0 0 1 180 100&#xA;             L 180 160&#xA;             Q 160 182 140 160&#xA;             Q 120 182 100 160&#xA;             Q 80 182 60 160&#xA;             Q 40 182 20 160&#xA;             Z" fill="#6E3CFF"></path>
+    <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"></ellipse>
+    <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"></ellipse>
+  </g>
+  <text x="220" y="140" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="128" letter-spacing="-7" fill="#0A0A0A">phantom</text>
+</svg>
