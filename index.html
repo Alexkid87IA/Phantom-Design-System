@@ -289,10 +289,41 @@
   .logo-text {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -1.2px;
+    font-size: 28px;
+    letter-spacing: -1.5px;
     color: var(--ink);
+    display: inline-flex;
+    align-items: baseline;
     line-height: 1;
+  }
+  .logo-letter {
+    display: inline-block;
+    animation: letterIn 0.5s var(--ease-out-quart) backwards;
+  }
+  .logo-letter:nth-child(1) { animation-delay: 0.05s; font-size: 0.75em; }
+  .logo-letter:nth-child(2) { animation-delay: 0.1s;  font-size: 0.82em; }
+  .logo-letter:nth-child(3) { animation-delay: 0.15s; font-size: 0.89em; }
+  .logo-letter:nth-child(4) { animation-delay: 0.2s;  font-size: 0.96em; }
+  .logo-letter:nth-child(5) { animation-delay: 0.25s; font-size: 1.0em; }
+  .logo-letter:nth-child(6) { animation-delay: 0.3s;  font-size: 1.07em; }
+  .logo-letter:nth-child(7) { animation-delay: 0.35s; font-size: 1.14em; }
+  .logo:hover .logo-letter {
+    animation: letterBounce 0.4s var(--ease) backwards;
+  }
+  .logo:hover .logo-letter:nth-child(1) { animation-delay: 0s; }
+  .logo:hover .logo-letter:nth-child(2) { animation-delay: 0.03s; }
+  .logo:hover .logo-letter:nth-child(3) { animation-delay: 0.06s; }
+  .logo:hover .logo-letter:nth-child(4) { animation-delay: 0.09s; }
+  .logo:hover .logo-letter:nth-child(5) { animation-delay: 0.12s; }
+  .logo:hover .logo-letter:nth-child(6) { animation-delay: 0.15s; }
+  .logo:hover .logo-letter:nth-child(7) { animation-delay: 0.18s; }
+  @keyframes letterIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.6); }
+  }
+  @keyframes letterBounce {
+    0% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
   }
 
   /* ── Nav dock ── */
@@ -365,8 +396,9 @@
   .menu-logo-text {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 18px;
+    font-size: 22px;
     letter-spacing: -0.03em;
+    color: #fff;
   }
   .menu-close {
     width: 52px;
@@ -2603,7 +2635,7 @@
           <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
           <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
         </svg>
-        <span class="logo-text">phantom</span>
+        <span class="logo-text"><span class="logo-letter">p</span><span class="logo-letter">h</span><span class="logo-letter">a</span><span class="logo-letter">n</span><span class="logo-letter">t</span><span class="logo-letter">o</span><span class="logo-letter">m</span></span>
       </div>
       <div class="hero-topbar-meta">
         <span><span class="dot-green">&#9679;</span> L'agence agentique</span>
