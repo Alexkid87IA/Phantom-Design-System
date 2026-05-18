@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom — Blog</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+  <meta name="description" content="Conseils marketing digital, études de cas et tendances pour les commerces de proximité. Par l'équipe Phantom.">
+  <meta property="og:title" content="Phantom — Blog">
+  <meta property="og:description" content="Conseils marketing digital et tendances pour les commerces de proximité.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://phantom.fr/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="marketing.css">
+  <style>
+    .blog-hero { text-align: center; margin-bottom: 48px; }
+    .blog-title { font-size: 38px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .blog-lead { font-size: 16px; color: var(--mk-text-secondary); max-width: 540px; margin: 0 auto; }
+
+    .blog-categories {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .blog-cat {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--mk-border);
+      color: var(--mk-text-secondary);
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+    .blog-cat:hover, .blog-cat.active {
+      background: var(--mk-violet-soft);
+      border-color: rgba(110,60,255,0.3);
+      color: var(--mk-violet);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+
+    .blog-card {
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .blog-card-img {
+      width: 100%;
+      height: 160px;
+      background: var(--mk-surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .blog-card-body { padding: 18px; }
+
+    .blog-card-cat {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--mk-violet);
+      margin-bottom: 8px;
+    }
+
+    .blog-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .blog-card-excerpt {
+      font-size: 13px;
+      color: var(--mk-text-secondary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--mk-text-muted);
+    }
+
+    .blog-featured {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .blog-featured-card {
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .blog-featured-card:hover { border-color: rgba(255,255,255,0.12); }
+
+    .blog-featured-img {
+      height: 220px;
+      background: linear-gradient(135deg, rgba(110,60,255,0.2), rgba(255,45,135,0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .blog-featured-body { padding: 24px; flex: 1; }
+    .blog-featured-cat {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--mk-violet);
+      margin-bottom: 10px;
+    }
+    .blog-featured-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .blog-featured-excerpt {
+      font-size: 14px;
+      color: var(--mk-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .blog-featured-meta {
+      font-size: 12px;
+      color: var(--mk-text-muted);
+    }
+
+    .blog-sidebar-card {
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .blog-sidebar-card:hover { border-color: rgba(255,255,255,0.12); }
+    .blog-sidebar-cat {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--mk-violet);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .blog-sidebar-title { font-size: 14px; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
+    .blog-sidebar-meta { font-size: 11px; color: var(--mk-text-muted); }
+
+    .blog-newsletter {
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 14px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .blog-newsletter-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .blog-newsletter-desc { font-size: 14px; color: var(--mk-text-secondary); margin-bottom: 20px; }
+    .blog-newsletter-form { display: flex; gap: 8px; max-width: 400px; margin: 0 auto; }
+    .blog-newsletter-input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--mk-border);
+      background: var(--mk-surface-2);
+      color: var(--mk-text);
+      font-size: 13px;
+      font-family: inherit;
+    }
+    .blog-newsletter-btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      background: var(--mk-violet);
+      color: #fff;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .blog-newsletter-btn:hover { opacity: 0.85; }
+
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-featured { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mk-nav">
+    <div class="mk-nav-inner">
+      <a href="../landing.html" class="mk-logo">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        Phantom
+      </a>
+      <div class="mk-nav-links">
+        <a href="pricing.html" class="mk-nav-link">Tarifs</a>
+        <a href="how-it-works.html" class="mk-nav-link">Comment ça marche</a>
+        <a href="case-studies.html" class="mk-nav-link">Études de cas</a>
+        <a href="blog.html" class="mk-nav-link active">Blog</a>
+      </div>
+      <a href="../auth/" class="mk-nav-cta">Se connecter</a>
+    </div>
+  </nav>
+
+  <main class="mk-main">
+    <div class="blog-hero">
+      <h1 class="blog-title">Le Blog Phantom</h1>
+      <p class="blog-lead">Stratégies, études de cas et insights pour les commerces locaux qui veulent grandir avec l'IA.</p>
+    </div>
+
+    <div class="blog-categories">
+      <span class="blog-cat active">Tous</span>
+      <span class="blog-cat">Réseaux sociaux</span>
+      <span class="blog-cat">Avis Google</span>
+      <span class="blog-cat">SEO local</span>
+      <span class="blog-cat">IA & Automatisation</span>
+      <span class="blog-cat">Études de cas</span>
+      <span class="blog-cat">Produit</span>
+    </div>
+
+    <!-- Featured -->
+    <div class="blog-featured">
+      <div class="blog-featured-card">
+        <div class="blog-featured-img">📱</div>
+        <div class="blog-featured-body">
+          <div class="blog-featured-cat">Réseaux sociaux</div>
+          <h2 class="blog-featured-title">Comment nos agents IA ont généré 340 posts en 30 jours pour un restaurant</h2>
+          <p class="blog-featured-excerpt">Sushi Boy Lyon a laissé son agent Social Manager publier pendant un mois complet. Voici les résultats : +127% d'engagement, +45 réservations organiques, et un ton de marque consistant.</p>
+          <div class="blog-featured-meta">Par Marie L. · 14 mai 2026 · 8 min de lecture</div>
+        </div>
+      </div>
+      <div>
+        <div class="blog-sidebar-card">
+          <div class="blog-sidebar-cat">IA & Automatisation</div>
+          <div class="blog-sidebar-title">L'agent IA n'est pas un robot : pourquoi le modèle hybride gagne</div>
+          <div class="blog-sidebar-meta">12 mai 2026 · 5 min</div>
+        </div>
+        <div class="blog-sidebar-card">
+          <div class="blog-sidebar-cat">Avis Google</div>
+          <div class="blog-sidebar-title">Répondre à un avis 1 étoile : la méthode qui transforme les détracteurs</div>
+          <div class="blog-sidebar-meta">9 mai 2026 · 6 min</div>
+        </div>
+        <div class="blog-sidebar-card">
+          <div class="blog-sidebar-cat">Produit</div>
+          <div class="blog-sidebar-title">Nouveauté : l'agent SEO Local est disponible pour tous les plans</div>
+          <div class="blog-sidebar-meta">7 mai 2026 · 3 min</div>
+        </div>
+        <div class="blog-sidebar-card">
+          <div class="blog-sidebar-cat">Études de cas</div>
+          <div class="blog-sidebar-title">Chez Marcel : de 0 à 2000 abonnés Instagram en 60 jours</div>
+          <div class="blog-sidebar-meta">4 mai 2026 · 7 min</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-card-img">🎯</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">SEO Local</div>
+          <h3 class="blog-card-title">Les 7 signaux que Google utilise pour classer ta fiche locale</h3>
+          <p class="blog-card-excerpt">Proximité, pertinence, notoriété... Décryptage complet des facteurs de classement Google Business Profile en 2026.</p>
+          <div class="blog-card-meta"><span>30 avril 2026</span><span>6 min</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">💬</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Avis Google</div>
+          <h3 class="blog-card-title">Pourquoi les restaurants avec >50 avis obtiennent 3x plus de clics</h3>
+          <p class="blog-card-excerpt">Analyse de 500 fiches Google locales. Le seuil des 50 avis déclenche un effet de confiance mesurable.</p>
+          <div class="blog-card-meta"><span>26 avril 2026</span><span>5 min</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">🤖</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">IA & Automatisation</div>
+          <h3 class="blog-card-title">Prompt engineering pour le contenu local : ce qui marche (et ce qui ne marche pas)</h3>
+          <p class="blog-card-excerpt">On partage nos apprentissages après 10 000 contenus générés pour des commerces locaux.</p>
+          <div class="blog-card-meta"><span>22 avril 2026</span><span>9 min</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">📸</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Réseaux sociaux</div>
+          <h3 class="blog-card-title">Carousel vs Reel vs Post : quel format pour quel objectif ?</h3>
+          <p class="blog-card-excerpt">Données de performance sur 2 000 publications Instagram de commerces locaux. Le format idéal dépend de ton objectif.</p>
+          <div class="blog-card-meta"><span>18 avril 2026</span><span>7 min</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">📊</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Études de cas</div>
+          <h3 class="blog-card-title">Bella Donna : comment un salon de beauté a doublé son panier moyen</h3>
+          <p class="blog-card-excerpt">Stratégie complète : contenus Instagram éducatifs + avis Google + upsell via stories. Résultat : +95% de panier moyen.</p>
+          <div class="blog-card-meta"><span>14 avril 2026</span><span>8 min</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">🧠</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Produit</div>
+          <h3 class="blog-card-title">Comment Phantom apprend le ton de ta marque (sans que tu aies à tout écrire)</h3>
+          <p class="blog-card-excerpt">Notre approche pour capturer la voix d'un commerce : questionnaire initial, feedback loop, et calibration continue.</p>
+          <div class="blog-card-meta"><span>10 avril 2026</span><span>5 min</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="blog-newsletter">
+      <h2 class="blog-newsletter-title">Reste informé</h2>
+      <p class="blog-newsletter-desc">Un email par semaine avec les meilleures stratégies pour ton commerce local.</p>
+      <div class="blog-newsletter-form">
+        <input type="email" class="blog-newsletter-input" placeholder="toi@tonbusiness.fr">
+        <button class="blog-newsletter-btn">S'inscrire</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mk-footer">
+    <div class="mk-footer-inner">
+      <div class="mk-footer-brand">
+        <div class="mk-logo" style="margin-bottom:8px">
+          <svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+          Phantom
+        </div>
+        <p style="font-size:12px;color:var(--mk-text-muted);max-width:260px">Ton équipe d'agents IA pour développer ton commerce local.</p>
+      </div>
+      <div class="mk-footer-links">
+        <div class="mk-footer-col">
+          <div class="mk-footer-col-title">Produit</div>
+          <a href="how-it-works.html">Comment ça marche</a>
+          <a href="pricing.html">Tarifs</a>
+          <a href="case-studies.html">Études de cas</a>
+        </div>
+        <div class="mk-footer-col">
+          <div class="mk-footer-col-title">Ressources</div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">À propos</a>
+        </div>
+        <div class="mk-footer-col">
+          <div class="mk-footer-col-title">Légal</div>
+          <a href="legal.html">Mentions légales</a>
+          <a href="cgv.html">CGV</a>
+          <a href="privacy.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+    <div class="mk-footer-bottom">© 2026 Phantom SAS. Tous droits réservés.</div>
+  </footer>
+
+</body>
+</html>

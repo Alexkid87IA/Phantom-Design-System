@@ -1,0 +1,35 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H10 — Impact maximal, payoff barré</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+body{margin:0;background:var(--ink);display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden}
+.label{position:fixed;top:16px;left:16px;font-family:var(--font-mono);font-size:11px;color:var(--phantom-violet-200);letter-spacing:0.1em;text-transform:uppercase}
+.hero-text{text-align:center;max-width:900px;padding:0 40px}
+h1{font-family:var(--font-display);font-size:clamp(44px,6.5vw,80px);font-weight:700;letter-spacing:-0.035em;line-height:1.1;color:#fff;margin:0}
+h1 del{text-decoration:line-through;color:rgba(255,255,255,0.2);font-weight:400;text-decoration-color:var(--rainbow-red);text-decoration-thickness:3px}
+h1 .replacement{display:inline-block;color:var(--rainbow-yellow);position:relative}
+h1 .replacement::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:4px;background:var(--rainbow-yellow);border-radius:4px;opacity:0.5}
+.sub{font-family:var(--font-body);font-size:18px;color:rgba(255,255,255,0.4);margin-top:32px;line-height:1.65}
+.sub strong{color:#fff;font-weight:600}
+.price-tag{display:inline-flex;align-items:center;gap:12px;margin-top:24px;padding:12px 24px;border-radius:9999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
+.price-old{font-family:var(--font-mono);font-size:14px;color:rgba(255,255,255,0.25);text-decoration:line-through}
+.price-new{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--rainbow-yellow)}
+.price-label{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.06em}
+.ctas{margin-top:36px;display:flex;gap:14px;justify-content:center}
+.btn-p{font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 28px;border-radius:9999px;background:#fff;color:var(--phantom-violet);border:2.5px solid #fff;box-shadow:4px 4px 0 0 var(--phantom-violet);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn-p:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 0 var(--phantom-violet)}
+.btn-g{font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 28px;border-radius:9999px;background:transparent;color:#fff;border:2.5px solid #fff;box-shadow:4px 4px 0 0 rgba(255,255,255,.15);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn-g:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 0 rgba(255,255,255,.2)}
+</style></head><body>
+<div class="label">10 / Barr&eacute;/remplac&eacute; — contraste narratif</div>
+<div class="hero-text">
+  <h1>T'as pas besoin d'une <del>&eacute;quipe</del><br><span class="replacement">d'agents IA qui bossent pour toi.</span></h1>
+  <p class="sub">Phantom installe des <strong>agents IA autonomes</strong> dans ta bo&icirc;te. Ils g&egrave;rent, ex&eacute;cutent, relancent &mdash; sans toi.</p>
+  <div class="price-tag">
+    <span class="price-old">3 500&euro;/mois</span>
+    <span class="price-new">490&euro;</span>
+    <span class="price-label">/mois &middot; sans engagement</span>
+  </div>
+  <div class="ctas"><a href="#" class="btn-p">R&eacute;server un appel &rarr;</a><a href="#" class="btn-g">Comment &ccedil;a marche</a></div>
+</div>
+</body></html>

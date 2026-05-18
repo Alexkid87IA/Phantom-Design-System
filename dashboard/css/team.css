@@ -1,0 +1,198 @@
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.team-card {
+  background: var(--paper);
+  border-radius: var(--r-card);
+  padding: 20px;
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-pop);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), box-shadow 0.2s var(--ease);
+  position: relative;
+  overflow: hidden;
+  animation: viewEnter 0.3s var(--ease) both;
+}
+.team-card:nth-child(1) { animation-delay: 0s; }
+.team-card:nth-child(2) { animation-delay: 0.06s; }
+.team-card:nth-child(3) { animation-delay: 0.12s; }
+.team-card:nth-child(4) { animation-delay: 0.18s; }
+.team-card:nth-child(5) { animation-delay: 0.24s; }
+.team-card:nth-child(6) { animation-delay: 0.3s; }
+.team-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-pop-lg);
+}
+.team-card:focus-visible {
+  outline: 2px solid var(--phantom-violet);
+  outline-offset: 2px;
+}
+.team-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.team-card-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+.team-card-status {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink-30);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.team-card-brief {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ink-60);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.team-card-pilot {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-30);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.team-card-stats {
+  display: flex;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(10,10,10,0.06);
+}
+.team-card-stat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-40);
+}
+.team-card-stat strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.team-card-cta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--phantom-violet);
+  letter-spacing: 0.04em;
+  margin-top: 10px;
+  display: inline-block;
+}
+.team-card-sparkline {
+  margin-top: 8px;
+  height: 28px;
+  position: relative;
+}
+
+/* ── Hero bar ── */
+.team-hero-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 0 20px;
+  animation: viewEnter 0.3s var(--ease) both;
+}
+.team-hero-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--phantom-violet);
+  box-shadow: 0 0 0 0 rgba(110,60,255,0.5);
+  animation: teamPulse 1.6s ease-out infinite;
+  flex-shrink: 0;
+}
+@keyframes teamPulse {
+  0% { box-shadow: 0 0 0 0 rgba(110,60,255,0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(110,60,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(110,60,255,0); }
+}
+.team-hero-copy {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-40);
+  font-style: italic;
+}
+
+/* ── MVP card ── */
+.team-mvp-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--paper);
+  border-radius: var(--r-card);
+  border: 2px solid var(--ink);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-pop);
+  animation: viewEnter 0.3s var(--ease) both;
+  position: relative;
+  overflow: hidden;
+}
+.team-mvp-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.team-mvp-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--phantom-violet);
+}
+.team-mvp-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 2px;
+}
+.team-mvp-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+.team-mvp-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  line-height: 1;
+}
+.team-mvp-metric {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-30);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.team-mvp-growth {
+  position: absolute;
+  right: 22px;
+  bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--green-600);
+  letter-spacing: -0.01em;
+}
+
+/* Status dot */
+.team-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}

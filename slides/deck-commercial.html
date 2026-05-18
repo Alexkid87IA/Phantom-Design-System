@@ -1,0 +1,1276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Phantom — Deck commercial</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html, body { background: #0a0a0a; margin: 0; }
+  ::selection { background: var(--rainbow-yellow); color: var(--ink); }
+
+  /* ───── Slide base ───── */
+  .slide {
+    width: 1920px; height: 1080px;
+    background: var(--paper);
+    color: var(--ink);
+    position: relative; overflow: hidden;
+    font-family: var(--font-body);
+    padding: 72px 88px;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+  }
+  .slide.dark { background: var(--ink); color: var(--paper); }
+  .slide.warm { background: var(--paper-warm); }
+  .slide.violet { background: var(--phantom-violet); color: var(--paper); }
+
+  /* ───── Header / footer chrome ───── */
+  .h-bar, .f-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-40);
+  }
+  .slide.dark .h-bar, .slide.dark .f-bar { color: rgba(255,255,255,.4); }
+  .slide.violet .h-bar, .slide.violet .f-bar { color: rgba(255,255,255,.55); }
+  .h-bar .brand {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--ink);
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 22px; letter-spacing: -1.2px; text-transform: none;
+  }
+  .slide.dark .h-bar .brand, .slide.violet .h-bar .brand { color: var(--paper); }
+  .h-bar .brand svg { width: 28px; height: 28px; }
+  .f-bar { margin-top: auto; padding-top: 32px; }
+
+  /* ───── Ghost mascot ───── */
+  .ghost { display: inline-block; }
+  .ghost-float { animation: float 2.4s ease-in-out infinite; }
+  @keyframes float { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-8px); } }
+
+  /* ───── Eyebrow ───── */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 16px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-60);
+    display: inline-flex; align-items: center; gap: 16px;
+  }
+  .eyebrow::before { content:""; width: 36px; height: 1.5px; background: var(--ink); }
+  .slide.dark .eyebrow { color: rgba(255,255,255,.55); }
+  .slide.dark .eyebrow::before { background: rgba(255,255,255,.55); }
+  .slide.violet .eyebrow { color: rgba(255,255,255,.7); }
+  .slide.violet .eyebrow::before { background: rgba(255,255,255,.7); }
+  .eyebrow.yellow { color: var(--rainbow-yellow); }
+  .eyebrow.yellow::before { background: var(--rainbow-yellow); }
+
+  /* ───── Display titles ───── */
+  h1.disp {
+    font-family: var(--font-display);
+    font-size: 148px; font-weight: 700;
+    line-height: .92; letter-spacing: -0.045em;
+    margin: 0; text-wrap: balance;
+  }
+  h2.title {
+    font-family: var(--font-display);
+    font-size: 100px; font-weight: 700;
+    line-height: .95; letter-spacing: -0.04em;
+    margin: 0; text-wrap: balance; max-width: 22ch;
+  }
+  h3.sub {
+    font-family: var(--font-display);
+    font-size: 52px; font-weight: 600;
+    line-height: 1.08; letter-spacing: -0.025em;
+    margin: 0; color: var(--ink);
+    text-wrap: balance; max-width: 32ch;
+  }
+
+  p.lede {
+    font-family: var(--font-display);
+    font-size: 34px; font-weight: 500;
+    line-height: 1.25; letter-spacing: -0.015em;
+    color: var(--ink-80); margin: 0;
+    max-width: 38ch; text-wrap: balance;
+  }
+  .slide.dark p.lede { color: rgba(255,255,255,.82); }
+  .slide.violet p.lede { color: rgba(255,255,255,.9); }
+
+  p.body {
+    font-family: var(--font-body);
+    font-size: 22px; line-height: 1.5;
+    color: var(--ink-80); margin: 0; max-width: 48ch;
+  }
+  .slide.dark p.body { color: rgba(255,255,255,.72); }
+
+  .violet { color: var(--phantom-violet); }
+  .outline { -webkit-text-stroke: 3px var(--ink); color: transparent; }
+  em.hl { font-style: normal; background: linear-gradient(180deg, transparent 62%, var(--yellow-100) 62%); padding: 0 4px; }
+
+  /* ───── Pop cards (matching site) ───── */
+  .pop-card {
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 6px 6px 0 0 var(--ink);
+    position: relative; overflow: hidden;
+  }
+  .pop-card.no-shadow { box-shadow: none; }
+
+  /* ───── Tags (matching site) ───── */
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 9999px;
+    display: inline-flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .tag::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 9999px; background: currentColor;
+  }
+  .tag-violet { background: var(--phantom-violet-50); color: var(--phantom-violet-600); }
+  .tag-pink { background: var(--pink-100); color: var(--pink-600); }
+  .tag-blue { background: var(--blue-100); color: var(--blue-600); }
+  .tag-green { background: var(--green-100); color: var(--green-600); }
+  .tag-orange { background: var(--orange-100); color: var(--orange-600); }
+  .tag-light { background: rgba(255,255,255,.18); color: #fff; }
+  .tag-light::before { background: #fff; }
+
+  /* ───── Common layouts ───── */
+  .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .col-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+  .col-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .col-asym { display: grid; grid-template-columns: 2fr 3fr; gap: 72px; align-items: start; }
+
+  .mt-6 { margin-top: 24px; }
+  .mt-8 { margin-top: 32px; }
+  .mt-12 { margin-top: 48px; }
+  .mt-16 { margin-top: 64px; }
+  .mt-20 { margin-top: 80px; }
+
+  /* ───── Service catalog grid ───── */
+  .svc-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .svc-cell {
+    padding: 24px 28px;
+    border-right: 1.5px solid rgba(10,10,10,.12);
+    border-bottom: 1.5px solid rgba(10,10,10,.12);
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 8px;
+    min-height: 175px;
+  }
+  .svc-cell:nth-child(3n) { border-right: 0; }
+  .svc-cell:nth-last-child(-n+3) { border-bottom: 0; }
+  .svc-cell .svc-dot {
+    width: 10px; height: 10px; border-radius: 9999px;
+  }
+  .svc-cell h4 {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.1; margin: 0;
+  }
+  .svc-cell p {
+    font-family: var(--font-body); font-size: 15px;
+    line-height: 1.45; color: var(--ink-60); margin: 0;
+  }
+  .svc-cell .svc-num {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.12em; color: var(--ink-40);
+  }
+  .svc-cell.featured { background: var(--ink); color: var(--paper); }
+  .svc-cell.featured h4 { color: var(--paper); }
+  .svc-cell.featured p { color: rgba(255,255,255,.65); }
+  .svc-cell.featured .svc-num { color: rgba(255,255,255,.45); }
+
+  /* ───── Stat numbers ───── */
+  .stat .big {
+    font-family: var(--font-display);
+    font-size: 160px; font-weight: 700;
+    line-height: .88; letter-spacing: -0.045em;
+  }
+  .stat .big em { font-style: normal; color: var(--phantom-violet); background: none; padding: 0; }
+  .slide.dark .stat .big em { color: var(--phantom-violet-200); }
+  .stat .lbl {
+    font-family: var(--font-body); font-size: 19px;
+    color: var(--ink-60); line-height: 1.4;
+    margin-top: 18px; max-width: 28ch;
+  }
+  .slide.dark .stat .lbl { color: rgba(255,255,255,.55); }
+
+  /* ───── Client logo strip ───── */
+  .client-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    border: 2.5px solid rgba(255,255,255,.15);
+    border-radius: 20px; overflow: hidden;
+  }
+  .client-strip .c {
+    padding: 40px 20px;
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 34px; letter-spacing: -0.02em;
+    color: var(--paper);
+    border-right: 1.5px solid rgba(255,255,255,.12);
+    border-bottom: 1.5px solid rgba(255,255,255,.12);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .client-strip .c:nth-child(5n) { border-right: 0; }
+  .client-strip .c:nth-last-child(-n+5) { border-bottom: 0; }
+
+  /* ───── Hybrid model diagram ───── */
+  .hybrid {
+    display: grid; grid-template-columns: 1fr 72px 1fr;
+    align-items: center; gap: 0;
+  }
+  .hybrid .block {
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    padding: 36px 32px;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 6px 6px 0 0 var(--phantom-violet);
+  }
+  .hybrid .block.right { box-shadow: 6px 6px 0 0 var(--rainbow-blue); }
+  .hybrid .arrow {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 56px; font-weight: 700;
+    color: var(--phantom-violet);
+  }
+  .hybrid .block .b-tag {
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--phantom-violet);
+  }
+  .hybrid .block.right .b-tag { color: var(--rainbow-blue); }
+  .hybrid .block h4 {
+    font-family: var(--font-display);
+    font-size: 34px; font-weight: 700;
+    letter-spacing: -0.025em; line-height: 1.05; margin: 0;
+  }
+  .hybrid .block ul {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 10px;
+  }
+  .hybrid .block ul li {
+    font-family: var(--font-body); font-size: 18px;
+    line-height: 1.4; color: var(--ink-80);
+    padding-left: 20px; position: relative;
+  }
+  .hybrid .block ul li::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: var(--phantom-violet);
+  }
+  .hybrid .block.right ul li::before { background: var(--rainbow-blue); }
+
+  /* ───── Method steps ───── */
+  .step {
+    display: grid; grid-template-columns: 72px 1fr;
+    gap: 28px; padding: 22px 0;
+    border-bottom: 1px solid var(--ink-10);
+    align-items: start;
+  }
+  .step:last-child { border-bottom: 0; }
+  .step .step-n {
+    font-family: var(--font-mono); font-size: 15px;
+    letter-spacing: 0.1em; color: var(--phantom-violet);
+    padding-top: 6px;
+  }
+  .step h4 {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 8px 0;
+  }
+  .step p {
+    font-family: var(--font-body); font-size: 17px;
+    line-height: 1.45; color: var(--ink-60); margin: 0; max-width: 80ch;
+  }
+  .step .step-tag {
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-40); margin-top: 8px;
+  }
+
+  /* ───── Case study ───── */
+  .case-hero {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    background: var(--paper);
+    box-shadow: 8px 8px 0 var(--ink);
+    overflow: hidden;
+  }
+  .case-hero .case-photo {
+    padding: 48px;
+    display: flex; align-items: center; justify-content: center;
+    border-right: 2.5px solid var(--ink);
+    background: var(--paper-warm);
+    min-height: 340px;
+  }
+  .case-hero .case-photo:has(img) {
+    padding: 0;
+  }
+  .case-hero .case-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .case-hero.violet-shadow { box-shadow: 8px 8px 0 var(--phantom-violet); }
+  .case-hero.green-shadow { box-shadow: 8px 8px 0 var(--rainbow-green); }
+  .case-hero.pink-shadow { box-shadow: 8px 8px 0 var(--rainbow-pink); }
+
+  .placeholder-img {
+    width: 100%; height: 100%;
+    background-image: repeating-linear-gradient(135deg, var(--ink-05) 0 18px, var(--paper) 18px 36px);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-40); text-align: center; padding: 12px;
+  }
+  .case-hero .case-content {
+    padding: 36px 44px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .case-hero .case-eyebrow {
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--phantom-violet);
+  }
+  .case-hero h3 {
+    font-family: var(--font-display);
+    font-size: 52px; font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1; margin: 0;
+  }
+  .case-hero .case-meta {
+    display: flex; gap: 28px;
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-60);
+  }
+  .case-hero .case-meta strong { color: var(--ink); font-weight: 500; }
+  .case-hero .case-quote {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 500;
+    line-height: 1.3; letter-spacing: -0.01em;
+    color: var(--ink); margin: 0;
+    border-left: 3px solid var(--phantom-violet);
+    padding-left: 20px;
+  }
+
+  .case-results {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 2.5px solid var(--ink);
+    border-radius: 16px;
+    overflow: hidden; margin-top: 20px;
+  }
+  .case-results .r {
+    padding: 24px 28px;
+    border-right: 1.5px solid rgba(10,10,10,.12);
+    background: var(--paper);
+  }
+  .case-results .r:last-child { border-right: 0; }
+  .case-results .r-big {
+    font-family: var(--font-display);
+    font-size: 64px; font-weight: 700;
+    line-height: 1; letter-spacing: -0.035em;
+  }
+  .case-results .r-big em { color: var(--phantom-violet); font-style: normal; }
+  .case-results .r-lbl {
+    font-family: var(--font-body); font-size: 14px;
+    line-height: 1.4; color: var(--ink-60); margin-top: 10px;
+  }
+
+  /* ───── Pricing ───── */
+  .pricing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .plan {
+    border: 1.5px solid rgba(10,10,10,.1);
+    border-radius: 20px;
+    background: var(--paper);
+    padding: 28px 26px;
+    display: flex; flex-direction: column;
+  }
+  .plan.featured {
+    border: 2.5px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--phantom-violet);
+  }
+  .plan-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+  }
+  .plan-name {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-60);
+  }
+  .plan-badge {
+    background: var(--phantom-violet); color: var(--paper);
+    padding: 4px 12px; border-radius: 9999px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .plan h3 {
+    font-family: var(--font-display);
+    font-size: 34px; font-weight: 700;
+    letter-spacing: -0.025em; line-height: 1; margin: 0 0 8px 0;
+  }
+  .plan-tagline {
+    font-family: var(--font-body); font-size: 14px;
+    color: var(--ink-60); line-height: 1.4; margin: 0 0 18px 0;
+  }
+  .plan-price {
+    border-top: 1px solid var(--ink-10);
+    padding-top: 14px; margin-bottom: 18px;
+  }
+  .plan-price .num {
+    font-family: var(--font-display);
+    font-size: 42px; font-weight: 700;
+    line-height: 1; letter-spacing: -0.03em;
+  }
+  .plan-price .per {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.08em; color: var(--ink-60); margin-top: 4px;
+  }
+  .plan ul {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 8px;
+  }
+  .plan ul li {
+    font-family: var(--font-body); font-size: 14px;
+    line-height: 1.4; color: var(--ink-80);
+    display: flex; gap: 10px;
+  }
+  .plan ul li::before { content: ""; width: 6px; height: 6px; border-radius: 9999px; background: var(--phantom-violet); flex-shrink: 0; margin-top: 6px; }
+
+  /* ───── Roadmap ───── */
+  .roadmap {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    overflow: hidden; background: var(--paper);
+  }
+  .week {
+    padding: 28px 24px;
+    border-right: 1.5px solid rgba(10,10,10,.12);
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative;
+  }
+  .week:last-child { border-right: 0; }
+  .week::before {
+    content: ""; position: absolute;
+    top: 24px; right: -14px;
+    width: 28px; height: 28px; border-radius: 9999px;
+    border: 2.5px solid var(--ink);
+    background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 3l4 4-4 4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center;
+  }
+  .week:last-child::before { display: none; }
+  .week .w-num {
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 0.12em; color: var(--phantom-violet);
+  }
+  .week h4 {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.05; margin: 0;
+  }
+  .week ul {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 8px;
+  }
+  .week ul li {
+    font-family: var(--font-body); font-size: 15px;
+    line-height: 1.4; color: var(--ink-80);
+    padding-left: 14px; position: relative;
+  }
+  .week ul li::before {
+    content: ""; position: absolute; left: 0; top: 7px;
+    width: 5px; height: 5px; border-radius: 9999px;
+    background: var(--phantom-violet);
+  }
+
+  /* ───── Team ───── */
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .team-member { display: flex; flex-direction: column; gap: 14px; }
+  .avatar {
+    width: 100%; height: 220px;
+    background: var(--paper-warm);
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 64px; letter-spacing: -0.03em;
+    color: var(--ink-30);
+  }
+  .team-member h4 {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -0.015em; line-height: 1.05; margin: 0;
+  }
+  .team-member .role {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-60); margin: 0;
+  }
+  .team-member .bio {
+    font-family: var(--font-body); font-size: 14px;
+    line-height: 1.45; color: var(--ink-60); margin: 0;
+  }
+
+  /* ───── Guarantees ───── */
+  .guarantees {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    overflow: hidden; background: var(--paper);
+  }
+  .guarantee {
+    padding: 32px 28px;
+    border-right: 1.5px solid rgba(10,10,10,.12);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .guarantee:last-child { border-right: 0; }
+  .guarantee .g-num {
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 0.12em; color: var(--phantom-violet);
+  }
+  .guarantee h4 {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.1; margin: 0;
+  }
+  .guarantee p {
+    font-family: var(--font-body); font-size: 16px;
+    line-height: 1.5; color: var(--ink-60); margin: 0;
+  }
+
+  /* ───── CTA closing ───── */
+  .cta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .cta-card {
+    border: 2.5px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    background: rgba(255,255,255,.04);
+    padding: 24px 24px 22px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .cta-card .c-tag {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+  }
+  .cta-card h4 {
+    font-family: var(--font-display);
+    font-size: 24px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.1;
+    margin: 0; color: var(--paper);
+  }
+  .cta-card p {
+    font-family: var(--font-body); font-size: 15px;
+    line-height: 1.45; color: rgba(255,255,255,.65); margin: 0;
+  }
+  .cta-card .c-action {
+    margin-top: auto; padding-top: 12px;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 18px; color: var(--phantom-violet-200);
+    display: flex; align-items: center; gap: 10px;
+    letter-spacing: -0.01em;
+  }
+  .cta-card.featured {
+    background: var(--paper); color: var(--ink);
+    border-color: var(--ink);
+    box-shadow: 6px 6px 0 0 var(--phantom-violet);
+  }
+  .cta-card.featured h4 { color: var(--ink); }
+  .cta-card.featured p { color: var(--ink-60); }
+  .cta-card.featured .c-tag { color: var(--ink-60); }
+  .cta-card.featured .c-action { color: var(--phantom-violet); }
+
+  .contact-row {
+    display: flex; gap: 48px;
+    padding-top: 20px; margin-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .contact-row .item { display: flex; flex-direction: column; gap: 4px; }
+  .contact-row .item .lbl {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+  }
+  .contact-row .item .val {
+    font-family: var(--font-display); font-size: 20px;
+    font-weight: 600; letter-spacing: -0.015em;
+    color: var(--paper);
+  }
+
+  /* ───── Glyph background ───── */
+  .glyph-bg {
+    position: absolute;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 600px; line-height: .8; letter-spacing: -0.06em;
+    color: rgba(255,255,255,.05);
+    pointer-events: none; user-select: none; z-index: 1;
+  }
+  .slide.warm .glyph-bg { color: rgba(10,10,10,.03); }
+
+  /* ───── Value props grid ───── */
+  .val-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .val-card {
+    border: 2.5px solid var(--ink);
+    border-radius: 20px;
+    padding: 28px 22px;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 12px;
+    box-shadow: 4px 4px 0 0 var(--phantom-violet);
+  }
+  .val-card .v-num {
+    font-family: var(--font-display); font-size: 40px; font-weight: 700;
+    line-height: 1; letter-spacing: -0.03em; color: var(--phantom-violet);
+  }
+  .val-card h4 {
+    font-family: var(--font-display); font-size: 20px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.1; margin: 0;
+  }
+  .val-card p {
+    font-family: var(--font-body); font-size: 14px;
+    line-height: 1.45; color: var(--ink-60); margin: 0;
+  }
+
+  /* ───── Layer banner ───── */
+  .layer-banner {
+    background: var(--ink); color: var(--paper);
+    border: 2.5px solid var(--ink);
+    border-radius: 20px 20px 0 0;
+    padding: 22px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .layer-banner .lb-title {
+    font-family: var(--font-display); font-size: 24px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1; margin: 0; color: var(--paper);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .layer-banner .lb-sub {
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+  }
+  .svc-grid.connected {
+    border-radius: 0 0 20px 20px;
+    border-top: 0;
+  }
+</style>
+</head>
+<body>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Slide d'ouverture. Le bras droit des dirigeants — la tagline. Pas de mot 'digital'. On couvre l'ensemble de l'entreprise.",
+  "Le constat. Un dirigeant devrait se concentrer sur son métier. Trois réalités : recruter coûte cher et risqué, empiler les prestataires c'est fragmenté, tout faire soi-même c'est intenable.",
+  "Pourquoi maintenant. L'IA seule c'est un outil, pilotée par des experts c'est une équipe. Les agents exécutent des processus complets. Le levier c'est l'orchestration.",
+  "Notre réponse. Ton équipe en renfort, sur tous les fronts. On couvre les pôles que tu n'as pas le temps, les compétences ou l'envie de gérer.",
+  "Le modèle hybride. Référent humain + agents IA. Le référent pilote, les agents exécutent : publication, devis, factures, relances, veille. Un système qui tourne.",
+  "Ce que tu gagnes. Cinq raisons : compétence, sérénité, souplesse, productivité, clarté. On vend un modèle supérieur au recrutement.",
+  "Le périmètre. Six pôles sous une couche agentique. Admin & Gestion en featured — on montre qu'on dépasse le digital.",
+  "En chiffres. Cinq métriques : cadence ×7, 3,2M vues, 2 semaines de mise en route, 96% satisfaction, −60% temps dirigeant sur les tâches déléguées.",
+  "Logos. Coca, Total, Michelin, Netflix, Hugo Boss, OM. Légitimité de production héritée d'Origines Média.",
+  "Cas Renaissance — lunetterie de luxe. Repositionnement de marque. Chiffres concrets.",
+  "Cas Origines Média — plateforme média. Industrialisation éditoriale. Référence intra-groupe.",
+  "Cas Yes We Nan. Lancement de marque depuis zéro. Le cas startup.",
+  "L'équipe. Quatre référents seniors. Humaniser la proposition, rassurer le prospect.",
+  "Garanties contractuelles. Livrables chiffrés par pôle, reporting hebdo, sortie sans pénalité.",
+  "Roadmap onboarding. Quatre semaines : diagnostic, cadrage, production, bilan.",
+  "Tarifs. Starter (2 pôles), Pilote (4 pôles, recommandé), Studio (tous les pôles), Sur-mesure.",
+  "Closing. Si ton entreprise méritait mieux que ça. Trois CTA au choix."
+]
+</script>
+
+<deck-stage>
+
+  <!-- ══ 01 COVER ══ -->
+  <section class="slide dark" data-screen-label="01 Cover">
+    <div class="h-bar">
+      <div class="brand">
+        <svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg>
+        <span>phantom</span>
+      </div>
+      <span>Deck commercial &middot; Confidentiel &middot; Mai 2026</span>
+    </div>
+
+    <div class="glyph-bg" style="bottom:-160px;right:-100px;">P.</div>
+
+    <div style="margin-top:72px;position:relative;z-index:2">
+      <span class="eyebrow yellow">L'agence agentique &middot; Paris &middot; 2025</span>
+      <h1 class="disp" style="margin-top:48px;color:var(--paper)">
+        Le bras droit<br/>
+        des<br/>
+        <span class="violet">dirigeants.</span>
+      </h1>
+      <p class="lede" style="margin-top:64px;max-width:50ch">
+        Une &eacute;quipe d'experts seniors. Une flotte d'agents IA. Un seul interlocuteur. On op&egrave;re ton entreprise &mdash; tu gardes la t&ecirc;te pour d&eacute;cider.
+      </p>
+    </div>
+
+    <div style="position:absolute;right:100px;top:200px;z-index:2">
+      <svg viewBox="0 0 200 200" fill="none" style="width:260px;color:var(--phantom-violet);filter:drop-shadow(0 16px 40px rgba(110,60,255,.35))" class="ghost-float">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+
+    <div class="f-bar">
+      <span>phantom.fr &middot; L'agence agentique</span>
+      <span>17 slides &mdash; 5 min de lecture</span>
+    </div>
+  </section>
+
+  <!-- ══ 02 CONSTAT ══ -->
+  <section class="slide" data-screen-label="02 Constat">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>01 / 17 &middot; Le constat</span></div>
+
+    <div style="margin-top:56px">
+      <span class="eyebrow">01 &mdash; Le constat</span>
+      <h2 class="title" style="margin-top:28px">
+        Un dirigeant devrait pouvoir se concentrer sur <span class="violet">ce qu'il fait le mieux.</span>
+      </h2>
+      <p class="lede" style="margin-top:32px;max-width:56ch">
+        Aujourd'hui, c'est rarement le cas.
+      </p>
+    </div>
+
+    <div class="col-3 mt-16">
+      <div class="pop-card">
+        <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40)">R&eacute;alit&eacute; &middot; 01</div>
+        <h4 style="font-family:var(--font-display);font-size:26px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;margin:12px 0 10px">Tu recrutes, tu formes, tu recommences.</h4>
+        <p style="font-family:var(--font-body);font-size:17px;line-height:1.45;color:var(--ink-60);margin:0">Un bon profil co&ucirc;te cher, met six mois &agrave; &ecirc;tre op&eacute;rationnel, et peut partir demain. Un mauvais profil te co&ucirc;te encore plus.</p>
+      </div>
+      <div class="pop-card">
+        <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40)">R&eacute;alit&eacute; &middot; 02</div>
+        <h4 style="font-family:var(--font-display);font-size:26px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;margin:12px 0 10px">Tu empiles les prestataires.</h4>
+        <p style="font-family:var(--font-body);font-size:17px;line-height:1.45;color:var(--ink-60);margin:0">Comptable, agence, freelance, SaaS. Chacun fait son bout. Personne ne voit l'ensemble. C'est toi qui coordonnes &mdash; en plus de tout le reste.</p>
+      </div>
+      <div class="pop-card">
+        <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40)">R&eacute;alit&eacute; &middot; 03</div>
+        <h4 style="font-family:var(--font-display);font-size:26px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;margin:12px 0 10px">Tu fais toi-m&ecirc;me.</h4>
+        <p style="font-family:var(--font-body);font-size:17px;line-height:1.45;color:var(--ink-60);margin:0">Tes journ&eacute;es s'&eacute;tirent. Tu touches &agrave; tout : posts, devis, factures, relances. Ton vrai m&eacute;tier passe en second.</p>
+      </div>
+    </div>
+
+    <div class="f-bar"><span>Constat march&eacute; &middot; PME / TPE / marques en croissance</span><span>Phantom &mdash; Deck commercial</span></div>
+  </section>
+
+  <!-- ══ 03 POURQUOI MAINTENANT ══ -->
+  <section class="slide warm" data-screen-label="03 Pourquoi maintenant">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>02 / 17 &middot; Contexte march&eacute;</span></div>
+
+    <div class="glyph-bg" style="top:-100px;right:-80px;">02</div>
+
+    <div style="margin-top:56px;position:relative;z-index:2">
+      <span class="eyebrow">02 &mdash; Pourquoi maintenant</span>
+      <h2 class="title" style="margin-top:28px">
+        L'IA seule, c'est un outil.<br/>
+        Pilot&eacute;e par des experts, c'est <span class="violet">une &eacute;quipe.</span>
+      </h2>
+    </div>
+
+    <div class="col-asym mt-16" style="position:relative;z-index:2">
+      <p class="body" style="font-size:21px;max-width:100%">
+        En 2026, les agents IA savent r&eacute;diger, publier, relancer, facturer, analyser. Ils ex&eacute;cutent des processus complets. Mais sans pilotage humain expert, ils font du g&eacute;n&eacute;rique ou des erreurs. Le vrai levier, c'est l'orchestration.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <div class="pop-card" style="display:flex;gap:20px;align-items:baseline;padding:28px 32px">
+          <span style="font-family:var(--font-display);font-size:80px;font-weight:700;letter-spacing:-0.04em;color:var(--phantom-violet);line-height:1">&times;80</span>
+          <p style="font-family:var(--font-body);font-size:17px;color:var(--ink-60);margin:0;line-height:1.4">de gains de productivit&eacute; sur les t&acirc;ches r&eacute;p&eacute;titives, quand l'IA est orchestr&eacute;e par des experts.</p>
+        </div>
+        <div class="pop-card" style="display:flex;gap:20px;align-items:baseline;padding:28px 32px">
+          <span style="font-family:var(--font-display);font-size:80px;font-weight:700;letter-spacing:-0.04em;color:var(--phantom-violet);line-height:1">3&nbsp;%</span>
+          <p style="font-family:var(--font-body);font-size:17px;color:var(--ink-60);margin:0;line-height:1.4">des PME fran&ccedil;aises utilisent des agents IA de mani&egrave;re structur&eacute;e (source : &eacute;tude interne, 2026).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-bar"><span>March&eacute; 2026</span><span>Fen&ecirc;tre d'opportunit&eacute; &mdash; 12 &agrave; 24 mois</span></div>
+  </section>
+
+  <!-- ══ 04 NOTRE RÉPONSE ══ -->
+  <section class="slide violet" data-screen-label="04 Notre réponse">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:#fff"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="var(--phantom-violet)"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="var(--phantom-violet)"/></svg><span>phantom</span></div><span>03 / 17 &middot; Notre r&eacute;ponse</span></div>
+
+    <div style="margin-top:72px">
+      <span class="eyebrow yellow">03 &mdash; La phrase &agrave; graver</span>
+    </div>
+
+    <div style="margin:auto 0;max-width:1500px">
+      <h1 class="disp" style="font-size:130px;color:var(--paper)">
+        Ton &eacute;quipe<br/>
+        en renfort.<br/>
+        Sur tous les<br/>
+        <span style="color:var(--rainbow-yellow)">fronts.</span>
+      </h1>
+      <p class="lede" style="margin-top:48px;max-width:52ch;color:rgba(255,255,255,.9)">
+        Des experts seniors qui orchestrent des agents IA sur les p&ocirc;les de ton entreprise que tu n'as pas le temps, les comp&eacute;tences ou l'envie de g&eacute;rer toi-m&ecirc;me.
+      </p>
+    </div>
+
+    <div style="position:absolute;right:100px;bottom:160px;z-index:2">
+      <svg viewBox="0 0 200 200" fill="none" style="width:200px;color:var(--rainbow-yellow)" class="ghost-float">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+
+    <div class="f-bar"><span>Positionnement Phantom &middot; v2026</span><span>L'agence agentique</span></div>
+  </section>
+
+  <!-- ══ 05 MODÈLE HYBRIDE ══ -->
+  <section class="slide" data-screen-label="05 Modèle hybride">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>04 / 17 &middot; Le mod&egrave;le hybride</span></div>
+
+    <div style="margin-top:48px">
+      <span class="eyebrow">04 &mdash; Ce qui nous rend diff&eacute;rents</span>
+      <h2 class="title" style="margin-top:24px;font-size:88px">
+        Un r&eacute;f&eacute;rent humain pilote.<br/>
+        Une flotte d'agents <span class="violet">ex&eacute;cute.</span>
+      </h2>
+    </div>
+
+    <div class="hybrid" style="margin-top:40px">
+      <div class="block">
+        <span class="b-tag">C&Ocirc;T&Eacute; HUMAIN</span>
+        <h4>Tes experts seniors.</h4>
+        <ul>
+          <li>Un r&eacute;f&eacute;rent d&eacute;di&eacute;, joignable au t&eacute;l&eacute;phone</li>
+          <li>Strat&eacute;gie, d&eacute;cisions, supervision qualit&eacute;</li>
+          <li>Relecture syst&eacute;matique avant publication</li>
+          <li>Point hebdomadaire et reporting mensuel</li>
+          <li>Une &eacute;quipe issue d'Origines M&eacute;dia</li>
+        </ul>
+      </div>
+      <div class="arrow">&harr;</div>
+      <div class="block right">
+        <span class="b-tag">C&Ocirc;T&Eacute; AGENTS</span>
+        <h4>Ta flotte d'IA, sous contr&ocirc;le.</h4>
+        <ul>
+          <li>Production, r&eacute;daction, publication 24/7</li>
+          <li>Devis, factures, relances automatis&eacute;es</li>
+          <li>Veille, mod&eacute;ration, reporting en continu</li>
+          <li>Calibr&eacute;s sur ton activit&eacute; et tes process</li>
+          <li>Toujours valid&eacute;s avant ex&eacute;cution</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:32px;max-width:100ch;font-size:28px">
+      Tu n'ach&egrave;tes ni un logiciel &agrave; apprendre, ni un freelance &agrave; briefer. Tu ach&egrave;tes <em class="hl">un syst&egrave;me qui tourne</em> &mdash; pilot&eacute; par des humains dont c'est le m&eacute;tier.
+    </p>
+
+    <div class="f-bar"><span>Notre diff&eacute;rence &mdash; &agrave; m&eacute;moriser</span><span>Mod&egrave;le propri&eacute;taire Phantom</span></div>
+  </section>
+
+  <!-- ══ 06 CE QUE TU GAGNES ══ -->
+  <section class="slide" data-screen-label="06 Ce que tu gagnes">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>05 / 17 &middot; Les avantages</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">05 &mdash; Ce que tu gagnes</span>
+      <h2 class="title" style="margin-top:20px;font-size:80px">Cinq raisons de ne plus <span class="violet">tout porter seul.</span></h2>
+    </div>
+
+    <div style="margin-top:28px;border-top:1px solid var(--ink-10)">
+      <div class="step">
+        <span class="step-n">01</span>
+        <div>
+          <h4>Comp&eacute;tence.</h4>
+          <p>Des profils seniors accessibles sans recruter. Strat&eacute;gie, direction artistique, r&eacute;daction, gestion &mdash; sans manager personne.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <div>
+          <h4>S&eacute;r&eacute;nit&eacute;.</h4>
+          <p>Z&eacute;ro recrutement rat&eacute;, z&eacute;ro d&eacute;part surprise. Ton syst&egrave;me tourne, ind&eacute;pendamment des personnes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <div>
+          <h4>Souplesse.</h4>
+          <p>Monte en charge quand tu acc&eacute;l&egrave;res, r&eacute;duis quand tu ralentis. Aucune contrainte RH.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <div>
+          <h4>Productivit&eacute;.</h4>
+          <p>Les agents tournent jour et nuit. Ce qui prenait une journ&eacute;e prend une heure. Ce qui prenait une semaine prend un jour.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">05</span>
+        <div>
+          <h4>Clart&eacute;.</h4>
+          <p>Tout est visible en temps r&eacute;el. Reporting automatique, tableaux de bord, alertes. Tu d&eacute;cides avec de la donn&eacute;e.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-bar"><span>Cinq avantages structurels &middot; Mod&egrave;le agentique</span><span>Phantom &mdash; Deck commercial</span></div>
+  </section>
+
+  <!-- ══ 07 CATALOGUE ══ -->
+  <section class="slide warm" data-screen-label="07 Catalogue services">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>06 / 17 &middot; Catalogue</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">06 &mdash; P&eacute;rim&egrave;tre d'intervention</span>
+      <h2 class="title" style="margin-top:20px;font-size:72px">Un seul partenaire. <span class="violet">Tous les p&ocirc;les.</span></h2>
+      <p class="lede" style="margin-top:12px;max-width:60ch">La couche agentique Phantom se branche sur chaque d&eacute;partement de ton entreprise.</p>
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="layer-banner">
+        <div class="lb-title">
+          <svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg>
+          Couche agentique Phantom
+        </div>
+        <span class="lb-sub">Experts seniors + agents IA &middot; Un seul interlocuteur</span>
+      </div>
+      <div class="svc-grid connected">
+        <div class="svc-cell" style="min-height:220px"><span class="svc-num">P&Ocirc;LE &middot; 01</span><span class="svc-dot" style="background:var(--phantom-violet)"></span><h4>Visibilit&eacute; &amp; Social.</h4><p>R&eacute;seaux sociaux, avis Google, e-r&eacute;putation, community management. Ton image, partout, tenue par des pros.</p></div>
+        <div class="svc-cell" style="min-height:220px"><span class="svc-num">P&Ocirc;LE &middot; 02</span><span class="svc-dot" style="background:var(--rainbow-pink)"></span><h4>Contenu &amp; Cr&eacute;ation.</h4><p>Vid&eacute;o, photo, r&eacute;daction, SEO, design. De l'id&eacute;e au livrable, &agrave; la cadence que tu veux.</p></div>
+        <div class="svc-cell" style="min-height:220px"><span class="svc-num">P&Ocirc;LE &middot; 03</span><span class="svc-dot" style="background:var(--rainbow-blue)"></span><h4>Web &amp; Digital.</h4><p>Site, landing, e-commerce, email marketing, acquisition pay&eacute;e. Toute ta pr&eacute;sence en ligne, int&eacute;gr&eacute;e.</p></div>
+        <div class="svc-cell featured" style="min-height:220px"><span class="svc-num">P&Ocirc;LE &middot; 04</span><span class="svc-dot" style="background:var(--rainbow-yellow)"></span><h4>Admin &amp; Gestion.</h4><p>Compta, facturation, devis, reporting, tableaux de bord. Toute la paperasse, automatis&eacute;e et supervis&eacute;e.</p></div>
+        <div class="svc-cell" style="min-height:220px"><span class="svc-num">P&Ocirc;LE &middot; 05</span><span class="svc-dot" style="background:var(--rainbow-green)"></span><h4>Commercial.</h4><p>Prospection, relances, suivi client, CRM, devis automatis&eacute;s. Ton pipe avance sans que tu y passes tes soir&eacute;es.</p></div>
+        <div class="svc-cell" style="min-height:220px"><span class="svc-num">P&Ocirc;LE &middot; 06</span><span class="svc-dot" style="background:var(--rainbow-orange)"></span><h4>Marque &amp; Identit&eacute;.</h4><p>Positionnement, naming, identit&eacute; visuelle, copywriting. Pour les marques qui veulent exister au-del&agrave; du logo.</p></div>
+      </div>
+    </div>
+
+    <div class="f-bar"><span>6 p&ocirc;les &middot; 1 couche agentique</span><span>&Agrave; la carte ou en abonnement</span></div>
+  </section>
+
+  <!-- ══ 08 CHIFFRES CLÉS ══ -->
+  <section class="slide dark" data-screen-label="08 Chiffres clés">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg><span>phantom</span></div><span>07 / 17 &middot; Chiffres</span></div>
+
+    <div style="margin-top:48px">
+      <span class="eyebrow yellow">07 &mdash; Trois chiffres &agrave; retenir</span>
+      <h2 class="title" style="margin-top:28px;color:var(--paper)">Ce que change un mod&egrave;le agentique<br/>bien <span class="violet">orchestr&eacute;.</span></h2>
+    </div>
+
+    <div class="col-3" style="margin-top:48px">
+      <div class="stat"><div class="big"><em>&times;7</em></div><div class="lbl">cadence op&eacute;rationnelle moyenne vs une &eacute;quipe interne PME &eacute;quivalente.</div></div>
+      <div class="stat"><div class="big"><em>3,2&nbsp;M</em></div><div class="lbl">vues mensuelles g&eacute;n&eacute;r&eacute;es sur les comptes pilot&eacute;s. Croissance continue sur 12 mois.</div></div>
+      <div class="stat"><div class="big"><em>2&nbsp;sem.</em></div><div class="lbl">d&eacute;lai moyen entre signature et premier livrable op&eacute;rationnel.</div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px">
+      <div class="pop-card" style="display:flex;gap:24px;align-items:baseline;padding:28px 32px;background:transparent;border-color:rgba(255,255,255,.15);color:var(--paper);box-shadow:none">
+        <span style="font-family:var(--font-display);font-size:72px;font-weight:700;letter-spacing:-0.04em;color:var(--phantom-violet-200);line-height:1">96&nbsp;%</span>
+        <p style="font-family:var(--font-body);font-size:17px;color:rgba(255,255,255,.6);margin:0;line-height:1.4">de satisfaction client mesur&eacute;e sur les six derniers mois.</p>
+      </div>
+      <div class="pop-card" style="display:flex;gap:24px;align-items:baseline;padding:28px 32px;background:transparent;border-color:rgba(255,255,255,.15);color:var(--paper);box-shadow:none">
+        <span style="font-family:var(--font-display);font-size:72px;font-weight:700;letter-spacing:-0.04em;color:var(--phantom-violet-200);line-height:1">&minus;60&nbsp;%</span>
+        <p style="font-family:var(--font-body);font-size:17px;color:rgba(255,255,255,.6);margin:0;line-height:1.4">de temps pass&eacute; par le dirigeant sur les t&acirc;ches op&eacute;rationnelles d&eacute;l&eacute;gu&eacute;es.</p>
+      </div>
+    </div>
+
+    <div class="f-bar"><span>Donn&eacute;es consolid&eacute;es &middot; douze derniers mois</span><span>Source : reporting interne Phantom</span></div>
+  </section>
+
+  <!-- ══ 09 LOGOS PRESTIGE ══ -->
+  <section class="slide dark" data-screen-label="09 Logos prestige">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg><span>phantom</span></div><span>08 / 17 &middot; R&eacute;f&eacute;rences</span></div>
+
+    <div style="margin-top:48px">
+      <span class="eyebrow yellow">08 &mdash; Notre l&eacute;gitimit&eacute;</span>
+      <h2 class="title" style="margin-top:28px;color:var(--paper)">On n'invente pas un m&eacute;tier.<br/><span class="violet">On le prouve.</span></h2>
+      <p class="lede" style="margin-top:28px;max-width:60ch;color:rgba(255,255,255,.82)">Phantom h&eacute;rite des &eacute;quipes et de la culture d'Origines M&eacute;dia. Ce qu'on a fait pour les marques ci-dessous, on l'industrialise d&eacute;sormais pour ta PME.</p>
+    </div>
+
+    <div class="client-strip" style="margin-top:56px">
+      <div class="c">Coca-Cola</div>
+      <div class="c">Total</div>
+      <div class="c">Michelin</div>
+      <div class="c">Netflix</div>
+      <div class="c">Hugo Boss</div>
+      <div class="c">Olympique de&nbsp;Marseille</div>
+      <div class="c">Melty</div>
+      <div class="c">Origines M&eacute;dia</div>
+      <div class="c">i-Value Media</div>
+      <div class="c" style="color:var(--phantom-violet-200)">+ la tienne ?</div>
+    </div>
+
+    <div class="f-bar"><span>Productions Origines M&eacute;dia / Phantom &middot; 2023 &mdash; 2026</span><span>D&eacute;tails sur demande</span></div>
+  </section>
+
+  <!-- ══ 10 CAS CLIENT 1 — RENAISSANCE ══ -->
+  <section class="slide" data-screen-label="10 Cas Renaissance">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>09 / 17 &middot; Cas client 01</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">09 &mdash; &Eacute;tude de cas &middot; Lunetterie de luxe</span>
+      <h3 class="sub" style="margin-top:20px">Renaissance &mdash; Une marque ancienne, repositionn&eacute;e en six mois.</h3>
+    </div>
+
+    <div class="case-hero violet-shadow mt-8">
+      <div class="case-photo"><img src="renaissance-cover.png" alt="Renaissance — Lunetterie de luxe"/></div>
+      <div class="case-content">
+        <span class="case-eyebrow">CAS CLIENT &middot; LUNETTERIE &middot; 2025</span>
+        <h3>Renaissance.</h3>
+        <div class="case-meta"><span><strong>Brief</strong> Repositionner</span><span><strong>Dur&eacute;e</strong> 6 mois</span><span><strong>P&eacute;rim&egrave;tre</strong> Brand &amp; social</span></div>
+        <p class="case-quote">&laquo;&nbsp;Phantom nous a permis de retrouver une voix &eacute;ditoriale moderne sans renier soixante ans d'h&eacute;ritage artisanal.&nbsp;&raquo;</p>
+        <p class="body" style="font-size:16px;line-height:1.45">Maison de lunetterie haut de gamme fran&ccedil;aise, cr&eacute;&eacute;e en 1962. Une pr&eacute;sence digitale d&eacute;pass&eacute;e, un site institutionnel fig&eacute;, des r&eacute;seaux sociaux g&eacute;r&eacute;s en interne sans cap &eacute;ditorial.</p>
+      </div>
+    </div>
+
+    <div class="case-results">
+      <div class="r"><div class="r-big"><em>+412&nbsp;%</em></div><div class="r-lbl">d'engagement social sur Instagram en six mois (vs trimestre pr&eacute;c&eacute;dent).</div></div>
+      <div class="r"><div class="r-big"><em>&times;3,5</em></div><div class="r-lbl">cadence de publication, sans recruter dans l'&eacute;quipe interne.</div></div>
+      <div class="r"><div class="r-big"><em>+38&nbsp;%</em></div><div class="r-lbl">de trafic qualifi&eacute; sur le site marchand depuis les r&eacute;seaux sociaux.</div></div>
+    </div>
+
+    <div class="f-bar"><span>Cas client 01 &middot; Renaissance &middot; 2025</span><span>&Eacute;tude d&eacute;taill&eacute;e sur demande</span></div>
+  </section>
+
+  <!-- ══ 11 CAS CLIENT 2 — ORIGINES ══ -->
+  <section class="slide" data-screen-label="11 Cas Origines">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>10 / 17 &middot; Cas client 02</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">10 &mdash; &Eacute;tude de cas &middot; Plateforme m&eacute;dia</span>
+      <h3 class="sub" style="margin-top:20px;font-size:46px">Origines M&eacute;dia &mdash; Industrialiser sans diluer la r&eacute;daction.</h3>
+    </div>
+
+    <div class="case-hero green-shadow mt-8">
+      <div class="case-photo"><img src="origines-cover.png" alt="Origines Média — Plateforme média"/></div>
+      <div class="case-content" style="padding:32px 40px">
+        <span class="case-eyebrow">CAS CLIENT &middot; M&Eacute;DIA &middot; 2024 &mdash; 2025</span>
+        <h3>Origines M&eacute;dia.</h3>
+        <div class="case-meta"><span><strong>Brief</strong> Industrialiser</span><span><strong>Dur&eacute;e</strong> 18 mois</span><span><strong>P&eacute;rim&egrave;tre</strong> &Eacute;dito &amp; ops</span></div>
+        <p class="case-quote">&laquo;&nbsp;On a multipli&eacute; notre volume &eacute;ditorial sans diluer la r&eacute;daction.&nbsp;&raquo;</p>
+        <p class="body" style="font-size:15px;line-height:1.45">Groupe m&eacute;dia fran&ccedil;ais, 12 verticales. R&eacute;daction senior d&eacute;bord&eacute;e, incapable de tenir la cadence sociale exig&eacute;e par les annonceurs.</p>
+      </div>
+    </div>
+
+    <div class="case-results">
+      <div class="r"><div class="r-big"><em>&times;4,2</em></div><div class="r-lbl">volume &eacute;ditorial mensuel publi&eacute;, &agrave; &eacute;quipe constante.</div></div>
+      <div class="r"><div class="r-big"><em>&minus;63&nbsp;%</em></div><div class="r-lbl">temps moyen pass&eacute; sur les t&acirc;ches de production r&eacute;p&eacute;titive par journaliste.</div></div>
+      <div class="r"><div class="r-big"><em>+1,8&nbsp;M</em></div><div class="r-lbl">vues additionnelles cumul&eacute;es sur les comptes verticaux en 12 mois.</div></div>
+    </div>
+
+    <div class="f-bar"><span>Cas client 02 &middot; Origines M&eacute;dia &middot; 2024&ndash;2025</span><span>Cas intra-groupe &mdash; chiffres r&eacute;els</span></div>
+  </section>
+
+  <!-- ══ 12 CAS CLIENT 3 — YES WE NAN ══ -->
+  <section class="slide" data-screen-label="12 Cas Yes We Nan">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>11 / 17 &middot; Cas client 03</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">11 &mdash; &Eacute;tude de cas &middot; Lancement</span>
+      <h3 class="sub" style="margin-top:20px">Yes We Nan &mdash; De z&eacute;ro &agrave; une communaut&eacute; engag&eacute;e en trois mois.</h3>
+    </div>
+
+    <div class="case-hero pink-shadow mt-8">
+      <div class="case-photo"><div class="placeholder-img">YES WE NAN &mdash; Photo produit<br/>Brand lifestyle &middot; &agrave; int&eacute;grer</div></div>
+      <div class="case-content">
+        <span class="case-eyebrow">CAS CLIENT &middot; LANCEMENT DE MARQUE &middot; 2025</span>
+        <h3>Yes We Nan.</h3>
+        <div class="case-meta"><span><strong>Brief</strong> Lancement</span><span><strong>Dur&eacute;e</strong> 3 mois</span><span><strong>P&eacute;rim&egrave;tre</strong> Brand &amp; growth</span></div>
+        <p class="case-quote">&laquo;&nbsp;On a d&eacute;marr&eacute; sans communaut&eacute;, sans contenu et sans temps. Phantom a tout mont&eacute; en parall&egrave;le de notre premi&egrave;re lev&eacute;e.&nbsp;&raquo;</p>
+        <p class="body" style="font-size:16px;line-height:1.45">Jeune marque lifestyle fran&ccedil;aise. Lancement public attendu pour septembre 2025, sans aucun actif digital existant.</p>
+      </div>
+    </div>
+
+    <div class="case-results">
+      <div class="r"><div class="r-big"><em>0 &rarr; 24k</em></div><div class="r-lbl">abonn&eacute;s cumul&eacute;s sur Instagram + TikTok en 90 jours.</div></div>
+      <div class="r"><div class="r-big"><em>1,1&nbsp;M</em></div><div class="r-lbl">vues organiques g&eacute;n&eacute;r&eacute;es avant le premier euro investi en payant.</div></div>
+      <div class="r"><div class="r-big"><em>&minus;47&nbsp;%</em></div><div class="r-lbl">co&ucirc;t d'acquisition r&eacute;el vs les benchmarks DTC de la cat&eacute;gorie.</div></div>
+    </div>
+
+    <div class="f-bar"><span>Cas client 03 &middot; Yes We Nan &middot; 2025</span><span>Cas lancement / startup</span></div>
+  </section>
+
+  <!-- ══ 13 ÉQUIPE ══ -->
+  <section class="slide warm" data-screen-label="13 Équipe">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>12 / 17 &middot; &Eacute;quipe</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">12 &mdash; L'&eacute;quipe qui pilote</span>
+      <h2 class="title" style="margin-top:20px;font-size:76px">Derri&egrave;re chaque agent, <span class="violet">un humain qui r&eacute;pond.</span></h2>
+    </div>
+
+    <div class="team-grid" style="margin-top:32px">
+      <div class="team-member"><div class="avatar">CR</div><h4>Camille Roux.</h4><p class="role">Direction &middot; Strategy lead</p><p class="bio">12 ans en agence (Publicis, Marcel). Pilote les comptes seniors. R&eacute;f&eacute;rente pour les marques en repositionnement.</p></div>
+      <div class="team-member"><div class="avatar">TL</div><h4>Th&eacute;o Lambert.</h4><p class="role">R&eacute;f&eacute;rent &eacute;ditorial</p><p class="bio">Ex-r&eacute;dacteur en chef Origines M&eacute;dia. Con&ccedil;oit les chartes &eacute;ditoriales agentiques. Relit chaque sortie sensible.</p></div>
+      <div class="team-member"><div class="avatar">SA</div><h4>Sarah A&iuml;ech.</h4><p class="role">Direction artistique</p><p class="bio">10 ans en studio. Construit la grammaire visuelle de chaque marque. Cadre l'ensemble des productions photo/vid&eacute;o.</p></div>
+      <div class="team-member"><div class="avatar">NK</div><h4>No&eacute; Kahn.</h4><p class="role">AI orchestration lead</p><p class="bio">Con&ccedil;oit la cha&icirc;ne agentique propri&eacute;taire de Phantom. Fine-tune les prompts. Garantit la qualit&eacute; technique de la production IA.</p></div>
+    </div>
+
+    <div class="f-bar"><span>&Eacute;quipe Phantom &middot; 4 r&eacute;f&eacute;rents seniors</span><span>+ 8 collaborateurs en production</span></div>
+  </section>
+
+  <!-- ══ 14 GARANTIES ══ -->
+  <section class="slide" data-screen-label="14 Garanties">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>13 / 17 &middot; Engagements</span></div>
+
+    <div style="margin-top:48px">
+      <span class="eyebrow">13 &mdash; Nos engagements contractuels</span>
+      <h2 class="title" style="margin-top:28px">Ce qui est &eacute;crit. Ce qu'on s'engage <span class="violet">&agrave; tenir.</span></h2>
+      <p class="lede" style="margin-top:20px;max-width:60ch">Trois garanties contractuelles dans chaque proposition. Si on ne tient pas, on rembourse ou on prolonge.</p>
+    </div>
+
+    <div class="guarantees mt-12">
+      <div class="guarantee"><span class="g-num">ENGAGEMENT &middot; 01</span><h4>Livrables chiffr&eacute;s.</h4><p>Chaque mois, un volume pr&eacute;cis de livrables par p&ocirc;le. Si on ne tient pas le volume, on prolonge le mois suivant &agrave; nos frais.</p></div>
+      <div class="guarantee"><span class="g-num">ENGAGEMENT &middot; 02</span><h4>Reporting hebdomadaire.</h4><p>Chaque vendredi midi, un rapport document&eacute; : ce qui a &eacute;t&eacute; produit, ce qui marche, ce qui ne marche pas, ce qui change la semaine suivante.</p></div>
+      <div class="guarantee"><span class="g-num">ENGAGEMENT &middot; 03</span><h4>Sortie sans p&eacute;nalit&eacute;.</h4><p>Tu peux mettre fin au contrat &agrave; tout moment, avec un mois de pr&eacute;avis. Pas d'engagement annuel obligatoire. Notre m&eacute;tier d&eacute;pend de notre exigence.</p></div>
+    </div>
+
+    <div class="f-bar"><span>Engagements contractuels Phantom</span><span>Inscrits dans chaque proposition sign&eacute;e</span></div>
+  </section>
+
+  <!-- ══ 15 ROADMAP ONBOARDING ══ -->
+  <section class="slide warm" data-screen-label="15 Roadmap onboarding">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>14 / 17 &middot; Onboarding</span></div>
+
+    <div style="margin-top:40px">
+      <span class="eyebrow">14 &mdash; Roadmap d'onboarding</span>
+      <h2 class="title" style="margin-top:24px;font-size:76px">Ce qui se passe les <span class="violet">quatre premi&egrave;res semaines.</span></h2>
+    </div>
+
+    <div class="roadmap mt-12">
+      <div class="week"><span class="w-num">SEMAINE &middot; 01</span><h4>Diagnostic.</h4><ul><li>Kick-off avec ton r&eacute;f&eacute;rent</li><li>Audit de tes process et canaux</li><li>R&eacute;cup&eacute;ration des acc&egrave;s &amp; archives</li><li>Premier brief strat&eacute;gique</li></ul></div>
+      <div class="week"><span class="w-num">SEMAINE &middot; 02</span><h4>Cadrage.</h4><ul><li>Configuration agentique par p&ocirc;le</li><li>Calibration des prompts</li><li>Validation du plan de production</li><li>Setup Slack &amp; reporting</li></ul></div>
+      <div class="week"><span class="w-num">SEMAINE &middot; 03</span><h4>Production.</h4><ul><li>Lancement des premiers agents</li><li>Premiers contenus produits</li><li>Validation conjointe</li><li>Premiers livrables publi&eacute;s</li></ul></div>
+      <div class="week"><span class="w-num">SEMAINE &middot; 04</span><h4>Bilan &amp; ajustement.</h4><ul><li>Premier rapport mensuel</li><li>Ajustement du p&eacute;rim&egrave;tre</li><li>Point strat&eacute;gique</li><li>Cap pour le mois suivant</li></ul></div>
+    </div>
+
+    <p class="lede" style="margin-top:32px;max-width:80ch;font-size:24px">
+      <em class="hl">Quatre semaines.</em> Pas un PowerPoint qui dure six mois. Une mise en route op&eacute;rationnelle qui te livre du concret d&egrave;s la semaine 3.
+    </p>
+
+    <div class="f-bar"><span>Onboarding standard &middot; 4 semaines</span><span>P&eacute;rim&egrave;tres complexes : sur devis</span></div>
+  </section>
+
+  <!-- ══ 16 TARIFS ══ -->
+  <section class="slide" data-screen-label="16 Tarifs">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#fff"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#fff"/></svg><span>phantom</span></div><span>15 / 17 &middot; Tarifs</span></div>
+
+    <div style="margin-top:36px">
+      <span class="eyebrow">15 &mdash; Tarifs</span>
+      <h2 class="title" style="margin-top:16px;font-size:76px">Trois plans clairs. Ou du <span class="violet">sur-mesure.</span></h2>
+    </div>
+
+    <div class="pricing" style="margin-top:28px">
+      <div class="plan">
+        <div class="plan-head"><span class="plan-name">PLAN &middot; 01</span></div>
+        <h3>Starter.</h3>
+        <p class="plan-tagline">L'essentiel pour structurer deux p&ocirc;les de ton entreprise. Id&eacute;al pour les TPE qui veulent poser des fondations solides.</p>
+        <div class="plan-price"><div class="num">1&nbsp;490&nbsp;&euro;</div><div class="per">/ mois &mdash; engagement 3 mois</div></div>
+        <ul><li>2 p&ocirc;les au choix (ex : social + admin)</li><li>Agents sur t&acirc;ches r&eacute;currentes</li><li>Reporting mensuel</li><li>R&eacute;f&eacute;rent d&eacute;di&eacute; partag&eacute;</li></ul>
+      </div>
+      <div class="plan featured">
+        <div class="plan-head"><span class="plan-name">PLAN &middot; 02</span><span class="plan-badge">Recommand&eacute;</span></div>
+        <h3>Pilote.</h3>
+        <p class="plan-tagline">Le p&eacute;rim&egrave;tre standard pour une PME ambitieuse. Quatre p&ocirc;les couverts, supervision senior, cadence soutenue.</p>
+        <div class="plan-price"><div class="num">3&nbsp;490&nbsp;&euro;</div><div class="per">/ mois &mdash; engagement 3 mois</div></div>
+        <ul><li>4 p&ocirc;les couverts (ex : social + web + admin + commercial)</li><li>Production compl&egrave;te + agents sur process</li><li>Reporting hebdomadaire</li><li>R&eacute;f&eacute;rent senior d&eacute;di&eacute;</li></ul>
+      </div>
+      <div class="plan">
+        <div class="plan-head"><span class="plan-name">PLAN &middot; 03</span></div>
+        <h3>Studio.</h3>
+        <p class="plan-tagline">Pour les entreprises en acc&eacute;l&eacute;ration qui veulent tout centraliser sous un seul toit.</p>
+        <div class="plan-price"><div class="num">7&nbsp;490&nbsp;&euro;</div><div class="per">/ mois &mdash; engagement 6 mois</div></div>
+        <ul><li>Tous les p&ocirc;les couverts</li><li>Agents sur l'ensemble des process</li><li>Point strat&eacute;gique mensuel</li><li>&Eacute;quipe d&eacute;di&eacute;e multi-r&eacute;f&eacute;rents</li></ul>
+      </div>
+      <div class="plan">
+        <div class="plan-head"><span class="plan-name">PLAN &middot; 04</span></div>
+        <h3>Sur-mesure.</h3>
+        <p class="plan-tagline">Pour les entreprises avec un besoin sp&eacute;cifique : refonte compl&egrave;te, lancement, ou p&eacute;rim&egrave;tre multi-entit&eacute;s.</p>
+        <div class="plan-price"><div class="num">sur devis</div><div class="per">&agrave; partir de 12&nbsp;000&nbsp;&euro; / mois</div></div>
+        <ul><li>Cadrage strat&eacute;gique &eacute;tendu</li><li>&Eacute;quipe dimensionn&eacute;e selon enjeux</li><li>Engagement adapt&eacute;</li><li>Direction conseil senior</li><li>Reporting et gouvernance d&eacute;di&eacute;s</li></ul>
+      </div>
+    </div>
+
+    <p class="body" style="font-size:14px;margin-top:16px;max-width:none;color:var(--ink-60)">
+      Tous nos plans incluent : r&eacute;f&eacute;rent humain joignable, validation syst&eacute;matique avant ex&eacute;cution, sortie sans p&eacute;nalit&eacute; avec 1 mois de pr&eacute;avis. Aucun frais cach&eacute;.
+    </p>
+
+    <div class="f-bar"><span>Tarifs HT &middot; 2026</span><span>Adapt&eacute;s selon p&eacute;rim&egrave;tre groupe</span></div>
+  </section>
+
+  <!-- ══ 17 CLOSING / CTA ══ -->
+  <section class="slide dark" data-screen-label="17 Closing">
+    <div class="h-bar"><div class="brand"><svg viewBox="0 0 200 200" fill="none" style="width:28px;height:28px;color:var(--phantom-violet)"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg><span>phantom</span></div><span>16 / 17 &middot; Closing</span></div>
+
+    <div class="glyph-bg" style="bottom:-180px;right:-120px;">&rarr;</div>
+
+    <div style="margin-top:36px;position:relative;z-index:2">
+      <span class="eyebrow yellow">16 &mdash; Et maintenant</span>
+      <h1 class="disp" style="margin-top:20px;font-size:92px;color:var(--paper)">
+        Si ton entreprise m&eacute;ritait<br/>
+        <span class="violet">mieux que &ccedil;a,</span><br/>
+        on devrait se parler.
+      </h1>
+    </div>
+
+    <div class="cta-grid" style="margin-top:28px;position:relative;z-index:2">
+      <div class="cta-card featured">
+        <span class="c-tag">OPTION &middot; 01 &mdash; Le plus simple</span>
+        <h4>Un &eacute;change de 20 min.</h4>
+        <p>On regarde ensemble ton fonctionnement actuel, on identifie deux &agrave; trois leviers concrets, on te dit si c'est pour nous ou pas.</p>
+        <div class="c-action">R&eacute;server un cr&eacute;neau &nbsp;&rarr;</div>
+      </div>
+      <div class="cta-card">
+        <span class="c-tag">OPTION &middot; 02 &mdash; Tu veux du concret</span>
+        <h4>Un audit de ton fonctionnement.</h4>
+        <p>Tu nous ouvres la porte, on te livre un diagnostic &eacute;crit sous une semaine. Trois leviers concrets, une recommandation chiffr&eacute;e.</p>
+        <div class="c-action">Demander un audit &nbsp;&rarr;</div>
+      </div>
+      <div class="cta-card">
+        <span class="c-tag">OPTION &middot; 03 &mdash; Tu veux une propal</span>
+        <h4>Une proposition chiffr&eacute;e.</h4>
+        <p>Tu sais d&eacute;j&agrave; ce que tu veux. Brief court, propal d&eacute;taill&eacute;e sous 5 jours ouvr&eacute;s, avec p&eacute;rim&egrave;tre, engagement et tarif fermes.</p>
+        <div class="c-action">Recevoir une propal &nbsp;&rarr;</div>
+      </div>
+    </div>
+
+    <div class="contact-row" style="position:relative;z-index:2">
+      <div class="item"><span class="lbl">T&eacute;l&eacute;phone</span><span class="val">+33 1 23 45 67 89</span></div>
+      <div class="item"><span class="lbl">Email direction</span><span class="val">contact@phantom.fr</span></div>
+      <div class="item"><span class="lbl">Site</span><span class="val">phantom.fr</span></div>
+      <div class="item"><span class="lbl">Adresse</span><span class="val">12 rue de Paradis &middot; Paris 10e</span></div>
+    </div>
+
+    <div style="position:absolute;right:88px;top:180px;z-index:2">
+      <svg viewBox="0 0 200 200" fill="none" style="width:120px;color:var(--rainbow-yellow)" class="ghost-float">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+      <svg viewBox="0 0 200 200" fill="none" style="width:80px;color:var(--rainbow-pink);margin-left:24px;animation:float 2.4s ease-in-out infinite;animation-delay:.4s">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+
+    <div class="f-bar"><span>Phantom &middot; L'agence agentique &middot; 2026</span><span>Document confidentiel &mdash; ne pas diffuser</span></div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+
+</body>
+</html>

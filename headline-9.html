@@ -1,0 +1,44 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H9 — Editorial magazine</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+body{margin:0;background:var(--ink);display:flex;align-items:center;min-height:100vh;overflow:hidden;padding:0 64px}
+.label{position:fixed;top:16px;left:16px;font-family:var(--font-mono);font-size:11px;color:var(--phantom-violet-200);letter-spacing:0.1em;text-transform:uppercase}
+.hero-text{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;max-width:1100px}
+.left-col{display:flex;flex-direction:column;gap:4px}
+.number{font-family:var(--font-display);font-size:120px;font-weight:700;letter-spacing:-0.05em;line-height:0.85;color:var(--rainbow-yellow);opacity:0.15}
+.kicker{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--phantom-violet-200);writing-mode:vertical-lr;transform:rotate(180deg);margin-top:16px}
+.right-col{padding-top:20px}
+h1{font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.15;color:#fff;margin:0 0 12px}
+h1 em{font-style:italic;color:var(--rainbow-yellow);font-weight:700}
+.rule{width:48px;height:3px;background:var(--phantom-violet);border-radius:3px;margin-bottom:20px}
+.sub{font-family:var(--font-body);font-size:17px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:500px;margin:0 0 28px}
+.sub strong{color:#fff;font-weight:600}
+.stats{display:flex;gap:28px;margin-bottom:32px}
+.stat-val{font-family:var(--font-display);font-size:28px;font-weight:700;color:#fff;letter-spacing:-0.02em}
+.stat-label{font-family:var(--font-mono);font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
+.ctas{display:flex;gap:14px}
+.btn-p{font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 28px;border-radius:9999px;background:#fff;color:var(--phantom-violet);border:2.5px solid #fff;box-shadow:4px 4px 0 0 var(--phantom-violet);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn-p:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 0 var(--phantom-violet)}
+.btn-g{font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 28px;border-radius:9999px;background:transparent;color:#fff;border:2.5px solid #fff;box-shadow:4px 4px 0 0 rgba(255,255,255,.15);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn-g:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 0 rgba(255,255,255,.2)}
+</style></head><body>
+<div class="label">9 / Editorial magazine</div>
+<div class="hero-text">
+  <div class="left-col">
+    <span class="number">01</span>
+    <span class="kicker">Agents IA</span>
+  </div>
+  <div class="right-col">
+    <h1>T'as pas besoin d'une &eacute;quipe.<br>T'as besoin que <em>&ccedil;a tourne.</em></h1>
+    <div class="rule"></div>
+    <p class="sub">Phantom installe des <strong>agents IA autonomes</strong> dans ta bo&icirc;te. Ils g&egrave;rent, ex&eacute;cutent, relancent &mdash; sans toi.</p>
+    <div class="stats">
+      <div><div class="stat-val">490&euro;</div><div class="stat-label">par mois</div></div>
+      <div><div class="stat-val">47</div><div class="stat-label">entreprises</div></div>
+      <div><div class="stat-val">18</div><div class="stat-label">agents</div></div>
+    </div>
+    <div class="ctas"><a href="#" class="btn-p">R&eacute;server un appel &rarr;</a><a href="#" class="btn-g">D&eacute;couvrir</a></div>
+  </div>
+</div>
+</body></html>

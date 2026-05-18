@@ -1,0 +1,156 @@
+.agent-breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-30);
+  letter-spacing: 0.06em;
+  margin-bottom: 1px;
+}
+.agent-breadcrumb-sep {
+  margin: 0 3px;
+  color: var(--ink-20);
+}
+.agent-tabs {
+  display: flex; gap: 0; border-bottom: 1px solid rgba(10,10,10,0.06);
+  padding: 0 20px; flex-shrink: 0;
+}
+.agent-tab {
+  padding: 10px 16px; border: none; background: none;
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  color: var(--ink-40); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  position: relative; top: 1px;
+}
+.agent-tab:hover { color: var(--ink-60); }
+.agent-tab:active { opacity: 0.7; }
+.agent-tab:focus-visible { outline: 2px solid var(--phantom-violet); outline-offset: 2px; }
+.agent-tab.active {
+  color: var(--phantom-violet); border-bottom-color: var(--phantom-violet); font-weight: 600;
+}
+
+/* Agent info panel */
+.agent-info {
+  padding: 20px; display: flex; flex-direction: column; gap: 16px;
+  flex: 1; overflow-y: auto;
+}
+.agent-mission-block {
+  background: var(--paper-warm); border-radius: 12px; padding: 16px;
+}
+.agent-mission-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-40);
+  margin-bottom: 8px;
+}
+.agent-mission-text {
+  font-family: var(--font-body); font-size: 12px; color: var(--ink);
+  line-height: 1.5;
+}
+.agent-stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.agent-stat-card {
+  background: var(--paper-warm); border-radius: 12px; padding: 14px;
+  text-align: center;
+}
+.agent-stat-value {
+  font-family: var(--font-display); font-weight: 700; font-size: 24px;
+  letter-spacing: -0.03em; color: var(--ink);
+}
+.agent-stat-label {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-40); margin-top: 4px;
+}
+.agent-config-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,0.04);
+}
+.agent-config-row:last-child { border-bottom: none; }
+.agent-config-label {
+  font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--ink);
+}
+.agent-config-value {
+  font-family: var(--font-body); font-size: 12px; color: var(--ink-40);
+}
+
+/* Work items in info tab */
+.agent-work-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(10,10,10,0.04);
+}
+.agent-work-row:last-child { border-bottom: none; }
+.agent-work-title {
+  font-family: var(--font-body); font-size: 12px; color: var(--ink);
+}
+.agent-work-impact {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  color: var(--green-600); white-space: nowrap;
+}
+.agent-work-date {
+  font-family: var(--font-mono); font-size: 9px; color: var(--ink-30);
+}
+.agent-work-empty {
+  font-family: var(--font-body); font-size: 12px; color: var(--ink-30); padding: 8px 0;
+}
+
+/* Color swatch in config tab */
+.agent-config-swatch {
+  width: 18px; height: 18px; border-radius: 9999px; display: inline-block;
+}
+
+/* Chips override for agent composer */
+.agent-chat-composer .chips { padding: 0; }
+
+/* Accomplishments banner — shows at top of chat */
+.agent-accomplishments {
+  background: linear-gradient(135deg, rgba(0,210,106,0.04), rgba(110,60,255,0.03));
+  border: 2px solid var(--ink);
+  border-radius: var(--r-card);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-pop);
+  animation: viewEnter 0.25s var(--ease) both;
+}
+
+.agent-accomplishments-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.agent-accomplishments-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-40);
+}
+
+.agent-accomplishment-item {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(10,10,10,0.04);
+}
+.agent-accomplishment-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.agent-accomplishment-text {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.agent-accomplishment-impact {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink-40);
+  margin-top: 2px;
+  line-height: 1.3;
+}

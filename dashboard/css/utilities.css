@@ -1,0 +1,16 @@
+.empty-state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 60px 20px; text-align: center;
+}
+.empty-state-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 18px;
+  color: var(--ink); margin-top: 16px;
+}
+.empty-state-text {
+  font-family: var(--font-body); font-size: 12px; color: var(--ink-40);
+  margin-top: 6px; max-width: 280px;
+}
+
+.notif-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}

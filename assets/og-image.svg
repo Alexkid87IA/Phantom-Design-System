@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A0F"/>
+      <stop offset="100%" stop-color="#1A1A2E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Ghost mark -->
+  <g transform="translate(520,120) scale(0.8)">
+    <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="#6E3CFF"/>
+    <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0F" opacity="0.5"/>
+    <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0F" opacity="0.5"/>
+  </g>
+  <!-- Brand name -->
+  <text x="600" y="400" text-anchor="middle" fill="#F0F0F5" font-family="Space Grotesk, system-ui, sans-serif" font-weight="700" font-size="72" letter-spacing="-0.04em">phantom</text>
+  <!-- Tagline -->
+  <text x="600" y="460" text-anchor="middle" fill="#8A8A9A" font-family="Geist, system-ui, sans-serif" font-weight="400" font-size="24">L'agence agentique</text>
+  <!-- Accent line -->
+  <rect x="540" y="490" width="120" height="3" rx="1.5" fill="#6E3CFF"/>
+</svg>

@@ -1,0 +1,195 @@
+/* ============================================================
+   INLINE MORNING SUMMARY CARD — Dashboard embedded version
+   ============================================================ */
+
+.ms-inline-card {
+  background: var(--paper);
+  border-radius: var(--r-card);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-pop);
+  overflow: hidden;
+  animation: viewEnter 0.25s var(--ease) both;
+  position: relative;
+}
+
+.ms-inline-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 20px 14px;
+}
+
+.ms-inline-date {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phantom-violet);
+  margin-bottom: 6px;
+}
+
+.ms-inline-greeting {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.ms-inline-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-30);
+  line-height: 1.4;
+}
+
+/* Growth impact pills */
+.ms-inline-growth {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 16px;
+}
+.ms-inline-growth-pill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px;
+  background: linear-gradient(135deg, rgba(110,60,255,0.04), rgba(0,210,106,0.03));
+  border: 1px solid rgba(110,60,255,0.08);
+  border-radius: 12px;
+}
+.ms-inline-growth-val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.ms-inline-growth-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--ink-30);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Agent rows */
+.ms-inline-agents {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(10, 10, 10, 0.06);
+}
+
+.ms-card-agent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.03);
+  transition: background 0.15s;
+}
+.ms-card-agent:last-child {
+  border-bottom: none;
+}
+.ms-card-agent:hover {
+  background: rgba(10, 10, 10, 0.015);
+}
+
+.ms-card-agent-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ms-card-agent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.ms-card-agent-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ms-card-agent-detail {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ink-40);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-card-agent-cta {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  transition: background 0.15s, opacity 0.15s;
+}
+.ms-card-agent-cta:hover {
+  opacity: 0.7;
+}
+.ms-card-agent-cta:focus-visible {
+  outline: 2px solid var(--phantom-violet);
+  outline-offset: 2px;
+}
+
+/* Footer */
+.ms-inline-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-top: 1px solid rgba(10, 10, 10, 0.06);
+  background: rgba(10, 10, 10, 0.01);
+}
+
+.ms-inline-completed {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-30);
+  letter-spacing: 0.04em;
+}
+
+.ms-inline-dismiss {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-20);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.ms-inline-dismiss:hover {
+  color: var(--ink-60);
+  background: rgba(10, 10, 10, 0.04);
+}
+.ms-inline-dismiss:focus-visible {
+  outline: 2px solid var(--phantom-violet);
+  outline-offset: 2px;
+}

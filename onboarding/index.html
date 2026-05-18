@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom — Bienvenue</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <div class="onb-page">
+    <div class="onb-header">
+      <div class="onb-brand">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/>
+          <circle cx="15" cy="19" r="2" fill="#fff"/>
+          <circle cx="25" cy="19" r="2" fill="#fff"/>
+        </svg>
+        <span class="onb-brand-text">Phantom</span>
+      </div>
+      <div class="onb-progress">
+        <div class="onb-progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="onb-step-indicator" id="step-indicator">Étape 1/5</div>
+    </div>
+
+    <div class="onb-content" id="onb-content"></div>
+
+    <div class="onb-footer">
+      <button class="onb-btn-back" id="btn-back">Retour</button>
+      <button class="onb-btn-next" id="btn-next">Continuer</button>
+    </div>
+  </div>
+
+  <script>
+    var currentStep = 0;
+    var STEPS = [
+      {
+        title: 'Parle-nous de ton commerce',
+        subtitle: 'Ces infos permettent à nos agents de te connaître',
+        fields: [
+          { id: 'biz-name', label: 'Nom du commerce', type: 'text', placeholder: 'Ex: Sushi Boy' },
+          { id: 'biz-sector', label: 'Secteur', type: 'select', options: ['Restauration', 'Coiffure / Beauté', 'Commerce', 'Bien-être / Sport', 'Automobile', 'Photographie', 'Autre'] },
+          { id: 'biz-city', label: 'Ville', type: 'text', placeholder: 'Marseille' },
+          { id: 'biz-employees', label: 'Nombre d\'employés', type: 'select', options: ['1-5', '6-15', '16-50', '50+'] },
+        ]
+      },
+      {
+        title: 'Ta présence en ligne',
+        subtitle: 'On connecte tes comptes pour que les agents puissent bosser',
+        connections: [
+          { id: 'connect-ig', name: 'Instagram', icon: '📸', desc: 'Posts, Stories, Reels' },
+          { id: 'connect-fb', name: 'Facebook', icon: '👥', desc: 'Page pro' },
+          { id: 'connect-google', name: 'Google Business', icon: '📍', desc: 'Avis, Maps, Fiche' },
+          { id: 'connect-site', name: 'Site web', icon: '🌐', desc: 'URL de ton site' },
+        ]
+      },
+      {
+        title: 'Choisis ton premier agent',
+        subtitle: 'Commence avec un agent — tu pourras en ajouter d\'autres après',
+        agents: [
+          { id: 'agent-social', name: 'Social Manager', desc: 'Posts Instagram & Facebook automatisés', icon: '📱', color: '#FF2D87' },
+          { id: 'agent-google', name: 'Avis Google', desc: 'Réponses aux avis & collecte 5★', icon: '⭐', color: '#FFD400' },
+          { id: 'agent-photos', name: 'Photos Pro', desc: 'Shooting & retouche de tes produits', icon: '📸', color: '#00D26A' },
+          { id: 'agent-seo', name: 'SEO Local', desc: 'Référencement Google & articles', icon: '🔍', color: '#0066FF' },
+        ]
+      },
+      {
+        title: 'Choisis ton plan',
+        subtitle: 'Sans engagement. Change ou annule à tout moment.',
+        plans: [
+          { id: 'plan-starter', name: 'Starter', price: '490', agents: '1 agent', features: ['1 agent IA', '1 pilot dédié', 'Chat illimité', 'Rapport mensuel'] },
+          { id: 'plan-croissance', name: 'Croissance', price: '890', agents: '3 agents', features: ['3 agents IA', '1 pilot dédié', 'Chat illimité', 'Rapport hebdo', 'Intégrations'], popular: true },
+          { id: 'plan-standard', name: 'Standard', price: '1490', agents: '6+ agents', features: ['6+ agents IA', 'Pilot senior', 'Chat prioritaire', 'Rapport quotidien', 'Toutes intégrations', 'Support prioritaire'] },
+        ]
+      },
+      {
+        title: 'Ton agent est prêt !',
+        subtitle: 'Premier livrable dans les 72 prochaines heures',
+        welcome: true
+      },
+    ];
+
+    function renderStep(step) {
+      var s = STEPS[step];
+      var html = '<h1 class="onb-title">' + s.title + '</h1><p class="onb-subtitle">' + s.subtitle + '</p>';
+
+      if (s.fields) {
+        html += '<div class="onb-fields">';
+        s.fields.forEach(function(f) {
+          html += '<div class="onb-field"><label class="onb-label">' + f.label + '</label>';
+          if (f.type === 'select') {
+            html += '<select class="onb-input" id="' + f.id + '"><option value="">Choisir...</option>';
+            f.options.forEach(function(o) { html += '<option>' + o + '</option>'; });
+            html += '</select>';
+          } else {
+            html += '<input class="onb-input" type="' + f.type + '" id="' + f.id + '" placeholder="' + (f.placeholder || '') + '">';
+          }
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
+      if (s.connections) {
+        html += '<div class="onb-connections">';
+        s.connections.forEach(function(c) {
+          html += '<div class="onb-connect-card" id="' + c.id + '">'
+            + '<div class="onb-connect-icon">' + c.icon + '</div>'
+            + '<div class="onb-connect-info"><div class="onb-connect-name">' + c.name + '</div><div class="onb-connect-desc">' + c.desc + '</div></div>'
+            + '<button class="onb-connect-btn">Connecter</button>'
+          + '</div>';
+        });
+        html += '</div><p class="onb-skip-note">Tu pourras connecter ces comptes plus tard</p>';
+      }
+
+      if (s.agents) {
+        html += '<div class="onb-agents-grid">';
+        s.agents.forEach(function(a) {
+          html += '<div class="onb-agent-card" data-agent="' + a.id + '">'
+            + '<div class="onb-agent-icon" style="background:' + a.color + '22;color:' + a.color + '">' + a.icon + '</div>'
+            + '<div class="onb-agent-name">' + a.name + '</div>'
+            + '<div class="onb-agent-desc">' + a.desc + '</div>'
+          + '</div>';
+        });
+        html += '</div>';
+      }
+
+      if (s.plans) {
+        html += '<div class="onb-plans-grid">';
+        s.plans.forEach(function(p) {
+          html += '<div class="onb-plan-card' + (p.popular ? ' onb-plan-popular' : '') + '" data-plan="' + p.id + '">'
+            + (p.popular ? '<div class="onb-plan-badge">Populaire</div>' : '')
+            + '<div class="onb-plan-name">' + p.name + '</div>'
+            + '<div class="onb-plan-price">' + p.price + ' €<span>/mois</span></div>'
+            + '<div class="onb-plan-agents">' + p.agents + '</div>'
+            + '<ul class="onb-plan-features">';
+          p.features.forEach(function(f) { html += '<li>' + f + '</li>'; });
+          html += '</ul></div>';
+        });
+        html += '</div>';
+      }
+
+      if (s.welcome) {
+        html += '<div class="onb-welcome">'
+          + '<div class="onb-welcome-ghost">'
+            + '<svg width="80" height="80" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>'
+          + '</div>'
+          + '<div class="onb-welcome-text">'
+            + '<p>Ton agent est déployé et commence à travailler dès maintenant.</p>'
+            + '<p>Un pilot humain supervise chaque action. Tu recevras ton premier livrable sous 72h maximum.</p>'
+          + '</div>'
+          + '<div class="onb-welcome-next">'
+            + '<div class="onb-welcome-item">📬 Premier livrable sous 72h</div>'
+            + '<div class="onb-welcome-item">💬 Chatte avec ton agent à tout moment</div>'
+            + '<div class="onb-welcome-item">📊 Rapport d\'impact chaque semaine</div>'
+          + '</div>'
+        + '</div>';
+      }
+
+      document.getElementById('onb-content').innerHTML = html;
+      document.getElementById('progress-bar').style.width = ((step + 1) / STEPS.length * 100) + '%';
+      document.getElementById('step-indicator').textContent = 'Étape ' + (step + 1) + '/' + STEPS.length;
+      document.getElementById('btn-back').style.visibility = step === 0 ? 'hidden' : 'visible';
+      document.getElementById('btn-next').textContent = step === STEPS.length - 1 ? 'Accéder à mon dashboard' : 'Continuer';
+
+      bindStepEvents();
+    }
+
+    function bindStepEvents() {
+      document.querySelectorAll('.onb-agent-card').forEach(function(el) {
+        el.addEventListener('click', function() {
+          document.querySelectorAll('.onb-agent-card').forEach(function(c) { c.classList.remove('selected'); });
+          el.classList.add('selected');
+        });
+      });
+      document.querySelectorAll('.onb-plan-card').forEach(function(el) {
+        el.addEventListener('click', function() {
+          document.querySelectorAll('.onb-plan-card').forEach(function(c) { c.classList.remove('selected'); });
+          el.classList.add('selected');
+        });
+      });
+      document.querySelectorAll('.onb-connect-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          btn.textContent = 'Connecté ✓';
+          btn.classList.add('connected');
+          btn.disabled = true;
+        });
+      });
+    }
+
+    document.getElementById('btn-next').addEventListener('click', function() {
+      if (currentStep < STEPS.length - 1) {
+        currentStep++;
+        renderStep(currentStep);
+      } else {
+        window.location.href = '../dashboard/';
+      }
+    });
+
+    document.getElementById('btn-back').addEventListener('click', function() {
+      if (currentStep > 0) {
+        currentStep--;
+        renderStep(currentStep);
+      }
+    });
+
+    renderStep(0);
+  </script>
+</body>
+</html>

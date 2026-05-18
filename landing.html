@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phantom — Parle à ton prochain agent</title>
+<meta name="description" content="Phantom donne aux commerces locaux une équipe d'agents IA qui gère réseaux sociaux, avis Google, SEO et plus. Tes agents bossent pendant que tu gères.">
+<meta property="og:title" content="Phantom — Ton équipe d'agents IA">
+<meta property="og:description" content="Réseaux sociaux, avis Google, SEO, photos — tes agents IA gèrent tout pendant que tu te concentres sur ton business.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Phantom — Ton équipe d'agents IA">
+<meta name="twitter:description" content="Réseaux sociaux, avis Google, SEO, photos — tes agents IA gèrent tout.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --violet: #6E3CFF;
+  --violet-50: #F2EDFF;
+  --violet-200: #C5ADFF;
+  --pink: #FF2D87;
+  --orange: #FF8A1F;
+  --yellow: #FFD400;
+  --green: #00D26A;
+  --blue: #0066FF;
+  --red: #FF4D2E;
+  --ink: #0A0A0A;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Geist', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font-body);
+  background: var(--ink);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--yellow); color: var(--ink); }
+
+/* ── LAYOUT ── */
+.app {
+  height: 100%; display: flex; flex-direction: column;
+  max-width: 800px; margin: 0 auto;
+  position: relative;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  padding: 20px 24px;
+  display: flex; align-items: center; gap: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(20px);
+  z-index: 10;
+}
+.topbar-ghost {
+  width: 40px; height: 40px; flex-shrink: 0;
+  animation: ghostFloat 2.4s ease-in-out infinite;
+}
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.topbar-info { flex: 1; }
+.topbar-name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 16px; letter-spacing: -0.02em;
+}
+.topbar-status {
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  display: flex; align-items: center; gap: 6px; margin-top: 2px;
+}
+.topbar-dot {
+  width: 6px; height: 6px; border-radius: 9999px;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.topbar-tag {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 9999px;
+  background: rgba(110,60,255,0.15); color: var(--violet-200);
+}
+
+/* ── CHAT ── */
+.chat {
+  flex: 1; overflow-y: auto; padding: 24px 24px 16px;
+  display: flex; flex-direction: column; gap: 6px;
+  scroll-behavior: smooth;
+}
+.chat::-webkit-scrollbar { width: 4px; }
+.chat::-webkit-scrollbar-track { background: transparent; }
+.chat::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ── MESSAGES ── */
+.msg {
+  max-width: 85%; opacity: 0; transform: translateY(10px);
+  animation: msgIn 0.35s var(--ease) forwards;
+}
+@keyframes msgIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.msg--agent { align-self: flex-start; }
+.msg--user { align-self: flex-end; }
+
+.msg-bubble {
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 15px; line-height: 1.5;
+}
+.msg--agent .msg-bubble {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom-left-radius: 6px;
+  color: rgba(255,255,255,0.85);
+}
+.msg--user .msg-bubble {
+  background: var(--violet);
+  border-bottom-right-radius: 6px;
+  color: #fff;
+}
+.msg-bubble strong { color: #fff; font-weight: 600; }
+.msg-bubble em { font-style: normal; color: var(--yellow); }
+
+/* ── TYPING INDICATOR ── */
+.typing {
+  align-self: flex-start;
+  display: flex; gap: 5px; padding: 16px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; border-bottom-left-radius: 6px;
+}
+.typing-dot {
+  width: 7px; height: 7px; border-radius: 9999px;
+  background: rgba(255,255,255,0.3);
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ── RICH CARDS (inside messages) ── */
+.rich-card {
+  margin-top: 12px; padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+}
+.rich-card + .rich-card { margin-top: 8px; }
+.rich-card-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 15px; letter-spacing: -0.01em;
+}
+.rich-card-desc {
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  margin-top: 4px; line-height: 1.45;
+}
+.rich-card-tag {
+  display: inline-block; font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 9999px;
+  margin-top: 8px;
+}
+
+/* ── STAT ROW (inside messages) ── */
+.stat-row {
+  display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;
+}
+.stat-block {
+  flex: 1; min-width: 80px; padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px; text-align: center;
+}
+.stat-block-val {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 22px; letter-spacing: -0.03em;
+}
+.stat-block-label {
+  font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-top: 4px;
+}
+
+/* ── QUICK REPLIES ── */
+.replies {
+  flex-shrink: 0;
+  padding: 12px 24px 24px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0; transform: translateY(10px);
+  animation: msgIn 0.4s var(--ease) 0.2s forwards;
+}
+.reply-btn {
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  padding: 12px 20px; border-radius: 14px;
+  border: 2.5px solid rgba(255,255,255,0.12);
+  background: transparent; color: #fff;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
+}
+.reply-btn:hover {
+  border-color: var(--violet);
+  background: rgba(110,60,255,0.1);
+  transform: translateY(-2px);
+}
+.reply-btn--primary {
+  background: var(--yellow); color: var(--ink);
+  border-color: var(--ink); box-shadow: 4px 4px 0 0 var(--ink);
+}
+.reply-btn--primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  background: var(--yellow);
+}
+
+/* ── BG GHOST ── */
+.bg-ghost {
+  position: fixed; pointer-events: none; z-index: 0;
+  opacity: 0.015;
+}
+@keyframes ghostRainbow {
+  0%   { color: #FF2D87; }
+  16%  { color: #FF8A1F; }
+  33%  { color: #FFD400; }
+  50%  { color: #00D26A; }
+  66%  { color: #0066FF; }
+  83%  { color: #6E3CFF; }
+  100% { color: #FF2D87; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .app { max-width: 100%; }
+  .topbar { padding: 16px; }
+  .chat { padding: 16px; }
+  .replies { padding: 12px 16px 20px; }
+  .reply-btn { font-size: 13px; padding: 10px 16px; }
+}
+</style>
+</head>
+<body>
+
+<svg class="bg-ghost" viewBox="0 0 200 200" fill="none" style="width:400px;height:400px;right:-100px;bottom:-60px;animation:ghostFloat 4s ease-in-out infinite,ghostRainbow 3s linear infinite">
+  <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+</svg>
+<svg class="bg-ghost" viewBox="0 0 200 200" fill="none" style="width:250px;height:250px;left:-60px;top:20%;animation:ghostFloat 3.5s ease-in-out 0.5s infinite,ghostRainbow 2.5s linear infinite">
+  <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+</svg>
+
+<div class="app">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-ghost">
+      <svg viewBox="0 0 200 200" fill="none" style="width:100%;height:100%;color:var(--violet)">
+        <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/>
+        <ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+        <ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/>
+      </svg>
+    </div>
+    <div class="topbar-info">
+      <div class="topbar-name">Phantom Agent</div>
+      <div class="topbar-status">
+        <div class="topbar-dot"></div>
+        En ligne
+      </div>
+    </div>
+    <div class="topbar-tag">Agent</div>
+    <a href="marketing/pricing.html" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;margin-left:8px;transition:color 0.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Tarifs</a>
+    <a href="dashboard/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;margin-left:8px;transition:color 0.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Démo</a>
+    <a href="auth/" style="font-size:11px;font-weight:600;color:#fff;text-decoration:none;padding:5px 12px;border-radius:6px;background:rgba(110,60,255,0.8);margin-left:4px;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Connexion</a>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat" id="chat"></div>
+
+  <!-- REPLIES (injected dynamically) -->
+  <div id="replies"></div>
+
+</div>
+
+<script>
+(function() {
+
+var chat = document.getElementById('chat');
+var repliesContainer = document.getElementById('replies');
+var typingEl = null;
+
+// ── Helpers ──
+
+function wait(ms) {
+  return new Promise(function(r) { setTimeout(r, ms); });
+}
+
+function scrollToBottom() {
+  chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
+}
+
+function showTyping() {
+  typingEl = document.createElement('div');
+  typingEl.className = 'typing';
+  typingEl.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  chat.appendChild(typingEl);
+  scrollToBottom();
+}
+
+function hideTyping() {
+  if (typingEl && typingEl.parentNode) {
+    typingEl.parentNode.removeChild(typingEl);
+    typingEl = null;
+  }
+}
+
+function addMessage(html, type) {
+  hideTyping();
+  var msg = document.createElement('div');
+  msg.className = 'msg msg--' + type;
+  msg.innerHTML = '<div class="msg-bubble">' + html + '</div>';
+  chat.appendChild(msg);
+  scrollToBottom();
+}
+
+function agentSays(html, delay) {
+  return new Promise(function(resolve) {
+    showTyping();
+    setTimeout(function() {
+      addMessage(html, 'agent');
+      resolve();
+    }, delay || 1200);
+  });
+}
+
+function userSays(text) {
+  addMessage(text, 'user');
+}
+
+function showReplies(options) {
+  return new Promise(function(resolve) {
+    repliesContainer.innerHTML = '';
+    repliesContainer.className = 'replies';
+    options.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.className = 'reply-btn' + (opt.primary ? ' reply-btn--primary' : '');
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function() {
+        repliesContainer.innerHTML = '';
+        repliesContainer.className = '';
+        userSays(opt.label);
+        resolve(opt.value || opt.label);
+      });
+      repliesContainer.appendChild(btn);
+    });
+    scrollToBottom();
+  });
+}
+
+// ── Industry data ──
+
+var industries = {
+  'Média': {
+    tasks: [
+      { title: 'Production éditoriale', desc: 'Articles SEO, dossiers, guides, fiches pratiques. Pipeline IA 4 couches de validation.', tag: 'ÉDITO', tagColor: 'var(--pink)' },
+      { title: 'Formats viraux', desc: 'Carrousels propriétaires, Reels, threads, stories. Rendez-vous récurrents sponsorisables.', tag: 'SOCIAL', tagColor: 'var(--orange)' },
+      { title: 'Studio créatif IA', desc: 'Covers d\'articles, visuels brand content, vidéos UGC, interviews IA avec Lya.', tag: 'STUDIO', tagColor: 'var(--violet)' },
+      { title: 'Growth & monétisation', desc: 'SEO, Google Discover, activation 6 plateformes, media kit, inventaire annonceur.', tag: 'GROWTH', tagColor: 'var(--green)' },
+    ],
+    stats: [
+      { val: '1000+', label: 'Articles', color: 'var(--pink)' },
+      { val: '43M', label: 'Reach/mois', color: 'var(--yellow)' },
+      { val: '5Mrd', label: 'Vues', color: 'var(--green)' },
+      { val: '×7', label: 'Cadence', color: 'var(--violet-200)' },
+    ],
+    outro: 'Pour un média, on construit la <em>machine complète</em> : contenu, social, vidéo, SEO, infra. Tout tourne en parallèle.'
+  },
+  'Restaurant': {
+    tasks: [
+      { title: 'Avis Google automatisés', desc: 'Collecte, réponse intelligente, amélioration de la note. Pilotage complet.', tag: 'RÉPUTATION', tagColor: 'var(--yellow)' },
+      { title: 'Photos IA de plats', desc: '10 modes de shooting virtuel. Studio shot, lifestyle, closeup, hero banner.', tag: 'STUDIO', tagColor: 'var(--orange)' },
+      { title: 'Social food', desc: 'Instagram, TikTok, Facebook. Formats food natifs, stories, Reels recettes.', tag: 'SOCIAL', tagColor: 'var(--pink)' },
+      { title: 'Commande & fidélisation', desc: 'Optimisation Uber Eats, Deliveroo. Newsletters clients. Programme fidélité.', tag: 'GROWTH', tagColor: 'var(--green)' },
+    ],
+    stats: [
+      { val: '4.8★', label: 'Note cible', color: 'var(--yellow)' },
+      { val: '50+', label: 'Visuels/mois', color: 'var(--orange)' },
+      { val: '6', label: 'Plateformes', color: 'var(--pink)' },
+      { val: '×3', label: 'Engagement', color: 'var(--green)' },
+    ],
+    outro: 'Pour un restaurant, on gère <em>toute la présence digitale</em> : de l\'avis Google au Reel TikTok, en passant par les photos de plats.'
+  },
+  'E-commerce': {
+    tasks: [
+      { title: 'Fiches produit IA', desc: 'Descriptions SEO, variantes A/B, traduction multi-langue. Par milliers.', tag: 'ÉDITO', tagColor: 'var(--blue)' },
+      { title: 'Photos produit IA', desc: 'Studio shot, lifestyle, closeup, hero banner, social carousel, ad creative pack.', tag: 'STUDIO', tagColor: 'var(--orange)' },
+      { title: 'Vidéo UGC & ads', desc: 'Avatars IA, unboxing, product showcase, TV spots. 8 modes de production.', tag: 'VIDÉO', tagColor: 'var(--pink)' },
+      { title: 'Social shopping', desc: 'Instagram Shopping, TikTok Shop, Pinterest. Formats natifs, hooks optimisés.', tag: 'GROWTH', tagColor: 'var(--green)' },
+    ],
+    stats: [
+      { val: '10K+', label: 'Fiches', color: 'var(--blue)' },
+      { val: '36+', label: 'Modèles IA', color: 'var(--orange)' },
+      { val: '×5', label: 'Vélocité', color: 'var(--pink)' },
+      { val: '-70%', label: 'Coût prod', color: 'var(--green)' },
+    ],
+    outro: 'Pour un e-commerce, on automatise <em>toute la production de contenu</em> : fiches, visuels, vidéos, ads. À l\'échelle de ton catalogue.'
+  },
+  'SaaS / Tech': {
+    tasks: [
+      { title: 'Content marketing', desc: 'Blog tech, guides, comparatifs, case studies. SEO technique et Google Discover.', tag: 'ÉDITO', tagColor: 'var(--violet-200)' },
+      { title: 'Thought leadership', desc: 'Posts LinkedIn fondateurs, threads X, newsletters B2B. Personal branding.', tag: 'SOCIAL', tagColor: 'var(--blue)' },
+      { title: 'Démos & product videos', desc: 'Screencasts, explainers, onboarding videos. Montage automatisé.', tag: 'VIDÉO', tagColor: 'var(--pink)' },
+      { title: 'Growth B2B', desc: 'Lead magnets, webinars, nurturing sequences. Pipeline inbound complet.', tag: 'GROWTH', tagColor: 'var(--green)' },
+    ],
+    stats: [
+      { val: '500+', label: 'Articles', color: 'var(--violet-200)' },
+      { val: '×4', label: 'Leads', color: 'var(--blue)' },
+      { val: '150+', label: 'Scripts', color: 'var(--yellow)' },
+      { val: '6', label: 'APIs', color: 'var(--green)' },
+    ],
+    outro: 'Pour un SaaS, on construit la <em>machine inbound</em> : contenu tech, LinkedIn, SEO, lead gen. Le tout piloté par des agents.'
+  },
+  'Immobilier': {
+    tasks: [
+      { title: 'Annonces optimisées', desc: 'Descriptions immobilières IA, SEO local, variantes par plateforme.', tag: 'ÉDITO', tagColor: 'var(--blue)' },
+      { title: 'Home staging IA', desc: 'Transformation photo d\'intérieurs. Meubler, décorer, mettre en scène virtuellement.', tag: 'STUDIO', tagColor: 'var(--orange)' },
+      { title: 'Social local', desc: 'Facebook, Instagram, Google Business. Formats immobiliers natifs, stories visite.', tag: 'SOCIAL', tagColor: 'var(--pink)' },
+      { title: 'Génération de leads', desc: 'Landing pages, formulaires, nurturing email. Pipeline acquéreur.', tag: 'GROWTH', tagColor: 'var(--green)' },
+    ],
+    stats: [
+      { val: '×3', label: 'Vues annonces', color: 'var(--blue)' },
+      { val: '48h', label: 'Mise en ligne', color: 'var(--orange)' },
+      { val: '-60%', label: 'Coût staging', color: 'var(--pink)' },
+      { val: '×2', label: 'Leads', color: 'var(--green)' },
+    ],
+    outro: 'Pour l\'immobilier, on transforme <em>chaque bien en contenu</em> : annonces, visuels, social, leads. Du mandat à la signature.'
+  },
+  'Santé': {
+    tasks: [
+      { title: 'Édito santé certifié', desc: 'Articles bien-être, guides patients, fiches pathologies. Fact-checking médical.', tag: 'ÉDITO', tagColor: 'var(--green)' },
+      { title: 'Vidéos experts', desc: 'Interviews praticiens, explainers santé, témoignages patients. Format confiance.', tag: 'VIDÉO', tagColor: 'var(--pink)' },
+      { title: 'SEO santé', desc: 'Position zéro, Google Discover, featured snippets. Trafic qualifié massif.', tag: 'SEO', tagColor: 'var(--blue)' },
+      { title: 'Communautés', desc: 'Facebook groupes, newsletters spécialisées, podcasts santé.', tag: 'SOCIAL', tagColor: 'var(--orange)' },
+    ],
+    stats: [
+      { val: '395+', label: 'Articles', color: 'var(--green)' },
+      { val: '45M', label: 'Vues/mois', color: 'var(--yellow)' },
+      { val: '3M+', label: 'Abonnés', color: 'var(--pink)' },
+      { val: '4', label: 'Couches QA', color: 'var(--violet-200)' },
+    ],
+    outro: 'Pour la santé, on produit du <em>contenu expert vérifié</em> : articles, vidéos, podcasts. Avec un fact-checking médical rigoureux.'
+  },
+};
+
+// ── Conversation flow ──
+
+async function runConversation() {
+
+  await wait(800);
+  await agentSays('Salut. 👋', 800);
+  await wait(400);
+  await agentSays('Je suis l\'agent <strong>Phantom</strong>. Je produis du contenu à échelle industrielle — articles, vidéos, carrousels, podcasts, newsletters, sites, apps, brand — pour n\'importe quelle industrie.', 1800);
+  await wait(600);
+  await agentSays('Des <strong>humains</strong> décident la stratégie. Des <strong>agents IA</strong> exécutent. Des <strong>humains</strong> valident tout avant publication.', 1500);
+  await wait(500);
+  await agentSays('Tu es dans quelle industrie ?', 800);
+
+  var industry = await showReplies([
+    { label: 'Média', value: 'Média' },
+    { label: 'Restaurant', value: 'Restaurant' },
+    { label: 'E-commerce', value: 'E-commerce' },
+    { label: 'SaaS / Tech', value: 'SaaS / Tech' },
+    { label: 'Immobilier', value: 'Immobilier' },
+    { label: 'Santé', value: 'Santé' },
+  ]);
+
+  await wait(400);
+  var data = industries[industry];
+
+  await agentSays(industry + ' — parfait. Voilà ce que je sais faire pour toi :', 1200);
+  await wait(300);
+
+  var cardsHtml = '';
+  data.tasks.forEach(function(t) {
+    cardsHtml += '<div class="rich-card">';
+    cardsHtml += '<div class="rich-card-title">' + t.title + '</div>';
+    cardsHtml += '<div class="rich-card-desc">' + t.desc + '</div>';
+    cardsHtml += '<div class="rich-card-tag" style="background:' + t.tagColor + '20;color:' + t.tagColor + '">' + t.tag + '</div>';
+    cardsHtml += '</div>';
+  });
+  await agentSays(cardsHtml, 2000);
+  await wait(600);
+
+  await agentSays('Tu veux voir des résultats concrets ?', 800);
+
+  var seeProof = await showReplies([
+    { label: 'Montre-moi les chiffres', value: 'stats' },
+    { label: 'Je veux parler à un humain', value: 'human', primary: true },
+  ]);
+
+  if (seeProof === 'stats') {
+    await wait(400);
+
+    var statsHtml = '<div class="stat-row">';
+    data.stats.forEach(function(s) {
+      statsHtml += '<div class="stat-block">';
+      statsHtml += '<div class="stat-block-val" style="color:' + s.color + '">' + s.val + '</div>';
+      statsHtml += '<div class="stat-block-label">' + s.label + '</div>';
+      statsHtml += '</div>';
+    });
+    statsHtml += '</div>';
+    await agentSays('Voilà ce qu\'on a déjà prouvé :' + statsHtml, 1500);
+    await wait(500);
+
+    await agentSays(data.outro, 1200);
+    await wait(400);
+    await agentSays('On se parle ? 20 minutes, zéro engagement. Tu décides après.', 1000);
+
+    await showReplies([
+      { label: 'Prendre un échange →', value: 'call', primary: true },
+      { label: 'Voir l\'offre TPE / PME', value: 'tpe' },
+      { label: 'Recommencer', value: 'restart' },
+    ]);
+  }
+
+  if (seeProof === 'human' || seeProof === 'call') {
+    await wait(400);
+    await agentSays('Parfait. <strong>Alex Quilghini</strong> va prendre le relais.<br><br><span style="color:rgba(255,255,255,0.4)">alex@origines.media</span><br><br><a href="#" style="display:inline-block;margin-top:8px;padding:12px 24px;background:var(--yellow);color:var(--ink);border-radius:12px;font-weight:700;text-decoration:none;border:2.5px solid var(--ink);box-shadow:4px 4px 0 0 var(--ink)">Réserver 20 min →</a>', 1200);
+    return;
+  }
+
+  if (seeProof === 'tpe') {
+    await wait(300);
+    await agentSays('Je t\'envoie vers notre page TPE / PME. À tout de suite.', 800);
+    await wait(800);
+    window.location.href = 'index.html';
+    return;
+  }
+
+  if (seeProof === 'restart') {
+    chat.innerHTML = '';
+    repliesContainer.innerHTML = '';
+    repliesContainer.className = '';
+    await runConversation();
+    return;
+  }
+}
+
+runConversation();
+
+})();
+</script>
+
+</body>
+</html>

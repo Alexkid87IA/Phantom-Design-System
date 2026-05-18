@@ -1,0 +1,62 @@
+.search-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,10,10,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 15vh;
+  animation: fadeIn 0.15s ease;
+}
+.search-overlay.hidden { display: none; }
+.search-box {
+  background: var(--paper); border-radius: var(--r-card);
+  width: 540px; max-height: 420px;
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-pop-lg);
+  overflow: hidden; display: flex; flex-direction: column;
+  animation: searchIn 0.2s var(--ease);
+}
+.search-input-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px; border-bottom: 1px solid rgba(10,10,10,0.06);
+}
+.search-input {
+  flex: 1; border: none; outline: none;
+  font-family: var(--font-body); font-size: 15px; color: var(--ink);
+  background: none;
+}
+.search-input::placeholder { color: var(--ink-30); }
+.search-kbd {
+  font-family: var(--font-mono); font-size: 9px; color: var(--ink-30);
+  background: rgba(10,10,10,0.04); padding: 2px 6px; border-radius: 4px;
+}
+.search-results {
+  overflow-y: auto; max-height: 320px;
+}
+.search-section-title {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-30);
+  padding: 10px 20px 4px;
+}
+.search-result {
+  padding: 10px 20px; display: flex; align-items: center; gap: 10px;
+  cursor: pointer; transition: background 0.15s;
+}
+.search-result:hover { background: rgba(110,60,255,0.06); }
+.search-result.focused { background: rgba(110,60,255,0.08); }
+.search-result-text { font-family: var(--font-body); font-size: 13px; color: var(--ink); }
+.search-result-sub { font-family: var(--font-body); font-size: 10px; color: var(--ink-40); }
+.search-empty {
+  padding: 30px 20px; text-align: center;
+  font-family: var(--font-body); font-size: 13px; color: var(--ink-30);
+}
+.search-shortcut {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-30);
+  background: rgba(10,10,10,0.04);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}

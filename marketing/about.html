@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom — À propos</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+  <meta name="description" content="On croit que chaque commerce mérite une équipe marketing d'élite. Phantom donne aux commerces de proximité les mêmes armes digitales que les grandes enseignes.">
+  <meta property="og:title" content="Phantom — À propos">
+  <meta property="og:description" content="Les mêmes armes digitales que les grandes enseignes, sans les budgets et sans la complexité.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://phantom.fr/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="marketing.css">
+  <style>
+    .about-hero { text-align: center; margin-bottom: 64px; }
+    .about-title { font-size: 38px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .about-lead { font-size: 18px; color: var(--mk-text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+    .about-manifesto {
+      max-width: 640px;
+      margin: 0 auto 64px;
+      padding: 32px;
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 14px;
+    }
+    .about-manifesto p {
+      font-size: 15px;
+      color: var(--mk-text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .about-manifesto p:last-child { margin-bottom: 0; }
+    .about-manifesto strong { color: var(--mk-text); }
+    .about-values { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 64px; }
+    .about-value-card {
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .about-value-icon { font-size: 28px; margin-bottom: 12px; }
+    .about-value-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .about-value-text { font-size: 12px; color: var(--mk-text-secondary); line-height: 1.5; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 64px; }
+    .about-stat {
+      text-align: center;
+      padding: 24px;
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 12px;
+    }
+    .about-stat-value { font-size: 28px; font-weight: 700; color: #6E3CFF; margin-bottom: 4px; }
+    .about-stat-label { font-size: 11px; color: var(--mk-text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .about-team { text-align: center; }
+    .about-team-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+    .about-team-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; max-width: 600px; margin: 0 auto; }
+    .about-team-card { padding: 20px; }
+    .about-team-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: #fff;
+      margin: 0 auto 10px;
+    }
+    .about-team-name { font-size: 14px; font-weight: 600; }
+    .about-team-role { font-size: 11px; color: var(--mk-text-muted); margin-top: 2px; }
+    @media (max-width: 768px) {
+      .about-values { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .about-team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="mk-nav">
+    <div class="mk-nav-inner">
+      <a href="../landing.html" class="mk-logo">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        <span>Phantom</span>
+      </a>
+      <div class="mk-nav-links">
+        <a href="pricing.html" class="mk-nav-link">Tarifs</a>
+        <a href="how-it-works.html" class="mk-nav-link">Comment ça marche</a>
+        <a href="case-studies.html" class="mk-nav-link">Études de cas</a>
+      </div>
+      <a href="../auth/" class="mk-nav-cta">Se connecter</a>
+    </div>
+  </nav>
+
+  <main class="mk-main">
+    <section class="about-hero">
+      <h1 class="about-title">On croit que chaque commerce mérite une équipe marketing d'élite.</h1>
+      <p class="about-lead">Phantom existe pour donner aux commerces de proximité les mêmes armes digitales que les grandes enseignes — sans les budgets, sans la complexité.</p>
+    </section>
+
+    <section class="about-manifesto">
+      <p><strong>Le constat est simple :</strong> un restaurateur, un coiffeur, un commerçant n'a pas le temps de gérer Instagram, Google, le SEO, la photo, le site web. Et embaucher un community manager à 3000€/mois n'est pas viable.</p>
+      <p><strong>Notre solution :</strong> des agents IA spécialisés, supervisés par des experts humains, qui travaillent 24h/24 pour ton commerce. Pas un outil de plus à apprendre. Une équipe de plus qui bosse pour toi.</p>
+      <p><strong>Notre promesse :</strong> Phantom ne remplace personne dans ton équipe. C'est un renfort. Tes employés font ce qu'ils font de mieux — servir, créer, accueillir. Nos agents font le reste.</p>
+    </section>
+
+    <section class="about-values">
+      <div class="about-value-card">
+        <div class="about-value-icon">🎯</div>
+        <div class="about-value-title">Résultats d'abord</div>
+        <div class="about-value-text">Chaque action de nos agents est mesurée. Si ça ne rapporte pas, on ajuste.</div>
+      </div>
+      <div class="about-value-card">
+        <div class="about-value-icon">🤝</div>
+        <div class="about-value-title">Humain + IA</div>
+        <div class="about-value-text">L'IA produit, l'humain valide. Zéro faux pas, zéro publication embarassante.</div>
+      </div>
+      <div class="about-value-card">
+        <div class="about-value-icon">💎</div>
+        <div class="about-value-title">Qualité artisanale</div>
+        <div class="about-value-text">Chaque contenu est crafté pour ton commerce. Pas de templates génériques.</div>
+      </div>
+    </section>
+
+    <section class="about-stats">
+      <div class="about-stat"><div class="about-stat-value">12</div><div class="about-stat-label">Clients actifs</div></div>
+      <div class="about-stat"><div class="about-stat-value">29</div><div class="about-stat-label">Agents déployés</div></div>
+      <div class="about-stat"><div class="about-stat-value">4.8x</div><div class="about-stat-label">ROI moyen</div></div>
+      <div class="about-stat"><div class="about-stat-value">72h</div><div class="about-stat-label">Premier résultat</div></div>
+    </section>
+
+    <section class="about-team">
+      <h2 class="about-team-title">L'équipe</h2>
+      <div class="about-team-grid">
+        <div class="about-team-card">
+          <div class="about-team-avatar" style="background:#6E3CFF">AQ</div>
+          <div class="about-team-name">Alex Q.</div>
+          <div class="about-team-role">Fondateur & CEO</div>
+        </div>
+        <div class="about-team-card">
+          <div class="about-team-avatar" style="background:#FF2D87">ML</div>
+          <div class="about-team-name">Marie L.</div>
+          <div class="about-team-role">Head of Pilots</div>
+        </div>
+        <div class="about-team-card">
+          <div class="about-team-avatar" style="background:#0066FF">PM</div>
+          <div class="about-team-name">Paul M.</div>
+          <div class="about-team-role">Tech & Produit</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mk-footer">
+    <div class="mk-footer-inner">
+      <div class="mk-footer-brand">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        <span>Phantom</span>
+      </div>
+      <p class="mk-footer-text">L'équipe d'agents IA qui fait grandir ton commerce.</p>
+      <div class="mk-footer-links"><a href="cgv.html">CGV</a><a href="legal.html">Mentions légales</a><a href="privacy.html">RGPD</a><a href="contact.html">Contact</a></div>
+    </div>
+  </footer>
+</body>
+</html>

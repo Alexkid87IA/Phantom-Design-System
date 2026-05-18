@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom — Contact</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+  <meta name="description" content="Une question ? On te répond en moins d'1h pendant les heures ouvrées. Réserve une démo ou contacte notre équipe.">
+  <meta property="og:title" content="Phantom — Contact">
+  <meta property="og:description" content="On te répond en moins d'1h. Réserve une démo ou contacte notre équipe.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://phantom.fr/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="marketing.css">
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
+    .contact-field { display: flex; flex-direction: column; gap: 6px; }
+    .contact-label { font-size: 12px; font-weight: 500; color: var(--mk-text-secondary); }
+    .contact-input, .contact-textarea {
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--mk-border);
+      background: rgba(255,255,255,0.03);
+      color: var(--mk-text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .contact-input:focus, .contact-textarea:focus {
+      border-color: var(--mk-violet);
+      box-shadow: 0 0 0 3px rgba(110,60,255,0.12);
+    }
+    .contact-textarea { min-height: 120px; resize: vertical; }
+    .contact-submit {
+      padding: 12px 24px;
+      border-radius: 8px;
+      background: var(--mk-violet);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      align-self: flex-start;
+    }
+    .contact-submit:hover { opacity: 0.9; }
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-info-card {
+      background: var(--mk-surface);
+      border: 1px solid var(--mk-border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .contact-info-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .contact-info-text { font-size: 13px; color: var(--mk-text-secondary); line-height: 1.6; }
+    .contact-info-link { color: var(--mk-violet); text-decoration: none; }
+    .contact-info-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="mk-nav">
+    <div class="mk-nav-inner">
+      <a href="../landing.html" class="mk-logo">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        <span>Phantom</span>
+      </a>
+      <div class="mk-nav-links">
+        <a href="pricing.html" class="mk-nav-link">Tarifs</a>
+        <a href="how-it-works.html" class="mk-nav-link">Comment ça marche</a>
+        <a href="case-studies.html" class="mk-nav-link">Études de cas</a>
+      </div>
+      <a href="../auth/" class="mk-nav-cta">Se connecter</a>
+    </div>
+  </nav>
+
+  <main class="mk-main">
+    <h1 style="font-size:38px;font-weight:700;letter-spacing:-0.03em;margin-bottom:8px">Contact</h1>
+    <p style="font-size:16px;color:var(--mk-text-secondary)">Une question ? On te répond en moins d'1h pendant les heures ouvrées.</p>
+
+    <div class="contact-grid">
+      <form class="contact-form" onsubmit="event.preventDefault();this.querySelector('.contact-submit').textContent='Message envoyé !';this.querySelector('.contact-submit').disabled=true;">
+        <div class="contact-field">
+          <label class="contact-label">Nom</label>
+          <input class="contact-input" type="text" placeholder="Jean Dupont" required>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Email</label>
+          <input class="contact-input" type="email" placeholder="jean@moncommerce.fr" required>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Commerce (optionnel)</label>
+          <input class="contact-input" type="text" placeholder="Nom de ton commerce">
+        </div>
+        <div class="contact-field">
+          <label class="contact-label">Message</label>
+          <textarea class="contact-textarea" placeholder="Comment on peut t'aider ?" required></textarea>
+        </div>
+        <button class="contact-submit" type="submit">Envoyer</button>
+      </form>
+
+      <div class="contact-info">
+        <div class="contact-info-card">
+          <div class="contact-info-title">Réserver une démo</div>
+          <div class="contact-info-text">Découvre Phantom en 20 minutes avec un membre de l'équipe. On te montre comment ça marche sur ton secteur.</div>
+          <a class="contact-info-link" href="#" style="display:inline-block;margin-top:10px">Choisir un créneau →</a>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-title">Support client</div>
+          <div class="contact-info-text">Déjà client ? Accède au chat directement depuis ton dashboard ou envoie un email à <a class="contact-info-link" href="mailto:support@phantom.fr">support@phantom.fr</a></div>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-title">Partenariats</div>
+          <div class="contact-info-text">Agence, franchise, réseau ? Contacte-nous pour un partenariat sur mesure. <a class="contact-info-link" href="mailto:partenaires@phantom.fr">partenaires@phantom.fr</a></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mk-footer">
+    <div class="mk-footer-inner">
+      <div class="mk-footer-brand">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        <span>Phantom</span>
+      </div>
+      <p class="mk-footer-text">L'équipe d'agents IA qui fait grandir ton commerce.</p>
+      <div class="mk-footer-links"><a href="cgv.html">CGV</a><a href="legal.html">Mentions légales</a><a href="privacy.html">RGPD</a><a href="contact.html">Contact</a></div>
+    </div>
+  </footer>
+</body>
+</html>

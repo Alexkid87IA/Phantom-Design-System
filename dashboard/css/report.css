@@ -1,0 +1,32 @@
+.report-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 16px;
+}
+.report-card {
+  background: var(--paper-warm); border-radius: var(--r-card); padding: 16px;
+  border: 2px solid var(--ink); box-shadow: var(--shadow-pop);
+}
+.report-card-value {
+  font-family: var(--font-display); font-weight: 700; font-size: 28px;
+  letter-spacing: -0.03em;
+}
+.report-card-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-40); margin-top: 4px;
+}
+.report-section-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 14px;
+  color: var(--ink); margin: 16px 0 10px;
+}
+.report-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid rgba(10,10,10,0.04);
+  font-family: var(--font-body); font-size: 12px;
+}
+.report-row-agent { display: flex; align-items: center; gap: 8px; color: var(--ink); }
+.report-row-value { font-weight: 600; color: var(--ink); }
+.report-bar {
+  height: 4px; border-radius: 4px; background: rgba(10,10,10,0.06);
+  flex: 1; margin: 0 12px; min-width: 60px;
+}
+.report-bar-fill { height: 100%; border-radius: 4px; }

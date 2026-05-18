@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom — Mentions légales</title>
+  <meta name="description" content="Mentions légales de Phantom.">
+  <meta property="og:title" content="Phantom — Mentions légales">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="marketing.css">
+  <style>
+    .legal-content { max-width: 700px; margin: 0 auto; }
+    .legal-content h1 { font-size: 32px; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.02em; }
+    .legal-content h2 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
+    .legal-content p { font-size: 14px; color: var(--mk-text-secondary); line-height: 1.7; margin-bottom: 12px; }
+    .legal-content ul { margin: 8px 0 16px 20px; }
+    .legal-content li { font-size: 14px; color: var(--mk-text-secondary); line-height: 1.7; margin-bottom: 4px; }
+    .legal-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .legal-tab {
+      padding: 8px 16px; border-radius: 16px; font-size: 13px; font-weight: 500;
+      background: var(--mk-surface); border: 1px solid var(--mk-border);
+      color: var(--mk-text-secondary); cursor: pointer; text-decoration: none;
+      transition: all 0.15s;
+    }
+    .legal-tab:hover { border-color: rgba(255,255,255,0.12); color: var(--mk-text); }
+    .legal-tab.active { background: rgba(110,60,255,0.12); border-color: rgba(110,60,255,0.3); color: #6E3CFF; }
+  </style>
+</head>
+<body>
+  <nav class="mk-nav">
+    <div class="mk-nav-inner">
+      <a href="../landing.html" class="mk-logo">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        <span>Phantom</span>
+      </a>
+      <div class="mk-nav-links">
+        <a href="pricing.html" class="mk-nav-link">Tarifs</a>
+        <a href="how-it-works.html" class="mk-nav-link">Comment ça marche</a>
+        <a href="case-studies.html" class="mk-nav-link">Études de cas</a>
+      </div>
+      <a href="../auth/" class="mk-nav-cta">Se connecter</a>
+    </div>
+  </nav>
+
+  <main class="mk-main">
+    <div class="legal-content">
+      <div class="legal-tabs">
+        <a class="legal-tab active" href="legal.html">Mentions légales</a>
+        <a class="legal-tab" href="cgv.html">CGV</a>
+        <a class="legal-tab" href="privacy.html">RGPD & Confidentialité</a>
+      </div>
+
+      <h1>Mentions légales</h1>
+
+      <h2>Éditeur du site</h2>
+      <p>Phantom SAS<br>
+      42 Rue du Prado, 13006 Marseille, France<br>
+      RCS Marseille — SIRET : 000 000 000 00000<br>
+      Capital social : 10 000 €<br>
+      Directeur de la publication : Alex Quilghini</p>
+
+      <h2>Hébergement</h2>
+      <p>Le site phantom.fr est hébergé par :<br>
+      Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, USA</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>L'ensemble des éléments du site (textes, images, logos, icônes, logiciels) sont la propriété exclusive de Phantom SAS ou de ses partenaires. Toute reproduction est interdite sans autorisation écrite préalable.</p>
+
+      <h2>Données personnelles</h2>
+      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour exercer ce droit, contactez : <strong>dpo@phantom.fr</strong></p>
+
+      <h2>Cookies</h2>
+      <p>Ce site utilise des cookies strictement nécessaires au fonctionnement du service. Des cookies analytiques (PostHog) sont déposés avec votre consentement pour améliorer l'expérience utilisateur.</p>
+
+      <h2>Contact</h2>
+      <p>Pour toute question : <strong>contact@phantom.fr</strong></p>
+    </div>
+  </main>
+
+  <footer class="mk-footer">
+    <div class="mk-footer-inner">
+      <div class="mk-footer-brand">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>
+        <span>Phantom</span>
+      </div>
+      <p class="mk-footer-text">L'équipe d'agents IA qui fait grandir votre commerce.</p>
+      <div class="mk-footer-links"><a href="legal.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="privacy.html">RGPD</a><a href="contact.html">Contact</a></div>
+    </div>
+  </footer>
+</body>
+</html>

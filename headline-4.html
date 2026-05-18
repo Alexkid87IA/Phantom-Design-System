@@ -1,0 +1,28 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H4 — Display brutal, une seule ligne</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+body{margin:0;background:var(--ink);display:flex;align-items:center;min-height:100vh;overflow:hidden;padding:0 48px}
+.label{position:fixed;top:16px;left:16px;font-family:var(--font-mono);font-size:11px;color:var(--phantom-violet-200);letter-spacing:0.1em;text-transform:uppercase}
+.hero-text{width:100%}
+h1{font-family:var(--font-display);font-size:clamp(36px,5.5vw,64px);font-weight:700;letter-spacing:-0.03em;line-height:1.15;color:#fff;margin:0 0 20px;max-width:900px}
+h1 strong{color:var(--rainbow-yellow);font-weight:700}
+.divider{width:64px;height:4px;background:linear-gradient(90deg,var(--phantom-violet),var(--rainbow-yellow));border-radius:4px;margin-bottom:24px}
+.sub{font-family:var(--font-body);font-size:18px;color:rgba(255,255,255,0.45);line-height:1.65;max-width:520px}
+.sub strong{color:#fff;font-weight:600}
+.price{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:var(--font-mono);font-size:13px;color:var(--rainbow-yellow);letter-spacing:0.04em;background:rgba(255,212,0,0.08);padding:8px 18px;border-radius:9999px;border:1px solid rgba(255,212,0,0.15)}
+.ctas{margin-top:32px;display:flex;gap:14px}
+.btn-p{font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 28px;border-radius:9999px;background:#fff;color:var(--phantom-violet);border:2.5px solid #fff;box-shadow:4px 4px 0 0 var(--phantom-violet);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn-p:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 0 var(--phantom-violet)}
+.btn-g{font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 28px;border-radius:9999px;background:transparent;color:#fff;border:2.5px solid #fff;box-shadow:4px 4px 0 0 rgba(255,255,255,.15);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn-g:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 0 rgba(255,255,255,.2)}
+</style></head><body>
+<div class="label">4 / Brutal, titre en une phrase</div>
+<div class="hero-text">
+  <h1>T'as pas besoin d'une &eacute;quipe. T'as besoin que <strong>&ccedil;a tourne.</strong></h1>
+  <div class="divider"></div>
+  <p class="sub">Phantom installe des <strong>agents IA autonomes</strong> dans ta bo&icirc;te.<br>Ils g&egrave;rent, ex&eacute;cutent, relancent &mdash; sans toi.</p>
+  <div class="price">D&egrave;s 490&euro;/mois &middot; sans engagement</div>
+  <div class="ctas"><a href="#" class="btn-p">R&eacute;server un appel &rarr;</a><a href="#" class="btn-g">Comment &ccedil;a marche</a></div>
+</div>
+</body></html>

@@ -1,0 +1,238 @@
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile & Tablet breakpoints
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── TABLET (768-1024) ─── */
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar .section-title { font-size: 9px; }
+  .sidebar .nav-item { font-size: 12px; padding: 7px 10px; }
+  .sidebar .agent-row { font-size: 11px; padding: 6px 10px; }
+  .sidebar .support { display: none; }
+  .agent-tooltip { display: none !important; }
+
+  .profile-grid { grid-template-columns: 1fr; }
+  .billing-grid { grid-template-columns: 1fr; }
+  .team-roles-grid { grid-template-columns: 1fr; }
+  .referral-stats { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* ─── MOBILE (<768) ─── */
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    z-index: 100;
+    border-right: none;
+    border-top: 1px solid rgba(10,10,10,0.06);
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .sidebar .ws,
+  .sidebar .section-title,
+  .sidebar .agent-row,
+  .sidebar .support,
+  .sidebar .user-block,
+  .sidebar .sidebar-progress {
+    display: none;
+  }
+
+  .agent-tooltip { display: none !important; }
+  .nav-shortcut { display: none !important; }
+  .shortcut-bar { display: none; }
+  .topbar-live { display: none; }
+
+  .sidebar .nav-item {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 4px;
+    font-size: 9px;
+    gap: 3px;
+    border-radius: 0;
+  }
+
+  .sidebar .nav-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+
+  .main {
+    padding-bottom: 60px;
+    width: 100%;
+  }
+
+  .topbar {
+    padding: 12px 16px;
+  }
+
+  .topbar .topbar-title { font-size: 16px; }
+
+  .content {
+    padding: 16px;
+  }
+
+  .view-integrations,
+  .view-profile,
+  .view-billing,
+  .view-settings,
+  .view-team-permissions,
+  .view-notifications,
+  .view-referral {
+    padding: 16px;
+  }
+
+  /* Dashboard */
+  .dash-away-grid { grid-template-columns: 1fr; }
+  .dash-agent-pills { flex-wrap: wrap; gap: 4px; }
+  .dash-agent-pill { padding: 4px 8px; }
+  .dash-agent-pill-name { font-size: 9px; }
+  .dash-onboarding { padding: 14px 16px; }
+  .dash-nudge { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .dash-nudge-right { width: 100%; justify-content: space-between; }
+  .dash-proof-grid { grid-template-columns: 1fr; }
+  .dash-roi-score { flex-direction: column; gap: 16px; padding: 20px 16px; }
+  .dash-actions-grid { grid-template-columns: 1fr; }
+
+  /* Inbox */
+  .inbox-batch { flex-wrap: wrap; }
+  .inbox-checkbox-wrap { display: none; }
+  .inbox-list { gap: 8px; }
+
+  /* Work */
+  .work-summary { grid-template-columns: 1fr 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .planning-stats { flex-direction: column; }
+  .planning-calendar { flex-direction: column; }
+  .planning-day-col { min-width: auto; }
+
+  /* Analytics */
+  .analytics-metrics-grid { grid-template-columns: 1fr 1fr; }
+  .analytics-two-col { grid-template-columns: 1fr; }
+  .analytics-verdict-hero { flex-direction: column; gap: 16px; padding: 20px; }
+  .analytics-verdict-hero-right { border-left: none; padding-left: 0; border-top: 1px solid rgba(110,60,255,0.12); padding-top: 16px; }
+  .analytics-report-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .analytics-report-cta-btn { width: 100%; text-align: center; }
+
+  /* Help */
+  .help-category-grid { grid-template-columns: 1fr; }
+  .help-bottom-grid { grid-template-columns: 1fr; }
+  .help-hero-inner { flex-direction: column; align-items: flex-start; }
+  .help-shortcuts-grid { grid-template-columns: 1fr 1fr; }
+
+  /* ROI Snapshot */
+  .dash-roi-snap-agent { width: 90px; font-size: 10px; }
+
+  /* ROI */
+  .roi-kpis { grid-template-columns: 1fr 1fr; }
+  .roi-compare { grid-template-columns: 1fr; }
+  .roi-comparison-arrow { transform: rotate(90deg); }
+
+  /* Layout */
+  .two-col { grid-template-columns: 1fr; }
+
+  /* Client pages */
+  .profile-grid { grid-template-columns: 1fr; }
+  .billing-grid { grid-template-columns: 1fr; }
+  .team-roles-grid { grid-template-columns: 1fr; }
+  .referral-stats { grid-template-columns: 1fr; }
+  .referral-link-row { flex-direction: column; }
+  .referral-progress-top { flex-direction: column; text-align: center; }
+  .referral-ring-wrap { margin: 0 auto; }
+  .referral-milestones { grid-template-columns: 1fr; }
+
+  .integ-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .integ-card-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .team-member-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .team-member-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Chat */
+  .agent-view { flex-direction: column; }
+  .agent-sidebar-panel { display: none; }
+  .chat-messages { max-height: calc(100vh - 240px); }
+
+  /* Morning summary (inline card) */
+  .ms-inline-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ms-inline-growth {
+    flex-wrap: wrap;
+  }
+  .ms-inline-growth-pill {
+    min-width: calc(50% - 4px);
+  }
+
+  /* Modals */
+  .modal-box {
+    width: 95vw;
+    max-width: none;
+    margin: 16px;
+  }
+}
+
+/* ─── SMALL MOBILE (<480) ─── */
+
+@media (max-width: 480px) {
+  .pricing-cards { grid-template-columns: 1fr; }
+  .onb-plans-grid { grid-template-columns: 1fr; }
+  .onb-agents-grid { grid-template-columns: 1fr; }
+
+  .topbar .topbar-actions { gap: 6px; }
+
+  .referral-share { flex-wrap: wrap; }
+
+  .referral-history-header,
+  .referral-row {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+  .referral-row-date { display: none; }
+
+  .billing-invoice-header,
+  .billing-invoice-row {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .billing-invoice-date,
+  .billing-invoice-dl { display: none; }
+}
