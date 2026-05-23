@@ -65,7 +65,7 @@ export function renderWorkload() {
 
   var totalAgents = ALL_AGENTS.filter(function(a) { return a.status !== 'paused'; }).length;
   var totalCapacity = PILOTS.reduce(function(s, p) { return s + p.maxAgents; }, 0);
-  var globalCapacity = Math.round((totalAgents / totalCapacity) * 100);
+  var globalCapacity = totalCapacity > 0 ? Math.round((totalAgents / totalCapacity) * 100) : 0;
   var totalClients = PILOTS.reduce(function(s, p) { return s + p.currentClients; }, 0);
   var maxClients = PILOTS.reduce(function(s, p) { return s + p.maxClients; }, 0);
 
@@ -93,7 +93,7 @@ export function renderWorkload() {
 
       + '<div class="admin-section">'
         + '<div class="admin-section-header">'
-          + '<div class="admin-section-title">Charge par pilot</div>'
+          + '<div><div class="admin-section-title">Charge par pilot</div><div style="font-size:11px;color:var(--admin-text-secondary);margin-top:2px">Au-dessus de 85% → redistribuer avant saturation</div></div>'
           + '<div class="admin-btn admin-btn-ghost" style="font-size:11px;padding:5px 12px">Rééquilibrer</div>'
         + '</div>'
         + '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">'

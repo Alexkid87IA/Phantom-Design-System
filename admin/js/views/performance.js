@@ -19,8 +19,8 @@ export function renderPerformance() {
 
   var typeCards = Object.keys(byType).map(function(type) {
     var data = byType[type];
-    var avgSuccess = Math.round(data.totalSuccess / data.agents.length);
-    var avgTasks = Math.round(data.totalTasks / data.agents.length);
+    var avgSuccess = data.agents.length > 0 ? Math.round(data.totalSuccess / data.agents.length) : 0;
+    var avgTasks = data.agents.length > 0 ? Math.round(data.totalTasks / data.agents.length) : 0;
     return '<div class="admin-card">'
       + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">'
         + '<div style="width:10px;height:10px;border-radius:50%;background:' + (typeColors[type] || '#6E3CFF') + '"></div>'

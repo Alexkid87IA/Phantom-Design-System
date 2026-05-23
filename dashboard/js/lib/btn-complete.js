@@ -1,10 +1,10 @@
 // Button completion animation: idle → loading → done ✓
 
 export function animateButton(btn, opts) {
-  if (!btn || btn.classList.contains('btn-loading')) return;
+  if (!btn || btn.dataset.animating) return;
 
-  var originalText = btn.textContent;
-  var loadingText = (opts && opts.loadingText) || originalText;
+  btn.dataset.animating = 'true';
+  var loadingText = (opts && opts.loadingText) || btn.textContent;
   var doneText = (opts && opts.doneText) || '✓';
   var duration = (opts && opts.duration) || 800;
   var onDone = (opts && opts.onDone) || null;
@@ -18,6 +18,7 @@ export function animateButton(btn, opts) {
     btn.textContent = doneText;
 
     setTimeout(function() {
+      delete btn.dataset.animating;
       if (onDone) onDone();
     }, duration);
   }, 600);

@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: adminModalFadeIn 0.2s ease;
+  animation: adminModalFadeIn 0.2s var(--ease);
 }
 
 @keyframes adminModalFadeIn {
@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 24px 48px -12px rgba(10,10,10,0.5);
-  animation: adminModalSlideUp 0.25s ease;
+  animation: adminModalSlideUp 0.25s var(--ease);
 }
 
 .admin-modal-header {
@@ -65,12 +65,16 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  transition: all 0.15s;
+  transition: all 0.15s var(--ease);
 }
 
 .admin-modal-close:hover {
   background: var(--admin-surface-2);
   color: var(--admin-text);
+}
+.admin-modal-close:focus-visible {
+  outline: 2px solid var(--admin-violet);
+  outline-offset: 2px;
 }
 
 .admin-modal-body {
@@ -117,9 +121,9 @@
   box-sizing: border-box;
 }
 
-.admin-form-input:focus,
-.admin-form-select:focus,
-.admin-form-textarea:focus {
+.admin-form-input:focus-visible,
+.admin-form-select:focus-visible,
+.admin-form-textarea:focus-visible {
   outline: none;
   border-color: var(--admin-violet);
   box-shadow: 0 0 0 3px rgba(110,60,255,0.15);
@@ -165,7 +169,7 @@
   padding: 8px 18px;
   border-radius: var(--admin-radius-sm);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s var(--ease);
   border: none;
 }
 
@@ -173,10 +177,14 @@
 
 .admin-modal-btn-primary {
   background: var(--admin-violet);
-  color: #fff;
+  color: var(--fg-on-color);
 }
 
 .admin-modal-btn-primary:hover { opacity: 0.85; }
+.admin-modal-btn:focus-visible {
+  outline: 2px solid var(--admin-violet);
+  outline-offset: 2px;
+}
 
 .admin-modal-btn-ghost {
   background: transparent;

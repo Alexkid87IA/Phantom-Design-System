@@ -17,5 +17,5 @@ export const ICONS_ROI = '<svg width="14" height="14" viewBox="0 0 24 24" fill="
 export const ICONS_TEAM = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>';
 
 export function ghostSvg(color, size = 18) {
-  return '<svg viewBox="0 0 200 200" fill="none" style="width:' + size + 'px;height:' + size + 'px;color:' + color + ';flex-shrink:0"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg>';
+  return '<svg viewBox="0 0 200 200" fill="none" aria-hidden="true" style="width:' + size + 'px;height:' + size + 'px;color:' + color + ';flex-shrink:0"><path d="M 20 100 A 80 80 0 0 1 180 100 L 180 160 Q 160 182 140 160 Q 120 182 100 160 Q 80 182 60 160 Q 40 182 20 160 Z" fill="currentColor"/><ellipse cx="78" cy="92" rx="10" ry="15" fill="#0A0A0A"/><ellipse cx="122" cy="92" rx="10" ry="15" fill="#0A0A0A"/></svg>';
 }

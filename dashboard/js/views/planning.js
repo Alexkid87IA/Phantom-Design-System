@@ -8,16 +8,17 @@ import { ghostSvg } from '../lib/icons.js';
 export var PLANNING_ITEMS = [
   { id: 'p1', agent: 'social', type: 'Post', title: 'Nigiri du jour — Thon rouge', day: 'Lun 19', time: '12:00', status: 'ready' },
   { id: 'p2', agent: 'social', type: 'Story', title: 'Coulisses — Livraison du matin', day: 'Lun 19', time: '09:00', status: 'ready' },
-  { id: 'p3', agent: 'seo', type: 'Article', title: 'Comment choisir son sushi à emporter', day: 'Mar 20', time: '10:00', status: 'in_progress' },
+  { id: 'p3', agent: 'seo', type: 'Article', title: 'Comment choisir son sushi à emporter', day: 'Mar 20', time: '10:00', status: 'in_progress', hours: 6 },
   { id: 'p4', agent: 'social', type: 'Reel', title: 'Découpe sashimi — ASMR', day: 'Mar 20', time: '18:00', status: 'draft' },
   { id: 'p5', agent: 'google', type: 'Réponse', title: 'Réponse avis — Paul M. (4★)', day: 'Mar 20', time: '14:00', status: 'ready' },
-  { id: 'p6', agent: 'social', type: 'Carousel', title: 'Top 5 plats populaires du mois', day: 'Mer 21', time: '12:00', status: 'in_progress' },
+  { id: 'p6', agent: 'social', type: 'Carousel', title: 'Top 5 plats populaires du mois', day: 'Mer 21', time: '12:00', status: 'in_progress', hours: 2 },
   { id: 'p7', agent: 'photos', type: 'Photo', title: 'Shooting menu été — Tartare', day: 'Mer 21', time: '15:00', status: 'scheduled' },
   { id: 'p8', agent: 'social', type: 'Story', title: 'Sondage — Ton maki préféré ?', day: 'Jeu 22', time: '11:00', status: 'draft' },
-  { id: 'p9', agent: 'brand', type: 'Design', title: 'Affiche promo terrasse été', day: 'Jeu 22', time: '16:00', status: 'in_progress' },
+  { id: 'p9', agent: 'brand', type: 'Design', title: 'Affiche promo terrasse été', day: 'Jeu 22', time: '16:00', status: 'in_progress', hours: 8 },
   { id: 'p10', agent: 'social', type: 'Post', title: 'Vendredi soir = sushi night', day: 'Ven 23', time: '18:00', status: 'draft' },
   { id: 'p11', agent: 'seo', type: 'Article', title: 'Sushi et santé : les oméga-3', day: 'Ven 23', time: '10:00', status: 'scheduled' },
   { id: 'p12', agent: 'social', type: 'Story', title: 'Weekend recap — Best moments', day: 'Sam 24', time: '20:00', status: 'scheduled' },
+  { id: 'p13', agent: 'web', type: 'Page', title: 'Mise à jour carte interactive', day: 'Mer 21', time: '10:00', status: 'in_progress', hours: 5 },
 ];
 
 export function updatePlanningStatus(id, newStatus) {
@@ -35,14 +36,18 @@ function statusLabel(s) {
 function cardActions(item) {
   if (item.status === 'draft') {
     return '<div class="planning-card-actions">'
-      + '<button class="planning-action-btn planning-action-approve" data-planning-action="approve" data-planning-id="' + item.id + '">Valider</button>'
+      + '<button class="planning-action-btn planning-action-approve" data-planning-action="approve" data-planning-id="' + item.id + '">Approuver & publier</button>'
       + '<button class="planning-action-btn" data-planning-action="preview" data-planning-id="' + item.id + '" data-agent="' + item.agent + '">Voir</button>'
     + '</div>';
   }
   if (item.status === 'in_progress') {
+    var sla = (item.hours && item.hours >= 4)
+      ? '<span class="planning-sla-badge">' + item.hours + 'h en cours</span>'
+      : '';
     return '<div class="planning-card-live">'
       + '<span class="planning-live-dot"></span>'
       + '<span class="planning-live-text">En train de créer...</span>'
+      + sla
     + '</div>'
     + '<div class="planning-card-actions">'
       + '<button class="planning-action-btn planning-action-approve" data-planning-action="mark-ready" data-planning-id="' + item.id + '">Marquer prêt</button>'
@@ -77,12 +82,25 @@ export function renderPlanning() {
     var itemCards = d.items.map(function(item) {
       var a = getAgent(item.agent);
       var color = a ? a.color : 'var(--ink-30)';
+      var forecast = '';
+      if (item.type === 'Reel') forecast = 'Reach estimé : 8-12k';
+      else if (item.type === 'Post') forecast = 'Reach estimé : 2-4k';
+      else if (item.type === 'Carousel') forecast = 'Reach estimé : 5-8k';
+      else if (item.type === 'Story') forecast = 'Vues estimées : 1-2k';
+      else if (item.type === 'Article') forecast = 'Objectif : Top 10 SEO';
+      else if (item.type === 'Réponse') forecast = 'Impact : fidélisation client';
+      else if (item.type === 'Photo') forecast = 'Utilisable sur 3+ plateformes';
+      else if (item.type === 'Design') forecast = 'Déclinable print + digital';
+      else if (item.type === 'Page') forecast = 'Trafic web +15% estimé';
+      var forecastHtml = forecast ? '<div class="planning-card-forecast">' + forecast + '</div>' : '';
+
       return '<div class="planning-card" style="border-left-color:' + color + '">'
         + '<div class="planning-card-top">'
           + '<span class="planning-card-time">' + item.time + '</span>'
           + statusLabel(item.status)
         + '</div>'
         + '<div class="planning-card-title">' + item.title + '</div>'
+        + forecastHtml
         + '<div class="planning-card-meta">'
           + ghostSvg(color, 12)
           + '<span class="planning-card-agent">' + (a ? a.name : '') + '</span>'

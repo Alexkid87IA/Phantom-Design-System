@@ -3,6 +3,8 @@
 //  Composite health metric combining engagement, NPS, usage, churn signals
 // ═══════════════════════════════════════════════════════════
 
+import { CLIENTS } from '../data/clients.js';
+
 var HEALTH_DATA = [
   { client: 'Sushi Boy', score: 96, activity: 'high', lastLogin: 'Il y a 2h', validationSpeed: '3.2h', contentApproval: 95, nps: 10, signals: ['Très engagé', 'Valide vite', 'NPS 10'], risk: 'none' },
   { client: 'Green Garden', score: 94, activity: 'high', lastLogin: 'Il y a 4h', validationSpeed: '5.1h', contentApproval: 92, nps: 9, signals: ['SEO en forte hausse', 'Feedback positif régulier'], risk: 'none' },
@@ -21,6 +23,9 @@ export function renderHealth() {
   var atRisk = HEALTH_DATA.filter(function(h) { return h.score >= 50 && h.score < 80; }).length;
   var critical = HEALTH_DATA.filter(function(h) { return h.score < 50; }).length;
   var avgScore = Math.round(HEALTH_DATA.reduce(function(s, h) { return s + h.score; }, 0) / HEALTH_DATA.length);
+
+  var atRiskNames = HEALTH_DATA.filter(function(h) { return h.score < 80; }).map(function(h) { return h.client; });
+  var mrrAtRisk = CLIENTS.filter(function(c) { return atRiskNames.indexOf(c.name) >= 0; }).reduce(function(sum, c) { return sum + c.mrr; }, 0);
 
   function scoreColor(s) {
     if (s >= 80) return 'var(--admin-green)';
@@ -73,7 +78,7 @@ export function renderHealth() {
       + '<div class="admin-kpi"><div class="admin-kpi-label">Score santé moyen</div><div class="admin-kpi-value" style="color:' + scoreColor(avgScore) + '">' + avgScore + '</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Sains (≥80)</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + healthy + '</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">À risque (50-79)</div><div class="admin-kpi-value" style="color:var(--admin-orange)">' + atRisk + '</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Critiques (&lt;50)</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + critical + '</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">MRR exposé</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + mrrAtRisk.toLocaleString('fr-FR') + ' €</div></div>'
     + '</div>'
 
     + '<div class="admin-section">'
@@ -84,7 +89,8 @@ export function renderHealth() {
           + '<div class="admin-btn admin-btn-primary" style="font-size:11px;padding:5px 12px">Actions recommandées</div>'
         + '</div>'
       + '</div>'
-      + '<div style="font-size:11px;color:var(--admin-text-muted);margin-bottom:16px">Score basé sur : activité (25%) + vitesse validation (20%) + taux approbation (20%) + NPS (20%) + signaux engagement (15%)</div>'
+      + '<div style="font-size:11px;color:var(--admin-text-muted);margin-bottom:6px">Score basé sur : activité (25%) + vitesse validation (20%) + taux approbation (20%) + NPS (20%) + signaux engagement (15%)</div>'
+      + '<div style="font-size:10px;color:var(--admin-text-muted);margin-bottom:16px">Score &lt;50 → appel immédiat · &lt;80 → contact sous 48h</div>'
       + cards
     + '</div>';
 }

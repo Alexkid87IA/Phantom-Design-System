@@ -21,9 +21,9 @@ var PUSH_CONFIG = [
 
 var SMTP_CONFIG = {
   provider: 'SendGrid',
-  from: 'hello@phantom.so',
-  replyTo: 'support@phantom.so',
-  domain: 'phantom.so',
+  from: 'hello@phantom.fr',
+  replyTo: 'support@phantom.fr',
+  domain: 'phantom.fr',
   dkim: true,
   spf: true,
 };

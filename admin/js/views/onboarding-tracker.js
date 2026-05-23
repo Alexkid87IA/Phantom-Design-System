@@ -25,7 +25,7 @@ export function renderOnboardingTracker() {
   var alerts = CLIENT_ONBOARDING.filter(function(c) { return c.alert; }).length;
 
   var cards = CLIENT_ONBOARDING.map(function(c) {
-    var progress = Math.round((c.completed / c.total) * 100);
+    var progress = c.total > 0 ? Math.round((c.completed / c.total) * 100) : 0;
     var barColor = c.alert ? 'var(--admin-orange)' : 'var(--admin-violet)';
     var steps = ONBOARDING_STEPS.map(function(step, i) {
       var done = i < c.completed;

@@ -4,6 +4,8 @@
 
 import { getState } from '../store.js';
 import { CLIENTS } from '../data/clients.js';
+import { ALERTS } from '../data/admin-agents.js';
+import { esc } from '../lib/esc.js';
 
 function getFilteredClients(filter) {
   if (filter === 'all') return CLIENTS;
@@ -49,21 +51,45 @@ export function renderClients() {
     return '<div class="admin-filter-btn' + (filter === f.id ? ' admin-filter-active' : '') + '" data-filter="' + f.id + '">' + f.label + '</div>';
   }).join('');
 
-  var rows = clients.map(function(c) {
-    var daysAgo = Math.floor((Date.now() - new Date(c.lastLogin).getTime()) / 86400000);
+  var healthOrder = { red: 0, orange: 1, green: 2 };
+  var sorted = clients.slice().sort(function(a, b) {
+    var ha = healthOrder[a.health] !== undefined ? healthOrder[a.health] : 2;
+    var hb = healthOrder[b.health] !== undefined ? healthOrder[b.health] : 2;
+    if (ha !== hb) return ha - hb;
+    return b.mrr - a.mrr;
+  });
+
+  var rows = sorted.map(function(c) {
+    var daysAgo = Math.floor((new Date() - new Date(c.lastLogin).getTime()) / 86400000);
+    if (isNaN(daysAgo)) daysAgo = 0;
     var loginLabel = daysAgo === 0 ? 'Auj.' : daysAgo === 1 ? 'Hier' : daysAgo + 'j';
     var loginColor = daysAgo >= 4 ? 'var(--admin-red)' : daysAgo >= 2 ? 'var(--admin-orange)' : 'var(--admin-text-muted)';
-    return '<tr class="admin-table-clickable" data-client="' + c.id + '">'
+
+    var isAtRisk = c.health === 'red' || c.health === 'orange';
+    var alert = ALERTS.find(function(a) { return a.client === c.name; });
+    var reason = alert ? alert.message : '';
+    var rowClass = c.health === 'red' ? ' admin-row-critical' : c.health === 'orange' ? ' admin-row-warning' : '';
+
+    return '<tr class="admin-table-clickable' + rowClass + '" data-client="' + c.id + '">'
       + '<td>' + healthDot(c.health) + '</td>'
-      + '<td><strong>' + c.name + '</strong></td>'
-      + '<td>' + c.sector + '</td>'
-      + '<td>' + c.city + '</td>'
-      + '<td>' + c.plan + '</td>'
-      + '<td style="font-weight:600">' + c.mrr.toLocaleString('fr-FR') + ' €</td>'
+      + '<td>'
+        + '<strong>' + esc(c.name) + '</strong>'
+        + (isAtRisk && reason ? '<div class="admin-churn-hint">' + esc(reason) + '</div>' : '')
+      + '</td>'
+      + '<td>' + esc(c.sector) + '</td>'
+      + '<td>' + esc(c.city) + '</td>'
+      + '<td>' + esc(c.plan) + '</td>'
+      + '<td style="font-weight:600' + (isAtRisk ? ';color:var(--admin-red)' : '') + '">'
+        + c.mrr.toLocaleString('fr-FR') + ' €'
+        + (isAtRisk ? '<div class="admin-mrr-risk">À risque</div>' : '')
+      + '</td>'
       + '<td>' + statusBadge(c.status) + '</td>'
       + '<td>' + c.agents + '</td>'
       + '<td style="color:var(--admin-text-muted);font-size:11px">' + c.pilot + '</td>'
-      + '<td style="color:' + loginColor + ';font-size:10px;font-weight:' + (daysAgo >= 4 ? '600' : '400') + '">' + loginLabel + '</td>'
+      + '<td style="color:' + loginColor + ';font-size:10px;font-weight:' + (daysAgo >= 4 ? '600' : '400') + '">'
+        + loginLabel
+        + (daysAgo >= 7 ? ' <span style="color:var(--admin-red)" title="Client inactif — risque de départ">⚠</span>' : '')
+      + '</td>'
     + '</tr>';
   }).join('');
 

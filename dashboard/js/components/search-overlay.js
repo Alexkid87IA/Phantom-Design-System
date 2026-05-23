@@ -7,9 +7,18 @@ import { AGENTS } from '../data/agents.js';
 import { WORK_ITEMS } from '../data/work.js';
 import { getFeed } from '../data/feed.js';
 import { ICONS, ghostSvg } from '../lib/icons.js';
-import { statusLabel } from '../lib/helpers.js';
+import { statusLabel, escapeHtml } from '../lib/helpers.js';
 import { openBriefModal } from '../modals/brief-modal.js';
 import { openReportModal } from '../modals/report-modal.js';
+
+function highlightMatch(text, query) {
+  if (!query) return escapeHtml(text);
+  var safe = escapeHtml(text);
+  var safeQ = escapeHtml(query);
+  var idx = safe.toLowerCase().indexOf(safeQ.toLowerCase());
+  if (idx === -1) return safe;
+  return safe.slice(0, idx) + '<mark class="search-highlight">' + safe.slice(idx, idx + safeQ.length) + '</mark>' + safe.slice(idx + safeQ.length);
+}
 
 // === Quick Actions ===
 var QUICK_ACTIONS = [
@@ -22,6 +31,7 @@ var QUICK_ACTIONS = [
 
 var focusedIdx = -1;
 var _keydownHandler = null;
+var _overlayClickHandler = null;
 
 function executeAction(action) {
   if (action === 'new-brief') {
@@ -108,7 +118,7 @@ export function renderSearch() {
   overlay.innerHTML = '<div class="search-box">'
     + '<div class="search-input-row">'
     + ICONS.search
-    + '<input type="text" class="search-input" id="search-input" placeholder="Cherche un agent, une tâche, un contenu..." autofocus />'
+    + '<input type="text" class="search-input" id="search-input" placeholder="Que veux-tu faire ? (agent, brief, ROI, tâche...)" autofocus />'
     + '<span class="search-kbd">ESC</span>'
     + '</div>'
     + '<div class="search-results" id="search-results">'
@@ -165,9 +175,11 @@ export function renderSearch() {
   input.focus();
   input.addEventListener('input', handleSearchInput);
 
-  overlay.addEventListener('click', function(e) {
+  if (_overlayClickHandler) overlay.removeEventListener('click', _overlayClickHandler);
+  _overlayClickHandler = function(e) {
     if (e.target === overlay) closeSearch();
-  });
+  };
+  overlay.addEventListener('click', _overlayClickHandler);
 
   // Keyboard navigation
   if (_keydownHandler) {
@@ -253,7 +265,7 @@ function handleSearchInput(e) {
     html += matchedActions.map(function(qa) {
       return '<div class="search-result" data-search-action="' + qa.action + '">'
         + (ICONS[qa.icon] || '')
-        + '<div class="search-result-text">' + qa.label + '</div>'
+        + '<div class="search-result-text">' + highlightMatch(qa.label, q) + '</div>'
         + '</div>';
     }).join('');
   }
@@ -263,7 +275,7 @@ function handleSearchInput(e) {
     html += matchedAgents.map(function(a) {
       return '<div class="search-result" data-search-agent="' + a.id + '">'
         + ghostSvg(a.color, 18)
-        + '<div><div class="search-result-text">' + a.name + '</div>'
+        + '<div><div class="search-result-text">' + highlightMatch(a.name, q) + '</div>'
         + '<div class="search-result-sub">' + statusLabel(a.status) + ' &middot; ' + a.pilot + ' pilote</div></div></div>';
     }).join('');
   }
@@ -272,8 +284,8 @@ function handleSearchInput(e) {
     html += '<div class="search-section-title">Travail produit</div>';
     html += matchedWork.map(function(w) {
       return '<div class="search-result" data-search-agent="' + w.agent + '">'
-        + '<div><div class="search-result-text">' + w.title + '</div>'
-        + '<div class="search-result-sub">' + w.type + ' &middot; ' + w.date + '</div></div></div>';
+        + '<div><div class="search-result-text">' + highlightMatch(w.title, q) + '</div>'
+        + '<div class="search-result-sub">' + highlightMatch(w.type, q) + ' &middot; ' + w.date + '</div></div></div>';
     }).join('');
   }
 
@@ -281,7 +293,7 @@ function handleSearchInput(e) {
     html += '<div class="search-section-title">Activité</div>';
     html += matchedFeed.map(function(f) {
       return '<div class="search-result" data-search-agent="' + f.agent + '">'
-        + '<div><div class="search-result-text">' + f.title + ' ' + f.text + '</div>'
+        + '<div><div class="search-result-text">' + highlightMatch(f.title + ' ' + f.text, q) + '</div>'
         + '<div class="search-result-sub">' + f.time + '</div></div></div>';
     }).join('');
   }
@@ -319,6 +331,10 @@ export function closeSearch() {
   if (_keydownHandler) {
     overlay.removeEventListener('keydown', _keydownHandler);
     _keydownHandler = null;
+  }
+  if (_overlayClickHandler) {
+    overlay.removeEventListener('click', _overlayClickHandler);
+    _overlayClickHandler = null;
   }
   overlay.classList.add('hidden');
   setState({ searchOpen: false });

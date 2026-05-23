@@ -6,6 +6,8 @@ export function sparkline(data, width, height, opts) {
   var fill = o.fill || false;
   var preserveAR = o.preserveAspectRatio || '';
 
+  if (!data || data.length < 2) return '';
+
   var max = Math.max.apply(null, data);
   var min = Math.min.apply(null, data);
   var range = max - min || 1;

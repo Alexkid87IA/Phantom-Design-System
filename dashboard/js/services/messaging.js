@@ -9,27 +9,35 @@ import { findResponse } from '../data/agent-responses.js';
 
 // Current dynamic chips per agent (updated after each agent response)
 var _currentChips = {};
+var _pendingTimers = {};
 
 export function getCurrentChips(agentId) {
   return _currentChips[agentId] || null;
 }
 
 export function sendMessage(agentId, text) {
-  if (!text.trim()) return;
+  if (!agentId || !text || !text.trim()) return;
+
+  if (_pendingTimers[agentId]) {
+    clearTimeout(_pendingTimers[agentId].typing);
+    clearTimeout(_pendingTimers[agentId].reply);
+    delete _pendingTimers[agentId];
+  }
 
   var userMessage = text.trim();
   addMessage(agentId, { from: 'user', text: userMessage });
 
-  // Trigger re-render
   setState({});
-  scrollMessages();
 
-  setTimeout(function() {
+  var timers = {};
+
+  timers.typing = setTimeout(function() {
     showTyping(agentId);
   }, 400);
 
-  setTimeout(function() {
-    // Try smart contextual response first
+  timers.reply = setTimeout(function() {
+    delete _pendingTimers[agentId];
+
     var smart = findResponse(agentId, userMessage);
     var response;
 
@@ -37,7 +45,6 @@ export function sendMessage(agentId, text) {
       response = smart.text;
       _currentChips[agentId] = smart.chips;
     } else {
-      // Fallback to legacy static responses
       var responses = AGENT_RESPONSES[agentId] || ['Compris, je m\'en occupe.', 'Bien reçu. Je regarde ça tout de suite.', 'OK ! Je te reviens avec une proposition.'];
       response = responses[Math.floor(Math.random() * responses.length)];
     }
@@ -46,9 +53,11 @@ export function sendMessage(agentId, text) {
     setState({});
     scrollMessages();
   }, 1500 + Math.random() * 1000);
+
+  _pendingTimers[agentId] = timers;
 }
 
-export function showTyping(agentId) {
+function showTyping(agentId) {
   var STATE = getState();
   var container = STATE.activeAgent
     ? document.getElementById('agent-messages')

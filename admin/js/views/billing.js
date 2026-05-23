@@ -65,7 +65,7 @@ export function renderBilling() {
       + '<div class="admin-kpi"><div class="admin-kpi-label">Encaissé ce mois</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + totalPaid.toLocaleString('fr-FR') + ' €</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">En attente</div><div class="admin-kpi-value" style="color:var(--admin-orange)">' + totalPending.toLocaleString('fr-FR') + ' €</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Factures en retard</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + counts.overdue + '</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Taux recouvrement</div><div class="admin-kpi-value">' + Math.round((totalPaid / (totalPaid + totalPending)) * 100) + '%</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">Taux recouvrement</div><div class="admin-kpi-value">' + ((totalPaid + totalPending) > 0 ? Math.round((totalPaid / (totalPaid + totalPending)) * 100) : 0) + '%</div></div>'
     + '</div>'
     + '<div class="admin-section">'
       + '<div class="admin-section-header">'

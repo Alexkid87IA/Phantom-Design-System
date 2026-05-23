@@ -4,6 +4,7 @@
 
 import { getInboxItems } from '../data/inbox.js';
 import { getAgent } from '../data/agents.js';
+import { WORK_ITEMS } from '../data/work.js';
 import { ghostSvg } from '../lib/icons.js';
 
 export function renderInbox() {
@@ -11,11 +12,31 @@ export function renderInbox() {
 
   var listHtml = '';
   if (items.length === 0) {
+    var published = WORK_ITEMS.filter(function(w) { return w.status === 'Publie' || w.status === 'Envoye'; });
+    var posts = published.filter(function(w) { return w.agent === 'social'; }).length;
+    var articles = published.filter(function(w) { return w.agent === 'seo'; }).length;
+    var avis = published.filter(function(w) { return w.agent === 'google'; }).length;
+
+    var total = posts + articles + avis;
     listHtml = '<div class="empty-state inbox-empty-celebrate">'
-      + ghostSvg('var(--rainbow-green)', 48)
-      + '<div class="empty-state-title">Tout est en ligne !</div>'
-      + '<div class="empty-state-text">Tes agents publient, répondent et optimisent pendant que tu fais tourner ta boîte.</div>'
-      + '<button class="inbox-empty-cta" data-nav="analytics">Voir les résultats &rarr;</button>'
+      + '<div class="inbox-celebrate-icon">'
+        + '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--rainbow-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'
+          + '<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+        + '</svg>'
+      + '</div>'
+      + '<div class="empty-state-title">Victoire — tout est en ligne.</div>'
+      + '<div class="empty-state-text">Tes agents ont produit, tu as validé, c\'est publié.<br>Tes concurrents font encore ça à la main.</div>'
+      + '<div class="inbox-celebrate-total">'
+        + '<span class="inbox-celebrate-num">' + total + '</span>'
+        + '<span class="inbox-celebrate-label">contenus publiés ce mois</span>'
+      + '</div>'
+      + '<div class="inbox-impact-grid">'
+        + '<div class="inbox-impact-stat"><span class="inbox-impact-value">' + posts + '</span><span class="inbox-impact-label">posts publiés</span></div>'
+        + '<div class="inbox-impact-stat"><span class="inbox-impact-value">' + articles + '</span><span class="inbox-impact-label">articles SEO</span></div>'
+        + '<div class="inbox-impact-stat"><span class="inbox-impact-value">' + avis + '</span><span class="inbox-impact-label">avis traités</span></div>'
+      + '</div>'
+      + '<button class="inbox-empty-cta" data-nav="roi">Voir le ROI complet &rarr;</button>'
+      + '<button class="inbox-empty-cta" data-nav="planning" style="background:transparent;color:var(--ink-60);border:1px solid var(--border);box-shadow:none;margin-top:8px">Briefer un nouveau contenu</button>'
     + '</div>';
   } else {
     listHtml = items.map(function(item) {
@@ -35,6 +56,9 @@ export function renderInbox() {
           + '<span class="inbox-review-dot" style="background:' + color + '"></span>'
           + 'Prêt'
         + '</span>'
+        + '<button class="inbox-item-approve" data-action="inbox-approve-item" data-item-id="' + item.id + '" title="Approuver">'
+          + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+        + '</button>'
         + '<svg class="inbox-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
       + '</div>';
     }).join('');

@@ -18,27 +18,71 @@ function renderGreeting() {
   var h = new Date().getHours();
   var salut = h < 6 ? 'Bonne nuit' : h < 12 ? 'Bonjour' : h < 18 ? 'Bon après-midi' : 'Bonsoir';
   var kpi = ROI_KPIS.length > 0 ? ROI_KPIS[0] : null;
+  var activeCount = AGENTS.filter(function(a) { return a.status === 'active'; }).length;
+  var recentCount = LIVE_ACTIVITIES.length;
   var subText = kpi
-    ? 'Tes agents ont généré <strong>' + kpi.value + '</strong> ce mois. Ils bossent pendant que tu gères.'
-    : 'Tes agents travaillent pendant que tu gères ton business.';
+    ? '<strong>' + activeCount + ' agents actifs</strong> ont déjà généré <strong>' + kpi.value + '</strong> ce mois — <strong>' + recentCount + ' actions</strong> dans les dernières heures. Ça accélère.'
+    : '<strong>' + activeCount + ' agents actifs</strong> accélèrent ton business en ce moment.';
+  var activeGhosts = AGENTS.filter(function(a) { return a.status === 'active'; })
+    .map(function(a) { return '<span class="dash-greeting-ghost" title="' + a.name + '">' + ghostSvg(a.color, 16) + '</span>'; })
+    .join('');
+  var presenceHtml = activeGhosts
+    ? '<div class="dash-greeting-presence">' + activeGhosts + '<span class="dash-greeting-presence-label">travaillent pour toi en ce moment</span></div>'
+    : '';
   return ''
     + '<div class="dash-greeting">'
       + '<div class="dash-greeting-text">' + salut + ' ' + firstName + '.</div>'
       + '<div class="dash-greeting-sub">' + subText + '</div>'
+      + presenceHtml
     + '</div>';
 }
 
 // ── 1b. LIVE TICKER — Real-time agent activity ──
 
 var LIVE_ACTIVITIES = [
-  { agent: 'social', action: 'a publié un Reel', detail: '"Nigiri du jour"', time: 'Il y a 3 min', impact: '+2.4k vues' },
-  { agent: 'google', action: 'a répondu à un avis', detail: 'Paul M. — 4★', time: 'Il y a 12 min', impact: 'Note 4.7★' },
-  { agent: 'seo', action: 'a publié un article', detail: '"Sushi et oméga-3"', time: 'Il y a 28 min', impact: '+45 visites' },
-  { agent: 'social', action: 'a programmé une Story', detail: 'Coulisses livraison', time: 'Il y a 45 min', impact: '~800 vues' },
-  { agent: 'brand', action: 'a finalisé un design', detail: 'Affiche terrasse été', time: 'Il y a 1h', impact: 'Prêt' },
-  { agent: 'social', action: 'a gagné +23 followers', detail: 'via Reel "Découpe sashimi"', time: 'Il y a 1h30', impact: '+23' },
-  { agent: 'google', action: 'a mis à jour les horaires', detail: 'Google Business Profile', time: 'Il y a 2h', impact: 'Synced' },
+  { agent: 'social', action: 'a publié un Reel', detail: '"Nigiri du jour"', time: 'Il y a 3 min', impact: '+23 clients potentiels' },
+  { agent: 'google', action: 'a répondu à un avis', detail: 'Paul M. — 4★', time: 'Il y a 12 min', impact: 'Confiance renforcée' },
+  { agent: 'seo', action: 'a publié un article', detail: '"Sushi et oméga-3"', time: 'Il y a 28 min', impact: '45 futurs clients ce soir' },
+  { agent: 'social', action: 'a programmé une Story', detail: 'Coulisses livraison', time: 'Il y a 45 min', impact: '800 yeux sur ta cuisine' },
+  { agent: 'brand', action: 'a finalisé un design', detail: 'Affiche terrasse été', time: 'Il y a 1h', impact: 'Terrasse visible' },
+  { agent: 'social', action: 'a gagné +23 followers', detail: 'via Reel "Découpe sashimi"', time: 'Il y a 1h30', impact: '+23 abonnés fidèles' },
+  { agent: 'google', action: 'a mis à jour les horaires', detail: 'Google Business Profile', time: 'Il y a 2h', impact: 'Horaires fiables' },
 ];
+
+var EXTRA_ACTIVITIES = [
+  { agent: 'social', action: 'a répondu à 5 commentaires', detail: 'Instagram', time: 'À l\'instant', impact: 'Communauté engagée' },
+  { agent: 'seo', action: 'a optimisé une fiche', detail: '"Sashimi Bordeaux"', time: 'À l\'instant', impact: '+8 places Google' },
+  { agent: 'google', action: 'a obtenu un nouvel avis', detail: 'Julie R. — 5★', time: 'À l\'instant', impact: 'Réputation blindée' },
+  { agent: 'brand', action: 'a généré un visuel', detail: 'Promo weekend', time: 'À l\'instant', impact: 'Prêt à valider' },
+  { agent: 'web', action: 'a mis à jour le menu', detail: 'Carte été 2026', time: 'À l\'instant', impact: 'Clients informés' },
+  { agent: 'social', action: 'a planifié 3 posts', detail: 'Semaine prochaine', time: 'À l\'instant', impact: 'Feed rempli 7 jours' },
+];
+var _tickerInterval = null;
+var _extraIndex = 0;
+
+function startTickerRotation() {
+  if (_tickerInterval) return;
+  _tickerInterval = setInterval(function() {
+    var list = document.getElementById('ticker-list');
+    if (!list) { clearInterval(_tickerInterval); _tickerInterval = null; return; }
+    var extra = EXTRA_ACTIVITIES[_extraIndex % EXTRA_ACTIVITIES.length];
+    _extraIndex++;
+    var a = getAgent(extra.agent);
+    var color = a ? a.color : 'var(--ink-30)';
+    var name = a ? a.name : extra.agent;
+    var newItem = document.createElement('div');
+    newItem.className = 'dash-ticker-item dash-ticker-new';
+    newItem.innerHTML = ''
+      + '<div class="dash-ticker-dot" style="background:' + color + '"></div>'
+      + '<span class="dash-ticker-agent" style="color:' + color + '">' + name + '</span>'
+      + '<span class="dash-ticker-action">' + extra.action + '</span>'
+      + '<span class="dash-ticker-detail">' + extra.detail + '</span>'
+      + '<span class="dash-ticker-impact">' + extra.impact + '</span>'
+      + '<span class="dash-ticker-time">' + extra.time + '</span>';
+    list.insertBefore(newItem, list.firstChild);
+    if (list.children.length > 8) list.removeChild(list.lastChild);
+  }, 25000);
+}
 
 function renderLiveTicker() {
   var activeCount = AGENTS.filter(function(a) { return a.status === 'active'; }).length;
@@ -92,10 +136,14 @@ function renderLiveTicker() {
       + '</div>'
       + '<div class="dash-agent-pills">' + agentPills + '</div>'
       + workingHtml
-      + '<div class="dash-ticker-list">'
+      + '<div class="dash-ticker-list" id="ticker-list">'
         + items
       + '</div>'
     + '</div>';
+}
+
+export function initTickerRotation() {
+  startTickerRotation();
 }
 
 // ── 1b-bis. ONBOARDING CHECKLIST (shows until 100%) ──
@@ -262,13 +310,24 @@ function renderROIScore() {
   var roiMulti = ROI_KPIS.length > 2 ? ROI_KPIS[2] : null;
   if (!kpi) return '';
 
-  var price = ROI_CONFIG ? ROI_CONFIG.monthlyPrice : 890;
+  var price = ROI_CONFIG ? ROI_CONFIG.monthlyPrice : 1490;
   var multiValue = roiMulti ? roiMulti.value : '—';
   var rawValue = parseInt(kpi.value.replace(/[^\d]/g, ''), 10) || 0;
   var multiNum = parseFloat((multiValue + '').replace(/[^\d.,]/g, '').replace(',', '.')) || 0;
 
+  var verdict;
+  if (rawValue > price * 2) {
+    verdict = 'Rentabilité doublée. En un mois, tes agents financent les 3 suivants.';
+  } else if (rawValue > price) {
+    verdict = 'Rentabilisé. Chaque euro investi t\'en rapporte ' + multiValue + '.';
+  } else if (multiNum > 0.5) {
+    verdict = 'Tes agents accélèrent. La rentabilité est à portée de main.';
+  } else {
+    verdict = 'Tes agents montent en puissance. Les premiers résultats arrivent.';
+  }
+
   return ''
-    + '<div class="dash-roi-score" data-nav="roi">'
+    + '<div class="dash-roi-score dash-roi-celebrate" data-nav="roi">'
       + '<div class="dash-roi-score-main">'
         + '<div class="dash-roi-generated">'
           + '<span class="dash-roi-big" data-countup="' + rawValue + '" data-suffix=" €">0 €</span>'
@@ -284,6 +343,9 @@ function renderROIScore() {
           + '<span class="dash-roi-big dash-roi-multi-val">' + multiValue + '</span>'
           + '<span class="dash-roi-sub">retour sur investissement</span>'
         + '</div>'
+      + '</div>'
+      + '<div class="dash-roi-victory">'
+        + '<span class="dash-roi-victory-text">' + verdict + '</span>'
       + '</div>'
       + '<div class="dash-roi-live-ticker" id="roi-ticker">'
         + '<span class="dash-roi-pulse"></span>'
@@ -311,7 +373,7 @@ function renderActions() {
           + '</div>'
           + '<div>'
             + '<div class="dash-section-title">Rien à faire !</div>'
-            + '<div class="dash-section-sub">Tes agents gèrent tout. Profite de ta journée.</div>'
+            + '<div class="dash-section-sub">Tes agents gèrent tout. Profite de ta journée — ou <a data-nav="work" style="color:var(--phantom-violet);cursor:pointer;font-weight:500">vois ce qu\'ils ont produit</a>.</div>'
           + '</div>'
         + '</div>'
       + '</div>';
@@ -495,12 +557,12 @@ export function renderDashboard() {
     + '<div class="content dash-home">'
       + morningCard
       + renderGreeting()
+      + renderROIScore()
       + renderOnboardingChecklist()
       + renderNudgeCard()
       + renderSinceAway()
       + renderLiveTicker()
       + renderProof()
-      + renderROIScore()
       + renderAgentROISnapshot()
       + renderWeeklyProgress()
       + renderActions()

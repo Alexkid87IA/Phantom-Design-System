@@ -5,8 +5,10 @@
 import { getNotifications, unreadCount } from '../data/notifications.js';
 import { getAgent } from '../data/agents.js';
 import { ghostSvg } from '../lib/icons.js';
+import { esc } from '../lib/esc.js';
 
 var panelOpen = false;
+var _outsideClickTimer = null;
 
 export function openNotifPanel() {
   panelOpen = true;
@@ -15,14 +17,17 @@ export function openNotifPanel() {
     el.innerHTML = renderNotifPanel();
     el.classList.remove('hidden');
   }
-  // Close panel on outside click (added on next tick to avoid closing immediately)
-  setTimeout(function() {
-    document.addEventListener('click', handleOutsideClick);
+  document.removeEventListener('click', handleOutsideClick);
+  if (_outsideClickTimer) clearTimeout(_outsideClickTimer);
+  _outsideClickTimer = setTimeout(function() {
+    _outsideClickTimer = null;
+    if (panelOpen) document.addEventListener('click', handleOutsideClick);
   }, 0);
 }
 
 export function closeNotifPanel() {
   panelOpen = false;
+  if (_outsideClickTimer) { clearTimeout(_outsideClickTimer); _outsideClickTimer = null; }
   var el = document.getElementById('notif-panel');
   if (el) {
     el.classList.add('hidden');
@@ -78,8 +83,8 @@ export function renderNotifPanel() {
         + (n.read ? '<div style="width:6px;flex-shrink:0"></div>' : '<div class="notif-dot"></div>')
         + ghostSvg(color, 18)
         + '<div class="notif-item-text">'
-        +   '<strong>' + (n.title || '') + '</strong> '
-        +   (n.text || '')
+        +   '<strong>' + esc(n.title || '') + '</strong> '
+        +   esc(n.text || '')
         + '</div>'
         + '<span class="notif-item-time">' + n.time + '</span>'
         + '</div>';

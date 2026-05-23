@@ -24,7 +24,7 @@ export function renderSettings() {
     + '<div class="settings-header">'
       + '<div>'
         + '<h2 class="view-title">Paramètres</h2>'
-        + '<p class="view-subtitle">Configure ton espace comme tu veux</p>'
+        + '<p class="view-subtitle">Tes préférences calibrent tes agents — chaque réglage améliore la pertinence</p>'
       + '</div>'
       + savedIndicator
     + '</div>'
@@ -58,7 +58,7 @@ export function renderSettings() {
 
       + '<div class="settings-section">'
         + '<h3 class="settings-section-title">Données & Confidentialité</h3>'
-        + '<div class="settings-action-row"><span>Exporter mes données</span><button class="settings-btn" data-action="export-data">Exporter</button></div>'
+        + '<div class="settings-action-row"><span>Exporter mes données</span><a class="settings-btn" href="mailto:support@phantom.fr?subject=Export%20RGPD%20de%20mes%20donn%C3%A9es">Demander l\'export</a></div>'
         + '<div class="settings-action-row"><span>Supprimer mon compte</span><button class="settings-btn settings-btn-danger" data-action="delete-account">Supprimer</button></div>'
       + '</div>'
 

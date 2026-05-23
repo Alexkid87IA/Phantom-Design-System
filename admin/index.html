@@ -3,22 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f14">
   <title>Phantom — Admin Panel</title>
   <meta name="description" content="Phantom Admin — Gestion clients, agents IA, churn, facturation.">
   <meta property="og:title" content="Phantom — Admin Panel">
   <meta property="og:description" content="Panel d'administration Phantom. Suivi clients, performance agents, churn, MRR et facturation.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://phantom.fr/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../colors_and_type.css">
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    #app:empty::after {
+      content: 'Chargement...';
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; font-family: 'Geist', system-ui, sans-serif;
+      color: rgba(255,255,255,0.3); font-size: 12px; letter-spacing: 0.06em;
+      animation: adminPulse 1.2s ease infinite;
+    }
+    @keyframes adminPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+  </style>
 </head>
 <body>
+  <noscript><p style="padding:40px;font-family:system-ui;color:#888;text-align:center">JavaScript est requis pour utiliser Phantom Admin.</p></noscript>
   <div id="app"></div>
   <div id="toasts"></div>
-  <script type="module" src="js/app.js?v=17"></script>
+  <script type="module" src="js/app.js?v=43"></script>
 </body>
 </html>

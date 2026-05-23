@@ -47,7 +47,7 @@ export function renderProfile() {
       + '<div class="profile-avatar">' + WORKSPACE.initials + '</div>'
       + '<div class="profile-header-info">'
         + '<h2 class="view-title">' + PROFILE.name + '</h2>'
-        + '<p class="view-subtitle">' + PROFILE.sector + ' · Marseille</p>'
+        + '<p class="view-subtitle">Ton profil nourrit tes agents — ' + completePct + '% renseigné, chaque détail rend leurs contenus plus justes</p>'
       + '</div>'
       + '<div class="profile-complete">'
         + '<div class="profile-complete-bar"><div class="profile-complete-fill" style="width:' + completePct + '%"></div></div>'

@@ -44,7 +44,7 @@ export function renderAiConfig() {
     + '</div>';
   }).join('');
 
-  var budgetPercent = Math.round((BUDGET.current / BUDGET.monthly) * 100);
+  var budgetPercent = BUDGET.monthly > 0 ? Math.round((BUDGET.current / BUDGET.monthly) * 100) : 0;
   var budgetColor = budgetPercent > 90 ? 'var(--admin-red)' : budgetPercent > 70 ? 'var(--admin-orange)' : 'var(--admin-green)';
 
   return ''

@@ -127,7 +127,7 @@ export function renderMessaging() {
         + '<div class="admin-section">'
           + '<div class="admin-section-header"><div class="admin-section-title">Stats réponse</div></div>'
           + '<div class="admin-card">'
-            + '<div style="padding:8px 0;border-bottom:1px solid var(--admin-border)"><span style="font-size:12px;color:var(--admin-text-muted)">Taux de réponse &lt;2h</span><div style="font-size:18px;font-weight:600;color:var(--admin-green);margin-top:4px">87%</div></div>'
+            + '<div style="padding:8px 0;border-bottom:1px solid var(--admin-border)"><span style="font-size:12px;color:var(--admin-text-muted)">Réponse &lt;2h vs. cible 95%</span><div style="font-size:18px;font-weight:600;color:var(--admin-green);margin-top:4px">87%</div></div>'
             + '<div style="padding:8px 0;border-bottom:1px solid var(--admin-border)"><span style="font-size:12px;color:var(--admin-text-muted)">Messages/jour (moy.)</span><div style="font-size:18px;font-weight:600;margin-top:4px">12.4</div></div>'
             + '<div style="padding:8px 0"><span style="font-size:12px;color:var(--admin-text-muted)">Canal le plus actif</span><div style="font-size:14px;font-weight:500;margin-top:4px">Email (62%)</div></div>'
           + '</div>'

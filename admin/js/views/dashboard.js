@@ -6,6 +6,7 @@ import { CLIENTS, totalMRR, activeClientCount } from '../data/clients.js';
 import { ALL_AGENTS, ALERTS, CONTENT_QUEUE, totalAgents, activeAgents, errorAgents, pendingContent } from '../data/admin-agents.js';
 import { PILOTS } from '../data/pilots.js';
 import { MRR_HISTORY, REVENUE_KPIS } from '../data/revenue.js';
+import { esc } from '../lib/esc.js';
 
 var HEALTH_TRENDS = {
   c3: [8, 7, 7, 6, 5, 4, 4, 3],
@@ -20,7 +21,7 @@ function miniSparkline(data, color) {
   var min = Math.min.apply(null, data);
   var range = max - min || 1;
   var pts = data.map(function(v, i) {
-    var x = (i / (data.length - 1)) * w;
+    var x = data.length > 1 ? (i / (data.length - 1)) * w : w / 2;
     var y = h - ((v - min) / range) * (h * 0.7) - h * 0.15;
     return x + ',' + y;
   }).join(' ');
@@ -51,11 +52,17 @@ function renderChurnRisk() {
     var reason = alert ? alert.message : 'Activité en baisse';
 
     var daysSince = '';
+    var urgencyHtml = '';
     if (c.lastLogin) {
       var last = new Date(c.lastLogin);
-      var now = new Date('2026-05-17');
+      var now = new Date();
       var diff = Math.floor((now - last) / (1000 * 60 * 60 * 24));
       daysSince = diff === 0 ? 'Aujourd\'hui' : diff === 1 ? 'Hier' : 'Il y a ' + diff + 'j';
+      if (diff >= 5) {
+        urgencyHtml = '<div class="admin-churn-urgency admin-churn-urgency-red">Critique — relancer aujourd\'hui</div>';
+      } else if (diff >= 3) {
+        urgencyHtml = '<div class="admin-churn-urgency admin-churn-urgency-orange">Escalade sous 48h</div>';
+      }
     }
 
     var trendData = HEALTH_TRENDS[c.id];
@@ -66,9 +73,10 @@ function renderChurnRisk() {
       + '<div class="admin-churn-left">'
         + '<div class="admin-churn-dot' + (isUrgent ? ' admin-churn-dot-pulse' : '') + '" style="background:' + healthColor + '"></div>'
         + '<div>'
-          + '<div class="admin-churn-name">' + c.name + '</div>'
-          + '<div class="admin-churn-reason">' + reason + '</div>'
+          + '<div class="admin-churn-name">' + esc(c.name) + '</div>'
+          + '<div class="admin-churn-reason">' + esc(reason) + '</div>'
           + '<div class="admin-churn-mrr-risk">' + c.mrr.toLocaleString('fr-FR') + ' €/mois à risque</div>'
+          + urgencyHtml
         + '</div>'
       + '</div>'
       + '<div class="admin-churn-right">'
@@ -221,14 +229,14 @@ function renderTodayFocus() {
   var highAlerts = ALERTS.filter(function(a) { return a.severity === 'high'; }).length;
 
   var tasks = [];
-  if (pending > 0) tasks.push({ label: pending + ' contenus à valider', action: 'validation', color: 'var(--admin-orange)', icon: '📝' });
-  if (errors > 0) tasks.push({ label: errors + ' agent en erreur', action: 'agents', color: 'var(--admin-red)', icon: '⚠️' });
-  if (highAlerts > 0) tasks.push({ label: highAlerts + ' alerte(s) client', action: 'health', color: 'var(--admin-red)', icon: '🚨' });
+  if (pending > 0) tasks.push({ label: pending + ' contenus à valider', action: 'validation', color: 'var(--admin-orange)', icon: '📝', urgent: true });
+  if (errors > 0) tasks.push({ label: errors + ' agent en erreur', action: 'agents', color: 'var(--admin-red)', icon: '⚠️', urgent: true });
+  if (highAlerts > 0) tasks.push({ label: highAlerts + ' alerte(s) client', action: 'health', color: 'var(--admin-red)', icon: '🚨', urgent: true });
   tasks.push({ label: 'Vérifier SLA', action: 'sla', color: 'var(--admin-blue)', icon: '⏱' });
   tasks.push({ label: 'Messages non lus', action: 'messaging', color: 'var(--admin-violet)', icon: '💬' });
 
   var taskItems = tasks.map(function(t) {
-    return '<div class="admin-focus-item" data-nav="' + t.action + '">'
+    return '<div class="admin-focus-item' + (t.urgent ? ' admin-focus-urgent' : '') + '" data-nav="' + t.action + '">'
       + '<span class="admin-focus-icon">' + t.icon + '</span>'
       + '<span class="admin-focus-label">' + t.label + '</span>'
       + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4"><polyline points="9 18 15 12 9 6"/></svg>'
@@ -244,13 +252,43 @@ function renderTodayFocus() {
     + '</div>';
 }
 
+function renderHealthVerdict() {
+  var atRisk = CLIENTS.filter(function(c) {
+    return (c.health === 'red' || c.health === 'orange') && c.status !== 'churned';
+  });
+  var mrrAtRisk = atRisk.reduce(function(sum, c) { return sum + c.mrr; }, 0);
+  var growing = REVENUE_KPIS.mrrNet > 0;
+  var ltvCac = REVENUE_KPIS.cac > 0 ? (REVENUE_KPIS.ltv / REVENUE_KPIS.cac).toFixed(1) : '0.0';
+  var color = growing ? 'var(--admin-green)' : 'var(--admin-red)';
+  var label = growing ? 'En croissance' : 'Attention requise';
+  var arrow = growing ? '&#9650;' : '&#9660;';
+
+  var riskLine = mrrAtRisk > 0
+    ? '<span style="color:var(--admin-red);font-weight:600">' + mrrAtRisk.toLocaleString('fr-FR') + ' &euro; MRR exposé</span> sur ' + atRisk.length + ' client' + (atRisk.length > 1 ? 's' : '') + ' à risque — un appel aujourd\'hui peut tout sauver. '
+    : '';
+
+  return ''
+    + '<div class="admin-card" style="border-left:4px solid ' + color + '">'
+      + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'
+        + '<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:' + color + '">' + arrow + ' ' + label + '</span>'
+        + '<span style="font-size:11px;color:var(--admin-text-muted)">LTV/CAC ' + ltvCac + 'x</span>'
+      + '</div>'
+      + '<div style="font-size:15px;font-weight:600;line-height:1.5;color:var(--admin-text)">'
+        + '<strong>' + totalMRR().toLocaleString('fr-FR') + ' &euro;</strong> MRR actuel. '
+        + riskLine
+        + '+' + REVENUE_KPIS.mrrNet.toLocaleString('fr-FR') + ' &euro; net ce mois.'
+      + '</div>'
+    + '</div>';
+}
+
 export function renderDashboard() {
   return ''
+    + '<div class="admin-section">' + renderHealthVerdict() + '</div>'
+    + '<div class="admin-section">' + renderTodayFocus() + '</div>'
     + '<div class="admin-section">' + renderKPIs() + '</div>'
-    + '<div class="admin-grid admin-grid-3" style="margin-bottom:28px">'
+    + '<div class="admin-grid admin-grid-2" style="margin-bottom:28px">'
       + renderMRRChart()
       + renderAlerts()
-      + renderTodayFocus()
     + '</div>'
     + '<div class="admin-grid admin-grid-2" style="margin-bottom:28px">'
       + renderChurnRisk()

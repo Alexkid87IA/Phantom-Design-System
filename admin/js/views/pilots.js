@@ -53,8 +53,8 @@ export function renderPilots() {
   return ''
     + '<div class="admin-grid admin-grid-3" style="margin-bottom:24px">'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Total Pilots</div><div class="admin-kpi-value">' + PILOTS.length + '</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Charge moyenne</div><div class="admin-kpi-value">' + Math.round(PILOTS.reduce(function(s, p) { return s + p.workload; }, 0) / PILOTS.length) + '%</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Qualité moyenne</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + Math.round(PILOTS.reduce(function(s, p) { return s + p.quality; }, 0) / PILOTS.length) + '%</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">Charge moyenne</div><div class="admin-kpi-value">' + (PILOTS.length > 0 ? Math.round(PILOTS.reduce(function(s, p) { return s + p.workload; }, 0) / PILOTS.length) : 0) + '%</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">Qualité moyenne</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + (PILOTS.length > 0 ? Math.round(PILOTS.reduce(function(s, p) { return s + p.quality; }, 0) / PILOTS.length) : 0) + '%</div></div>'
     + '</div>'
     + '<div class="admin-grid admin-grid-3">' + cards + '</div>';
 }

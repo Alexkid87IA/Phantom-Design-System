@@ -75,19 +75,25 @@ export function renderWork() {
         + '</div>'
       + '</div>'
       + summaryHtml
+      + (pending > 0 ? '<div class="work-pending-cta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <strong>' + pending + ' livrable' + (pending > 1 ? 's' : '') + ' en attente</strong> — chaque heure perdue est un client sans réponse. <a data-nav="inbox" class="work-pending-link">Approuver maintenant &rarr;</a></div>' : '')
       + '<div class="work-grid">'
         + filtered.map(function(w) {
             var a = getAgent(w.agent);
             var isLive = w.status === 'Publie' || w.status === 'Envoye';
-            var impactHero = (isLive && w.impact)
-              ? '<div class="work-item-reach"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green-600)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> ' + w.impact + '</div>'
-              : '';
+            var isPending = w.status === 'En attente';
             var impactDraft = (!isLive && w.impact)
               ? '<div class="work-item-impact"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--green-600)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> ' + w.impact + '</div>'
               : '';
-            return '<div class="work-item' + (isLive ? ' work-item-live' : '') + '" data-agent="' + w.agent + '">'
+            var liveBar = isLive
+              ? '<div class="work-item-live-bar">'
+                  + '<span class="work-live-pulse"></span>'
+                  + '<span class="work-live-label">En direct</span>'
+                  + (w.impact ? '<span class="work-live-reach">' + w.impact + '</span>' : '')
+                + '</div>'
+              : '';
+            return '<div class="work-item' + (isLive ? ' work-item-live' : '') + (isPending ? ' work-item-pending' : '') + '" data-agent="' + w.agent + '">'
               + '<span class="work-item-type" style="background:' + w.color + '20;color:' + w.color + '">' + w.type + '</span>'
-              + impactHero
+              + liveBar
               + '<div class="work-item-title">' + w.title + '</div>'
               + impactDraft
               + '<div class="work-item-meta">'

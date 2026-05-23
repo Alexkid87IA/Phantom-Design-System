@@ -52,6 +52,9 @@ export function addMessage(agentId, msg) {
     CONVERSATIONS[agentId] = [];
   }
   CONVERSATIONS[agentId].push(msg);
+  if (CONVERSATIONS[agentId].length > 200) {
+    CONVERSATIONS[agentId].shift();
+  }
 }
 
 export function initConversation(agentId, messages) {

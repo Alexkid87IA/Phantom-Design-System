@@ -8,10 +8,3 @@ export var PILOTS = [
   { id: 'p3', name: 'Paul Martin', role: 'Pilot', specialties: ['Brand', 'Web', 'Commerce'], clients: 4, agents: 10, workload: 82, quality: 89, avatar: 'PM', color: '#0066FF', status: 'active' },
 ];
 
-export function getPilot(id) {
-  return PILOTS.find(function(p) { return p.id === id; });
-}
-
-export function getPilotByName(name) {
-  return PILOTS.find(function(p) { return p.name.includes(name); });
-}

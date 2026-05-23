@@ -36,7 +36,7 @@
   justify-content: center;
   gap: 16px;
   padding: 6px 16px;
-  border-top: 1px solid rgba(10,10,10,0.04);
+  border-top: 1px solid var(--border-light);
   background: rgba(247,246,242,0.6);
   flex-shrink: 0;
 }
@@ -50,9 +50,9 @@
   font-size: 9px;
   font-weight: 500;
   color: var(--ink-40);
-  background: rgba(10,10,10,0.04);
-  border: 1px solid rgba(10,10,10,0.06);
-  border-radius: 4px;
+  background: var(--border-light);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--r-xs);
   padding: 1px 5px;
   line-height: 1.4;
 }

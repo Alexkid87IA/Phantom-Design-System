@@ -83,17 +83,25 @@ function renderMainContent() {
 export function render() {
   var app = document.getElementById('app');
   if (!app) return;
-  app.innerHTML = ''
-    + '<div class="admin-app">'
-      + renderSidebar()
-      + '<div class="admin-main">'
-        + renderTopbar()
-        + '<div class="admin-content">'
-          + renderMainContent()
+  try {
+    app.innerHTML = ''
+      + '<div class="admin-app">'
+        + renderSidebar()
+        + '<div class="admin-main">'
+          + renderTopbar()
+          + '<div class="admin-content">'
+            + renderMainContent()
+          + '</div>'
         + '</div>'
-      + '</div>'
-    + '</div>';
-  bindEvents();
+      + '</div>';
+    bindEvents();
+  } catch (err) {
+    console.error('[Admin] Render error:', err);
+    app.innerHTML = '<div style="padding:40px;text-align:center;font-family:system-ui">'
+      + '<h2 style="margin-bottom:8px">Erreur de rendu</h2>'
+      + '<p style="color:var(--admin-text-muted,#666)">' + err.message + '</p>'
+      + '</div>';
+  }
 }
 
 var bound = false;

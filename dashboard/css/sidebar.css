@@ -11,15 +11,19 @@
 .ws {
   padding: 8px 10px;
   margin-bottom: 14px;
-  border-radius: 12px;
+  border-radius: var(--r-md);
   background: var(--paper);
   border: 1px solid var(--border-hairline);
   display: flex;
   align-items: center;
   gap: 10px;
 }
+.ws:focus-visible {
+  outline: 2px solid var(--phantom-violet);
+  outline-offset: 2px;
+}
 .ws-avatar {
-  width: 30px; height: 30px; border-radius: 6px;
+  width: 30px; height: 30px; border-radius: var(--r-sm);
   background: var(--rainbow-yellow); border: 1.5px solid var(--ink);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 13px;
@@ -40,13 +44,13 @@
 }
 .section-title:first-child { margin-top: 0; }
 .nav-item {
-  padding: 7px 10px; border-radius: 6px;
+  padding: 7px 10px; border-radius: var(--r-sm);
   display: flex; align-items: center; gap: 8px;
   font-family: var(--font-body); font-size: 12px; color: var(--ink);
-  cursor: pointer; transition: background 0.15s;
+  cursor: pointer; transition: background 0.15s var(--ease), color 0.15s var(--ease);
   user-select: none;
 }
-.nav-item:hover { background: rgba(10,10,10,0.04); }
+.nav-item:hover { background: var(--border-light); }
 .nav-item:focus-visible {
   outline: 2px solid var(--phantom-violet);
   outline-offset: 2px;
@@ -55,9 +59,17 @@
   background: rgba(110,60,255,0.08); color: var(--phantom-violet); font-weight: 500;
 }
 .nav-badge {
-  background: var(--rainbow-red); color: #fff;
+  background: var(--ink-20); color: var(--fg-on-color);
   font-family: var(--font-mono); font-size: 9px; font-weight: 600;
-  padding: 1px 5px; border-radius: 9999px; margin-left: auto;
+  padding: 1px 5px; border-radius: var(--r-full); margin-left: auto;
+}
+.nav-badge-urgent {
+  background: var(--rainbow-red);
+  animation: badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,45,135,0.3); }
+  50% { box-shadow: 0 0 0 4px rgba(255,45,135,0); }
 }
 .nav-shortcut {
   font-family: var(--font-mono);
@@ -70,9 +82,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s var(--ease);
 }
 .nav-item:hover .nav-shortcut {
   opacity: 1;
@@ -81,14 +93,14 @@
   opacity: 0.6;
 }
 .agent-row {
-  padding: 5px 8px; border-radius: 6px;
+  padding: 5px 8px; border-radius: var(--r-sm);
   display: flex; align-items: center; gap: 8px;
   font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--ink);
-  cursor: pointer; transition: background 0.15s, transform 0.15s;
+  cursor: pointer; transition: background 0.15s var(--ease), transform 0.15s var(--ease);
   user-select: none;
   position: relative;
 }
-.agent-row:hover { background: rgba(10,10,10,0.04); transform: translateX(2px); }
+.agent-row:hover { background: var(--border-light); transform: translateX(2px); }
 .agent-row:focus-visible {
   outline: 2px solid var(--phantom-violet);
   outline-offset: 2px;
@@ -102,13 +114,13 @@
   transform: translateY(-50%) translateX(-4px);
   width: 220px;
   background: var(--paper);
-  border: 1px solid rgba(10,10,10,0.08);
-  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
   padding: 12px 14px;
-  box-shadow: 0 8px 32px -4px rgba(10,10,10,0.15), 0 1px 0 0 rgba(10,10,10,0.04);
+  box-shadow: 0 8px 32px -4px rgba(10,10,10,0.15), 0 1px 0 0 var(--border-light);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
   z-index: 50;
 }
 .agent-row:hover .agent-tooltip {
@@ -141,7 +153,7 @@
   margin-bottom: 6px;
   padding: 3px 8px;
   background: rgba(110,60,255,0.06);
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   display: inline-block;
 }
 .agent-tooltip-brief {
@@ -160,7 +172,7 @@
   letter-spacing: 0.02em;
 }
 .agent-dot {
-  width: 6px; height: 6px; border-radius: 9999px; margin-left: auto;
+  width: 6px; height: 6px; border-radius: var(--r-full); margin-left: auto;
 }
 .agent-dot-pulse {
   animation: agentDotPulse 2s ease-in-out infinite;
@@ -209,28 +221,32 @@
 .sidebar-progress-bar {
   height: 4px;
   background: var(--border-hairline);
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   overflow: hidden;
 }
 .sidebar-progress-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--phantom-violet), var(--rainbow-pink));
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   transition: width 0.6s var(--ease);
 }
 
 .support {
-  background: var(--ink); color: #fff;
-  padding: 12px; border-radius: 12px;
+  background: var(--ink); color: var(--fg-on-color);
+  padding: 12px; border-radius: var(--r-md);
   margin-bottom: 10px;
   position: relative; overflow: hidden;
   cursor: pointer;
+}
+.support:focus-visible {
+  outline: 2px solid var(--phantom-violet);
+  outline-offset: 2px;
 }
 .support-title {
   font-family: var(--font-display); font-weight: 600; font-size: 12px; line-height: 1.2; max-width: 130px;
 }
 .support-btn {
-  background: var(--paper); color: var(--ink); border: none; border-radius: 9999px;
+  background: var(--paper); color: var(--ink); border: none; border-radius: var(--r-full);
   padding: 4px 10px; font-family: var(--font-body); font-size: 10px; font-weight: 600;
   margin-top: 8px; display: inline-block; cursor: pointer;
 }
@@ -242,9 +258,9 @@
   display: flex; align-items: center; gap: 8px; padding: 6px 8px;
 }
 .user-avatar {
-  width: 24px; height: 24px; border-radius: 9999px; background: var(--rainbow-pink);
+  width: 24px; height: 24px; border-radius: var(--r-full); background: var(--rainbow-pink);
   display: flex; align-items: center; justify-content: center;
-  color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 9px;
+  color: var(--fg-on-color); font-family: var(--font-display); font-weight: 700; font-size: 9px;
 }
 .user-name { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--ink); }
 .user-email { font-family: var(--font-body); font-size: 9px; color: var(--ink-30); }

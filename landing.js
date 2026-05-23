@@ -177,9 +177,9 @@
   });
 
   var botReplies = [
-    "Top ! On a plusieurs clients dans ce secteur. Tu veux qu'on regarde ensemble ce qu'on peut faire pour toi ?",
-    "Parfait. En général, on commence par un appel de 20 min avec la direction pour bien cerner tes besoins. Ça te dit ?",
-    "Super ! Je te propose de réserver un créneau directement → phantom.fr/rdv 🚀",
+    "Top ! Nos clients dans ce secteur voient en moyenne +35% de demandes entrantes le premier mois. On gère Instagram, avis Google, SEO — tout en pilote automatique.",
+    "Concrètement : tes agents IA sont configurés en 72h, premier livrable dans la foulée. Zéro formation, zéro technique de ton côté. Un appel de 20 min suffit pour démarrer.",
+    "Résultat type : 1 790 €/mois tout compris, au lieu de 8 400 € en agence+freelances. On te propose un créneau ? → phantom.fr/rdv 🚀",
     "Fun fact : il y a un secret caché sur cette page. Tape ↑↑ au clavier. 👀"
   ];
   var replyIndex = 0;
@@ -201,7 +201,7 @@
     messages.scrollTop = messages.scrollHeight;
     var reply = botReplies[replyIndex++];
     setTimeout(function() {
-      messages.removeChild(typing);
+      if (typing.parentNode) typing.parentNode.removeChild(typing);
       addMsg(reply, false);
     }, 1200);
   }
@@ -364,7 +364,7 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
     }
 
     setTimeout(function() {
-      document.body.removeChild(container);
+      if (container.parentNode) document.body.removeChild(container);
     }, 5000);
   }
 })();

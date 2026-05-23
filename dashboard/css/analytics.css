@@ -42,6 +42,12 @@
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
+  animation: metricPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes metricPop {
+  0% { transform: scale(0.85); opacity: 0.5; }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .analytics-metric-growth {
@@ -49,6 +55,16 @@
   font-size: 11px;
   color: var(--green-600);
   font-weight: 500;
+}
+
+.analytics-metric-rec {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink-40);
+  margin-top: 8px;
+  line-height: 1.4;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-hairline);
 }
 
 /* Two-column layout */
@@ -103,7 +119,7 @@
   width: 100%;
   max-width: 28px;
   background: var(--phantom-violet);
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   opacity: 0.7;
 }
 
@@ -130,14 +146,14 @@
 .analytics-agent-bar-track {
   flex: 1;
   height: 6px;
-  background: rgba(10,10,10,0.04);
-  border-radius: 4px;
+  background: var(--border-light);
+  border-radius: var(--r-xs);
   overflow: hidden;
 }
 
 .analytics-agent-bar-fill {
   height: 100%;
-  border-radius: 4px;
+  border-radius: var(--r-xs);
 }
 
 .analytics-agent-tasks {
@@ -155,10 +171,10 @@
   align-items: center;
   padding: 10px 8px;
   margin: 0 -8px;
-  border-bottom: 1px solid rgba(10,10,10,0.06);
-  border-radius: 8px;
+  border-bottom: 1px solid var(--border-hairline);
+  border-radius: var(--r-sm);
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s var(--ease);
   animation: feedItemIn 0.25s var(--ease) both;
 }
 .analytics-content-row:hover {
@@ -198,9 +214,9 @@
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--ink-30);
-  background: rgba(10,10,10,0.04);
+  background: var(--border-light);
   padding: 1px 6px;
-  border-radius: 4px;
+  border-radius: var(--r-xs);
 }
 
 .analytics-content-right {
@@ -235,7 +251,7 @@
   color: var(--ink-20);
   flex-shrink: 0;
   margin-left: 8px;
-  transition: transform 0.15s, color 0.15s;
+  transition: transform 0.15s var(--ease), color 0.15s var(--ease);
 }
 .analytics-content-row:hover .analytics-content-chevron {
   transform: translateX(2px);
@@ -261,7 +277,7 @@
 .analytics-insight-icon {
   width: 36px;
   height: 36px;
-  border-radius: 12px;
+  border-radius: var(--r-md);
   background: linear-gradient(135deg, var(--phantom-violet), var(--rainbow-pink));
   display: flex;
   align-items: center;
@@ -291,32 +307,32 @@
 
 .analytics-insight-btn {
   padding: 8px 14px;
-  border-radius: 6px;
+  border-radius: var(--r-sm-md);
   font-family: var(--font-body);
   font-size: 12px;
   cursor: pointer;
   border: none;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s var(--ease);
 }
 
 .analytics-insight-btn:active { transform: scale(0.97); }
 
 .analytics-insight-btn-primary {
   background: var(--phantom-violet);
-  color: #fff;
+  color: var(--fg-on-color);
   font-weight: 600;
 }
 
 .analytics-insight-btn-primary:hover { opacity: 0.85; }
 
 .analytics-insight-btn-ghost {
-  background: rgba(10,10,10,0.04);
+  background: var(--border-light);
   color: var(--ink-60);
-  border: 1px solid rgba(10,10,10,0.08);
+  border: 1px solid var(--border);
   font-weight: 500;
 }
 
-.analytics-insight-btn-ghost:hover { background: rgba(10,10,10,0.06); }
+.analytics-insight-btn-ghost:hover { background: var(--border-hairline); }
 .analytics-insight-btn:focus-visible { outline: 2px solid var(--phantom-violet); outline-offset: 2px; }
 
 /* ── Verdict hero ── */
@@ -343,11 +359,6 @@
   letter-spacing: -0.04em;
   color: var(--phantom-violet);
   line-height: 1;
-}
-.analytics-verdict-pct {
-  font-size: 32px;
-  font-weight: 600;
-  opacity: 0.7;
 }
 .analytics-verdict-label {
   font-family: var(--font-mono);
@@ -414,12 +425,12 @@
   font-size: 12px;
   font-weight: 600;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: var(--r-sm-md);
   background: var(--phantom-violet);
-  color: #fff;
+  color: var(--fg-on-color);
   border: none;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s var(--ease);
   white-space: nowrap;
 }
 .analytics-report-cta-btn:hover { opacity: 0.85; }

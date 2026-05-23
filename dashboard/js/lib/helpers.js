@@ -19,24 +19,24 @@ export function statusLabel(status) {
 }
 
 export function formatDate() {
-  const d = new Date();
-  const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-  const mois = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
-  const h = String(d.getHours()).padStart(2, '0');
-  const m = String(d.getMinutes()).padStart(2, '0');
+  var d = new Date();
+  var jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+  var mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  var h = String(d.getHours()).padStart(2, '0');
+  var m = String(d.getMinutes()).padStart(2, '0');
   return jours[d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()] + ' · ' + h + ':' + m;
 }
 
 export function activeAgentCount() {
-  return AGENTS.filter(a => a.status === 'active').length;
+  return AGENTS.filter(function(a) { return a.status === 'active'; }).length;
 }
 
 export function pendingCount() {
-  return getFeed().filter(f => f.status === 'waiting').length + getInboxItems().length;
+  return getFeed().filter(function(f) { return f.status === 'waiting'; }).length + getInboxItems().length;
 }
 
 export function escapeHtml(str) {
-  const div = document.createElement('div');
+  var div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }

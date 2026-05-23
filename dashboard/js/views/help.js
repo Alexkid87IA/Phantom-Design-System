@@ -28,12 +28,13 @@ export function renderHelp() {
 
   var categoryHtml = Object.keys(categories).map(function(cat) {
     var articles = categories[cat].map(function(a) {
-      return '<div class="work-item help-article">'
+      return '<div class="work-item help-article" data-action="help-article" data-help-id="' + a.id + '" role="button" tabindex="0">'
         + '<div class="help-article-icon">' + a.icon + '</div>'
         + '<div>'
           + '<div class="help-article-title">' + a.title + '</div>'
           + '<div class="help-article-desc">' + a.desc + '</div>'
         + '</div>'
+        + '<svg class="help-article-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>'
       + '</div>';
     }).join('');
 
@@ -62,11 +63,19 @@ export function renderHelp() {
       + '<div class="help-hero">'
         + '<div class="help-hero-inner">'
           + '<div class="help-hero-body">'
-            + '<div class="help-hero-title">Besoin d\'aide ?</div>'
-            + '<div class="help-hero-desc">Ton pilot répond en moins d\'1h. Vrai humain, vraie réponse.</div>'
+            + '<div class="help-pilot-card">'
+              + '<div class="help-pilot-avatar-wrap">'
+                + '<div class="help-pilot-avatar">ML</div>'
+                + '<span class="help-pilot-online"></span>'
+              + '</div>'
+              + '<div>'
+                + '<div class="help-hero-title">Marie est en ligne</div>'
+                + '<div class="help-hero-desc">Ton pilot · Temps de réponse moyen : <strong>23 min</strong></div>'
+              + '</div>'
+            + '</div>'
           + '</div>'
           + '<div class="help-hero-actions">'
-            + '<button class="help-hero-btn help-hero-btn-primary" data-agent="social">Contacter mon pilot</button>'
+            + '<button class="help-hero-btn help-hero-btn-primary" data-nav="messaging">Démarrer un chat</button>'
             + '<button class="help-hero-btn help-hero-btn-ghost" data-nav="notifications">Nouveau ticket</button>'
           + '</div>'
         + '</div>'
@@ -98,7 +107,7 @@ export function renderHelp() {
         + '<div class="help-section-card">'
           + '<div class="help-section-title">Infos rapides</div>'
           + '<div class="help-info-row"><div class="help-info-label">Ton pilot</div><div class="help-info-value">Marie L.</div></div>'
-          + '<div class="help-info-row"><div class="help-info-label">Temps de réponse moy.</div><div class="help-info-value">45 minutes</div></div>'
+          + '<div class="help-info-row"><div class="help-info-label">Temps de réponse moy.</div><div class="help-info-value">23 minutes</div></div>'
           + '<div class="help-info-row"><div class="help-info-label">Plan actuel</div><div class="help-info-value help-info-value-accent">Pro — 6 agents</div></div>'
         + '</div>'
       + '</div>'

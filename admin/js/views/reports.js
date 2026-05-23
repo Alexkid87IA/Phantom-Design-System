@@ -13,15 +13,15 @@ var PRESET_REPORTS = [
 
 var SCHEDULED_EXPORTS = [
   { report: 'Rapport MRR mensuel', next: '1 juin 2026', format: 'PDF', destination: 'Email + Google Drive' },
-  { report: 'Performance agents', next: '19 mai 2026', format: 'CSV', destination: 'Email' },
+  { report: 'Performance agents', next: '26 mai 2026', format: 'CSV', destination: 'Email' },
   { report: 'Export comptable', next: '5 juin 2026', format: 'CSV', destination: 'Email + Sheets' },
 ];
 
 export function renderReports() {
   var reportCards = PRESET_REPORTS.map(function(r) {
     var formatBadge = r.format === 'PDF'
-      ? '<span class="admin-badge" style="background:rgba(255,45,135,0.1);color:#FF2D87">PDF</span>'
-      : '<span class="admin-badge" style="background:rgba(0,102,255,0.1);color:#0066FF">CSV</span>';
+      ? '<span class="admin-badge admin-badge-pink">PDF</span>'
+      : '<span class="admin-badge admin-badge-blue">CSV</span>';
 
     return '<div class="admin-card">'
       + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">'

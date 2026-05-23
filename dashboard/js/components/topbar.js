@@ -28,6 +28,7 @@ export function renderTopbar() {
     'team-permissions': 'Équipe & Accès',
     notifications: 'Notifications',
     referral: 'Parrainage',
+    'command-center': 'Centre de commande',
     help: 'Centre d\'aide',
   };
 
@@ -39,7 +40,7 @@ export function renderTopbar() {
   }
 
   var count = unreadCount();
-  var bellHtml = '<div class="notif-bell" data-action="toggle-notif-panel">'
+  var bellHtml = '<div class="notif-bell" data-action="toggle-notif-panel" role="button" tabindex="0" aria-label="Notifications' + (count > 0 ? ', ' + count + ' non lue' + (count > 1 ? 's' : '') : '') + '">'
     + '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>'
     + (count > 0 ? '<span class="notif-badge">' + count + '</span>' : '')
     + '</div>';

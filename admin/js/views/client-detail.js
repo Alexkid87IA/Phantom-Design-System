@@ -6,6 +6,7 @@ import { getState } from '../store.js';
 import { getClient, CLIENTS } from '../data/clients.js';
 import { ALL_AGENTS, CONTENT_QUEUE } from '../data/admin-agents.js';
 import { INVOICES } from '../data/revenue.js';
+import { esc } from '../lib/esc.js';
 
 function statusBadge(status) {
   if (status === 'active') return '<span class="admin-badge admin-badge-green">Actif</span>';
@@ -65,7 +66,9 @@ export function renderClientDetail() {
         ? '<span class="admin-badge admin-badge-red">Retard</span>'
         : inv.status === 'trial'
           ? '<span class="admin-badge admin-badge-blue">Trial</span>'
-          : '<span class="admin-badge admin-badge-orange">Attente</span>';
+          : inv.status === 'paused'
+            ? '<span class="admin-badge admin-badge-muted">Pause</span>'
+            : '<span class="admin-badge admin-badge-orange">Attente</span>';
     return '<tr><td>' + inv.period + '</td><td>' + inv.amount + ' €</td><td>' + sBadge + '</td></tr>';
   }).join('');
 
@@ -78,7 +81,7 @@ export function renderClientDetail() {
     + '</div>'
     + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">'
       + '<div style="display:flex;align-items:center;gap:14px">'
-        + '<div class="admin-detail-title">' + client.name + '</div>'
+        + '<div class="admin-detail-title">' + esc(client.name) + '</div>'
         + statusBadge(client.status)
       + '</div>'
       + '<div style="display:flex;gap:6px">'
@@ -88,9 +91,9 @@ export function renderClientDetail() {
       + '</div>'
     + '</div>'
     + '<div class="admin-detail-meta" style="margin-bottom:28px">'
-      + '<span>' + client.sector + ' · ' + client.city + '</span>'
-      + '<span>Plan ' + client.plan + ' · ' + client.mrr + ' €/mois</span>'
-      + '<span>Pilot : ' + client.pilot + '</span>'
+      + '<span>' + esc(client.sector) + ' · ' + esc(client.city) + '</span>'
+      + '<span>Plan ' + esc(client.plan) + ' · ' + client.mrr + ' €/mois</span>'
+      + '<span>Pilot : ' + esc(client.pilot) + '</span>'
       + '<span>Depuis ' + client.since + '</span>'
     + '</div>'
 

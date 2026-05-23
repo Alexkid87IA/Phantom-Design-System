@@ -1,4 +1,5 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes msFadeOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes searchIn { from { opacity: 0; transform: scale(0.96) translateY(-10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
@@ -25,17 +26,11 @@
 .skeleton {
   background: linear-gradient(90deg, rgba(10,10,10,0.04) 25%, rgba(10,10,10,0.08) 50%, rgba(10,10,10,0.04) 75%);
   background-size: 200% 100%;
-  animation: shimmer 1.2s ease infinite;
-  border-radius: 12px;
+  animation: shimmer 1.2s var(--ease) infinite;
+  border-radius: var(--r-md);
 }
-.skeleton-text { height: 12px; margin-bottom: 8px; border-radius: 6px; }
-.skeleton-text-sm { height: 9px; width: 60%; margin-bottom: 6px; border-radius: 4px; }
 .skeleton-card {
   height: 80px;
   border-radius: var(--r-card);
   margin-bottom: 10px;
-}
-.skeleton-circle {
-  width: 36px; height: 36px;
-  border-radius: 50%;
 }

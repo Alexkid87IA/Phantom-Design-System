@@ -39,7 +39,7 @@ export function renderTeamPermissions() {
     + '<div class="team-perm-header">'
       + '<div>'
         + '<h2 class="view-title">Équipe & Permissions</h2>'
-        + '<p class="view-subtitle">' + TEAM_MEMBERS.length + ' membres · Gère les accès à ton espace</p>'
+        + '<p class="view-subtitle">' + TEAM_MEMBERS.length + ' membres · Chacun voit exactement ce qu\'il faut pour avancer</p>'
       + '</div>'
       + '<button class="team-invite-btn" data-action="team-invite">+ Inviter un membre</button>'
     + '</div>'

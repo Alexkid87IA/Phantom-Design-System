@@ -11,7 +11,7 @@ function miniSparkline(data, color) {
   var min = Math.min.apply(null, data);
   var range = max - min || 1;
   var pts = data.map(function(v, i) {
-    var x = (i / (data.length - 1)) * w;
+    var x = data.length > 1 ? (i / (data.length - 1)) * w : w / 2;
     var y = h - ((v - min) / range) * (h * 0.7) - h * 0.15;
     return x + ',' + y;
   }).join(' ');
@@ -34,6 +34,10 @@ var CHURNED_CLIENTS = [
 export function renderChurn() {
   var atRisk = CHURN_SIGNALS.filter(function(c) { return c.risk >= 50; }).length;
   var totalChurnedMrr = CHURNED_CLIENTS.reduce(function(s, c) { return s + c.mrr; }, 0);
+
+  var atRiskNames = CHURN_SIGNALS.filter(function(c) { return c.risk >= 50; }).map(function(c) { return c.client; });
+  var mrrExposed = CLIENTS.filter(function(c) { return atRiskNames.indexOf(c.name) >= 0; }).reduce(function(sum, c) { return sum + c.mrr; }, 0);
+  var churnRate = (CLIENTS.length + CHURNED_CLIENTS.length) > 0 ? ((CHURNED_CLIENTS.length / (CLIENTS.length + CHURNED_CLIENTS.length)) * 100).toFixed(1) : '0.0';
 
   var riskCards = CHURN_SIGNALS.map(function(c) {
     var riskColor = c.risk >= 70 ? 'var(--admin-red)' : c.risk >= 50 ? 'var(--admin-orange)' : 'var(--admin-text-muted)';
@@ -77,12 +81,37 @@ export function renderChurn() {
     + '</tr>';
   }).join('');
 
+  var criticalClients = CHURN_SIGNALS.filter(function(c) { return c.risk >= 80; });
+  var criticalBanner = '';
+  if (criticalClients.length > 0) {
+    var criticalItems = criticalClients.map(function(c) {
+      return '<div class="churn-critical-item">'
+        + '<span class="churn-critical-name">' + c.client + '</span>'
+        + '<span class="churn-critical-risk">' + c.risk + '%</span>'
+        + '<span class="churn-critical-reason">' + c.topReason + '</span>'
+        + '<div class="churn-critical-actions">'
+          + '<div class="admin-btn admin-btn-primary churn-critical-btn" data-action="call">' + c.action + '</div>'
+          + '<div class="admin-btn admin-btn-ghost churn-critical-btn" data-action="email">Email</div>'
+        + '</div>'
+      + '</div>';
+    }).join('');
+
+    criticalBanner = '<div class="churn-critical-banner">'
+      + '<div class="churn-critical-header">'
+        + '<span class="churn-critical-icon">&#9888;</span>'
+        + '<span class="churn-critical-title">' + criticalClients.length + ' client' + (criticalClients.length > 1 ? 's' : '') + ' en danger critique</span>'
+      + '</div>'
+      + criticalItems
+    + '</div>';
+  }
+
   return ''
+    + criticalBanner
     + '<div class="admin-grid admin-grid-4" style="margin-bottom:24px">'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Clients à risque</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + atRisk + '</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Taux churn</div><div class="admin-kpi-value" style="color:var(--admin-orange)">4.7%</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">Taux churn</div><div class="admin-kpi-value" style="color:var(--admin-orange)">' + churnRate + '%</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">MRR perdu (churn)</div><div class="admin-kpi-value">' + totalChurnedMrr + ' €</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Clients résiliés</div><div class="admin-kpi-value">' + CHURNED_CLIENTS.length + '</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">MRR exposé</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + mrrExposed.toLocaleString('fr-FR') + ' €</div></div>'
     + '</div>'
 
     + '<div class="admin-section">'

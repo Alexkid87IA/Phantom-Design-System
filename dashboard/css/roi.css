@@ -2,6 +2,23 @@
    ROI & Impact view
    ============================================================ */
 
+/* --- Hero --- */
+
+.roi-hero { margin-bottom: 20px; }
+.roi-hero-title {
+  font-family: var(--font-display); font-size: 24px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.roi-hero-sub {
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-30);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;
+}
+.roi-meaning {
+  font-size: 14px; line-height: 1.6; color: var(--ink-60);
+  background: var(--paper-warm); border: 1px solid var(--border);
+  border-radius: var(--r-card); padding: 16px 20px; margin-top: 16px;
+}
+
 /* --- KPI Grid --- */
 
 .roi-kpis {
@@ -41,12 +58,6 @@
   letter-spacing: -0.04em;
   margin-top: 8px;
 }
-.roi-kpi-sub {
-  font-family: var(--font-body);
-  font-size: 11px;
-  opacity: 0.85;
-  margin-top: 6px;
-}
 
 /* --- Info button (?) --- */
 
@@ -56,7 +67,7 @@
   right: 12px;
   width: 22px;
   height: 22px;
-  border-radius: 50%;
+  border-radius: var(--r-full);
   border: 1.5px solid currentColor;
   background: transparent;
   color: inherit;
@@ -68,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s var(--ease);
   z-index: 2;
   padding: 0;
   line-height: 1;
@@ -86,7 +97,7 @@
   z-index: 100;
   background: var(--ink);
   color: var(--paper-warm);
-  border-radius: 12px;
+  border-radius: var(--r-md);
   padding: 16px;
   width: 320px;
   box-shadow: var(--shadow-lift);
@@ -136,7 +147,7 @@
 .roi-tooltip-row-label {
   font-size: 11px;
   font-weight: 500;
-  color: #fff;
+  color: var(--fg-on-color);
   grid-column: 1;
   grid-row: 1;
 }
@@ -166,7 +177,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 3px 8px;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -202,7 +213,7 @@
   align-items: center;
   gap: 12px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(10,10,10,0.06);
+  border-bottom: 1px solid var(--border-hairline);
   position: relative;
   cursor: default;
 }
@@ -221,13 +232,13 @@
 .roi-bar-track {
   flex: 1;
   height: 8px;
-  background: rgba(10,10,10,0.06);
-  border-radius: 4px;
+  background: var(--border-hairline);
+  border-radius: var(--r-xs);
   overflow: hidden;
 }
 .roi-bar-fill {
   height: 100%;
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   transition: width 0.5s var(--ease);
 }
 .roi-agent-value {
@@ -262,7 +273,7 @@
   font-size: 11px;
   line-height: 1.4;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: var(--r-sm-md);
   box-shadow: var(--shadow-lift);
   white-space: nowrap;
   pointer-events: none;
@@ -326,7 +337,7 @@
   width: 2px;
   height: 20px;
   background: var(--ink-10, #ddd);
-  border-radius: 4px;
+  border-radius: var(--r-xs);
 }
 .roi-comparison-arrow-badge {
   font-family: var(--font-mono);
@@ -335,7 +346,7 @@
   color: var(--rainbow-green);
   background: rgba(0,210,106,0.1);
   padding: 4px 10px;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   white-space: nowrap;
 }
 
@@ -344,7 +355,7 @@
 .roi-saving {
   background: rgba(0,210,106,0.06);
   border: 1px solid rgba(0,210,106,0.15);
-  border-radius: 12px;
+  border-radius: var(--r-md);
   padding: 16px 20px;
   font-family: var(--font-body);
   font-size: 14px;
@@ -402,12 +413,12 @@
   font-size: 13px;
   font-weight: 600;
   padding: 10px 24px;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   border: none;
   background: var(--phantom-violet);
-  color: #fff;
+  color: var(--fg-on-color);
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s var(--ease);
 }
 .roi-verdict-btn:hover { opacity: 0.85; }
 .roi-verdict-btn:active { transform: scale(0.97); }

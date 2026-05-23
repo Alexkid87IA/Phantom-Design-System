@@ -31,7 +31,7 @@ var POSITIONING = {
 export function renderCompetitors() {
   var wins = WIN_LOSS.filter(function(w) { return w.result === 'win'; }).length;
   var losses = WIN_LOSS.filter(function(w) { return w.result === 'loss'; }).length;
-  var winRate = Math.round((wins / (wins + losses)) * 100);
+  var winRate = (wins + losses) > 0 ? Math.round((wins / (wins + losses)) * 100) : 0;
 
   function threatBadge(t) {
     if (t === 'high') return '<span class="admin-badge admin-badge-red">Élevée</span>';
@@ -78,7 +78,7 @@ export function renderCompetitors() {
     + '</div>'
 
     + '<div class="admin-section">'
-      + '<div class="admin-section-header"><div class="admin-section-title">Landscape concurrentiel</div></div>'
+      + '<div class="admin-section-header"><div><div class="admin-section-title">Landscape concurrentiel</div><div style="font-size:11px;color:var(--admin-text-secondary);margin-top:2px">Menace élevée → priorité rétention sales</div></div></div>'
       + '<div class="admin-card" style="padding:0;overflow:hidden">'
         + '<table class="admin-table">'
           + '<thead><tr><th>Concurrent</th><th>Type</th><th>Pricing</th><th>Force</th><th>Faiblesse</th><th>Menace</th></tr></thead>'

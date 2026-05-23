@@ -5,7 +5,7 @@
 import { getState, setState } from './store.js';
 import { renderSidebar } from './components/sidebar.js';
 import { renderTopbar } from './components/topbar.js';
-import { renderDashboard, dismissMorningCard } from './views/dashboard.js';
+import { renderDashboard, dismissMorningCard, initTickerRotation } from './views/dashboard.js';
 import { renderAgentChat } from './views/agent.js';
 import { renderInbox } from './views/inbox.js';
 import { renderWork } from './views/work.js';
@@ -21,6 +21,7 @@ import { renderSettings } from './views/settings.js';
 import { renderTeamPermissions } from './views/team-permissions.js';
 import { renderNotifications, markNotifRead, markAllNotifs } from './views/notifications.js';
 import { renderReferral } from './views/referral.js';
+import { renderCommandCenter, cleanupCommandCenter } from './views/command-center.js';
 import { sendMessage, scrollMessages } from './services/messaging.js';
 import { toast, celebrate } from './lib/toast.js';
 import { initCountUp } from './lib/countup.js';
@@ -32,13 +33,23 @@ import { openReportModal } from './modals/report-modal.js';
 import { openEditBriefModal } from './modals/edit-brief-modal.js';
 import { openApprovalModal } from './modals/approval-modal.js';
 import { toggleNotifPanel, closeNotifPanel } from './components/notif-panel.js';
-import { markAllRead } from './data/notifications.js';
 import { removeAgentRequest } from './data/agent-requests.js';
 import { addMessage } from './data/conversations.js';
-import { setInboxItems } from './data/inbox.js';
+import { setInboxItems, removeInboxItem, getInboxItems } from './data/inbox.js';
+
+var _previousView = null;
+
+function cleanupPreviousView(currentView) {
+  if (_previousView === 'command-center' && currentView !== 'command-center') {
+    cleanupCommandCenter();
+  }
+  _previousView = currentView;
+}
 
 function renderMainContent() {
   var STATE = getState();
+  var currentView = STATE.activeAgent ? '_agent' : (STATE.view || 'dashboard');
+  cleanupPreviousView(currentView);
   if (STATE.activeAgent) return renderAgentChat();
   if (STATE.view === 'inbox') return renderInbox();
   if (STATE.view === 'work') return renderWork();
@@ -53,6 +64,7 @@ function renderMainContent() {
   if (STATE.view === 'team-permissions') return renderTeamPermissions();
   if (STATE.view === 'notifications') return renderNotifications();
   if (STATE.view === 'referral') return renderReferral();
+  if (STATE.view === 'command-center') return renderCommandCenter();
   if (STATE.view === 'help') return renderHelp();
   return renderDashboard();
 }
@@ -83,17 +95,26 @@ function renderShortcutBar() {
 export function render() {
   var app = document.getElementById('app');
   if (!app) return;
-  app.innerHTML = ''
-    + '<div class="app">'
-      + renderSidebar()
-      + '<div class="main">'
-        + renderTopbar()
-        + renderMainContent()
-        + renderShortcutBar()
-      + '</div>'
-    + '</div>';
-  bindAllEvents();
-  requestAnimationFrame(initCountUp);
+  try {
+    app.innerHTML = ''
+      + '<div class="app">'
+        + renderSidebar()
+        + '<div class="main">'
+          + renderTopbar()
+          + renderMainContent()
+          + renderShortcutBar()
+        + '</div>'
+      + '</div>';
+    bindAllEvents();
+    requestAnimationFrame(initCountUp);
+    initTickerRotation();
+  } catch (err) {
+    console.error('[Phantom] Render error:', err);
+    app.innerHTML = '<div style="padding:40px;text-align:center;font-family:system-ui">'
+      + '<h2 style="margin-bottom:8px">Oups — rechargez la page</h2>'
+      + '<p style="color:var(--ink-60,#666)">' + err.message + '</p>'
+      + '</div>';
+  }
 }
 
 var clickBound = false;
@@ -105,28 +126,24 @@ function bindAllEvents() {
   if (!clickBound) {
     clickBound = true;
     app.addEventListener('click', handleAppClick);
-  }
-
-  var dashInput = document.getElementById('dashboard-composer');
-  if (dashInput) {
-    dashInput.addEventListener('keydown', function(e) {
+    app.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        var el = e.target.closest('[role="button"]');
+        if (el) { e.preventDefault(); el.click(); return; }
+      }
       if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage(dashInput.dataset.agent, dashInput.value);
+        var composer = e.target.closest('#dashboard-composer, #agent-composer');
+        if (composer) {
+          e.preventDefault();
+          sendMessage(composer.dataset.agent, composer.value);
+          composer.value = '';
+        }
       }
     });
   }
 
   var agentInput = document.getElementById('agent-composer');
-  if (agentInput) {
-    agentInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage(agentInput.dataset.agent, agentInput.value);
-      }
-    });
-    agentInput.focus();
-  }
+  if (agentInput) agentInput.focus();
 }
 
 function handleAppClick(e) {
@@ -287,6 +304,8 @@ function handleAppClick(e) {
     var chipEl = target.closest('[data-chip]');
     if (chipEl) {
       sendMessage(chipEl.dataset.chipAgent, chipEl.dataset.chip);
+      chipEl.classList.add('chip-sent');
+      chipEl.disabled = true;
       return;
     }
 
@@ -301,10 +320,12 @@ function handleAppClick(e) {
       }
 
       if (action === 'mark-all-read') {
-        markAllNotifs();
-        closeNotifPanel();
-        toast('Ardoise nettoyée !');
-        setState({});
+        animateButton(actionEl, { doneText: '✓ Marqué', onDone: function() {
+          markAllNotifs();
+          closeNotifPanel();
+          toast('Ardoise nettoyée !');
+          setState({});
+        }});
         return;
       }
 
@@ -341,16 +362,41 @@ function handleAppClick(e) {
         el.style.color = 'var(--ink)';
         el.style.padding = '0';
         el.style.border = '1px solid rgba(110,60,255,0.15)';
-        document.getElementById('toasts').appendChild(el);
+        var toastsEl = document.getElementById('toasts');
+        if (toastsEl) toastsEl.appendChild(el);
         setTimeout(function() { el.classList.add('toast-out'); }, 3500);
         setTimeout(function() { el.remove(); }, 3800);
         setState({});
         return;
       }
 
-      if (action === 'dismiss-morning') {
-        dismissMorningCard();
+      if (action === 'inbox-approve-item') {
+        var itemId = actionEl.dataset.itemId;
+        removeInboxItem(itemId);
+        toast('Livrable approuvé et en ligne !');
+        var remaining = getInboxItems().length;
+        if (remaining === 0) {
+          celebrate();
+          celebrate();
+        }
         setState({});
+        return;
+      }
+
+      if (action === 'dismiss-morning') {
+        var msCard = document.querySelector('.ms-inline-card');
+        if (msCard) {
+          msCard.style.transition = 'opacity 0.3s var(--ease), transform 0.3s var(--ease)';
+          msCard.style.opacity = '0';
+          msCard.style.transform = 'translateY(-8px)';
+          setTimeout(function() {
+            dismissMorningCard();
+            setState({});
+          }, 300);
+        } else {
+          dismissMorningCard();
+          setState({});
+        }
         return;
       }
 
@@ -402,6 +448,12 @@ function handleAppClick(e) {
         return;
       }
 
+      if (action === 'cc-sync') {
+        toast('Resynchronisation du Command Center...');
+        setState({});
+        return;
+      }
+
       if (action === 'delete-account') {
         toast('Contacte ton pilot pour supprimer ton compte.');
         return;
@@ -424,7 +476,18 @@ function handleAppClick(e) {
 
       if (action === 'integ-connect') {
         var integId = actionEl.dataset.integ;
+        var connectBtn = actionEl;
+        connectBtn.disabled = true;
+        connectBtn.classList.add('integ-btn-loading');
+        connectBtn.textContent = 'Connexion...';
         toast('Connexion à ' + (integId || 'l\'intégration') + ' en cours...');
+        setTimeout(function() {
+          if (!connectBtn.parentNode) return;
+          connectBtn.classList.remove('integ-btn-loading');
+          connectBtn.classList.add('integ-btn-disabled');
+          connectBtn.textContent = 'Connecté';
+          toast((integId || 'Intégration') + ' connecté avec succès');
+        }, 2000);
         return;
       }
 
@@ -433,6 +496,7 @@ function handleAppClick(e) {
         actionEl.textContent = 'Sync...';
         toast('Resynchronisation lancée');
         setTimeout(function() {
+          if (!actionEl.parentNode) return;
           actionEl.textContent = 'Resync';
           toast('Synchronisation terminée');
         }, 1500);
@@ -452,6 +516,13 @@ function handleAppClick(e) {
           setState({ activeAgent: null, agentTab: 'chat' });
           toast('Agent "' + ag3.name + '" supprimé');
         }
+        return;
+      }
+
+      if (action === 'help-article') {
+        actionEl.classList.add('help-article-active');
+        toast('Article complet — Ton pilot te l\'envoie par email');
+        setTimeout(function() { actionEl.classList.remove('help-article-active'); }, 600);
         return;
       }
 
@@ -481,6 +552,7 @@ function handleAppClick(e) {
       var dashInput = document.getElementById('dashboard-composer');
       if (dashInput) {
         sendMessage(dashInput.dataset.agent, dashInput.value);
+        dashInput.value = '';
       }
       return;
     }
@@ -488,6 +560,7 @@ function handleAppClick(e) {
       var agentInput = document.getElementById('agent-composer');
       if (agentInput) {
         sendMessage(agentInput.dataset.agent, agentInput.value);
+        agentInput.value = '';
       }
       return;
     }

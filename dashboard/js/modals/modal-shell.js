@@ -2,17 +2,22 @@
 //  MODAL SHELL -- openModal / closeModal
 // =====================================================
 
+var _overlayHandler = null;
+
 export function openModal(html) {
   var overlay = document.getElementById('modal-overlay');
+  if (_overlayHandler) overlay.removeEventListener('click', _overlayHandler);
   overlay.classList.remove('hidden');
   overlay.innerHTML = '<div class="modal">' + html + '</div>';
-  overlay.addEventListener('click', function(e) {
+  _overlayHandler = function(e) {
     if (e.target === overlay) closeModal();
-  });
-  var closeBtn = overlay.querySelector('[data-action="close-modal"]');
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (e.target.closest('[data-action="close-modal"]')) closeModal();
+  };
+  overlay.addEventListener('click', _overlayHandler);
 }
 
 export function closeModal() {
-  document.getElementById('modal-overlay').classList.add('hidden');
+  var overlay = document.getElementById('modal-overlay');
+  if (_overlayHandler) { overlay.removeEventListener('click', _overlayHandler); _overlayHandler = null; }
+  overlay.classList.add('hidden');
 }

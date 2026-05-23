@@ -38,7 +38,7 @@ var UNIT_ECONOMICS = {
 export function renderForecast() {
   var currentMRR = MRR_HISTORY[MRR_HISTORY.length - 1].mrr;
   var prevMRR = MRR_HISTORY[MRR_HISTORY.length - 2].mrr;
-  var mrrGrowth = Math.round(((currentMRR - prevMRR) / prevMRR) * 100);
+  var mrrGrowth = prevMRR > 0 ? Math.round(((currentMRR - prevMRR) / prevMRR) * 100) : 0;
   var arr = currentMRR * 12;
 
   var historyBars = MRR_HISTORY.map(function(h) {
@@ -85,6 +85,12 @@ export function renderForecast() {
       + '<div class="admin-kpi"><div class="admin-kpi-label">Pipeline pondéré</div><div class="admin-kpi-value" style="color:var(--admin-violet)">+' + weightedPipeline + ' €</div></div>'
     + '</div>'
 
+    + '<div class="admin-card" style="padding:16px;margin-bottom:16px;border-left:4px solid var(--admin-violet)">'
+      + '<div style="font-size:10px;color:var(--admin-text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Levier du mois</div>'
+      + '<div style="font-size:14px;font-weight:600;color:var(--admin-text-primary)">Convertir 1 démo + réduire churn à 2% = scénario Réaliste atteint</div>'
+      + '<div style="font-size:11px;color:var(--admin-text-muted);margin-top:6px">Impact : +' + (SCENARIOS[1].mrrM6 - currentMRR).toLocaleString('fr-FR') + ' € MRR à 6 mois</div>'
+    + '</div>'
+
     + '<div class="admin-section" style="margin-bottom:16px">'
       + '<div class="admin-section-header"><div class="admin-section-title">Scénarios de croissance</div></div>'
       + '<div style="display:flex;gap:12px">' + scenarioCards + '</div>'
@@ -107,7 +113,7 @@ export function renderForecast() {
       + '</div>'
 
       + '<div class="admin-section">'
-        + '<div class="admin-section-header"><div class="admin-section-title">Unit Economics</div></div>'
+        + '<div class="admin-section-header"><div><div class="admin-section-title">Unit Economics</div><div style="font-size:10px;color:var(--admin-text-muted);margin-top:2px">LTV/CAC &lt;3x → revoir acquisition · Payback &gt;12 mois → alerte</div></div></div>'
         + '<div class="admin-card" style="padding:16px">'
           + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">'
             + '<div style="padding:10px 0;border-bottom:1px solid var(--admin-border)"><div style="font-size:10px;color:var(--admin-text-muted)">ARPU (moy.)</div><div style="font-size:18px;font-weight:700;margin-top:4px">' + UNIT_ECONOMICS.avgMRR + ' €</div></div>'

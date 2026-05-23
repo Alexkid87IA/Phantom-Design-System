@@ -3,12 +3,11 @@
 // ═══════════════════════════════════════════════════════════
 
 export var MRR_HISTORY = [
-  { month: 'Déc 2025', mrr: 0, clients: 0, newMrr: 0, churnMrr: 0 },
   { month: 'Jan 2026', mrr: 1490, clients: 1, newMrr: 1490, churnMrr: 0 },
   { month: 'Fév 2026', mrr: 2870, clients: 3, newMrr: 1380, churnMrr: 0 },
   { month: 'Mar 2026', mrr: 5850, clients: 6, newMrr: 3470, churnMrr: 490 },
   { month: 'Avr 2026', mrr: 8220, clients: 9, newMrr: 2860, churnMrr: 490 },
-  { month: 'Mai 2026', mrr: 10390, clients: 11, newMrr: 2660, churnMrr: 490 },
+  { month: 'Mai 2026', mrr: 10390, clients: 10, newMrr: 2660, churnMrr: 490 },
 ];
 
 export var REVENUE_KPIS = {
@@ -26,8 +25,8 @@ export var REVENUE_KPIS = {
 
 export var PLAN_BREAKDOWN = [
   { plan: 'Starter', clients: 3, mrr: 1470, percent: 14 },
-  { plan: 'Croissance', clients: 4, mrr: 3560, percent: 34 },
-  { plan: 'Standard', clients: 4, mrr: 5960, percent: 57 },
+  { plan: 'Croissance', clients: 5, mrr: 4450, percent: 43 },
+  { plan: 'Standard', clients: 3, mrr: 4470, percent: 43 },
 ];
 
 export var PIPELINE = [
@@ -43,10 +42,11 @@ export var INVOICES = [
   { id: 'inv2', client: 'Chez Marcel', amount: 890, status: 'paid', date: '2026-05-01', period: 'Mai 2026' },
   { id: 'inv3', client: 'Bella Donna', amount: 490, status: 'paid', date: '2026-05-01', period: 'Mai 2026' },
   { id: 'inv4', client: 'Green Garden', amount: 1490, status: 'paid', date: '2026-05-01', period: 'Mai 2026' },
-  { id: 'inv5', client: 'L\'Atelier Zen', amount: 890, status: 'pending', date: '2026-05-01', period: 'Mai 2026' },
+  { id: 'inv5', client: 'L\'Atelier Zen', amount: 890, status: 'overdue', date: '2026-05-01', period: 'Mai 2026' },
   { id: 'inv6', client: 'Pizza Roma', amount: 490, status: 'trial', date: '2026-05-10', period: 'Trial' },
   { id: 'inv7', client: 'Maison Dupont', amount: 890, status: 'overdue', date: '2026-05-01', period: 'Mai 2026' },
   { id: 'inv8', client: 'Bike & Run', amount: 1490, status: 'paid', date: '2026-05-01', period: 'Mai 2026' },
   { id: 'inv9', client: 'Fleur de Sel', amount: 890, status: 'paid', date: '2026-05-01', period: 'Mai 2026' },
   { id: 'inv10', client: 'Studio Lumière', amount: 490, status: 'trial', date: '2026-05-14', period: 'Trial' },
+  { id: 'inv11', client: 'Garage Auto+', amount: 890, status: 'paused', date: '2026-05-01', period: 'Mai 2026' },
 ];

@@ -36,29 +36,37 @@ function getAllNotifs() {
   return merged;
 }
 
+var ACTION_TYPES = { deliverable: true, alert: true, request: true };
+
+function renderNotifItem(n) {
+  var agent = AGENTS.find(function(a) { return a.id === n.agent; });
+  var agentColor = agent ? agent.color : 'var(--phantom-violet)';
+  var agentName = agent ? agent.name : 'Agent';
+  var typeIcon = TYPE_ICONS[n.type] || '🔔';
+
+  return '<div class="notif-center-item' + (n.read ? '' : ' notif-center-unread') + '" data-notif-read="' + n.id + '">'
+    + '<div class="notif-center-dot" style="background:' + (n.read ? 'transparent' : agentColor) + '"></div>'
+    + '<div class="notif-center-icon">' + typeIcon + '</div>'
+    + '<div class="notif-center-body">'
+      + '<div class="notif-center-title">' + n.title + '</div>'
+      + '<div class="notif-center-text">' + (n.text || n.body || '') + '</div>'
+      + '<div class="notif-center-meta">'
+        + '<span class="notif-center-agent" style="color:' + agentColor + '">' + agentName + '</span>'
+        + '<span class="notif-center-time">' + n.time + '</span>'
+      + '</div>'
+    + '</div>'
+  + '</div>';
+}
+
 export function renderNotifications() {
   var allNotifs = getAllNotifs();
   var unread = allNotifs.filter(function(n) { return !n.read; }).length;
 
-  var items = allNotifs.map(function(n) {
-    var agent = AGENTS.find(function(a) { return a.id === n.agent; });
-    var agentColor = agent ? agent.color : 'var(--phantom-violet)';
-    var agentName = agent ? agent.name : 'Agent';
-    var typeIcon = TYPE_ICONS[n.type] || '🔔';
+  var actionNotifs = allNotifs.filter(function(n) { return ACTION_TYPES[n.type]; });
+  var updateNotifs = allNotifs.filter(function(n) { return !ACTION_TYPES[n.type]; });
 
-    return '<div class="notif-center-item' + (n.read ? '' : ' notif-center-unread') + '" data-notif-read="' + n.id + '">'
-      + '<div class="notif-center-dot" style="background:' + (n.read ? 'transparent' : agentColor) + '"></div>'
-      + '<div class="notif-center-icon">' + typeIcon + '</div>'
-      + '<div class="notif-center-body">'
-        + '<div class="notif-center-title">' + n.title + '</div>'
-        + '<div class="notif-center-text">' + (n.text || n.body || '') + '</div>'
-        + '<div class="notif-center-meta">'
-          + '<span class="notif-center-agent" style="color:' + agentColor + '">' + agentName + '</span>'
-          + '<span class="notif-center-time">' + n.time + '</span>'
-        + '</div>'
-      + '</div>'
-    + '</div>';
-  }).join('');
+  var actionItems = actionNotifs.map(renderNotifItem).join('');
+  var updateItems = updateNotifs.map(renderNotifItem).join('');
 
   var emptyState = allNotifs.length === 0
     ? '<div class="notif-center-empty">'
@@ -68,17 +76,39 @@ export function renderNotifications() {
     + '</div>'
     : '';
 
+  var actionSection = actionNotifs.length > 0
+    ? '<div class="notif-section">'
+        + '<div class="notif-section-header">'
+          + '<span class="notif-section-dot notif-section-dot-action"></span>'
+          + '<span class="notif-section-label">Action requise</span>'
+          + '<span class="notif-section-count">' + actionNotifs.length + '</span>'
+        + '</div>'
+        + '<div class="notif-center-list">' + actionItems + '</div>'
+      + '</div>'
+    : '';
+
+  var updateSection = updateNotifs.length > 0
+    ? '<div class="notif-section">'
+        + '<div class="notif-section-header">'
+          + '<span class="notif-section-dot notif-section-dot-update"></span>'
+          + '<span class="notif-section-label">Mises à jour</span>'
+          + '<span class="notif-section-count">' + updateNotifs.length + '</span>'
+        + '</div>'
+        + '<div class="notif-center-list">' + updateItems + '</div>'
+      + '</div>'
+    : '';
+
   return '<div class="view-notifications">'
     + '<div class="notif-center-header">'
       + '<div>'
         + '<h2 class="view-title">Notifications</h2>'
-        + '<p class="view-subtitle">' + unread + ' non lue' + (unread > 1 ? 's' : '') + '</p>'
+        + '<p class="view-subtitle">Tes agents te signalent uniquement ce qui compte' + (unread > 0 ? ' — ' + unread + ' en attente' : '') + '</p>'
       + '</div>'
       + (unread > 0
         ? '<button class="notif-mark-all-btn" data-action="mark-all-read">Tout marquer comme lu</button>'
         : '')
     + '</div>'
-    + (emptyState || '<div class="notif-center-list">' + items + '</div>')
+    + (emptyState || (actionSection + updateSection))
   + '</div>';
 }
 

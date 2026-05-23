@@ -3,7 +3,7 @@
 // =====================================================
 
 import { subscribe, setState } from './store.js';
-import { render } from './router.js';
+import { render } from './router.js?v=43';
 import { initKeyboardShortcuts } from './services/keyboard.js';
 import { startBackgroundSimulation } from './services/background.js';
 import { showOnboardingTour } from './components/onboarding-tour.js';

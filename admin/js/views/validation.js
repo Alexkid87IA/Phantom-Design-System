@@ -49,7 +49,7 @@ export function renderValidation() {
             + '<div class="admin-btn admin-btn-primary" data-action="approve" style="font-size:10px;padding:4px 10px">Approuver</div>'
             + '<div class="admin-btn admin-btn-ghost" data-action="reject" style="font-size:10px;padding:4px 10px">Retour agent</div>'
           : actions === 'client' ? ''
-            + '<div class="admin-btn admin-btn-ghost" data-action="remind" style="font-size:10px;padding:4px 10px">Relancer client</div>'
+            + '<div class="admin-btn admin-btn-ghost" data-action="remind" style="font-size:10px;padding:4px 10px">Envoyer relance</div>'
           : ''
             + '<div class="admin-btn admin-btn-primary" data-action="approve" style="font-size:10px;padding:4px 10px">Publier</div>'
           )

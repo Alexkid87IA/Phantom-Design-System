@@ -31,8 +31,9 @@ var TOP_CONTENT = [
 ];
 
 export function renderAnalytics() {
-  function metricCard(label, value, growth, color, countupVal) {
+  function metricCard(label, value, growth, color, countupVal, rec) {
     var growthHtml = growth ? '<span class="analytics-metric-growth">' + growth + '</span>' : '';
+    var recHtml = rec ? '<div class="analytics-metric-rec">' + rec + '</div>' : '';
     var valHtml = countupVal
       ? '<div class="analytics-metric-value" style="color:' + (color || 'var(--ink)') + '" data-countup="' + countupVal + '">0</div>'
       : '<div class="analytics-metric-value" style="color:' + (color || 'var(--ink)') + '">' + value + '</div>';
@@ -42,6 +43,7 @@ export function renderAnalytics() {
         + valHtml
         + growthHtml
       + '</div>'
+      + recHtml
     + '</div>';
   }
 
@@ -110,10 +112,10 @@ export function renderAnalytics() {
       + '</div>'
 
       + '<div class="analytics-metrics-grid">'
-        + metricCard('Followers Instagram', METRICS.instagram.followers.toLocaleString('fr-FR'), METRICS.instagram.followersGrowth, 'var(--rainbow-pink)', METRICS.instagram.followers)
-        + metricCard('Engagement', METRICS.instagram.engagement, METRICS.instagram.engGrowth, 'var(--phantom-violet)')
-        + metricCard('Note Google', METRICS.google.rating + '★', METRICS.google.ratingGrowth, 'var(--rainbow-yellow)')
-        + metricCard('Position SEO moy.', '#' + METRICS.seo.position, METRICS.seo.posGrowth, 'var(--rainbow-green)')
+        + metricCard('Followers Instagram', METRICS.instagram.followers.toLocaleString('fr-FR'), METRICS.instagram.followersGrowth, 'var(--rainbow-pink)', METRICS.instagram.followers, 'Reels = 3x plus de reach → publier 3/sem.')
+        + metricCard('Engagement', METRICS.instagram.engagement, METRICS.instagram.engGrowth, 'var(--phantom-violet)', null, 'Mardi et vendredi = pics d’engagement')
+        + metricCard('Note Google', METRICS.google.rating + '★', METRICS.google.ratingGrowth, 'var(--rainbow-yellow)', null, 'Objectif 5.0★ → répondre aux avis en <1h')
+        + metricCard('Position SEO moy.', '#' + METRICS.seo.position, METRICS.seo.posGrowth, 'var(--rainbow-green)', null, 'Top 5 accessible → 2 articles/sem.')
       + '</div>'
 
       + '<div class="analytics-two-col">'

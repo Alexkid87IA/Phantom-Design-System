@@ -43,4 +43,3 @@ export function startBackgroundSimulation() {
   if (intervalId) return;
   intervalId = setInterval(simulateActivity, 45000 + Math.random() * 45000);
 }
-

@@ -33,6 +33,12 @@ var TOUR_STEPS = [
     text: 'Choisis un template ou construis un agent sur-mesure. En quelques clics, ton nouvel agent se met au travail.',
     position: 'bottom',
   },
+  {
+    selector: '[data-nav="work"]',
+    title: 'Le travail de tes agents',
+    text: 'Regarde ce qu\'ils ont déjà produit. Posts, articles, réponses aux avis — tout est là. Plus tu avances, plus ils deviennent performants.',
+    position: 'right',
+  },
 ];
 
 var currentStep = 0;
@@ -40,7 +46,11 @@ var currentStep = 0;
 function getTargetRect(selector) {
   var el = document.querySelector(selector);
   if (!el) return null;
-  return el.getBoundingClientRect();
+  var styles = window.getComputedStyle(el);
+  var rect = el.getBoundingClientRect();
+  if (styles.display === 'none' || styles.visibility === 'hidden') return null;
+  if (rect.width < 16 || rect.height < 16) return null;
+  return rect;
 }
 
 function buildStepHTML(step, stepIndex, total) {
@@ -75,20 +85,35 @@ function positionTooltip(step) {
 
   var tw = tooltip.offsetWidth;
   var th = tooltip.offsetHeight;
+  var gap = 16;
+  var minX = 16;
+  var minY = 16;
+  var maxX = window.innerWidth - tw - minX;
+  var maxY = window.innerHeight - th - minY;
+  var left = rect.left;
+  var top = rect.top;
 
   if (step.position === 'right') {
-    tooltip.style.top = rect.top + 'px';
-    tooltip.style.left = (rect.right + 16) + 'px';
+    top = rect.top;
+    left = rect.right + gap;
   } else if (step.position === 'left') {
-    tooltip.style.top = rect.top + 'px';
-    tooltip.style.left = (rect.left - tw - 16) + 'px';
+    top = rect.top;
+    left = rect.left - tw - gap;
   } else if (step.position === 'bottom') {
-    tooltip.style.top = (rect.bottom + 12) + 'px';
-    tooltip.style.left = Math.max(16, rect.left + rect.width / 2 - tw / 2) + 'px';
+    top = rect.bottom + 12;
+    left = rect.left + rect.width / 2 - tw / 2;
   } else {
-    tooltip.style.top = (rect.top - th - 12) + 'px';
-    tooltip.style.left = Math.max(16, rect.left + rect.width / 2 - tw / 2) + 'px';
+    top = rect.top - th - 12;
+    left = rect.left + rect.width / 2 - tw / 2;
   }
+
+  if (left > maxX) left = maxX;
+  if (left < minX) left = minX;
+  if (top > maxY) top = maxY;
+  if (top < minY) top = minY;
+
+  tooltip.style.top = top + 'px';
+  tooltip.style.left = left + 'px';
 }
 
 function renderStep(stepIndex) {
@@ -121,9 +146,20 @@ function renderStep(stepIndex) {
   document.getElementById('tour-overlay').addEventListener('click', function(e) {
     if (e.target.id === 'tour-overlay') closeTour();
   });
+
+  document.removeEventListener('keydown', handleTourKeydown);
+  document.addEventListener('keydown', handleTourKeydown);
+}
+
+function handleTourKeydown(e) {
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    closeTour();
+  }
 }
 
 function closeTour() {
+  document.removeEventListener('keydown', handleTourKeydown);
   var overlay = document.getElementById('tour-overlay');
   if (overlay) {
     overlay.classList.add('tour-closing');

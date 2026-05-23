@@ -249,7 +249,7 @@ export var AGENT_TEMPLATES = [
     ],
     color: '#FFD400',
     firstDeliverable: {
-      title: 'Snapshot financier — Mai 2025',
+      title: 'Snapshot financier — Mai 2026',
       items: [
         'Factures émises ce mois : 8 — total 14 200EUR',
         'Payées : 5 (9 800EUR) — En attente : 2 (3 200EUR) — En retard : 1 (1 200EUR, +12j)',
@@ -409,7 +409,7 @@ export var AGENT_TEMPLATES = [
 
 // ── QCM definitions per pole ──
 
-export var POLE_QCM = {
+var POLE_QCM = {
   'Visibilite': [
     {
       id: 'networks',
@@ -454,7 +454,7 @@ export var POLE_QCM = {
       label: 'Sujets prioritaires ?',
       type: 'text',
       count: 3,
-      placeholder: 'Ex : cuisine japonaise, menu du jour...',
+      placeholder: 'cuisine japonaise, menu du jour...',
     },
     {
       id: 'tone',

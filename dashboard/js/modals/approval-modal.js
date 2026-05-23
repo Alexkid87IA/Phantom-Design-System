@@ -109,7 +109,7 @@ export function openApprovalModal(itemId) {
     + '</div>'
     + '<div class="approval-feedback-zone hidden" id="approval-feedback-zone">'
       + '<div class="approval-feedback-label">Ton feedback pour ' + agentName + '</div>'
-      + '<textarea class="approval-feedback-input" id="approval-feedback-input" placeholder="Ex : Refais la photo 3 avec un fond plus clair..." rows="3"></textarea>'
+      + '<textarea class="approval-feedback-input" id="approval-feedback-input" placeholder="Refais la photo 3 avec un fond plus clair..." rows="3"></textarea>'
       + '<button class="btn-primary approval-feedback-send" id="approval-feedback-send">Envoyer le feedback</button>'
     + '</div>'
     + '<div class="modal-footer" id="approval-footer">'
@@ -122,14 +122,21 @@ export function openApprovalModal(itemId) {
   document.getElementById('approval-approve').addEventListener('click', function() {
     removeInboxItem(itemId);
     var remaining = getInboxItems();
-    closeModal();
-    if (remaining.length === 0) {
+    celebrate();
+    if (!window._firstApprovalDone) {
+      window._firstApprovalDone = true;
       celebrate();
+      setTimeout(function() { celebrate(); }, 120);
+      closeModal();
+      toast('Premier livrable validé ! Il est live — ton agent a fait le job.');
+    } else if (remaining.length === 0) {
       celebrate();
-      toast('Tout est validé ! Tes agents envoient tout en ligne.');
+      setTimeout(function() { celebrate(); }, 150);
+      closeModal();
+      toast('Tout est live ! Tes agents ont tout publié — zéro effort de ton côté.');
     } else {
+      closeModal();
       toast('Validé ! Plus que ' + remaining.length + ' livrable' + (remaining.length > 1 ? 's' : ''));
-      celebrate();
     }
     setState({});
   });

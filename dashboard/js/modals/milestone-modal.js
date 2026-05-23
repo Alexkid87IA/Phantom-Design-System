@@ -8,10 +8,10 @@ import { celebrate } from '../lib/toast.js';
 import { ghostSvg } from '../lib/icons.js';
 
 var MILESTONES = [
-  { threshold: 2, emoji: '🚀', title: 'Tu as doublé ta mise !', sub: 'Ton ROI vient de passer ×2. Phantom te rapporte deux fois ce qu\'il te coûte.' },
-  { threshold: 5, emoji: '🔥', title: '×5 — Ça chauffe !', sub: 'Chaque euro investi t\'en rapporte 5. Tes agents accélèrent.' },
-  { threshold: 10, emoji: '💎', title: '×10 — Machine à valeur', sub: 'Dix fois ton investissement. L\'équipe Phantom bosse pendant que tu gères.' },
-  { threshold: 15, emoji: '👑', title: '×15 — Niveau patron', sub: 'Tu fais partie du top 5% des clients Phantom. Résultat exceptionnel.' },
+  { threshold: 2, emoji: '🚀', title: 'Tu as doublé ta mise !', sub: 'Ton ROI vient de passer ×2. À ce rythme, tes agents financent les suivants d\'ici 3 mois.' },
+  { threshold: 5, emoji: '🔥', title: '×5 — Ça chauffe !', sub: 'Chaque euro investi t\'en rapporte 5. Tes agents fonctionnent en pilote automatique — le prochain palier arrive vite.' },
+  { threshold: 10, emoji: '💎', title: '×10 — Machine à valeur', sub: 'Dix fois ton investissement. Tu peux scaler : ajouter 3 agents et rester largement rentable.' },
+  { threshold: 15, emoji: '👑', title: '×15 — Niveau patron', sub: 'Top 5% des clients Phantom. Ton business tourne sans toi — c\'est exactement le plan.' },
 ];
 
 var STORAGE_KEY = 'phantom_roi_milestone';

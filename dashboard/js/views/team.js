@@ -52,7 +52,7 @@ function weeklyMVP() {
     var prev = trend[trend.length - 2];
     var curr = trend[trend.length - 1];
     var growth = prev > 0 ? Math.round(((curr - prev) / prev) * 100) : 0;
-    if (curr > bestGrowth || !best) {
+    if (growth > bestGrowth || !best) {
       best = a;
       bestGrowth = growth;
     }
@@ -102,7 +102,7 @@ export function renderTeam() {
         + '</div>'
         + '<div class="team-card-stats">'
           + '<div class="team-card-stat"><strong>' + completed + '</strong> tâches</div>'
-          + '<div class="team-card-stat"><strong>' + successRate + '%</strong> succès</div>'
+          + '<div class="team-card-stat"><strong>' + successRate + '%</strong> contenu publiable</div>'
         + '</div>'
         + '<div class="team-card-cta">Voir l\'agent &rarr;</div>'
       + '</div>';
@@ -142,7 +142,7 @@ export function renderTeam() {
       + '</div>'
       + '<div class="team-hero-bar">'
         + '<span class="team-hero-pulse"></span>'
-        + '<span class="team-hero-copy">' + activeAgentCount() + ' agents ont travaillé pendant que tu dormais</span>'
+        + '<span class="team-hero-copy">' + activeAgentCount() + ' agents ont produit ' + totalCompleted() + ' livrables pendant que tu dormais</span>'
       + '</div>'
       + heroCard
       + '<div class="team-grid">'

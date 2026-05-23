@@ -74,14 +74,24 @@ export function renderAgentChat() {
         web: 'optimise la vitesse du site...',
         brand: 'finalise un visuel de marque...',
       };
+      var MOMENTUM = {
+        social: 'Tes followers vont adorer — publication dans quelques minutes.',
+        google: 'Réponse pro en moins d\'une heure. Tes clients sentent qu\'on les écoute.',
+        seo: 'Chaque mot optimisé pour la page 1. Trafic en hausse.',
+        photos: 'Visuels pros en cours. Tes clients vont croire que tu as un studio.',
+        web: 'Chaque seconde gagnée = plus de clients qui restent.',
+        brand: 'Ton identité visuelle prend forme. Reconnaissable au premier regard.',
+      };
       var workText = WORKING_ON[a.id] || 'travaille sur une tâche...';
+      var momentumText = MOMENTUM[a.id] || '';
       workingIndicator = ''
         + '<div class="agent-working-indicator">'
           + '<div class="agent-working-dot" style="background:' + a.color + '"></div>'
           + ghostSvg(a.color, 16)
           + '<span class="agent-working-text">' + a.name + ' ' + workText + '</span>'
           + '<span class="agent-working-typing"><span></span><span></span><span></span></span>'
-        + '</div>';
+        + '</div>'
+        + (momentumText ? '<div class="agent-working-momentum">' + momentumText + '</div>' : '');
     }
 
     tabContent = ''
@@ -117,7 +127,19 @@ export function renderAgentChat() {
             + '<span class="agent-work-date">' + w.date + '</span>'
           + '</div>';
         }).join('')
-      : '<div class="agent-work-empty">Aucun travail récent</div>';
+      : '<div class="agent-first72">'
+          + '<div class="agent-first72-header">'
+            + '<span class="agent-first72-badge">Premières 72h</span>'
+            + '<span class="agent-first72-countdown">~48h restantes</span>'
+          + '</div>'
+          + '<div class="agent-first72-steps">'
+            + '<div class="agent-first72-step done"><span class="agent-first72-dot done"></span><span>Analyse de ton activité</span><span class="agent-first72-check">&#10003;</span></div>'
+            + '<div class="agent-first72-step done"><span class="agent-first72-dot done"></span><span>Configuration des paramètres</span><span class="agent-first72-check">&#10003;</span></div>'
+            + '<div class="agent-first72-step active"><span class="agent-first72-dot active"></span><span>Préparation du premier livrable…</span></div>'
+            + '<div class="agent-first72-step"><span class="agent-first72-dot"></span><span>Validation & publication</span></div>'
+          + '</div>'
+          + '<div class="agent-first72-footer">Ton agent travaille. En attendant, tu peux briefer ou configurer d\'autres agents — quand le livrable arrive, tu valides en 10 secondes.</div>'
+        + '</div>';
 
     tabContent = ''
       + '<div class="agent-info">'

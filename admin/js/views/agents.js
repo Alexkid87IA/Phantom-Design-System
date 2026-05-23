@@ -43,7 +43,9 @@ export function renderAgents() {
   }).join('');
 
   var totalValue = ALL_AGENTS.reduce(function(sum, a) { return sum + a.value; }, 0);
-  var avgSuccess = Math.round(ALL_AGENTS.reduce(function(sum, a) { return sum + a.success; }, 0) / ALL_AGENTS.length);
+  var avgSuccess = ALL_AGENTS.length > 0
+    ? Math.round(ALL_AGENTS.reduce(function(sum, a) { return sum + a.success; }, 0) / ALL_AGENTS.length)
+    : 0;
 
   var rows = filtered.map(function(a) {
     var pauseLabel = (a.status === 'active' || a.status === 'waiting') ? 'Pause' : 'Activer';
@@ -73,7 +75,7 @@ export function renderAgents() {
     + '<div class="admin-grid admin-grid-4" style="margin-bottom:24px">'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Total agents</div><div class="admin-kpi-value">' + totalAgents() + '</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Actifs</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + activeAgents() + '</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">Erreurs</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + errorAgents() + '</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">Erreurs</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + errorAgents() + (totalAgents() > 0 ? ' <span style="font-size:12px;font-weight:400;color:var(--admin-text-muted)">(' + Math.round((errorAgents() / totalAgents()) * 100) + '%)</span>' : '') + '</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Valeur totale générée</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + totalValue.toLocaleString('fr-FR') + ' €</div></div>'
     + '</div>'
     + '<div class="admin-section">'

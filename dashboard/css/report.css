@@ -20,13 +20,13 @@
 }
 .report-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 8px 0; border-bottom: 1px solid rgba(10,10,10,0.04);
+  padding: 8px 0; border-bottom: 1px solid var(--border-light);
   font-family: var(--font-body); font-size: 12px;
 }
 .report-row-agent { display: flex; align-items: center; gap: 8px; color: var(--ink); }
 .report-row-value { font-weight: 600; color: var(--ink); }
 .report-bar {
-  height: 4px; border-radius: 4px; background: rgba(10,10,10,0.06);
+  height: 4px; border-radius: var(--r-xs); background: var(--border-hairline);
   flex: 1; margin: 0 12px; min-width: 60px;
 }
-.report-bar-fill { height: 100%; border-radius: 4px; }
+.report-bar-fill { height: 100%; border-radius: var(--r-xs); }

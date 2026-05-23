@@ -4,15 +4,15 @@
 // ═══════════════════════════════════════════════════════════
 
 var SLA_DATA = [
-  { client: 'Sushi Boy', plan: 'Pro', contentSla: 24, actualContent: 18, responseSla: 4, actualResponse: 1.2, publishSla: 48, actualPublish: 32, score: 98, trend: 'up' },
-  { client: 'Chez Marcel', plan: 'Pro', contentSla: 24, actualContent: 22, responseSla: 4, actualResponse: 2.8, publishSla: 48, actualPublish: 44, score: 91, trend: 'stable' },
+  { client: 'Sushi Boy', plan: 'Standard', contentSla: 24, actualContent: 18, responseSla: 4, actualResponse: 1.2, publishSla: 48, actualPublish: 32, score: 98, trend: 'up' },
+  { client: 'Chez Marcel', plan: 'Croissance', contentSla: 24, actualContent: 22, responseSla: 4, actualResponse: 2.8, publishSla: 48, actualPublish: 44, score: 91, trend: 'stable' },
   { client: 'Bella Donna', plan: 'Starter', contentSla: 48, actualContent: 36, responseSla: 8, actualResponse: 5.5, publishSla: 72, actualPublish: 60, score: 94, trend: 'up' },
-  { client: 'Green Garden', plan: 'Scale', contentSla: 12, actualContent: 10, responseSla: 2, actualResponse: 1.5, publishSla: 24, actualPublish: 18, score: 96, trend: 'up' },
-  { client: 'Maison Dupont', plan: 'Pro', contentSla: 24, actualContent: 52, responseSla: 4, actualResponse: 12.0, publishSla: 48, actualPublish: 96, score: 42, trend: 'down' },
-  { client: 'Bike & Run', plan: 'Scale', contentSla: 12, actualContent: 11, responseSla: 2, actualResponse: 1.8, publishSla: 24, actualPublish: 20, score: 95, trend: 'stable' },
-  { client: 'L\'Atelier Zen', plan: 'Starter', contentSla: 48, actualContent: 40, responseSla: 8, actualResponse: 6.0, publishSla: 72, actualPublish: 55, score: 92, trend: 'stable' },
+  { client: 'Green Garden', plan: 'Standard', contentSla: 12, actualContent: 10, responseSla: 2, actualResponse: 1.5, publishSla: 24, actualPublish: 18, score: 96, trend: 'up' },
+  { client: 'Maison Dupont', plan: 'Croissance', contentSla: 24, actualContent: 52, responseSla: 4, actualResponse: 12.0, publishSla: 48, actualPublish: 96, score: 42, trend: 'down' },
+  { client: 'Bike & Run', plan: 'Standard', contentSla: 12, actualContent: 11, responseSla: 2, actualResponse: 1.8, publishSla: 24, actualPublish: 20, score: 95, trend: 'stable' },
+  { client: 'L\'Atelier Zen', plan: 'Croissance', contentSla: 24, actualContent: 40, responseSla: 4, actualResponse: 6.0, publishSla: 48, actualPublish: 55, score: 92, trend: 'stable' },
   { client: 'Pizza Roma', plan: 'Starter', contentSla: 48, actualContent: 30, responseSla: 8, actualResponse: 3.0, publishSla: 72, actualPublish: 48, score: 97, trend: 'up' },
-  { client: 'Fleur de Sel', plan: 'Pro', contentSla: 24, actualContent: 20, responseSla: 4, actualResponse: 2.2, publishSla: 48, actualPublish: 36, score: 95, trend: 'up' },
+  { client: 'Fleur de Sel', plan: 'Croissance', contentSla: 24, actualContent: 20, responseSla: 4, actualResponse: 2.2, publishSla: 48, actualPublish: 36, score: 95, trend: 'up' },
   { client: 'Studio Lumière', plan: 'Starter', contentSla: 48, actualContent: 44, responseSla: 8, actualResponse: 7.0, publishSla: 72, actualPublish: 68, score: 88, trend: 'down' },
 ];
 
@@ -81,7 +81,7 @@ export function renderSla() {
       + '<div class="admin-kpi"><div class="admin-kpi-label">Score SLA global</div><div class="admin-kpi-value" style="color:' + scoreColor(avgScore) + '">' + avgScore + '%</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">Conformes (≥90%)</div><div class="admin-kpi-value" style="color:var(--admin-green)">' + compliant + '</div></div>'
       + '<div class="admin-kpi"><div class="admin-kpi-label">À risque (80-90%)</div><div class="admin-kpi-value" style="color:var(--admin-orange)">' + atRisk + '</div></div>'
-      + '<div class="admin-kpi"><div class="admin-kpi-label">En breach (&lt;80%)</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + breaches + '</div></div>'
+      + '<div class="admin-kpi"><div class="admin-kpi-label">Violation SLA (&lt;80%)</div><div class="admin-kpi-value" style="color:var(--admin-red)">' + breaches + '</div></div>'
     + '</div>'
 
     + '<div class="admin-section">'

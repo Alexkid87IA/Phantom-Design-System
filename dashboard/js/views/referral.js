@@ -83,7 +83,7 @@ export function renderReferral() {
     + '<div class="referral-hero">'
       + '<div class="referral-hero-text">'
         + '<h2 class="view-title">Parrainage</h2>'
-        + '<p class="referral-hero-desc">Parraine un commerce et recevez tous les deux <strong>1 mois offert</strong> sur ton abonnement.</p>'
+        + '<p class="referral-hero-desc">Parraine un commerce — vous gagnez tous les deux <strong>1 mois offert</strong>. Ton réseau grandit, ton abonnement se paie tout seul.</p>'
       + '</div>'
     + '</div>'
 

@@ -19,11 +19,11 @@ export function renderIntegrations() {
       ? '<span class="integ-badge integ-badge-green">Connecté</span>'
       : i.status === 'warning'
         ? '<span class="integ-badge integ-badge-orange">Attention</span>'
-        : '<span class="integ-badge integ-badge-red">Déconnecté</span>';
+        : '<span class="integ-badge integ-badge-muted">À connecter</span>';
 
     var actionBtn = i.status === 'disconnected'
       ? '<button class="integ-connect-btn" data-action="integ-connect" data-integ="' + i.id + '">Connecter</button>'
-      : '<button class="integ-sync-btn" data-action="integ-sync" data-integ="' + i.id + '">Resync</button>';
+      : '<button class="integ-sync-btn integ-btn-disabled" disabled>Synchro auto</button>';
 
     return '<div class="integ-card">'
       + '<div class="integ-card-left">'
@@ -45,7 +45,7 @@ export function renderIntegrations() {
     + '<div class="integ-header">'
       + '<div class="integ-header-text">'
         + '<h2 class="view-title">Intégrations</h2>'
-        + '<p class="view-subtitle">' + connected + '/' + INTEGRATIONS.length + ' services connectés</p>'
+        + '<p class="view-subtitle">Plus tu connectes, plus tes agents sont puissants — ' + connected + '/' + INTEGRATIONS.length + ' en place</p>'
       + '</div>'
     + '</div>'
     + '<div class="integ-list">' + items + '</div>'

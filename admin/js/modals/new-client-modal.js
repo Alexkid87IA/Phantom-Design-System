@@ -6,6 +6,7 @@ import { openModal, closeModal, getModalElement } from './modal-shell.js';
 import { CLIENTS } from '../data/clients.js';
 import { toast } from '../lib/toast.js';
 import { setState } from '../store.js';
+import { esc } from '../lib/esc.js';
 
 var SECTORS = ['Restauration', 'Coiffure', 'Bien-être', 'Boulangerie', 'Commerce', 'Photographie', 'Automobile', 'Hôtellerie', 'Santé', 'Services'];
 var PLANS = ['Starter', 'Croissance', 'Standard'];
@@ -34,7 +35,7 @@ export function openNewClientModal() {
     + '<div class="admin-form-row">'
       + '<div class="admin-form-group">'
         + '<label class="admin-form-label">Nom de l\'entreprise</label>'
-        + '<input type="text" class="admin-form-input" id="nc-name" placeholder="ex: Mon Restaurant">'
+        + '<input type="text" class="admin-form-input" id="nc-name" placeholder="Mon Restaurant">'
       + '</div>'
       + '<div class="admin-form-group">'
         + '<label class="admin-form-label">Secteur</label>'
@@ -45,7 +46,7 @@ export function openNewClientModal() {
     + '<div class="admin-form-row">'
       + '<div class="admin-form-group">'
         + '<label class="admin-form-label">Ville</label>'
-        + '<input type="text" class="admin-form-input" id="nc-city" placeholder="ex: Marseille">'
+        + '<input type="text" class="admin-form-input" id="nc-city" placeholder="Marseille">'
       + '</div>'
       + '<div class="admin-form-group">'
         + '<label class="admin-form-label">Plan</label>'
@@ -75,8 +76,8 @@ export function openNewClientModal() {
     + '</div>';
 
   var footer = ''
-    + '<button class="admin-modal-btn admin-modal-btn-ghost" data-modal-close>Annuler</button>'
-    + '<button class="admin-modal-btn admin-modal-btn-primary" id="nc-submit">Créer le client</button>';
+    + '<button class="admin-modal-btn admin-modal-btn-ghost" type="button" data-modal-close>Annuler</button>'
+    + '<button class="admin-modal-btn admin-modal-btn-primary" type="button" id="nc-submit">Créer le client</button>';
 
   openModal('Nouveau client', body, footer);
 
@@ -121,7 +122,7 @@ export function openNewClientModal() {
       });
 
       closeModal();
-      toast('Client "' + name + '" créé !');
+      toast('Client "' + esc(name) + '" créé !');
       setState({ view: 'clients', selectedClient: newId });
     });
   }

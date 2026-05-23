@@ -2,7 +2,10 @@
 //  ADMIN MODAL SHELL — overlay + container + close logic
 // ═══════════════════════════════════════════════════════════
 
+import { esc } from '../lib/esc.js';
+
 var overlay = null;
+var _clickHandler = null;
 
 export function openModal(title, bodyHtml, footerHtml) {
   closeModal();
@@ -14,7 +17,7 @@ export function openModal(title, bodyHtml, footerHtml) {
   overlay.innerHTML = ''
     + '<div class="admin-modal-box">'
       + '<div class="admin-modal-header">'
-        + '<div class="admin-modal-title">' + title + '</div>'
+        + '<div class="admin-modal-title">' + esc(title) + '</div>'
         + '<button class="admin-modal-close" data-modal-close>&times;</button>'
       + '</div>'
       + '<div class="admin-modal-body">'
@@ -25,12 +28,12 @@ export function openModal(title, bodyHtml, footerHtml) {
 
   document.body.appendChild(overlay);
 
-  overlay.addEventListener('click', function(e) {
+  _clickHandler = function(e) {
     if (e.target === overlay || e.target.closest('[data-modal-close]')) {
       closeModal();
     }
-  });
-
+  };
+  overlay.addEventListener('click', _clickHandler);
   document.addEventListener('keydown', handleEsc);
 
   var firstInput = overlay.querySelector('input, select, textarea');
@@ -43,6 +46,7 @@ function handleEsc(e) {
 
 export function closeModal() {
   if (overlay) {
+    if (_clickHandler) { overlay.removeEventListener('click', _clickHandler); _clickHandler = null; }
     overlay.remove();
     overlay = null;
   }

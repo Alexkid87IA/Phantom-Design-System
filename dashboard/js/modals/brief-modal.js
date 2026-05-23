@@ -9,6 +9,7 @@ import { initConversation } from '../data/conversations.js';
 import { openModal, closeModal } from './modal-shell.js';
 import { ghostSvg } from '../lib/icons.js';
 import { toast } from '../lib/toast.js';
+import { escapeHtml } from '../lib/helpers.js';
 import { AGENT_TEMPLATES, getTemplatesForPole, getQcmForPole } from '../data/agent-templates.js';
 
 // Pole icons (simple SVGs)
@@ -89,7 +90,7 @@ export function openBriefModal() {
 
     POLES.forEach(function(pole) {
       var sel = (selectedPole === pole) ? ' selected' : '';
-      body += '<div class="wizard-pole' + sel + '" data-pole="' + pole + '">'
+      body += '<div class="wizard-pole' + sel + '" data-pole="' + pole + '" tabindex="0" role="button" aria-pressed="' + (selectedPole === pole ? 'true' : 'false') + '">'
         + '<div class="wizard-pole-icon">' + getPoleIcon(pole) + '</div>'
         + '<div>' + pole + '</div>'
       + '</div>';
@@ -106,12 +107,15 @@ export function openBriefModal() {
 
     // Bind pole clicks
     document.querySelectorAll('.wizard-pole').forEach(function(el) {
+      enableKeyboardClick(el);
       el.addEventListener('click', function() {
         selectedPole = el.dataset.pole;
         document.querySelectorAll('.wizard-pole').forEach(function(p) {
           p.classList.remove('selected');
+          p.setAttribute('aria-pressed', 'false');
         });
         el.classList.add('selected');
+        el.setAttribute('aria-pressed', 'true');
         var nextBtn = document.getElementById('wizard-next-1');
         if (nextBtn) {
           nextBtn.disabled = false;
@@ -145,7 +149,7 @@ export function openBriefModal() {
 
     templates.forEach(function(tpl) {
       var sel = (selectedTemplate && selectedTemplate.id === tpl.id) ? ' selected' : '';
-      body += '<div class="template-card' + sel + '" data-tpl-id="' + tpl.id + '">'
+      body += '<div class="template-card' + sel + '" data-tpl-id="' + tpl.id + '" tabindex="0" role="button" aria-pressed="' + (selectedTemplate && selectedTemplate.id === tpl.id ? 'true' : 'false') + '">'
         + '<div class="template-card-icon">' + tpl.icon + '</div>'
         + '<div class="template-card-info">'
           + '<div class="template-card-name">' + escapeHtml(tpl.name) + '</div>'
@@ -156,7 +160,7 @@ export function openBriefModal() {
 
     // Custom agent card
     var customSel = isCustom ? ' selected' : '';
-    body += '<div class="template-card template-card-custom' + customSel + '" data-tpl-id="custom">'
+    body += '<div class="template-card template-card-custom' + customSel + '" data-tpl-id="custom" tabindex="0" role="button" aria-pressed="' + (isCustom ? 'true' : 'false') + '">'
       + '<div class="template-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div>'
       + '<div class="template-card-info">'
         + '<div class="template-card-name">Agent sur-mesure &#10022;</div>'
@@ -202,12 +206,15 @@ export function openBriefModal() {
 
     // Bind template clicks
     document.querySelectorAll('.template-card').forEach(function(el) {
+      enableKeyboardClick(el);
       el.addEventListener('click', function() {
         var tplId = el.dataset.tplId;
         document.querySelectorAll('.template-card').forEach(function(c) {
           c.classList.remove('selected');
+          c.setAttribute('aria-pressed', 'false');
         });
         el.classList.add('selected');
+        el.setAttribute('aria-pressed', 'true');
 
         if (tplId === 'custom') {
           selectedTemplate = null;
@@ -310,7 +317,7 @@ export function openBriefModal() {
     if (qcmItems.length === 0) body += '<div style="margin-top:14px"></div>';
     body += '<div class="form-group">'
       + '<label class="form-label">Nom de l\'agent</label>'
-      + '<input type="text" class="form-input" id="wizard-name" placeholder="Ex : Community Manager, Webmaster..." value="' + escapeAttr(formData.name) + '" />'
+      + '<input type="text" class="form-input" id="wizard-name" placeholder="Community Manager, Webmaster..." value="' + escapeAttr(formData.name) + '" />'
     + '</div>';
 
     body += '<div class="form-group">'
@@ -327,7 +334,7 @@ export function openBriefModal() {
       + '<label class="form-label">Couleur</label>'
       + '<div class="color-picker" id="wizard-colors">'
         + RAINBOW_COLORS.map(function(c) {
-            return '<div class="color-swatch ' + (currentState.selectedColor === c ? 'selected' : '') + '" style="background:' + c + '" data-color="' + c + '"></div>';
+            return '<div class="color-swatch ' + (currentState.selectedColor === c ? 'selected' : '') + '" style="background:' + c + '" data-color="' + c + '" tabindex="0" role="button" aria-label="Choisir cette couleur" aria-pressed="' + (currentState.selectedColor === c ? 'true' : 'false') + '"></div>';
           }).join('')
       + '</div>'
     + '</div>';
@@ -389,12 +396,15 @@ export function openBriefModal() {
 
     // Color picker
     document.querySelectorAll('#wizard-colors .color-swatch').forEach(function(el) {
+      enableKeyboardClick(el);
       el.addEventListener('click', function() {
         setState({ selectedColor: el.dataset.color });
         document.querySelectorAll('#wizard-colors .color-swatch').forEach(function(s) {
           s.classList.remove('selected');
+          s.setAttribute('aria-pressed', 'false');
         });
         el.classList.add('selected');
+        el.setAttribute('aria-pressed', 'true');
       });
     });
 
@@ -423,7 +433,7 @@ export function openBriefModal() {
     var color = currentState.selectedColor;
 
     var body = convoHTML()
-      + phantomSays('Ton agent est prêt. Vérifie le brief et lance-le !')
+      + phantomSays('Il te reste une signature. Signe le brief — demain à cette heure, ton agent aura déjà commencé.')
       + '<div class="wizard-deploy" style="margin-top:8px">'
         + '<div class="wizard-deploy-ghost">' + ghostSvg(color, 64) + '</div>'
         + '<div class="wizard-deploy-name">' + escapeHtml(formData.name) + '</div>'
@@ -446,7 +456,10 @@ export function openBriefModal() {
 
     // Editable brief
     body += '<div class="form-group">'
-      + '<label class="form-label">Brief généré (éditable)</label>'
+      + '<div style="display:flex;justify-content:space-between;align-items:center">'
+        + '<label class="form-label">Brief généré (éditable)</label>'
+        + '<span id="brief-save-status" class="brief-save-indicator">✓ Capturé</span>'
+      + '</div>'
       + '<textarea class="form-textarea brief-preview" id="wizard-brief" rows="5">' + escapeHtml(formData.mission) + '</textarea>'
     + '</div>';
 
@@ -456,6 +469,21 @@ export function openBriefModal() {
     + '</div>';
 
     updateModalContent(body, footer);
+
+    // Autosave indicator on brief edit
+    var briefTextarea = document.getElementById('wizard-brief');
+    var saveStatus = document.getElementById('brief-save-status');
+    if (briefTextarea && saveStatus) {
+      saveStatus.style.opacity = '0';
+      briefTextarea.addEventListener('input', function() {
+        formData.mission = briefTextarea.value;
+        saveStatus.style.opacity = '1';
+        clearTimeout(briefTextarea._saveTimer);
+        briefTextarea._saveTimer = setTimeout(function() {
+          saveStatus.style.opacity = '0';
+        }, 2000);
+      });
+    }
 
     // Back
     document.getElementById('wizard-back-4').addEventListener('click', function() {
@@ -666,14 +694,17 @@ export function openBriefModal() {
     });
   }
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  function enableKeyboardClick(el) {
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        el.click();
+      }
+    });
   }
 
   function escapeAttr(str) {
-    if (!str) return '';
-    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return escapeHtml(str || '');
   }
 
   // ── Open the modal shell once ──

@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6E3CFF">
   <title>Phantom — Bienvenue</title>
+  <meta name="description" content="Bienvenue sur Phantom. Configure ton équipe d'agents IA et lance ton premier livrable en quelques minutes.">
+  <meta property="og:title" content="Phantom — Bienvenue">
+  <meta property="og:description" content="Configure ton équipe d'agents IA et lance ton premier livrable en quelques minutes.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://phantom.fr/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +18,7 @@
   <link rel="stylesheet" href="onboarding.css">
 </head>
 <body>
+  <noscript><p style="padding:40px;font-family:system-ui;color:#888;text-align:center">JavaScript est requis pour utiliser Phantom.</p></noscript>
   <div class="onb-page">
     <div class="onb-header">
       <div class="onb-brand">
@@ -30,8 +38,8 @@
     <div class="onb-content" id="onb-content"></div>
 
     <div class="onb-footer">
-      <button class="onb-btn-back" id="btn-back">Retour</button>
-      <button class="onb-btn-next" id="btn-next">Continuer</button>
+      <button class="onb-btn-back" id="btn-back" type="button">Retour</button>
+      <button class="onb-btn-next" id="btn-next" type="button">Continuer</button>
     </div>
   </div>
 
@@ -42,7 +50,7 @@
         title: 'Parle-nous de ton commerce',
         subtitle: 'Ces infos permettent à nos agents de te connaître',
         fields: [
-          { id: 'biz-name', label: 'Nom du commerce', type: 'text', placeholder: 'Ex: Sushi Boy' },
+          { id: 'biz-name', label: 'Nom du commerce', type: 'text', placeholder: 'Sushi Boy' },
           { id: 'biz-sector', label: 'Secteur', type: 'select', options: ['Restauration', 'Coiffure / Beauté', 'Commerce', 'Bien-être / Sport', 'Automobile', 'Photographie', 'Autre'] },
           { id: 'biz-city', label: 'Ville', type: 'text', placeholder: 'Marseille' },
           { id: 'biz-employees', label: 'Nombre d\'employés', type: 'select', options: ['1-5', '6-15', '16-50', '50+'] },
@@ -60,26 +68,26 @@
       },
       {
         title: 'Choisis ton premier agent',
-        subtitle: 'Commence avec un agent — tu pourras en ajouter d\'autres après',
+        subtitle: 'Choisis celui qui t\'aidera le plus vite. Les autres suivront.',
         agents: [
-          { id: 'agent-social', name: 'Social Manager', desc: 'Posts Instagram & Facebook automatisés', icon: '📱', color: '#FF2D87' },
-          { id: 'agent-google', name: 'Avis Google', desc: 'Réponses aux avis & collecte 5★', icon: '⭐', color: '#FFD400' },
-          { id: 'agent-photos', name: 'Photos Pro', desc: 'Shooting & retouche de tes produits', icon: '📸', color: '#00D26A' },
-          { id: 'agent-seo', name: 'SEO Local', desc: 'Référencement Google & articles', icon: '🔍', color: '#0066FF' },
+          { id: 'agent-social', name: 'Social Manager', desc: '3 posts/semaine publiés sans que tu y touches', icon: '📱', color: '#FF2D87' },
+          { id: 'agent-google', name: 'Avis Google', desc: 'Chaque avis reçoit une réponse pro en -1h', icon: '⭐', color: '#FFD400' },
+          { id: 'agent-photos', name: 'Photos Pro', desc: '10 visuels produit livrés sous 48h', icon: '📸', color: '#00D26A' },
+          { id: 'agent-seo', name: 'SEO Local', desc: 'Page 1 Google sur ta ville en 30 jours', icon: '🔍', color: '#0066FF' },
         ]
       },
       {
         title: 'Choisis ton plan',
         subtitle: 'Sans engagement. Change ou annule à tout moment.',
         plans: [
-          { id: 'plan-starter', name: 'Starter', price: '490', agents: '1 agent', features: ['1 agent IA', '1 pilot dédié', 'Chat illimité', 'Rapport mensuel'] },
+          { id: 'plan-starter', name: 'Starter', price: '490', agents: '1 agent', features: ['1 agent IA', '1 pilot superviseur', 'Chat illimité', 'Rapport mensuel'] },
           { id: 'plan-croissance', name: 'Croissance', price: '890', agents: '3 agents', features: ['3 agents IA', '1 pilot dédié', 'Chat illimité', 'Rapport hebdo', 'Intégrations'], popular: true },
           { id: 'plan-standard', name: 'Standard', price: '1490', agents: '6+ agents', features: ['6+ agents IA', 'Pilot senior', 'Chat prioritaire', 'Rapport quotidien', 'Toutes intégrations', 'Support prioritaire'] },
         ]
       },
       {
-        title: 'Ton agent est prêt !',
-        subtitle: 'Premier livrable dans les 72 prochaines heures',
+        title: 'Ton premier agent commence maintenant',
+        subtitle: 'Ton premier résultat arrive dans 72h — pendant ce temps, fais autre chose.',
         welcome: true
       },
     ];
@@ -91,7 +99,7 @@
       if (s.fields) {
         html += '<div class="onb-fields">';
         s.fields.forEach(function(f) {
-          html += '<div class="onb-field"><label class="onb-label">' + f.label + '</label>';
+          html += '<div class="onb-field"><label class="onb-label" for="' + f.id + '">' + f.label + '</label>';
           if (f.type === 'select') {
             html += '<select class="onb-input" id="' + f.id + '"><option value="">Choisir...</option>';
             f.options.forEach(function(o) { html += '<option>' + o + '</option>'; });
@@ -110,7 +118,7 @@
           html += '<div class="onb-connect-card" id="' + c.id + '">'
             + '<div class="onb-connect-icon">' + c.icon + '</div>'
             + '<div class="onb-connect-info"><div class="onb-connect-name">' + c.name + '</div><div class="onb-connect-desc">' + c.desc + '</div></div>'
-            + '<button class="onb-connect-btn">Connecter</button>'
+            + '<button class="onb-connect-btn" type="button">Connecter</button>'
           + '</div>';
         });
         html += '</div><p class="onb-skip-note">Tu pourras connecter ces comptes plus tard</p>';
@@ -149,13 +157,38 @@
             + '<svg width="80" height="80" viewBox="0 0 40 40" fill="none"><path d="M10 32V18a10 10 0 0120 0v14l-4-3-3 3-3-3-3 3-3-3z" fill="#6E3CFF" opacity="0.9"/><circle cx="15" cy="19" r="2" fill="#fff"/><circle cx="25" cy="19" r="2" fill="#fff"/></svg>'
           + '</div>'
           + '<div class="onb-welcome-text">'
-            + '<p>Ton agent est déployé et commence à travailler dès maintenant.</p>'
-            + '<p>Un pilot humain supervise chaque action. Tu recevras ton premier livrable sous 72h maximum.</p>'
+            + '<h2 class="onb-welcome-title">Bienvenue dans ta nouvelle équipe. Elle est déjà au travail.</h2>'
+            + '<p>Ton équipe Phantom démarre maintenant. Pendant que tu fais ce que tu fais de mieux — servir tes clients, créer, vendre — tes agents prennent le digital en main.</p>'
           + '</div>'
-          + '<div class="onb-welcome-next">'
-            + '<div class="onb-welcome-item">📬 Premier livrable sous 72h</div>'
-            + '<div class="onb-welcome-item">💬 Chatte avec ton agent à tout moment</div>'
-            + '<div class="onb-welcome-item">📊 Rapport d\'impact chaque semaine</div>'
+          + '<div class="onb-live-feed">'
+            + '<div class="onb-live-header">'
+              + '<span class="onb-live-dot"></span>'
+              + '<span class="onb-live-label">ACTIVITÉ EN COURS</span>'
+            + '</div>'
+            + '<div class="onb-live-line onb-live-anim-1">'
+              + '<span class="onb-live-icon" style="background:rgba(255,45,135,0.12);color:#FF2D87">📱</span>'
+              + '<span class="onb-live-msg">Social Manager analyse ton profil Instagram...</span>'
+              + '<span class="onb-live-time">à l\'instant</span>'
+            + '</div>'
+            + '<div class="onb-live-line onb-live-anim-2">'
+              + '<span class="onb-live-icon" style="background:rgba(255,212,0,0.12);color:#FFD400">⭐</span>'
+              + '<span class="onb-live-msg">Avis Google scanne tes 23 avis existants...</span>'
+              + '<span class="onb-live-time">il y a 2s</span>'
+            + '</div>'
+            + '<div class="onb-live-line onb-live-anim-3">'
+              + '<span class="onb-live-icon" style="background:rgba(0,102,255,0.12);color:#0066FF">🔍</span>'
+              + '<span class="onb-live-msg">SEO Local audite la structure de ton site...</span>'
+              + '<span class="onb-live-time">il y a 5s</span>'
+            + '</div>'
+            + '<div class="onb-live-line onb-live-anim-4">'
+              + '<span class="onb-live-icon" style="background:rgba(110,60,255,0.12);color:#6E3CFF">👤</span>'
+              + '<span class="onb-live-msg">Pilot Marie P. assigne et supervise tes agents</span>'
+              + '<span class="onb-live-time">il y a 8s</span>'
+            + '</div>'
+          + '</div>'
+          + '<div class="onb-countdown">'
+            + '<div class="onb-countdown-bar"><div class="onb-countdown-fill"></div></div>'
+            + '<div class="onb-countdown-text">Premier livrable estimé dans <strong>~68h</strong></div>'
           + '</div>'
         + '</div>';
       }
@@ -164,7 +197,7 @@
       document.getElementById('progress-bar').style.width = ((step + 1) / STEPS.length * 100) + '%';
       document.getElementById('step-indicator').textContent = 'Étape ' + (step + 1) + '/' + STEPS.length;
       document.getElementById('btn-back').style.visibility = step === 0 ? 'hidden' : 'visible';
-      document.getElementById('btn-next').textContent = step === STEPS.length - 1 ? 'Accéder à mon dashboard' : 'Continuer';
+      document.getElementById('btn-next').textContent = step === STEPS.length - 1 ? 'Voir mon tableau de bord →' : 'Continuer';
 
       bindStepEvents();
     }
@@ -191,8 +224,46 @@
       });
     }
 
+    function showToast(msg) {
+      var existing = document.querySelector('.onb-toast');
+      if (existing) existing.remove();
+      var toast = document.createElement('div');
+      toast.className = 'onb-toast';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(function() { toast.classList.add('visible'); }, 10);
+      setTimeout(function() { toast.classList.remove('visible'); setTimeout(function() { toast.remove(); }, 300); }, 2500);
+    }
+
+    function canAdvance() {
+      var step = STEPS[currentStep];
+      if (step.fields) {
+        var missing = [];
+        document.querySelectorAll('.onb-input').forEach(function(input) {
+          if (!input.value || input.value === 'Choisir...') {
+            var label = input.parentElement.querySelector('.onb-label');
+            if (label) missing.push(label.textContent);
+            input.style.borderColor = 'var(--onb-error)';
+            input.addEventListener('input', function() { input.style.borderColor = ''; }, { once: true });
+            input.addEventListener('change', function() { input.style.borderColor = ''; }, { once: true });
+          }
+        });
+        if (missing.length) { showToast('Remplis : ' + missing.join(', ')); return false; }
+      }
+      if (step.agents && !document.querySelector('.onb-agent-card.selected')) {
+        showToast('Choisis un agent pour continuer');
+        return false;
+      }
+      if (step.plans && !document.querySelector('.onb-plan-card.selected')) {
+        showToast('Choisis un plan pour continuer');
+        return false;
+      }
+      return true;
+    }
+
     document.getElementById('btn-next').addEventListener('click', function() {
       if (currentStep < STEPS.length - 1) {
+        if (!canAdvance()) return;
         currentStep++;
         renderStep(currentStep);
       } else {

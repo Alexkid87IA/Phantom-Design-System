@@ -2,6 +2,8 @@
 //  AGENTS — Agent list, missions, responses, chips
 // ═══════════════════════════════════════════════════════════
 
+import { getConversations } from './conversations.js';
+
 export let AGENTS = [
   { id: 'social', name: 'Social Manager', color: '#FF2D87', status: 'active', tasks: 12, pilot: 'Marie' },
   { id: 'google', name: 'Avis Google', color: '#FFD400', status: 'active', tasks: 3, pilot: 'Julie' },
@@ -87,4 +89,6 @@ export function removeAgent(id) {
   delete AGENT_MISSIONS[id];
   delete AGENT_RESPONSES[id];
   delete AGENT_CHIPS[id];
+  var convos = getConversations();
+  delete convos[id];
 }

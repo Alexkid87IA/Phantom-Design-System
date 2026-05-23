@@ -16,6 +16,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+::selection { background: var(--mk-violet); color: #fff; }
 
 body {
   font-family: 'Space Grotesk', 'Geist', system-ui, sans-serif;
@@ -129,6 +130,12 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
 }
 
 .pricing-card-popular {
@@ -588,6 +595,16 @@ body {
   gap: 12px;
   justify-content: center;
 }
+
+/* ─── FOCUS ─── */
+
+.mk-nav-link:focus-visible { color: var(--mk-text); }
+.mk-nav-cta:focus-visible,
+.pricing-cta:focus-visible,
+.pricing-cta-primary:focus-visible,
+.cs-card:focus-visible,
+.mk-btn-primary:focus-visible,
+.mk-btn-ghost:focus-visible { outline: 2px solid var(--mk-violet); outline-offset: 2px; }
 
 /* ─── RESPONSIVE ─── */
 

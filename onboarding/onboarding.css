@@ -11,9 +11,11 @@
   --onb-text-muted: #5a5a6a;
   --onb-violet: #6E3CFF;
   --onb-violet-soft: rgba(110,60,255,0.12);
+  --onb-error: #FF3B5C;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+::selection { background: var(--onb-violet); color: #fff; }
 
 body {
   font-family: 'Space Grotesk', 'Geist', system-ui, sans-serif;
@@ -115,6 +117,10 @@ body {
 }
 
 .onb-btn-next:hover { opacity: 0.9; }
+.onb-btn-next:focus-visible {
+  outline: 2px solid var(--onb-violet);
+  outline-offset: 3px;
+}
 
 .onb-btn-back {
   padding: 12px 20px;
@@ -130,6 +136,10 @@ body {
 }
 
 .onb-btn-back:hover { border-color: rgba(255,255,255,0.15); color: var(--onb-text); }
+.onb-btn-back:focus-visible {
+  outline: 2px solid var(--onb-violet);
+  outline-offset: 3px;
+}
 
 /* ─── FORM FIELDS ─── */
 
@@ -156,7 +166,7 @@ body {
   appearance: none;
 }
 
-.onb-input:focus {
+.onb-input:focus-visible {
   border-color: var(--onb-violet);
   box-shadow: 0 0 0 3px var(--onb-violet-soft);
 }
@@ -185,6 +195,7 @@ select.onb-input {
 }
 
 .onb-connect-card:hover { border-color: rgba(255,255,255,0.1); }
+.onb-connect-card:focus-visible { outline: 2px solid var(--onb-violet); outline-offset: 2px; }
 
 .onb-connect-icon { font-size: 22px; }
 .onb-connect-info { flex: 1; }
@@ -193,7 +204,7 @@ select.onb-input {
 
 .onb-connect-btn {
   padding: 7px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.1);
   background: transparent;
   color: var(--onb-text-secondary);
@@ -233,6 +244,8 @@ select.onb-input {
 }
 
 .onb-agent-card:hover { border-color: rgba(255,255,255,0.12); }
+.onb-agent-card:focus-visible { outline: 2px solid var(--onb-violet); outline-offset: 2px; }
+.onb-agent-card:active { transform: scale(0.97); }
 
 .onb-agent-card.selected {
   border-color: var(--onb-violet);
@@ -273,6 +286,8 @@ select.onb-input {
 }
 
 .onb-plan-card:hover { border-color: rgba(255,255,255,0.12); }
+.onb-plan-card:focus-visible { outline: 2px solid var(--onb-violet); outline-offset: 2px; }
+.onb-plan-card:active { transform: scale(0.98); }
 
 .onb-plan-card.selected {
   border-color: var(--onb-violet);
@@ -345,11 +360,25 @@ select.onb-input {
 .onb-welcome-ghost {
   margin-bottom: 24px;
   animation: ghostFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 0 transparent);
+}
+
+.onb-welcome-ghost svg {
+  filter: drop-shadow(0 4px 20px rgba(110,60,255,0.3));
 }
 
 @keyframes ghostFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
+}
+
+.onb-welcome-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--onb-text);
+  margin: 0 0 8px;
 }
 
 .onb-welcome-text {
@@ -379,4 +408,181 @@ select.onb-input {
   border: 1px solid var(--onb-border);
   font-size: 13px;
   text-align: left;
+}
+
+/* ─── TOAST ─── */
+
+.onb-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--onb-error);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.onb-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── LIVE FEED (Step 5) ─── */
+
+.onb-live-feed {
+  background: var(--onb-surface);
+  border: 1px solid var(--onb-border);
+  border-radius: 14px;
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  text-align: left;
+}
+
+.onb-live-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.onb-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00D26A;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,210,106,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,210,106,0); }
+}
+
+.onb-live-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #00D26A;
+}
+
+.onb-live-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--onb-border);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: liveFadeIn 0.5s ease forwards;
+}
+
+.onb-live-line:last-of-type { border-bottom: none; }
+
+.onb-live-anim-1 { animation-delay: 0.3s; }
+.onb-live-anim-2 { animation-delay: 0.8s; }
+.onb-live-anim-3 { animation-delay: 1.3s; }
+.onb-live-anim-4 { animation-delay: 1.8s; }
+
+@keyframes liveFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.onb-live-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.onb-live-msg {
+  flex: 1;
+  font-size: 13px;
+  color: var(--onb-text);
+  font-weight: 500;
+}
+
+.onb-live-time {
+  font-size: 10px;
+  color: var(--onb-text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ─── COUNTDOWN ─── */
+
+.onb-countdown {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.onb-countdown-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.onb-countdown-fill {
+  width: 5%;
+  height: 100%;
+  background: var(--onb-violet);
+  border-radius: 2px;
+  animation: countdownGrow 3s ease forwards;
+}
+
+@keyframes countdownGrow {
+  from { width: 0%; }
+  to { width: 5%; }
+}
+
+.onb-countdown-text {
+  font-size: 12px;
+  color: var(--onb-text-muted);
+}
+
+.onb-countdown-text strong {
+  color: var(--onb-violet);
+}
+
+/* ─── RESPONSIVE ─── */
+
+@media (max-width: 768px) {
+  .onb-page { padding: 24px 16px; max-width: 100%; }
+  .onb-header { margin-bottom: 32px; }
+  .onb-plans-grid { grid-template-columns: 1fr; }
+  .onb-agents-grid { grid-template-columns: 1fr; }
+  .onb-connect-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .onb-page { padding: 16px 12px; }
+  .onb-header { gap: 10px; margin-bottom: 24px; }
+  .onb-step-title { font-size: 20px; }
+  .onb-step-sub { font-size: 13px; }
+  .onb-agent-card { padding: 14px; }
+  .onb-plan-card { padding: 16px 12px; }
+  .onb-live-feed { max-width: 100%; }
+  .onb-summary-card { max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

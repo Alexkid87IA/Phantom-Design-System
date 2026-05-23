@@ -28,7 +28,7 @@ export function renderBilling() {
       + '<span class="billing-invoice-amount">' + inv.amount + ' €</span>'
       + '<span class="billing-invoice-status billing-status-' + inv.status + '">' + (inv.status === 'paid' ? 'Payée' : 'En attente') + '</span>'
       + '<span class="billing-invoice-date">' + inv.date + '</span>'
-      + '<span class="billing-invoice-dl" data-action="billing-download-pdf">PDF ↓</span>'
+      + '<a class="billing-invoice-dl" href="mailto:support@phantom.fr?subject=Facture%20' + encodeURIComponent(inv.period) + '">PDF</a>'
     + '</div>';
   }).join('');
 
@@ -62,7 +62,7 @@ export function renderBilling() {
 
   return '<div class="view-billing">'
     + '<h2 class="view-title">Facturation</h2>'
-    + '<p class="view-subtitle">Ton abonnement et tes factures en un coup d\'œil</p>'
+    + '<p class="view-subtitle">Ton investissement, tes factures, et ce que ça te rapporte vraiment</p>'
 
     + roiCard
 
@@ -78,7 +78,7 @@ export function renderBilling() {
           + '<div class="billing-plan-row"><span>Client depuis</span><span>' + PLAN.since + '</span></div>'
         + '</div>'
         + '<div class="billing-plan-actions">'
-          + '<button class="billing-btn billing-btn-primary" data-action="billing-change-plan">Changer de plan</button>'
+          + '<a class="billing-btn billing-btn-ghost" href="https://calendly.com/phantom-ia/20min" target="_blank" rel="noopener">Changer de plan</a>'
         + '</div>'
       + '</div>'
 
@@ -91,7 +91,7 @@ export function renderBilling() {
             + '<div class="billing-card-type">' + PLAN.cardType + ' · Expire 08/28</div>'
           + '</div>'
         + '</div>'
-        + '<button class="billing-btn billing-btn-ghost" data-action="billing-edit-payment">Modifier</button>'
+        + '<a class="billing-btn billing-btn-ghost" href="mailto:support@phantom.fr?subject=Modification%20moyen%20de%20paiement">Modifier</a>'
       + '</div>'
     + '</div>'
 

@@ -5,7 +5,7 @@
    radii, shadows, motion. À inclure dans chaque artefact.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* ────────── COLOR · Brand ────────── */
@@ -60,7 +60,10 @@
   --bg: var(--paper);
   --bg-alt: var(--paper-warm);
   --bg-elev: #FFFFFF;
+  --bg-subtle: rgba(10, 10, 10, 0.03);
+  --border-light: rgba(10, 10, 10, 0.04);
   --border: rgba(10, 10, 10, 0.08);
+  --border-input: rgba(10, 10, 10, 0.12);
   --border-strong: rgba(10, 10, 10, 0.16);
   --border-hairline: rgba(10, 10, 10, 0.06);
   --border-editorial: var(--ink);   /* the 2px black */
@@ -136,6 +139,7 @@
 
   /* ────────── RADII ────────── */
   --r-xs: 4px;
+  --r-sm-md: 6px;
   --r-sm: 8px;
   --r-md: 12px;
   --r-card: 14px;

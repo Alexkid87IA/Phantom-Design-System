@@ -29,7 +29,10 @@ export function renderSatisfaction() {
   var passives = NPS_RESPONSES.filter(function(r) { return r.category === 'passive'; }).length;
   var detractors = NPS_RESPONSES.filter(function(r) { return r.category === 'detractor'; }).length;
   var total = NPS_RESPONSES.length;
-  var npsScore = Math.round(((promoters - detractors) / total) * 100);
+  var npsScore = total > 0 ? Math.round(((promoters - detractors) / total) * 100) : 0;
+  var promoterPct = total > 0 ? Math.round((promoters / total) * 100) : 0;
+  var passivePct = total > 0 ? Math.round((passives / total) * 100) : 0;
+  var detractorPct = total > 0 ? Math.round((detractors / total) * 100) : 0;
 
   function scoreColor(s) {
     if (s >= 9) return 'var(--admin-green)';
@@ -90,7 +93,7 @@ export function renderSatisfaction() {
 
       + '<div>'
         + '<div class="admin-section">'
-          + '<div class="admin-section-header"><div class="admin-section-title">Évolution NPS</div></div>'
+          + '<div class="admin-section-header"><div><div class="admin-section-title">Évolution NPS</div><div style="font-size:10px;color:var(--admin-text-muted);margin-top:2px">NPS &lt;60 → relancer les détracteurs · &gt;70 → demander témoignages</div></div></div>'
           + '<div class="admin-card" style="padding:16px">'
             + '<div style="display:flex;align-items:flex-end;justify-content:space-between;height:100px">'
               + trendBars
@@ -102,16 +105,16 @@ export function renderSatisfaction() {
           + '<div class="admin-section-header"><div class="admin-section-title">Répartition</div></div>'
           + '<div class="admin-card" style="padding:16px">'
             + '<div style="margin-bottom:12px">'
-              + '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Promoteurs</span><span style="color:var(--admin-green);font-weight:600">' + Math.round((promoters/total)*100) + '%</span></div>'
-              + '<div style="height:8px;background:var(--admin-border);border-radius:4px;overflow:hidden"><div style="width:' + Math.round((promoters/total)*100) + '%;height:100%;background:var(--admin-green);border-radius:4px"></div></div>'
+              + '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Promoteurs</span><span style="color:var(--admin-green);font-weight:600">' + promoterPct + '%</span></div>'
+              + '<div style="height:8px;background:var(--admin-border);border-radius:4px;overflow:hidden"><div style="width:' + promoterPct + '%;height:100%;background:var(--admin-green);border-radius:4px"></div></div>'
             + '</div>'
             + '<div style="margin-bottom:12px">'
-              + '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Passifs</span><span style="color:var(--admin-orange);font-weight:600">' + Math.round((passives/total)*100) + '%</span></div>'
-              + '<div style="height:8px;background:var(--admin-border);border-radius:4px;overflow:hidden"><div style="width:' + Math.round((passives/total)*100) + '%;height:100%;background:var(--admin-orange);border-radius:4px"></div></div>'
+              + '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Passifs</span><span style="color:var(--admin-orange);font-weight:600">' + passivePct + '%</span></div>'
+              + '<div style="height:8px;background:var(--admin-border);border-radius:4px;overflow:hidden"><div style="width:' + passivePct + '%;height:100%;background:var(--admin-orange);border-radius:4px"></div></div>'
             + '</div>'
             + '<div>'
-              + '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Détracteurs</span><span style="color:var(--admin-red);font-weight:600">' + Math.round((detractors/total)*100) + '%</span></div>'
-              + '<div style="height:8px;background:var(--admin-border);border-radius:4px;overflow:hidden"><div style="width:' + Math.round((detractors/total)*100) + '%;height:100%;background:var(--admin-red);border-radius:4px"></div></div>'
+              + '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Détracteurs</span><span style="color:var(--admin-red);font-weight:600">' + detractorPct + '%</span></div>'
+              + '<div style="height:8px;background:var(--admin-border);border-radius:4px;overflow:hidden"><div style="width:' + detractorPct + '%;height:100%;background:var(--admin-red);border-radius:4px"></div></div>'
             + '</div>'
           + '</div>'
         + '</div>'

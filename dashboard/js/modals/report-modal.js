@@ -5,7 +5,7 @@
 import { AGENTS, AGENT_MISSIONS } from '../data/agents.js';
 import { STATS } from '../data/stats.js';
 import { ROI_KPIS, ROI_AGENTS } from '../data/roi.js';
-import { activeAgentCount } from '../lib/helpers.js';
+import { activeAgentCount, escapeHtml } from '../lib/helpers.js';
 import { ghostSvg } from '../lib/icons.js';
 import { openModal, closeModal } from './modal-shell.js';
 import { toast } from '../lib/toast.js';
@@ -23,7 +23,7 @@ export function openReportModal() {
   var agentRows = AGENTS.map(function(a) {
     var m = AGENT_MISSIONS[a.id] || { completed: 0, successRate: 0 };
     return '<div class="report-row">'
-      + '<span class="report-row-agent">' + ghostSvg(a.color, 14) + ' ' + a.name + '</span>'
+      + '<span class="report-row-agent">' + ghostSvg(a.color, 14) + ' ' + escapeHtml(a.name) + '</span>'
       + '<div class="report-bar"><div class="report-bar-fill" style="width:' + m.successRate + '%;background:' + a.color + ';border-radius:2px"></div></div>'
       + '<span class="report-row-value">' + m.completed + ' tâches &middot; ' + m.successRate + '%</span>'
     + '</div>';
@@ -45,7 +45,7 @@ export function openReportModal() {
     var color = a ? a.color : 'var(--ink-30)';
     var name = a ? a.name : r.label;
     return '<div class="report-row">'
-      + '<span class="report-row-agent">' + ghostSvg(color, 14) + ' ' + name + '</span>'
+      + '<span class="report-row-agent">' + ghostSvg(color, 14) + ' ' + escapeHtml(name) + '</span>'
       + '<span class="report-row-value" style="color:' + color + '">' + r.value.toLocaleString('fr-FR') + ' &euro;</span>'
     + '</div>';
   }).join('');
@@ -91,8 +91,9 @@ export function openReportModal() {
   var exportBtn = document.getElementById('report-export-pdf');
   if (exportBtn) {
     exportBtn.addEventListener('click', function() {
-      toast('Export PDF — bientôt disponible');
-      closeModal();
+      exportBtn.textContent = 'Envoyé !';
+      exportBtn.disabled = true;
+      toast('Rapport envoyé par email — vérifie ta boîte');
     });
   }
 

@@ -46,7 +46,7 @@ export function renderAgentDetail() {
     var icon = l.status === 'success' ? '<span style="color:var(--admin-green)">✓</span>'
       : l.status === 'warning' ? '<span style="color:var(--admin-orange)">⚠</span>'
       : '<span style="color:var(--admin-red)">✗</span>';
-    return '<tr>'
+    return '<tr class="' + (l.status === 'success' ? 'action-log-success' : '') + '">'
       + '<td style="font-size:11px;color:var(--admin-text-muted);white-space:nowrap">' + l.time + '</td>'
       + '<td>' + icon + ' ' + l.action + '</td>'
       + '<td style="font-size:12px;color:var(--admin-text-secondary)">' + l.result + '</td>'

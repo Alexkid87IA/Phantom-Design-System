@@ -5,6 +5,7 @@
 import { getState } from '../store.js';
 import { WORKSPACE, USER } from '../data/workspace.js';
 import { AGENTS, AGENT_MISSIONS } from '../data/agents.js';
+import { WORK_ITEMS } from '../data/work.js';
 import { ICONS, ICONS_ROI, ICONS_TEAM, ghostSvg } from '../lib/icons.js';
 import { statusColor, statusLabel, pendingCount } from '../lib/helpers.js';
 
@@ -18,6 +19,7 @@ export function renderSidebar() {
     { id: 'analytics', label: 'Statistiques', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>' },
     { id: 'roi', label: 'Impact & ROI', icon: ICONS_ROI },
     { id: 'team', label: 'Équipe', icon: ICONS_TEAM },
+    { id: 'command-center', label: 'Centre de commande', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' },
   ];
   const navItems2 = [
     { id: 'integrations', label: 'Intégrations', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>' },
@@ -42,16 +44,16 @@ export function renderSidebar() {
 
       <div class="section-title">&mdash; Atelier</div>
       ${navItems.map((n, i) => `
-        <div class="nav-item ${STATE.view === n.id && !STATE.activeAgent ? 'active' : ''}" data-nav="${n.id}">
+        <div class="nav-item ${STATE.view === n.id && !STATE.activeAgent ? 'active' : ''}" data-nav="${n.id}" role="button" tabindex="0">
           ${n.icon}
           ${n.label}
-          ${n.badge ? '<span class="nav-badge">' + n.badge + '</span>' : '<span class="nav-shortcut">' + (i + 1) + '</span>'}
+          ${n.badge ? '<span class="nav-badge nav-badge-urgent">' + n.badge + '</span>' : '<span class="nav-shortcut">' + (i + 1) + '</span>'}
         </div>
       `).join('')}
 
       <div class="section-title">&mdash; Gestion</div>
       ${navItems2.map(n => `
-        <div class="nav-item ${STATE.view === n.id && !STATE.activeAgent ? 'active' : ''}" data-nav="${n.id}">
+        <div class="nav-item ${STATE.view === n.id && !STATE.activeAgent ? 'active' : ''}" data-nav="${n.id}" role="button" tabindex="0">
           ${n.icon}
           ${n.label}
         </div>
@@ -89,7 +91,7 @@ export function renderSidebar() {
             + '</div>'
           + '</div>'
           : '';
-        return '<div class="agent-row ' + (STATE.activeAgent === a.id ? 'active' : '') + '" data-agent="' + a.id + '">'
+        return '<div class="agent-row ' + (STATE.activeAgent === a.id ? 'active' : '') + '" data-agent="' + a.id + '" role="button" tabindex="0">'
           + ghostSvg(a.color)
           + a.name
           + '<span class="agent-dot' + (a.status === 'active' ? ' agent-dot-pulse' : '') + '" style="background:' + statusColor(a.status) + '"></span>'
@@ -101,10 +103,10 @@ export function renderSidebar() {
       <div class="sidebar-progress">
         <div class="sidebar-progress-header">
           <span class="sidebar-progress-label">Objectif semaine</span>
-          <span class="sidebar-progress-value">7/12</span>
+          <span class="sidebar-progress-value">${WORK_ITEMS.filter(w => w.status === 'Publie' || w.status === 'Envoye').length}/${WORK_ITEMS.length}</span>
         </div>
         <div class="sidebar-progress-bar">
-          <div class="sidebar-progress-fill" style="width:58%"></div>
+          <div class="sidebar-progress-fill" style="width:${Math.round((WORK_ITEMS.filter(w => w.status === 'Publie' || w.status === 'Envoye').length / WORK_ITEMS.length) * 100)}%"></div>
         </div>
       </div>
 

@@ -4,17 +4,17 @@
 // ═══════════════════════════════════════════════════════════
 
 var COST_DATA = [
-  { client: 'Sushi Boy', plan: 'Pro', mrr: 499, aiCost: 42.80, apiCalls: 1847, margin: 91.4, agents: 6 },
-  { client: 'Chez Marcel', plan: 'Pro', mrr: 499, aiCost: 28.50, apiCalls: 1203, margin: 94.3, agents: 3 },
-  { client: 'Bella Donna', plan: 'Starter', mrr: 199, aiCost: 15.20, apiCalls: 680, margin: 92.4, agents: 1 },
-  { client: 'Green Garden', plan: 'Scale', mrr: 899, aiCost: 56.30, apiCalls: 2340, margin: 93.7, agents: 4 },
-  { client: 'Maison Dupont', plan: 'Pro', mrr: 499, aiCost: 8.40, apiCalls: 320, margin: 98.3, agents: 3 },
-  { client: 'Bike & Run', plan: 'Scale', mrr: 899, aiCost: 48.90, apiCalls: 2100, margin: 94.6, agents: 4 },
-  { client: 'L\'Atelier Zen', plan: 'Starter', mrr: 199, aiCost: 12.80, apiCalls: 540, margin: 93.6, agents: 2 },
-  { client: 'Pizza Roma', plan: 'Starter', mrr: 199, aiCost: 9.60, apiCalls: 410, margin: 95.2, agents: 1 },
-  { client: 'Fleur de Sel', plan: 'Pro', mrr: 499, aiCost: 22.10, apiCalls: 920, margin: 95.6, agents: 2 },
-  { client: 'Studio Lumière', plan: 'Starter', mrr: 199, aiCost: 6.30, apiCalls: 270, margin: 96.8, agents: 1 },
-  { client: 'Garage Auto+', plan: 'Pro', mrr: 0, aiCost: 0, apiCalls: 0, margin: 0, agents: 2 },
+  { client: 'Sushi Boy', plan: 'Standard', mrr: 1490, aiCost: 42.80, apiCalls: 1847, margin: 97.1, agents: 6 },
+  { client: 'Chez Marcel', plan: 'Croissance', mrr: 890, aiCost: 28.50, apiCalls: 1203, margin: 96.8, agents: 3 },
+  { client: 'Bella Donna', plan: 'Starter', mrr: 490, aiCost: 15.20, apiCalls: 680, margin: 96.9, agents: 1 },
+  { client: 'Green Garden', plan: 'Standard', mrr: 1490, aiCost: 56.30, apiCalls: 2340, margin: 96.2, agents: 4 },
+  { client: 'Maison Dupont', plan: 'Croissance', mrr: 890, aiCost: 8.40, apiCalls: 320, margin: 99.1, agents: 3 },
+  { client: 'Bike & Run', plan: 'Standard', mrr: 1490, aiCost: 48.90, apiCalls: 2100, margin: 96.7, agents: 4 },
+  { client: 'L\'Atelier Zen', plan: 'Croissance', mrr: 890, aiCost: 12.80, apiCalls: 540, margin: 98.6, agents: 2 },
+  { client: 'Pizza Roma', plan: 'Starter', mrr: 490, aiCost: 9.60, apiCalls: 410, margin: 98.0, agents: 1 },
+  { client: 'Fleur de Sel', plan: 'Croissance', mrr: 890, aiCost: 22.10, apiCalls: 920, margin: 97.5, agents: 2 },
+  { client: 'Studio Lumière', plan: 'Starter', mrr: 490, aiCost: 6.30, apiCalls: 270, margin: 98.7, agents: 1 },
+  { client: 'Garage Auto+', plan: 'Croissance', mrr: 0, aiCost: 0, apiCalls: 0, margin: 0, agents: 2 },
 ];
 
 var COST_BREAKDOWN = [
@@ -32,7 +32,7 @@ export function renderCosts() {
   var totalMRR = activeClients.reduce(function(s, c) { return s + c.mrr; }, 0);
   var totalAiCost = COST_DATA.reduce(function(s, c) { return s + c.aiCost; }, 0);
   var totalCalls = COST_DATA.reduce(function(s, c) { return s + c.apiCalls; }, 0);
-  var avgMargin = Math.round(activeClients.reduce(function(s, c) { return s + c.margin; }, 0) / activeClients.length * 10) / 10;
+  var avgMargin = activeClients.length > 0 ? Math.round(activeClients.reduce(function(s, c) { return s + c.margin; }, 0) / activeClients.length * 10) / 10 : 0;
 
   var rows = COST_DATA.filter(function(c) { return c.mrr > 0; }).sort(function(a, b) { return b.aiCost - a.aiCost; }).map(function(c) {
     var costBar = Math.round((c.aiCost / c.mrr) * 100);
@@ -83,7 +83,7 @@ export function renderCosts() {
 
       + '<div class="admin-section">'
         + '<div class="admin-section-header">'
-          + '<div class="admin-section-title">Coûts par client</div>'
+          + '<div><div class="admin-section-title">Coûts par client</div><div style="font-size:11px;color:var(--admin-text-secondary);margin-top:2px">Marge sous 50% → revoir la config agents</div></div>'
           + '<div class="admin-btn admin-btn-ghost" data-action="export" style="font-size:11px;padding:5px 12px">Export</div>'
         + '</div>'
         + '<div class="admin-card" style="padding:0;overflow:hidden">'

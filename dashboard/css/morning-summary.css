@@ -61,7 +61,7 @@
   padding: 10px 8px;
   background: linear-gradient(135deg, rgba(110,60,255,0.04), rgba(0,210,106,0.03));
   border: 1px solid rgba(110,60,255,0.08);
-  border-radius: 12px;
+  border-radius: var(--r-md);
 }
 .ms-inline-growth-val {
   font-family: var(--font-display);
@@ -84,7 +84,7 @@
 .ms-inline-agents {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(10, 10, 10, 0.06);
+  border-top: 1px solid var(--border-hairline);
 }
 
 .ms-card-agent {
@@ -93,8 +93,8 @@
   justify-content: space-between;
   gap: 10px;
   padding: 10px 20px;
-  border-bottom: 1px solid rgba(10, 10, 10, 0.03);
-  transition: background 0.15s;
+  border-bottom: 1px solid var(--bg-subtle);
+  transition: background 0.15s var(--ease);
 }
 .ms-card-agent:last-child {
   border-bottom: none;
@@ -144,8 +144,8 @@
   white-space: nowrap;
   flex-shrink: 0;
   padding: 3px 8px;
-  border-radius: 6px;
-  transition: background 0.15s, opacity 0.15s;
+  border-radius: var(--r-sm-md);
+  transition: background 0.15s var(--ease), opacity 0.15s var(--ease);
 }
 .ms-card-agent-cta:hover {
   opacity: 0.7;
@@ -161,7 +161,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  border-top: 1px solid rgba(10, 10, 10, 0.06);
+  border-top: 1px solid var(--border-hairline);
   background: rgba(10, 10, 10, 0.01);
 }
 
@@ -180,16 +180,56 @@
   color: var(--ink-20);
   cursor: pointer;
   padding: 4px 8px;
-  border-radius: 6px;
-  transition: color 0.15s, background 0.15s;
+  border-radius: var(--r-sm-md);
+  transition: color 0.15s var(--ease), background 0.15s var(--ease);
   flex-shrink: 0;
   line-height: 1;
 }
 .ms-inline-dismiss:hover {
   color: var(--ink-60);
-  background: rgba(10, 10, 10, 0.04);
+  background: var(--border-light);
 }
 .ms-inline-dismiss:focus-visible {
   outline: 2px solid var(--phantom-violet);
   outline-offset: 2px;
+}
+
+/* Progressive reveal stagger */
+@keyframes msReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ms-stagger-item {
+  opacity: 0;
+  animation: msReveal 0.45s var(--ease) both;
+}
+
+.ms-inline-protip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--bg-subtle);
+  background: rgba(110, 60, 255, 0.02);
+}
+.ms-protip-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.ms-protip-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-30);
+  letter-spacing: 0.02em;
+}
+.ms-protip-text kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--phantom-violet);
+  background: rgba(110, 60, 255, 0.06);
+  border-radius: var(--r-xs);
+  border: 1px solid rgba(110, 60, 255, 0.12);
 }

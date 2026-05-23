@@ -2,7 +2,7 @@
 //  DATA -- Smart contextual responses per agent
 // =====================================================
 
-export var SMART_RESPONSES = {
+var SMART_RESPONSES = {
   social: {
     contexts: [
       {
@@ -528,6 +528,7 @@ export function findResponse(agentId, messageText) {
     for (var j = 0; j < patterns.length; j++) {
       if (patterns[j].test(msg)) {
         var responses = ctx.responses || [];
+        if (responses.length === 0) continue;
         var text = responses[Math.floor(Math.random() * responses.length)];
         var chips = ctx.chips || [];
         return { text: text, chips: chips };
@@ -539,6 +540,7 @@ export function findResponse(agentId, messageText) {
   var fb = agentData.fallback;
   if (fb) {
     var fbResponses = fb.responses || [];
+    if (fbResponses.length === 0) return null;
     var fbText = fbResponses[Math.floor(Math.random() * fbResponses.length)];
     var fbChips = fb.chips || [];
     return { text: fbText, chips: fbChips };

@@ -3,7 +3,7 @@
 // =====================================================
 
 export var ROI_CONFIG = {
-  monthlyPrice: 890,
+  monthlyPrice: 1490,
   hourlyRate: 45,
   monthsActive: 6,
 };
@@ -49,17 +49,17 @@ export var ROI_KPIS = [
   {
     id: 'roi-multiplier',
     label: 'Retour sur investissement',
-    value: '×15.5',
+    value: '×9.3',
     bg: '#00D4AA',
     fg: '#fff',
     formula: 'Valeur générée ÷ Coût abonnement Phantom',
     sources: [
       { label: 'Valeur générée', value: '13 830 €', detail: 'Voir KPI "Valeur générée"' },
-      { label: 'Coût Phantom/mois', value: '890 €', detail: 'Forfait Standard (4 agents)' },
-      { label: 'ROI', value: '×15.5', detail: '13 830 ÷ 890 = 15.5' },
+      { label: 'Coût Phantom/mois', value: '1 490 €', detail: 'Forfait Standard (6 agents)' },
+      { label: 'ROI', value: '×9.3', detail: '13 830 ÷ 1 490 = 9.3' },
     ],
     confidence: 'estimated',
-    trend: [9.2, 10.1, 11.7, 13.0, 14.2, 15.5],
+    trend: [5.5, 6.1, 7.0, 7.5, 8.5, 9.3],
   },
 ];
 
@@ -74,6 +74,6 @@ export var ROI_AGENTS = [
 
 export var ROI_COMPARISON = {
   before: { label: 'Sans Phantom', monthly: 4850, detail: 'Freelance social 1 200 € + agence SEO 1 500 € + photographe 800 € + divers 1 350 €' },
-  after: { label: 'Avec Phantom', monthly: 890, detail: 'Forfait Standard — 4 agents inclus' },
-  saving: { percent: 82, monthly: 3960, annual: 47520 },
+  after: { label: 'Avec Phantom', monthly: 1490, detail: 'Forfait Standard — 6 agents inclus' },
+  saving: { percent: 69, monthly: 3360, annual: 40320 },
 };

@@ -3,10 +3,12 @@
 // ═══════════════════════════════════════════════════════════
 
 export function toast(text) {
-  const el = document.createElement('div');
+  var el = document.createElement('div');
   el.className = 'toast toast-success';
   el.textContent = text;
-  document.getElementById('toasts').appendChild(el);
+  var container = document.getElementById('toasts');
+  if (!container) return;
+  container.appendChild(el);
   setTimeout(function () { el.classList.add('toast-out'); }, 2500);
   setTimeout(function () { el.remove(); }, 2800);
 }

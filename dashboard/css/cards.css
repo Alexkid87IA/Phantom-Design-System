@@ -13,11 +13,10 @@
   outline-offset: 2px;
 }
 .card-header {
-  padding: 14px 18px; border-bottom: 1px solid rgba(10,10,10,0.06);
+  padding: 14px 18px; border-bottom: 1px solid var(--border-hairline);
   display: flex; justify-content: space-between; align-items: center;
 }
 .card-title { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--ink); }
-.card-sub { font-family: var(--font-body); font-size: 10px; color: var(--ink-30); margin-top: 1px; }
 
 /* Stats */
 .stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
@@ -39,7 +38,4 @@
   font-family: var(--font-display); font-weight: 700;
   font-size: 36px; line-height: 1; letter-spacing: -0.04em;
   margin-top: 8px; font-variant-numeric: tabular-nums;
-}
-.stat-sub {
-  font-family: var(--font-body); font-size: 11px; opacity: 0.85; margin-top: 6px;
 }

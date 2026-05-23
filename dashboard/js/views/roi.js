@@ -68,7 +68,7 @@ function renderKPICards() {
 
 function renderAgentBars() {
   var sorted = ROI_AGENTS.slice().sort(function(a, b) { return b.value - a.value; });
-  var maxValue = sorted[0].value;
+  var maxValue = sorted.length > 0 ? sorted[0].value : 1;
 
   var rows = sorted.map(function(row) {
     var ag = getAgent(row.id);
@@ -231,13 +231,15 @@ function closeRoiTips() {
 export function renderROI() {
   var html = ''
     + '<div class="content">'
+      + '<div class="roi-hero"><div class="roi-hero-title">Ton investissement travaille pour toi.</div><div class="roi-hero-sub">Voici ce que tes agents ont généré — et ce que ça débloque ensuite.</div></div>'
+      + '<div class="roi-meaning">En clair : tes agents font l\'équivalent de 127h de travail par mois pour ' + ROI_CONFIG.monthlyPrice + ' €. Un freelance te coûterait ' + fmt(127 * ROI_CONFIG.hourlyRate) + ' €. Tu économises ' + fmt((127 * ROI_CONFIG.hourlyRate) - ROI_CONFIG.monthlyPrice) + ' € chaque mois — et tu récupères ton temps.</div>'
       + renderKPICards()
       + renderAgentBars()
       + renderComparison()
       + renderTimeline()
       + '<div class="roi-verdict">'
-        + '<div class="roi-verdict-line">En ' + ROI_CONFIG.monthsActive + ' mois, Phantom t\'a rapporté plus que ce que tu as payé.</div>'
-        + '<div class="roi-verdict-sub">Partage ce rapport avec ton associé, ton comptable, ou garde-le pour toi.</div>'
+        + '<div class="roi-verdict-line">Ton investissement s\'est payé. En ' + ROI_CONFIG.monthsActive + ' mois, c\'est ton agent qui finance les 3 suivants.</div>'
+        + '<div class="roi-verdict-sub">Partage ce rapport avec ton équipe — ou utilise-le pour justifier le passage aux 6 agents. À toi de piloter la croissance.</div>'
         + '<button class="roi-verdict-btn" data-action="report">Télécharger le rapport &rarr;</button>'
       + '</div>'
     + '</div>';

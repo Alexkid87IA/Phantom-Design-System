@@ -10,7 +10,7 @@
   color: var(--ink-20);
 }
 .agent-tabs {
-  display: flex; gap: 0; border-bottom: 1px solid rgba(10,10,10,0.06);
+  display: flex; gap: 0; border-bottom: 1px solid var(--border-hairline);
   padding: 0 20px; flex-shrink: 0;
 }
 .agent-tab {
@@ -18,7 +18,7 @@
   font-family: var(--font-body); font-size: 12px; font-weight: 500;
   color: var(--ink-40); cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
   position: relative; top: 1px;
 }
 .agent-tab:hover { color: var(--ink-60); }
@@ -34,7 +34,7 @@
   flex: 1; overflow-y: auto;
 }
 .agent-mission-block {
-  background: var(--paper-warm); border-radius: 12px; padding: 16px;
+  background: var(--paper-warm); border-radius: var(--r-md); padding: 16px;
 }
 .agent-mission-label {
   font-family: var(--font-mono); font-size: 9px; font-weight: 600;
@@ -49,8 +49,13 @@
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
 }
 .agent-stat-card {
-  background: var(--paper-warm); border-radius: 12px; padding: 14px;
+  background: var(--paper-warm); border-radius: var(--r-md); padding: 14px;
   text-align: center;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.agent-stat-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 0 4px 12px rgba(10,10,10,0.06);
 }
 .agent-stat-value {
   font-family: var(--font-display); font-weight: 700; font-size: 24px;
@@ -62,7 +67,7 @@
 }
 .agent-config-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,0.04);
+  padding: 12px 0; border-bottom: 1px solid var(--border-light);
 }
 .agent-config-row:last-child { border-bottom: none; }
 .agent-config-label {
@@ -78,7 +83,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(10,10,10,0.04);
+  border-bottom: 1px solid var(--border-light);
 }
 .agent-work-row:last-child { border-bottom: none; }
 .agent-work-title {
@@ -91,13 +96,60 @@
 .agent-work-date {
   font-family: var(--font-mono); font-size: 9px; color: var(--ink-30);
 }
-.agent-work-empty {
-  font-family: var(--font-body); font-size: 12px; color: var(--ink-30); padding: 8px 0;
+
+/* ── First 72h onboarding card ── */
+.agent-first72 {
+  background: linear-gradient(135deg, rgba(110,60,255,0.04), rgba(0,210,106,0.04));
+  border: 2px solid var(--ink);
+  border-radius: var(--r-card);
+  padding: 16px;
+  box-shadow: var(--shadow-pop);
+  animation: viewEnter 0.3s var(--ease);
+}
+.agent-first72-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+}
+.agent-first72-badge {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  background: var(--phantom-violet); color: var(--fg-on-color);
+  padding: 3px 10px; border-radius: var(--r-full);
+}
+.agent-first72-countdown {
+  font-family: var(--font-mono); font-size: 9px; color: var(--ink-30);
+  letter-spacing: 0.04em;
+}
+.agent-first72-steps {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.agent-first72-step {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-size: 12px; color: var(--ink-30);
+}
+.agent-first72-step.done { color: var(--ink-60); }
+.agent-first72-step.active { color: var(--ink); font-weight: 600; }
+.agent-first72-dot {
+  width: 8px; height: 8px; border-radius: var(--r-full); flex-shrink: 0;
+  background: var(--border);
+}
+.agent-first72-dot.done { background: var(--green-600); }
+.agent-first72-dot.active {
+  background: var(--phantom-violet);
+  animation: pulse 2s ease-in-out infinite;
+}
+.agent-first72-check {
+  margin-left: auto; color: var(--green-600); font-size: 11px; font-weight: 700;
+}
+.agent-first72-footer {
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid var(--border-hairline);
+  font-family: var(--font-body); font-size: 11px; color: var(--ink-40);
 }
 
 /* Color swatch in config tab */
 .agent-config-swatch {
-  width: 18px; height: 18px; border-radius: 9999px; display: inline-block;
+  width: 18px; height: 18px; border-radius: var(--r-full); display: inline-block;
 }
 
 /* Chips override for agent composer */
@@ -132,7 +184,7 @@
 
 .agent-accomplishment-item {
   padding: 6px 0;
-  border-bottom: 1px solid rgba(10,10,10,0.04);
+  border-bottom: 1px solid var(--border-light);
 }
 .agent-accomplishment-item:last-child {
   border-bottom: none;
