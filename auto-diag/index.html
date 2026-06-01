@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0A">
+<title>DiagAuto 06 — Diagnostic automobile Alpes-Maritimes</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9670;</text></svg>">
+<meta name="description" content="Diagnostic automobile professionnel dans le 06. Lecture OBD, inspection avant achat, diagnostic moteur et electronique. Intervention rapide Nice, Cannes, Antibes, Grasse.">
+<meta property="og:title" content="DiagAuto 06 — Diagnostic automobile Alpes-Maritimes">
+<meta property="og:description" content="Diagnostic OBD, inspection avant achat, recherche de pannes. Intervention rapide dans tout le 06.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   DIAGAUTO 06 — Editorial Automotive
+   Premium white canvas / Fraunces + DM Sans / Photo-driven
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --da-ink: #0C0C0C;
+  --da-ink-80: #2A2A2A;
+  --da-ink-60: #555;
+  --da-ink-40: #888;
+  --da-ink-20: #BBB;
+  --da-ink-10: #DDD;
+  --da-ink-05: #F5F3FF;
+  --da-paper: #FFFFFF;
+  --da-cream: #F9F8FD;
+  --da-warm: #F3F1EC;
+  --da-violet: #6E3CFF;
+  --da-violet-dark: #5A26EB;
+  --da-violet-light: #F2EDFF;
+  --da-violet-soft: rgba(110,60,255,0.08);
+  --da-green: #1A8754;
+  --da-green-light: #E8F5EE;
+  --da-orange: #C4600C;
+  --da-orange-light: #FEF3E8;
+  --da-border: rgba(110,60,255,0.06);
+  --da-border-strong: rgba(110,60,255,0.14);
+
+  --ff-display: 'Fraunces', 'Georgia', serif;
+  --ff-body: 'DM Sans', system-ui, sans-serif;
+  --ff-mono: 'JetBrains Mono', monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: var(--da-violet); color: #fff; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff-body);
+  color: var(--da-ink);
+  background: var(--da-paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); }
+
+/* ─── NAV ─── */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+}
+
+.nav.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 0 1px 0 var(--da-border);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: var(--da-violet);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-weight: 800;
+  transition: border-radius 0.3s var(--ease-out);
+}
+
+.nav-logo:hover .nav-logo-mark { border-radius: 50%; }
+
+.nav-center { display: flex; gap: 32px; align-items: center; }
+
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--da-ink-60);
+  letter-spacing: 0.01em;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--da-ink); }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--da-violet);
+  transition: width 0.3s var(--ease-out);
+}
+.nav-link:hover::after { width: 100%; }
+
+.nav-cta-wrap { display: flex; align-items: center; gap: 16px; }
+
+.nav-phone {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--da-ink-60);
+  letter-spacing: 0.02em;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  background: var(--da-violet);
+  color: #fff;
+  border-radius: 100px;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(110,60,255,0.3);
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px; height: 40px;
+  position: relative;
+}
+.mobile-toggle span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--da-ink);
+  position: absolute;
+  left: 9px;
+  transition: transform 0.3s var(--ease-out), opacity 0.2s;
+}
+.mobile-toggle span:nth-child(1) { top: 14px; }
+.mobile-toggle span:nth-child(2) { top: 20px; }
+.mobile-toggle span:nth-child(3) { top: 26px; }
+
+/* ─── HERO ─── */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  background: var(--da-cream);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 40%, rgba(249,248,253,0.85) 70%, var(--da-cream) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 clamp(20px, 4vw, 64px);
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--da-violet-dark);
+  margin-bottom: 28px;
+  padding: 6px 14px 6px 10px;
+  background: var(--da-violet-light);
+  border-radius: 100px;
+  box-shadow: 0 1px 3px rgba(110,60,255,0.1);
+}
+
+.hero-tag-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--da-green);
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: clamp(44px, 6.5vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--da-violet);
+}
+
+.hero-sub {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.65;
+  color: var(--da-ink-60);
+  max-width: 540px;
+  margin-bottom: 40px;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--da-violet);
+  color: #fff;
+  font-family: var(--ff-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+  letter-spacing: -0.01em;
+}
+.btn-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(110,60,255,0.35);
+}
+.btn-dark svg { width: 18px; height: 18px; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--da-violet);
+  font-family: var(--ff-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1.5px solid rgba(110,60,255,0.25);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  letter-spacing: -0.01em;
+}
+.btn-outline:hover {
+  background: var(--da-violet-light);
+  border-color: var(--da-violet);
+}
+
+/* ─── PROOF STRIP ─── */
+
+.proof-strip {
+  background: var(--da-violet-light);
+  border-top: 1px solid rgba(110,60,255,0.08);
+  border-bottom: 1px solid rgba(110,60,255,0.08);
+}
+
+.proof-strip-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.proof-stat {
+  padding: 36px 0;
+  text-align: center;
+  position: relative;
+}
+
+.proof-stat + .proof-stat::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 24px; bottom: 24px;
+  width: 1px;
+  background: rgba(110,60,255,0.1);
+}
+
+.proof-num {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.proof-label {
+  font-size: 12.5px;
+  color: var(--da-ink-40);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ─── SECTION SHARED ─── */
+
+.section { padding: clamp(80px, 10vw, 140px) 0; }
+
+.section-header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  margin-bottom: 64px;
+}
+
+.section-tag {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--da-violet);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-tag::before {
+  content: '';
+  width: 32px; height: 1.5px;
+  background: var(--da-violet);
+  opacity: 0.4;
+}
+
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  max-width: 700px;
+}
+
+.section-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--da-violet);
+}
+
+.section-sub {
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: var(--da-ink-60);
+  max-width: 520px;
+  margin-top: 20px;
+  line-height: 1.65;
+}
+
+/* ─── SERVICES ─── */
+
+.services-section { background: var(--da-paper); }
+
+.services-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--da-border);
+  border: 1px solid var(--da-border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.svc {
+  background: var(--da-paper);
+  padding: 44px 36px;
+  position: relative;
+  transition: background 0.35s;
+}
+
+.svc:hover { background: var(--da-violet-light); }
+
+.svc-img {
+  width: 100%; height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.svc-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.svc:hover .svc-img img { transform: scale(1.06); }
+
+.svc-num {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--da-violet);
+  opacity: 0.5;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.svc-name {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.svc-desc {
+  font-size: 14px;
+  color: var(--da-ink-60);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.svc-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--da-violet-dark);
+  padding: 5px 12px;
+  background: var(--da-violet-light);
+  border-radius: 100px;
+}
+
+/* ─── EDITORIAL IMAGE BAND ─── */
+
+.editorial-band {
+  position: relative;
+  height: clamp(400px, 50vw, 640px);
+  overflow: hidden;
+}
+
+.editorial-band img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.editorial-band-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--da-paper) 0%, transparent 15%, transparent 80%, var(--da-paper) 100%);
+}
+
+.editorial-band-text {
+  position: absolute;
+  bottom: 48px;
+  left: clamp(20px, 4vw, 64px);
+  right: clamp(20px, 4vw, 64px);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.editorial-band-quote {
+  font-family: var(--ff-display);
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--da-paper);
+  line-height: 1.2;
+  max-width: 600px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+/* ─── HOW IT WORKS ─── */
+
+.how-section { background: var(--da-cream); }
+
+.how-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.how-step {
+  padding: 0 32px;
+  position: relative;
+}
+
+.how-step + .how-step { border-left: 1px solid rgba(110,60,255,0.08); }
+
+.how-num {
+  font-family: var(--ff-display);
+  font-size: 72px;
+  font-weight: 300;
+  color: rgba(110,60,255,0.12);
+  line-height: 1;
+  margin-bottom: 24px;
+  letter-spacing: -0.04em;
+}
+
+.how-title {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.how-desc {
+  font-size: 14px;
+  color: var(--da-ink-60);
+  line-height: 1.65;
+}
+
+/* ─── DUAL IMAGE + TEXT ─── */
+
+.dual-section { background: var(--da-paper); }
+
+.dual-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.dual-img-stack { position: relative; }
+
+.dual-img-main {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px -16px rgba(0,0,0,0.12);
+}
+
+.dual-img-main img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.dual-img-float {
+  position: absolute;
+  bottom: -32px;
+  right: -32px;
+  width: 55%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 5px solid var(--da-paper);
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.15);
+}
+
+.dual-img-float img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.dual-content {}
+
+.dual-content .section-tag { margin-bottom: 20px; }
+.dual-content .section-title { margin-bottom: 24px; }
+
+.dual-text {
+  font-size: 15px;
+  color: var(--da-ink-60);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.dual-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  margin-bottom: 40px;
+}
+
+.dual-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14.5px;
+  color: var(--da-ink-80);
+  line-height: 1.5;
+}
+
+.dual-check {
+  width: 22px; height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  background: var(--da-violet-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.dual-check svg { width: 12px; height: 12px; color: var(--da-violet); }
+
+/* ─── ZONES ─── */
+
+.zones-section { background: var(--da-cream); }
+
+.zones-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.zone-map-area {
+  background: var(--da-paper);
+  border-radius: 20px;
+  border: 1px solid var(--da-border);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.zone-map-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--da-ink-05);
+}
+
+.zone-map-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.zone-cities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.zone-city {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.zone-city:hover { background: var(--da-violet-light); }
+
+.zone-city-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--da-green);
+  flex-shrink: 0;
+}
+
+.zone-info-cards { display: flex; flex-direction: column; gap: 16px; }
+
+.zone-info-card {
+  background: var(--da-paper);
+  border: 1px solid var(--da-border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: box-shadow 0.3s, transform 0.3s var(--ease-out);
+}
+
+.zone-info-card:hover {
+  box-shadow: 0 8px 32px -8px rgba(110,60,255,0.1);
+  border-color: rgba(110,60,255,0.15);
+  transform: translateY(-2px);
+}
+
+.zone-info-icon {
+  width: 48px; height: 48px;
+  min-width: 48px;
+  border-radius: 14px;
+  background: var(--da-violet-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zone-info-icon svg { width: 22px; height: 22px; color: var(--da-violet); }
+
+.zone-info-title {
+  font-family: var(--ff-display);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.zone-info-text {
+  font-size: 13.5px;
+  color: var(--da-ink-60);
+  line-height: 1.55;
+}
+
+/* ─── TESTIMONIALS ─── */
+
+.reviews-section { background: var(--da-paper); }
+
+.reviews-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.review {
+  border: 1px solid var(--da-border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s var(--ease-out);
+}
+
+.review:hover {
+  box-shadow: 0 16px 48px -12px rgba(110,60,255,0.1);
+  border-color: rgba(110,60,255,0.15);
+  transform: translateY(-4px);
+}
+
+.review-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.review-star {
+  width: 18px; height: 18px;
+  color: #E8B000;
+}
+
+.review-text {
+  font-size: 15px;
+  color: var(--da-ink-80);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 28px;
+}
+
+.review-author { display: flex; align-items: center; gap: 14px; }
+
+.review-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--da-cream);
+}
+
+.review-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.review-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.review-detail {
+  font-size: 12.5px;
+  color: var(--da-ink-40);
+}
+
+/* ─── DIAGNOSTIC PREVIEW CARD ─── */
+
+.diag-card-section {
+  background: linear-gradient(135deg, #1a0a3e 0%, #2d1566 40%, #3D14A8 100%);
+  color: var(--da-paper);
+  position: relative;
+  overflow: hidden;
+}
+
+.diag-card-section::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(110,60,255,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.diag-card-section::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(197,173,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.diag-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.diag-content {}
+
+.diag-content .section-tag { color: rgba(255,255,255,0.35); }
+.diag-content .section-tag::before { background: rgba(255,255,255,0.2); }
+
+.diag-content .section-title { color: #fff; }
+
+.diag-text {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-top: 20px;
+}
+
+.diag-panel {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+.diag-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--phantom-violet), var(--rainbow-green), var(--rainbow-blue));
+}
+
+.diag-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.diag-panel-title {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.diag-badge {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(26,135,84,0.15);
+  color: #4ADE80;
+}
+
+.diag-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+}
+
+.diag-row:last-child { border-bottom: none; }
+
+.diag-label { color: rgba(255,255,255,0.45); }
+.diag-val { font-weight: 600; }
+.diag-ok { color: #4ADE80; }
+.diag-warn { color: #FB923C; }
+.diag-code { font-family: var(--ff-mono); font-size: 12px; color: var(--phantom-violet-200); }
+
+.diag-panel-foot {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+
+.diag-panel-foot svg { width: 14px; height: 14px; color: #4ADE80; }
+
+/* ─── FAQ ─── */
+
+.faq-section { background: var(--da-cream); }
+
+.faq-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+
+.faq-item {
+  border-bottom: 1px solid var(--da-border);
+}
+
+.faq-item:first-child { border-top: 1px solid var(--da-border); }
+
+.faq-q {
+  width: 100%;
+  padding: 22px 0;
+  background: none;
+  border: none;
+  font-family: var(--ff-body);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--da-ink);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+
+.faq-q:hover { color: var(--da-violet); }
+
+.faq-arrow {
+  width: 20px; height: 20px;
+  color: var(--da-ink-40);
+  transition: transform 0.3s var(--ease-out);
+  flex-shrink: 0;
+}
+
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease-out);
+}
+
+.faq-a-inner {
+  padding: 0 0 24px;
+  font-size: 14.5px;
+  color: var(--da-ink-60);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ─── CTA ─── */
+
+.cta-section {
+  background: var(--da-paper);
+  position: relative;
+}
+
+.cta-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+}
+
+.cta-box {
+  background: linear-gradient(135deg, #2d1566 0%, var(--da-violet) 50%, #5A26EB 100%);
+  border-radius: 28px;
+  padding: clamp(48px, 6vw, 80px);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-box-title {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.cta-box-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.cta-box-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: #fff;
+  color: var(--da-ink);
+  font-family: var(--ff-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+}
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,255,255,0.15);
+}
+.btn-white svg { width: 18px; height: 18px; }
+
+.btn-ghost-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--ff-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-ghost-white:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.cta-box-img {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-box-img img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+/* ─── FOOTER ─── */
+
+.footer {
+  background: var(--da-paper);
+  border-top: 1px solid var(--da-border);
+  padding: 48px 0;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: var(--da-ink-40);
+}
+
+.footer-links { display: flex; gap: 28px; }
+
+.footer-link {
+  font-size: 13px;
+  color: var(--da-ink-40);
+  transition: color 0.15s;
+}
+.footer-link:hover { color: var(--da-violet); }
+
+/* ─── SCROLL REVEAL ─── */
+
+.rv {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.rv.vis { opacity: 1; transform: translateY(0); }
+
+.rv-d1 { transition-delay: 0.08s; }
+.rv-d2 { transition-delay: 0.16s; }
+.rv-d3 { transition-delay: 0.24s; }
+.rv-d4 { transition-delay: 0.32s; }
+.rv-d5 { transition-delay: 0.40s; }
+.rv-d6 { transition-delay: 0.48s; }
+
+.rv-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.rv-left.vis { opacity: 1; transform: translateX(0); }
+
+.rv-right {
+  opacity: 0;
+  transform: translateX(48px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.rv-right.vis { opacity: 1; transform: translateX(0); }
+
+.rv-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.rv-scale.vis { opacity: 1; transform: scale(1); }
+
+/* ─── RESPONSIVE ─── */
+
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .how-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .how-step + .how-step { border-left: none; }
+  .how-step:nth-child(2n+1):not(:first-child) { border-left: none; }
+  .how-step:nth-child(2) { border-left: 1px solid var(--da-border); }
+  .how-step:nth-child(4) { border-left: 1px solid var(--da-border); }
+  .dual-grid { grid-template-columns: 1fr; gap: 48px; }
+  .dual-img-float { right: -16px; bottom: -16px; }
+  .diag-layout { grid-template-columns: 1fr; gap: 48px; }
+  .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+  .cta-box { grid-template-columns: 1fr; }
+  .zones-layout { grid-template-columns: 1fr; }
+  .nav-center { display: none; }
+  .nav-phone { display: none; }
+  .mobile-toggle { display: block; }
+}
+
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr; }
+  .how-step + .how-step { border-left: none !important; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .proof-strip-inner { grid-template-columns: repeat(2, 1fr); }
+  .proof-stat:nth-child(3)::before { display: none; }
+  .zone-cities { grid-template-columns: 1fr; }
+  .cta-box { padding: 36px 28px; border-radius: 20px; }
+  .hero-title { font-size: clamp(36px, 8vw, 52px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">D</div>
+      <span>DiagAuto 06</span>
+    </a>
+    <div class="nav-center">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#methode" class="nav-link">Methode</a>
+      <a href="#zones" class="nav-link">Zones</a>
+      <a href="#avis" class="nav-link">Avis</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+    <div class="nav-cta-wrap">
+      <span class="nav-phone">04 93 00 00 00</span>
+      <a href="tel:+33493000000" class="nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Appeler
+      </a>
+    </div>
+    <button class="mobile-toggle" aria-label="Menu" id="mobile-toggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=80&auto=format" alt="Vehicule premium sur route cotiere" loading="eager" fetchpriority="high">
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag rv"><span class="hero-tag-dot"></span> Disponible 7j/7 dans le 06</div>
+    <h1 class="hero-title rv rv-d1">Chaque vehicule<br>a <em>une histoire.</em><br>On la lit.</h1>
+    <p class="hero-sub rv rv-d2">Diagnostic electronique, inspection avant achat, recherche de pannes. <strong>Intervention a domicile</strong> dans tout le departement des Alpes-Maritimes.</p>
+    <div class="hero-actions rv rv-d3">
+      <a href="tel:+33493000000" class="btn-dark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Prendre rendez-vous
+      </a>
+      <a href="#services" class="btn-outline">Decouvrir nos services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROOF STRIP ═══════ -->
+<div class="proof-strip rv">
+  <div class="proof-strip-inner">
+    <div class="proof-stat">
+      <div class="proof-num">2 500+</div>
+      <div class="proof-label">Diagnostics</div>
+    </div>
+    <div class="proof-stat">
+      <div class="proof-num">4.9<span style="font-size:0.6em;color:var(--da-ink-40)">/5</span></div>
+      <div class="proof-label">Avis Google</div>
+    </div>
+    <div class="proof-stat">
+      <div class="proof-num">45 min</div>
+      <div class="proof-label">Intervention</div>
+    </div>
+    <div class="proof-stat">
+      <div class="proof-num">7j/7</div>
+      <div class="proof-label">Disponible</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SERVICES ═══════ -->
+<section class="section services-section" id="services">
+  <div class="section-header rv">
+    <div class="section-tag">Services</div>
+    <h2 class="section-title">Six expertises. <em>Un seul interlocuteur.</em></h2>
+    <p class="section-sub">Materiel professionnel de derniere generation. Rapport detaille remis sur place ou envoye par email.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="svc rv rv-d1">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1635784063566-09fddba8e0fe?w=600&q=80&auto=format" alt="Diagnostic electronique OBD" loading="lazy">
+      </div>
+      <div class="svc-num">01</div>
+      <div class="svc-name">Diagnostic OBD</div>
+      <p class="svc-desc">Lecture et effacement des codes defaut. Analyse complete des capteurs moteur, transmission, ABS, airbag, climatisation.</p>
+      <div class="svc-price">A partir de 59 &euro;</div>
+    </div>
+
+    <div class="svc rv rv-d2">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80&auto=format" alt="Inspection avant achat vehicule" loading="lazy">
+      </div>
+      <div class="svc-num">02</div>
+      <div class="svc-name">Inspection avant achat</div>
+      <p class="svc-desc">Verification complete avant l'achat d'un vehicule d'occasion. Rapport 120 points avec photos.</p>
+      <div class="svc-price">A partir de 129 &euro;</div>
+    </div>
+
+    <div class="svc rv rv-d3">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80&auto=format" alt="Recherche de panne mecanique" loading="lazy">
+      </div>
+      <div class="svc-num">03</div>
+      <div class="svc-name">Recherche de panne</div>
+      <p class="svc-desc">Identification precise de la source d'un probleme mecanique ou electronique. Devis reparation inclus.</p>
+      <div class="svc-price">A partir de 89 &euro;</div>
+    </div>
+
+    <div class="svc rv rv-d4">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80&auto=format" alt="Controle pre-CT" loading="lazy">
+      </div>
+      <div class="svc-num">04</div>
+      <div class="svc-name">Controle pre-CT</div>
+      <p class="svc-desc">Verification complete avant le passage au controle technique. Evitez la contre-visite.</p>
+      <div class="svc-price">A partir de 79 &euro;</div>
+    </div>
+
+    <div class="svc rv rv-d5">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1504222490345-c075b6008014?w=600&q=80&auto=format" alt="Rapport detaille vehicule" loading="lazy">
+      </div>
+      <div class="svc-num">05</div>
+      <div class="svc-name">Rapport detaille</div>
+      <p class="svc-desc">Rapport numerique complet avec photos, codes defaut et recommandations. Envoye par email.</p>
+      <div class="svc-price">Inclus</div>
+    </div>
+
+    <div class="svc rv rv-d6">
+      <div class="svc-img">
+        <img src="https://images.unsplash.com/photo-1449965408869-ebd3fee7ab41?w=600&q=80&auto=format" alt="Intervention a domicile Cote d'Azur" loading="lazy">
+      </div>
+      <div class="svc-num">06</div>
+      <div class="svc-name">A domicile</div>
+      <p class="svc-desc">On se deplace chez vous, sur votre lieu de travail ou directement chez le vendeur.</p>
+      <div class="svc-price">Deplacement offert &lt; 20 km</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ EDITORIAL BAND ═══════ -->
+<div class="editorial-band rv-scale">
+  <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&q=80&auto=format" alt="Vehicule de luxe en mouvement" loading="lazy">
+  <div class="editorial-band-overlay"></div>
+  <div class="editorial-band-text">
+    <p class="editorial-band-quote">&laquo; Un bon diagnostic peut vous economiser des milliers d'euros. &raquo;</p>
+  </div>
+</div>
+
+<!-- ═══════ HOW IT WORKS ═══════ -->
+<section class="section how-section" id="methode">
+  <div class="section-header rv">
+    <div class="section-tag">Methode</div>
+    <h2 class="section-title">Du premier appel <em>au rapport final.</em></h2>
+  </div>
+
+  <div class="how-grid">
+    <div class="how-step rv rv-d1">
+      <div class="how-num">01</div>
+      <div class="how-title">Vous appelez</div>
+      <div class="how-desc">Decrivez votre besoin par telephone. On vous rappelle sous 30 minutes pour confirmer le creneau.</div>
+    </div>
+    <div class="how-step rv rv-d2">
+      <div class="how-num">02</div>
+      <div class="how-title">On se deplace</div>
+      <div class="how-desc">Un technicien certifie intervient chez vous, sur votre lieu de travail ou chez le vendeur.</div>
+    </div>
+    <div class="how-step rv rv-d3">
+      <div class="how-num">03</div>
+      <div class="how-title">Diagnostic</div>
+      <div class="how-desc">Analyse electronique, visuelle et fonctionnelle de votre vehicule. 45 minutes en moyenne.</div>
+    </div>
+    <div class="how-step rv rv-d4">
+      <div class="how-num">04</div>
+      <div class="how-title">Rapport clair</div>
+      <div class="how-desc">Rapport detaille avec photos, etat du vehicule et recommandations actionables.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DUAL — Expertise ═══════ -->
+<section class="section dual-section">
+  <div class="dual-grid">
+    <div class="dual-img-stack rv-left">
+      <div class="dual-img-main">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80&auto=format" alt="Technicien diagnostic automobile" loading="lazy">
+      </div>
+      <div class="dual-img-float">
+        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=500&q=80&auto=format" alt="Outil de diagnostic professionnel" loading="lazy">
+      </div>
+    </div>
+    <div class="dual-content rv-right">
+      <div class="section-tag">Expertise</div>
+      <h2 class="section-title">Pas un garage. <em>Un specialiste.</em></h2>
+      <p class="dual-text">Notre approche est differente : nous sommes independants de tout atelier de reparation. Notre seul interet est de vous donner un diagnostic objectif et transparent.</p>
+      <ul class="dual-features">
+        <li>
+          <span class="dual-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Materiel multimarque derniere generation (80+ marques)
+        </li>
+        <li>
+          <span class="dual-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Techniciens certifies avec 10+ ans d'experience
+        </li>
+        <li>
+          <span class="dual-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Aucun conflit d'interet : pas de reparation, que du diagnostic
+        </li>
+        <li>
+          <span class="dual-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Rapport exploitable par tous les garages
+        </li>
+      </ul>
+      <a href="tel:+33493000000" class="btn-dark">Prendre rendez-vous</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DIAGNOSTIC CARD DARK ═══════ -->
+<section class="section diag-card-section">
+  <div class="diag-layout">
+    <div class="diag-content rv-left">
+      <div class="section-tag">Rapport</div>
+      <h2 class="section-title">Un rapport que vous <em>comprenez vraiment.</em></h2>
+      <p class="diag-text">Pas de jargon technique incomprehensible. Chaque point est explique clairement, illustre par des photos et accompagne de recommandations concretes.</p>
+    </div>
+    <div class="diag-panel rv-right">
+      <div class="diag-panel-head">
+        <div class="diag-panel-title">Peugeot 3008 — 2021</div>
+        <div class="diag-badge">Termine</div>
+      </div>
+      <div class="diag-row">
+        <span class="diag-label">Moteur</span>
+        <span class="diag-val diag-ok">Aucun defaut</span>
+      </div>
+      <div class="diag-row">
+        <span class="diag-label">Transmission</span>
+        <span class="diag-val diag-ok">OK</span>
+      </div>
+      <div class="diag-row">
+        <span class="diag-label">Freinage</span>
+        <span class="diag-val diag-warn">Plaquettes avant 72%</span>
+      </div>
+      <div class="diag-row">
+        <span class="diag-label">Code OBD</span>
+        <span class="diag-val diag-code">P0420 — Catalyseur</span>
+      </div>
+      <div class="diag-row">
+        <span class="diag-label">Electronique</span>
+        <span class="diag-val diag-ok">0 defaut</span>
+      </div>
+      <div class="diag-row">
+        <span class="diag-label">Carrosserie</span>
+        <span class="diag-val diag-ok">Pas de repeinture</span>
+      </div>
+      <div class="diag-panel-foot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Intervention a domicile — Nice Ouest — 14h32
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ZONES ═══════ -->
+<section class="section zones-section" id="zones">
+  <div class="section-header rv">
+    <div class="section-tag">Zones</div>
+    <h2 class="section-title">Tout le departement <em>des Alpes-Maritimes.</em></h2>
+    <p class="section-sub">Intervention en moins d'1h. Deplacement gratuit dans un rayon de 20 km autour de Nice.</p>
+  </div>
+
+  <div class="zones-layout">
+    <div class="zone-map-area rv-left">
+      <div class="zone-map-img">
+        <img src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800&q=80&auto=format" alt="Vue aerienne de Nice et la Cote d'Azur" loading="lazy">
+      </div>
+      <div class="zone-cities">
+        <div class="zone-city"><span class="zone-city-dot"></span> Nice</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Cannes</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Antibes</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Grasse</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Cagnes-sur-Mer</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Le Cannet</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Mougins</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Valbonne</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Sophia Antipolis</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Menton</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Mandelieu</div>
+        <div class="zone-city"><span class="zone-city-dot"></span> Villeneuve-Loubet</div>
+      </div>
+    </div>
+
+    <div class="zone-info-cards rv-right">
+      <div class="zone-info-card">
+        <div class="zone-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="zone-info-title">7j/7, de 8h a 20h</div>
+          <div class="zone-info-text">Y compris le week-end et les jours feries. Creneaux le matin ou en fin de journee.</div>
+        </div>
+      </div>
+      <div class="zone-info-card">
+        <div class="zone-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="zone-info-title">Deplacement gratuit</div>
+          <div class="zone-info-text">Dans un rayon de 20 km autour de Nice. Au-dela, supplement de 0,50 &euro;/km.</div>
+        </div>
+      </div>
+      <div class="zone-info-card">
+        <div class="zone-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <div>
+          <div class="zone-info-title">Paiement flexible</div>
+          <div class="zone-info-text">Carte bancaire, especes ou virement instantane. Facture envoyee par email dans l'heure.</div>
+        </div>
+      </div>
+      <div class="zone-info-card">
+        <div class="zone-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="zone-info-title">Rappel sous 30 min</div>
+          <div class="zone-info-text">Laissez un message et un technicien vous recontacte dans la demi-heure.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ AVIS ═══════ -->
+<section class="section reviews-section" id="avis">
+  <div class="section-header rv">
+    <div class="section-tag">Avis clients</div>
+    <h2 class="section-title">4.9/5 sur Google. <em>Pas par hasard.</em></h2>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review rv rv-d1">
+      <div class="review-stars">
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="review-text">&laquo; Diagnostic avant achat impeccable. Le technicien a detecte un probleme de turbo que le vendeur avait cache. J'ai evite un achat a 18 000 &euro;. Investissement le plus rentable de ma vie. &raquo;</p>
+      <div class="review-author">
+        <div class="review-avatar">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&q=80&auto=format&fit=crop" alt="Marc L." loading="lazy">
+        </div>
+        <div>
+          <div class="review-name">Marc L.</div>
+          <div class="review-detail">Nice — BMW X3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review rv rv-d2">
+      <div class="review-stars">
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="review-text">&laquo; Voyant moteur allume, le garage voulait 800 &euro; de reparation. DiagAuto a trouve la vraie cause : un simple capteur a 45 &euro;. Serieux, competent et honnete. &raquo;</p>
+      <div class="review-author">
+        <div class="review-avatar">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&q=80&auto=format&fit=crop" alt="Sophie P." loading="lazy">
+        </div>
+        <div>
+          <div class="review-name">Sophie P.</div>
+          <div class="review-detail">Antibes — Renault Clio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review rv rv-d3">
+      <div class="review-stars">
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg class="review-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="review-text">&laquo; Intervenu un dimanche chez le vendeur a Cannes. Rapport tres professionnel, le vehicule etait impeccable, j'ai achete en confiance. Je recommande a 100%. &raquo;</p>
+      <div class="review-author">
+        <div class="review-avatar">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=88&q=80&auto=format&fit=crop" alt="Karim D." loading="lazy">
+        </div>
+        <div>
+          <div class="review-name">Karim D.</div>
+          <div class="review-detail">Cannes — Mercedes Classe C</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="section faq-section" id="faq">
+  <div class="faq-layout">
+    <div class="rv">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-title">Questions <em>frequentes.</em></h2>
+      <p class="section-sub" style="margin-top:20px">Vous ne trouvez pas votre reponse ? Appelez-nous au 04 93 00 00 00, on repond en moins de 30 minutes.</p>
+    </div>
+
+    <div class="faq-list rv rv-d2">
+      <div class="faq-item">
+        <button class="faq-q">
+          Combien de temps dure un diagnostic ?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Un diagnostic OBD standard prend environ 30 a 45 minutes. Une inspection avant achat complete (120 points) dure environ 1h a 1h30 selon le vehicule.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Quelles marques diagnostiquez-vous ?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Toutes les marques : Renault, Peugeot, Citroen, BMW, Mercedes, Audi, Volkswagen, Toyota, etc. Notre materiel couvre plus de 80 marques et 10 000 modeles.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Vous deplacez-vous vraiment a domicile ?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Oui. Chez vous, sur votre lieu de travail, ou directement chez le vendeur particulier ou concessionnaire. Le deplacement est gratuit dans un rayon de 20 km autour de Nice. Au-dela, un supplement de 0,50 &euro;/km s'applique.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Le diagnostic remplace-t-il le controle technique ?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Non, notre diagnostic est complementaire. Il va plus loin que le CT sur la partie electronique et mecanique, mais ne le remplace pas legalement. C'est un excellent complement avant un achat ou pour identifier un probleme.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Comment se passe le paiement ?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Paiement sur place apres l'intervention : carte bancaire, especes ou virement instantane. Facture envoyee par email dans l'heure.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="section cta-section">
+  <div class="cta-inner">
+    <div class="cta-box rv-scale">
+      <div>
+        <h2 class="cta-box-title">Un doute sur<br>votre vehicule ?</h2>
+        <p class="cta-box-sub">Appelez-nous. On vous rappelle sous 30 minutes pour planifier l'intervention a l'endroit et au moment qui vous convient.</p>
+        <div class="cta-box-actions">
+          <a href="tel:+33493000000" class="btn-white">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
+            04 93 00 00 00
+          </a>
+          <a href="#services" class="btn-ghost-white">Voir les tarifs</a>
+        </div>
+      </div>
+      <div class="cta-box-img">
+        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&q=80&auto=format" alt="Vehicule en attente de diagnostic" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-logo">DiagAuto 06</span>
+      <span class="footer-copy">Diagnostic automobile — Alpes-Maritimes — SIRET 000 000 000 00000</span>
+    </div>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Mentions legales</a>
+      <a href="#" class="footer-link">CGV</a>
+      <a href="#" class="footer-link">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.rv, .rv-left, .rv-right, .rv-scale').forEach(function(el) { obs.observe(el); });
+})();
+
+(function() {
+  var nav = document.getElementById('nav');
+  var last = 0;
+  window.addEventListener('scroll', function() {
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 60);
+    last = y;
+  }, { passive: true });
+})();
+
+document.querySelectorAll('.faq-q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.parentElement;
+    var ans = item.querySelector('.faq-a');
+    var open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(o) {
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight = '0';
+    });
+    if (!open) {
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    }
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
