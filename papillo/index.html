@@ -1,0 +1,2407 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Papillo'& Cie — Cosmétiques ongles, nail art & soins professionnels</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FF2D87">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>">
+<meta name="description" content="Papillo'& Cie — Boutique en ligne de cosmétiques pour ongles. Makear, SoPRO, Trind Cosmetics. Vernis gel, nail art, soins hypoallergéniques. Livraison gratuite dès 49€.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PHANTOM DESIGN TOKENS — adapted for Papillo'& Cie
+   ============================================================ */
+:root {
+  --papillo-pink: #FF2D87;
+  --papillo-pink-50: #FFF0F6;
+  --papillo-pink-100: #FFD4E5;
+  --papillo-pink-200: #FFA8CB;
+  --papillo-pink-400: #FF5EA0;
+  --papillo-pink-600: #D6126A;
+  --papillo-pink-800: #9E0A4E;
+  --papillo-pink-900: #5C0630;
+
+  --rainbow-red: #FF4D2E;
+  --rainbow-orange: #FF8A1F;
+  --rainbow-yellow: #FFD400;
+  --rainbow-green: #00D26A;
+  --rainbow-blue: #0066FF;
+  --rainbow-pink: #FF2D87;
+  --rainbow-violet: #6E3CFF;
+
+  --ink: #0A0A0A;
+  --ink-90: #1A1A1A;
+  --ink-80: #2B2B2B;
+  --ink-60: #4A4A4A;
+  --ink-40: #767676;
+  --ink-30: #9B9B9B;
+  --ink-20: #C6C6C6;
+  --ink-10: #E5E5E5;
+  --ink-05: #F2F2F2;
+  --paper: #FFFFFF;
+  --paper-warm: #FFF8FA;
+
+  --font-display: 'Space Grotesk', 'SF Pro Display', system-ui, sans-serif;
+  --font-body: 'Geist', 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-md: 17px;
+  --fs-lg: 21px;
+  --fs-xl: 26px;
+  --fs-2xl: 33px;
+  --fs-3xl: 42px;
+  --fs-4xl: 56px;
+  --fs-5xl: clamp(64px, 7vw, 88px);
+
+  --tracking-tight: -0.025em;
+  --tracking-snug: -0.01em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+  --leading-display: 1.02;
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-base: 1.55;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+  --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-14: 56px; --s-20: 80px;
+  --container: 1280px;
+
+  --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-card: 14px;
+  --r-lg: 20px; --r-xl: 28px; --r-2xl: 40px; --r-full: 9999px;
+
+  --shadow-pop: 4px 4px 0 0 var(--ink);
+  --shadow-pop-pink: 4px 4px 0 0 var(--papillo-pink);
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --d-fast: 120ms;
+  --d-base: 220ms;
+  --d-slow: 420ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; }
+::selection { background: var(--rainbow-yellow); color: var(--ink); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+/* Aurora depth shapes */
+.aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora-band {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform;
+  background: rgba(255,255,255,0.06);
+}
+.ab-1 {
+  width: 700px; height: 400px;
+  opacity: 0.8;
+  top: -15%; left: -5%;
+  animation: auroraDrift1 20s ease-in-out infinite;
+}
+.ab-2 {
+  width: 500px; height: 350px;
+  opacity: 0.5;
+  top: 25%; right: -8%;
+  animation: auroraDrift2 26s ease-in-out infinite;
+}
+.ab-3 {
+  width: 400px; height: 300px;
+  opacity: 0.4;
+  bottom: 5%; left: 30%;
+  animation: auroraDrift3 18s ease-in-out infinite;
+}
+@keyframes auroraDrift1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(100px, 50px) rotate(5deg) scale(1.1); }
+  66% { transform: translate(-50px, 80px) rotate(-3deg) scale(0.95); }
+}
+@keyframes auroraDrift2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-80px, 40px) rotate(-4deg); }
+  66% { transform: translate(60px, -30px) rotate(3deg); }
+}
+@keyframes auroraDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(80px, -40px) scale(1.15); }
+}
+
+/* Noise overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* ═══════ NAV ═══════ */
+.hero-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 48px;
+  position: relative;
+  z-index: 60;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-butterfly {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  filter: drop-shadow(0 2px 8px rgba(255,255,255,0.3));
+}
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.logo-text span {
+  color: var(--rainbow-yellow);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+  padding: 4px 0;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: #fff;
+  transition: width 0.3s var(--ease);
+}
+.nav-link:hover,
+.nav-link:focus-visible { color: #fff; }
+.nav-link:hover::after { width: 100%; }
+.nav-cta {
+  background: #fff;
+  color: var(--papillo-pink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: var(--r-full);
+  text-decoration: none;
+  border: 2.5px solid #fff;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  box-shadow: 3px 3px 0 0 var(--papillo-pink-900);
+}
+.nav-cta:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 0 var(--papillo-pink-900); }
+
+/* ═══════ HERO MAIN ═══════ */
+.hero-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px 40px;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+}
+.hero-content::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 52px;
+  bottom: 60px;
+  width: 3px;
+  border-radius: var(--r-full);
+  background: linear-gradient(180deg, transparent, var(--rainbow-yellow), rgba(255,255,255,0.34), transparent);
+  opacity: 0.82;
+}
+.hero-content::after {
+  content: '';
+  position: absolute;
+  left: -72px; top: 14%;
+  width: 320px; height: 320px;
+  border-radius: var(--r-full);
+  background: radial-gradient(circle, rgba(255,212,0,0.18), rgba(255,255,255,0.06) 34%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Eyebrow */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: var(--r-full);
+  padding: 7px 8px 7px 10px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 14px 42px rgba(92,6,48,0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  transform: translateY(12px);
+}
+.eyebrow-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--rainbow-green);
+  box-shadow: 0 0 8px rgba(0,210,106,0.6);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.eyebrow-live {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  background: var(--paper);
+  color: var(--papillo-pink);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Headline */
+.payoff {
+  font-family: var(--font-display);
+  font-size: clamp(58px, 6.4vw, 92px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.9;
+  margin: 0 0 22px;
+  padding-bottom: 0.1em;
+  position: relative;
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(20px);
+}
+.payoff span,
+.payoff strong,
+.payoff em {
+  display: block;
+  font-style: normal;
+}
+.payoff span {
+  color: rgba(255,255,255,0.74);
+  font-size: 0.42em;
+  line-height: 1.1;
+  font-weight: 650;
+  margin-bottom: 6px;
+}
+.payoff strong {
+  color: var(--rainbow-yellow);
+  font-size: 1em;
+  line-height: 0.9;
+  white-space: normal;
+  max-width: 10ch;
+  padding-bottom: 0.12em;
+}
+.payoff em {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 18px;
+  padding: 7px 14px 8px;
+  border: 2px solid var(--paper);
+  border-radius: var(--r-full);
+  color: var(--paper);
+  font-size: 0.2em;
+  line-height: 1.1;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 0 var(--papillo-pink-900);
+  background: rgba(255,255,255,0.10);
+  -webkit-text-fill-color: var(--paper);
+}
+.payoff::after {
+  content: '';
+  position: absolute;
+  width: 70%; height: 50%;
+  bottom: -15%; left: 0;
+  background: var(--rainbow-yellow);
+  filter: blur(100px);
+  opacity: 0;
+  z-index: -1;
+}
+.payoff.shimmer strong {
+  animation: shimmer 14s linear infinite;
+  background-size: 300% 100%;
+  background-image: linear-gradient(91deg,
+    var(--rainbow-yellow) 0%, var(--paper) 15%,
+    var(--rainbow-yellow) 30%, var(--paper) 50%,
+    var(--rainbow-yellow) 70%, var(--paper) 85%,
+    var(--rainbow-yellow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+
+/* Sub */
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.58;
+  color: rgba(255,255,255,0.76);
+  max-width: 520px;
+  margin: 0 0 24px;
+  text-wrap: pretty;
+  opacity: 0;
+  transform: translateY(12px);
+}
+.hero-sub strong { color: var(--paper); font-weight: 600; }
+
+/* Proof */
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(12px);
+}
+.hero-proof-text {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.76);
+  line-height: 1.2;
+}
+.hero-proof-text strong,
+.hero-proof-text span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: var(--r-full);
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.84);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.hero-proof-text strong {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--papillo-pink);
+  box-shadow: 3px 3px 0 0 var(--papillo-pink-900);
+}
+
+/* Headline */
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.5vw, 80px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 20px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 4px 24px rgba(0,0,0,0.5), 0 8px 60px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: #fff;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.5), 0 8px 50px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* CTAs */
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(16px);
+  justify-content: center;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  min-height: 48px;
+  padding: 10px 20px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  background: var(--paper);
+  color: var(--papillo-pink);
+  border: 2.5px solid var(--paper);
+  box-shadow: 4px 4px 0 0 var(--papillo-pink-900);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 0 var(--papillo-pink-900); }
+.btn-primary:active { transform: translate(1px,1px); box-shadow: 2px 2px 0 0 var(--papillo-pink-900); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-primary small {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--rainbow-yellow);
+  color: var(--ink);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  min-height: 48px;
+  padding: 10px 20px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: var(--paper);
+  border: 2.5px solid rgba(255,255,255,0.3);
+  box-shadow: 4px 4px 0 0 rgba(0,0,0,0.15);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.15s var(--ease);
+  text-decoration: none;
+}
+.btn-ghost:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 0 rgba(0,0,0,0.2); background: rgba(255,255,255,0.15); }
+.btn-ghost:active { transform: translate(1px,1px); box-shadow: 2px 2px 0 0 rgba(0,0,0,0.1); }
+
+/* ═══════ RIGHT: BUTTERFLY + ORBIT ═══════ */
+.hero-right {
+  position: relative;
+  width: min(42vw, 560px);
+  flex: 0 0 min(42vw, 560px);
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  transform: translateX(-14px);
+}
+.hero-right::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(360px, 34vw, 560px);
+  height: clamp(360px, 34vw, 560px);
+  transform: translate(-50%, -50%);
+  border-radius: var(--r-full);
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.08) 32%, transparent 68%),
+    conic-gradient(from 90deg, rgba(255,212,0,0.22), rgba(110,60,255,0.16), rgba(0,210,106,0.16), rgba(255,45,135,0.22), rgba(255,212,0,0.22));
+  filter: blur(20px);
+  opacity: 0.58;
+  animation: fieldBreathe 8s var(--ease) infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-right::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(300px, 27vw, 420px);
+  height: clamp(320px, 30vw, 460px);
+  transform: translate(-50%, -50%) rotate(-3deg);
+  border-radius: var(--r-2xl);
+  border: 2px solid rgba(255,255,255,0.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
+    radial-gradient(circle at 50% 32%, rgba(255,212,0,0.12), transparent 48%);
+  box-shadow: 10px 10px 0 0 rgba(92,6,48,0.28), inset 0 1px 0 rgba(255,255,255,0.24);
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes fieldBreathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.94) rotate(0deg); opacity: 0.55; }
+  50% { transform: translate(-50%, -50%) scale(1.04) rotate(18deg); opacity: 0.82; }
+}
+
+/* Butterfly mascot */
+.butterfly-wrapper {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.butterfly-wrapper::before,
+.butterfly-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(210px, 21vw, 320px);
+  height: clamp(210px, 21vw, 320px);
+  border-radius: var(--r-full);
+  border: 1.5px solid rgba(255,255,255,0.26);
+  transform: translate(-50%, -50%) scale(0.78);
+  opacity: 0;
+  animation: butterflyPulse 4.8s var(--ease) infinite;
+  pointer-events: none;
+}
+.butterfly-wrapper::after {
+  width: clamp(260px, 25vw, 380px);
+  height: clamp(260px, 25vw, 380px);
+  border-color: rgba(255,212,0,0.24);
+  animation-delay: 1.4s;
+}
+@keyframes butterflyPulse {
+  0% { transform: translate(-50%, -50%) scale(0.72); opacity: 0; }
+  18% { opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0; }
+}
+.hero-butterfly {
+  width: clamp(210px, 20vw, 310px);
+  filter: drop-shadow(0 12px 40px rgba(255,255,255,0.16)) drop-shadow(0 0 34px rgba(255,45,135,0.16));
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+/* Orbit paths */
+.orbit-paths {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(470px, 38vw, 650px);
+  height: clamp(470px, 38vw, 650px);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+.orbit-paths.revealed {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+.orbit-path {
+  fill: none;
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 18;
+}
+.orbit-path.ring-0 { animation: orbitDash 54s linear infinite; }
+.orbit-path.ring-1 { animation: orbitDash 62s linear infinite; }
+.orbit-path.ring-2 { animation: orbitDash 72s linear infinite; animation-delay: -8s; }
+@keyframes orbitDash {
+  to { stroke-dashoffset: -36; }
+}
+
+/* Orbit container + product tags */
+.orbit-container {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  z-index: 7;
+  pointer-events: none;
+}
+.product-tag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: var(--r-full);
+  background: var(--paper);
+  border: 2px solid var(--tc, #fff);
+  box-shadow: 3px 3px 0 0 var(--tc, var(--papillo-pink-900));
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ink);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  scale: 0.5;
+  transform-origin: center center;
+  transition: box-shadow 0.15s var(--ease);
+}
+.product-tag[data-ring="1"] {
+  padding: 7px 11px;
+  font-size: 10px;
+  box-shadow: 2.5px 2.5px 0 0 var(--tc, var(--papillo-pink-900));
+}
+.product-tag[data-ring="2"] {
+  padding: 6px 10px;
+  font-size: 9px;
+  box-shadow: 2px 2px 0 0 var(--tc, var(--papillo-pink-900));
+}
+.product-tag::after {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: var(--r-full);
+  background: var(--tc, var(--papillo-pink));
+  opacity: 0.72;
+}
+.product-tag.revealed {
+  opacity: var(--tag-opacity, 1) !important;
+  transform: translate(-50%, -50%) scale(var(--tag-scale, 1)) !important;
+}
+.product-tag:hover {
+  box-shadow: 5px 5px 0 0 var(--tc, var(--papillo-pink-900));
+  z-index: 20 !important;
+}
+.tag-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--tc, var(--papillo-pink));
+}
+.tag-icon svg { width: 12px; height: 12px; }
+
+/* ═══════ TICKER ═══════ */
+.hero-ticker {
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255,45,135,0.15) 0%, rgba(255,255,255,0.06) 50%, rgba(255,212,0,0.1) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.hero-ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 14px 0;
+  animation: tickerScroll 32s linear infinite;
+}
+.hero-ticker-track.reverse {
+  animation: tickerScrollReverse 28s linear infinite;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes tickerScrollReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.ticker-item {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 0 6px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.ticker-sep {
+  padding: 0 12px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  font-size: 8px;
+  color: var(--papillo-pink);
+}
+.ticker-highlight {
+  color: #fff;
+  background: var(--papillo-pink);
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  margin: 0 4px;
+}
+.ticker-item-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 0 6px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  color: var(--rainbow-yellow);
+}
+
+/* ═══════ PROOF BAR ═══════ */
+.hero-proof-bar {
+  padding: 16px 48px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 36px;
+  background: var(--papillo-pink-900);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  opacity: 0;
+}
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+.proof-value {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(255,255,255,0.9);
+}
+.proof-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.12); }
+
+/* ═══════ REVEAL ═══════ */
+.reveal {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), scale 0.7s var(--ease);
+}
+.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  scale: 1 !important;
+}
+.payoff.revealed::after { opacity: 0.08; transition: opacity 1.5s var(--ease) 0.3s; }
+
+/* ═══════ SECTIONS AFTER HERO ═══════ */
+
+/* Brands section */
+.brands-section {
+  padding: 40px 48px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink-05);
+}
+.brands-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.brands-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-30);
+  white-space: nowrap;
+}
+.brands-list {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brands-list a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border: 2px solid var(--ink-10);
+  border-radius: var(--r-full);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), border-color 0.15s;
+}
+.brands-list a:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-pop-pink);
+  border-color: var(--papillo-pink-200);
+  color: var(--papillo-pink);
+}
+
+/* Categories section */
+/* ═══════ SERVICES COLUMNS ═══════ */
+.services-cols {
+  background: var(--ink);
+  padding: 0;
+  overflow: hidden;
+}
+.services-cols-header {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) 48px 0;
+}
+.services-cols-header .section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.services-cols-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--paper);
+  margin: 0;
+}
+.services-cols-header h2 span { color: var(--papillo-pink); }
+
+.svc-grid {
+  display: flex;
+  gap: 0;
+  min-height: clamp(400px, 55vh, 560px);
+  padding: clamp(24px, 3vw, 48px);
+}
+.svc-col {
+  position: relative;
+  flex: 1 1 0%;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  margin: 0 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: flex-grow 0.5s var(--ease);
+  text-decoration: none;
+}
+.svc-col:hover { flex-grow: 1.8; }
+
+.svc-col-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.svc-col-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.svc-col:hover .svc-col-image img { transform: scale(1.06); }
+
+.svc-col::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.svc-col-info {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.svc-col-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  border: 2px solid var(--tc, var(--papillo-pink));
+  color: var(--tc, var(--papillo-pink));
+  background: transparent;
+  margin-bottom: 8px;
+  display: inline-block;
+  transition: background 0.3s, color 0.3s;
+}
+.svc-col:hover .svc-col-tag {
+  background: var(--tc, var(--papillo-pink));
+  color: var(--ink);
+  box-shadow: var(--shadow-pop);
+}
+.svc-col-name {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.svc-col-desc {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.svc-col-arrow {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.svc-col-arrow svg { width: 16px; height: 16px; color: var(--paper); }
+.svc-col:hover .svc-col-arrow {
+  background: var(--papillo-pink);
+  border-color: var(--papillo-pink);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-pop-pink);
+}
+.svc-col:hover .svc-col-arrow svg { color: var(--paper); }
+
+/* Products section */
+/* ═══════ PRODUCTS ═══════ */
+.products-section {
+  padding: 100px 48px;
+  background: var(--paper);
+  position: relative;
+}
+.products-section .section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.products-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+.products-section .section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.products-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  margin: 0;
+}
+.products-section h2 span { color: var(--papillo-pink); }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.product-card {
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  overflow: hidden;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  border: 2px solid var(--ink-05);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 0 0 2px var(--papillo-pink-200);
+  border-color: var(--papillo-pink-200);
+}
+.product-card .product-img {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+.product-card .product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+.product-card:hover .product-img img {
+  transform: scale(1.06);
+}
+.product-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.product-badge.badge-promo {
+  background: var(--papillo-pink);
+  color: #fff;
+}
+.product-badge.badge-new {
+  background: var(--ink);
+  color: #fff;
+}
+.product-quick {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  padding: 12px;
+  border-radius: var(--r-lg);
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  z-index: 2;
+  border: none;
+  cursor: pointer;
+}
+.product-card:hover .product-quick {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-quick:hover {
+  background: var(--papillo-pink);
+}
+.product-card .product-info {
+  padding: 20px 20px 24px;
+}
+.product-card .product-brand {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  margin-bottom: 6px;
+}
+.product-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.product-card .product-price {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--papillo-pink);
+}
+.product-card .product-price-old {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--ink-30);
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+/* Blog section */
+/* ═══════ BLOG / MAGAZINE ═══════ */
+.blog-section {
+  padding: 100px 48px;
+  background: var(--paper-warm);
+}
+.blog-section .section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.blog-section .section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.blog-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  margin: 0 0 56px;
+}
+.blog-section h2 span { color: var(--papillo-pink); }
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(30px);
+  border: 2px solid var(--ink-05);
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: var(--papillo-pink-200);
+}
+.blog-card .blog-cover {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+.blog-card .blog-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.blog-card:hover .blog-cover img {
+  transform: scale(1.05);
+}
+.blog-card .blog-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 5px 14px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--papillo-pink);
+  color: #fff;
+  z-index: 2;
+}
+.blog-card .blog-read-time {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.blog-card .blog-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.blog-card .blog-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  margin-bottom: 10px;
+}
+.blog-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.blog-card p {
+  font-size: var(--fs-sm);
+  color: var(--ink-50);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  flex: 1;
+}
+.blog-card .blog-read-link {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--papillo-pink);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s var(--ease);
+}
+.blog-card:hover .blog-read-link { gap: 12px; }
+/* Featured (first card: image covers most of the card) */
+.blog-card.blog-featured {
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.blog-card.blog-featured .blog-cover {
+  height: 100%;
+  min-height: 300px;
+}
+.blog-card.blog-featured .blog-content {
+  padding: 28px;
+}
+.blog-card.blog-featured h3 {
+  font-size: var(--fs-xl);
+}
+.blog-card.blog-featured p {
+  font-size: var(--fs-sm);
+}
+
+/* Promo banner */
+.promo-banner {
+  padding: 48px;
+  background: linear-gradient(135deg, var(--papillo-pink) 0%, var(--papillo-pink-600) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.promo-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.3;
+}
+.promo-banner .promo-inner {
+  position: relative;
+  z-index: 1;
+}
+.promo-banner h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: 700;
+  color: var(--paper);
+  margin: 0 0 12px;
+  letter-spacing: var(--tracking-tight);
+}
+.promo-banner p {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: rgba(255,255,255,0.8);
+  margin: 0 0 24px;
+}
+.promo-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-radius: var(--r-full);
+  background: var(--paper);
+  color: var(--papillo-pink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 6px 6px 0 0 var(--papillo-pink-900);
+}
+
+/* Trust section */
+.trust-section {
+  padding: 60px 48px;
+  background: var(--paper);
+  border-top: 2px solid var(--ink-05);
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.trust-item {
+  text-align: center;
+  padding: 24px;
+}
+.trust-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.trust-item h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.trust-item p {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--ink-40);
+  margin: 0;
+  line-height: var(--leading-base);
+}
+
+/* ═══════ BOOKING / RDV ═══════ */
+.booking-section {
+  padding: 0;
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 700px;
+}
+.booking-photo {
+  overflow: hidden;
+}
+.booking-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.booking-body {
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.booking-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--papillo-pink);
+  margin-bottom: 12px;
+}
+.booking-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #fff;
+  margin: 0 0 12px;
+}
+.booking-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.45);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 28px;
+  max-width: 400px;
+}
+.booking-perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+}
+.booking-perks li {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.booking-perks li::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--papillo-pink);
+  flex-shrink: 0;
+}
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.booking-form label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.booking-form input,
+.booking-form select {
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  transition: border-color 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+.booking-form input::placeholder { color: rgba(255,255,255,0.2); }
+.booking-form input:focus,
+.booking-form select:focus {
+  border-color: var(--papillo-pink);
+}
+.booking-form select option { background: var(--ink); color: #fff; }
+.booking-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.booking-submit {
+  margin-top: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: var(--r-full);
+  background: var(--papillo-pink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  box-shadow: 4px 4px 0 0 var(--papillo-pink-900);
+}
+.booking-submit:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 0 var(--papillo-pink-900);
+}
+.booking-submit:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 0 var(--papillo-pink-900);
+}
+
+/* Footer */
+.footer {
+  padding: 48px;
+  background: var(--ink-90);
+  color: rgba(255,255,255,0.5);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-brand svg { width: 24px; height: 24px; color: var(--papillo-pink); }
+.footer-brand span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--paper);
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.footer-links a:hover { color: var(--paper); }
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border-radius: var(--r-full);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.footer-social a:hover {
+  background: var(--papillo-pink);
+  color: var(--paper);
+  border-color: var(--papillo-pink);
+}
+
+/* Mobile burger */
+.mobile-burger {
+  display: none;
+  width: 40px; height: 40px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  color: #fff;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 60;
+}
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+.mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-nav-overlay a {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-nav-overlay a:hover {
+  color: var(--papillo-pink);
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 1100px) {
+  .hero-right {
+    width: min(39vw, 460px);
+    flex-basis: min(39vw, 460px);
+    min-height: 540px;
+  }
+  .payoff { font-size: clamp(48px, 7vw, 72px); }
+  .product-tag { font-size: 10px; padding: 6px 10px; }
+  .orbit-paths { width: 390px; height: 390px; }
+  .orbit-path.ring-2,
+  .product-tag[data-ring="2"] { display: none !important; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 960px) {
+  .hero-main { flex-direction: column; text-align: center; padding: 0 24px; gap: 0; }
+  .hero-content { padding: 40px 0 0; max-width: 600px; margin: 0 auto; }
+  .hero-content::before { display: none; }
+  .hero-content::after { left: 50%; transform: translateX(-50%); }
+  .hero-sub { margin: 0 auto 24px; }
+  .hero-proof { justify-content: center; }
+  .hero-proof-text { justify-content: center; }
+  .payoff strong { max-width: none; }
+  .payoff em { margin-left: auto; margin-right: auto; }
+  .hero-ctas { justify-content: center; }
+  .hero-right { display: none; }
+  .hero-ticker { display: none; }
+  .hero-nav { padding: 20px 24px; }
+  .nav-right { display: none; }
+  .mobile-burger { display: flex; }
+  .hero-proof-bar { gap: 20px; padding: 16px 24px; }
+  .proof-divider { display: none; }
+  .hero-eyebrow { margin-left: auto; margin-right: auto; }
+  .brands-section, .products-section, .blog-section, .booking-section { padding: 60px 24px; }
+  .booking-section { grid-template-columns: 1fr; }
+  .booking-photo { height: 300px; }
+  .booking-body { padding: 40px 24px 60px; }
+  .booking-perks { grid-template-columns: 1fr; }
+  .brands-inner { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .brands-label { width: 100%; text-align: center; }
+  .svc-grid {
+    flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 20px;
+  }
+  .svc-grid::-webkit-scrollbar { display: none; }
+  .svc-col { flex: 0 0 75%; min-width: 75%; scroll-snap-align: center; }
+  .svc-col:hover { flex-grow: 1; }
+  .services-cols-header { padding: 48px 24px 0; }
+  .products-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-card.blog-featured { grid-row: auto; }
+  .blog-card.blog-featured .blog-cover { height: 220px; }
+  .blog-card.blog-featured h3 { font-size: var(--fs-lg); }
+  .blog-card.blog-featured p { font-size: var(--fs-sm); }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+@media (max-width: 560px) {
+  .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin: 0 auto; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+  .payoff { font-size: clamp(42px, 12vw, 56px); line-height: 0.94; }
+  .payoff em { font-size: 0.21em; }
+  .hero-proof-text { width: 100%; max-width: 360px; margin: 0 auto; }
+  .hero-proof-text strong,
+  .hero-proof-text span { flex: 1 1 100%; justify-content: center; }
+  .svc-col { flex: 0 0 85%; min-width: 85%; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .promo-banner h2 { font-size: var(--fs-2xl); }
+  .booking-row { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-right::before,
+  .butterfly-wrapper::before,
+  .butterfly-wrapper::after {
+    animation: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero">
+
+  <div class="hero-bg">
+    <img src="hero-bg.png" alt="Manucure professionnelle">
+  </div>
+
+  <nav class="hero-nav">
+    <a class="logo" href="/">
+      <svg class="logo-butterfly" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <path d="M100 100 Q60 30 20 60 Q-10 85 40 110 Q60 125 100 100Z" fill="currentColor" opacity="0.95"/>
+        <path d="M100 100 Q140 30 180 60 Q210 85 160 110 Q140 125 100 100Z" fill="currentColor" opacity="0.95"/>
+        <path d="M100 100 Q70 130 50 170 Q40 195 80 180 Q95 170 100 100Z" fill="currentColor" opacity="0.7"/>
+        <path d="M100 100 Q130 130 150 170 Q160 195 120 180 Q105 170 100 100Z" fill="currentColor" opacity="0.7"/>
+        <ellipse cx="100" cy="100" rx="4" ry="30" fill="currentColor"/>
+        <line x1="96" y1="72" x2="78" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="104" y1="72" x2="122" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="78" cy="48" r="3" fill="currentColor"/>
+        <circle cx="122" cy="48" r="3" fill="currentColor"/>
+      </svg>
+      <span class="logo-text">papillo<span>'</span>&amp; cie</span>
+    </a>
+    <div class="nav-right">
+      <a href="#boutique" class="nav-link">Boutique</a>
+      <a href="#articles" class="nav-link">Articles</a>
+      <a href="#marques" class="nav-link">Marques</a>
+      <a href="#rdv" class="nav-link">Rendez-vous</a>
+      <a href="#boutique" class="nav-cta">Voir la boutique &rarr;</a>
+    </div>
+    <button class="mobile-burger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <a href="#boutique" onclick="closeMobileNav()">Boutique</a>
+    <a href="#articles" onclick="closeMobileNav()">Articles</a>
+    <a href="#marques" onclick="closeMobileNav()">Marques</a>
+    <a href="#rdv" onclick="closeMobileNav()">Rendez-vous</a>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal" data-delay="400">
+        <span class="eyebrow-dot"></span>
+        <span class="eyebrow-text">Cosm&eacute;tiques ongles professionnels</span>
+        <span class="eyebrow-live">Nouveau</span>
+      </div>
+
+      <h1 class="hero-headline reveal" data-delay="600">Vos ongles m&eacute;ritent<br>le meilleur.</h1>
+
+      <p class="hero-tagline reveal" data-delay="800">Vernis gel, nail art, soins hypoallerg&eacute;niques &mdash; une s&eacute;lection pro pour des ongles sublimes.</p>
+
+      <div class="hero-ctas reveal" data-delay="1000">
+        <a href="#boutique" class="btn-primary"><span>D&eacute;couvrir la boutique</span> <small>Promo -70%</small></a>
+        <a href="#rdv" class="btn-ghost"><span>Prendre rendez-vous</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero-ticker reveal" data-delay="1000">
+    <div class="hero-ticker-track">
+      <span class="ticker-item">Vernis gel</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Nail art</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Polygel</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Dip Powder</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Soins ongles</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Maquillage</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Hypoallerg&eacute;nique</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">-5% code BLOG5PN</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Makear</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">SoPRO</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Trind</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Livraison offerte d&egrave;s 49&euro;</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Vernis gel</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Nail art</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Polygel</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Dip Powder</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Soins ongles</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Maquillage</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Hypoallerg&eacute;nique</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">-5% code BLOG5PN</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Makear</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">SoPRO</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Trind</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Livraison offerte d&egrave;s 49&euro;</span><span class="ticker-sep">&#9830;</span>
+    </div>
+    <div class="hero-ticker-track reverse">
+      <span class="ticker-item-brand">Silcare</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Pose gel</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Remplissage</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">China Glaze</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Manucure</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Paiement 4x sans frais</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Moyou London</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">D&eacute;pose + soin</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">SunUV</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Sans HEMA</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">500+ produits</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Artistic Nail</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Silcare</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Pose gel</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Remplissage</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">China Glaze</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Manucure</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Paiement 4x sans frais</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Moyou London</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">D&eacute;pose + soin</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">SunUV</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Sans HEMA</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">500+ produits</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item-brand">Artistic Nail</span><span class="ticker-sep">&#9830;</span>
+    </div>
+  </div>
+
+  <div class="hero-proof-bar reveal" data-delay="1200">
+    <div class="proof-item"><span class="proof-value">500+</span> produits</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">-70%</span> promos du mois</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">49&euro;</span> livraison offerte</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">4x</span> paiement</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">4.8&#9733;</span> avis clients</div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     BRANDS
+     ════════════════════════════════════════════════════════════ -->
+<section class="brands-section" id="marques">
+  <div class="brands-inner">
+    <span class="brands-label">Nos marques</span>
+    <div class="brands-list">
+      <a href="#boutique">Makear</a>
+      <a href="#boutique">SoPRO</a>
+      <a href="#boutique">Trind Cosmetics</a>
+      <a href="#boutique">Artistic Nail Design</a>
+      <a href="#boutique">Silcare</a>
+      <a href="#boutique">China Glaze</a>
+      <a href="#boutique">Moyou London</a>
+      <a href="#boutique">SunUV</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SERVICES COLUMNS
+     ════════════════════════════════════════════════════════════ -->
+<section class="services-cols" id="services">
+  <div class="services-cols-header">
+    <div class="section-eyebrow">&mdash; Nos univers</div>
+    <h2>Tout pour la <span>beaut&eacute;</span> de vos ongles</h2>
+  </div>
+  <div class="svc-grid">
+    <a href="#boutique" class="svc-col" style="--tc: var(--rainbow-pink);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=800&fit=crop&q=80" alt="Onglerie" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Best-seller</div>
+          <div class="svc-col-name">Onglerie</div>
+          <div class="svc-col-desc">Gel, r&eacute;sine, polygel, dip powder, semi-permanent</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#boutique" class="svc-col" style="--tc: var(--rainbow-violet);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=600&h=800&fit=crop&q=80" alt="Nail Art" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Cr&eacute;atif</div>
+          <div class="svc-col-name">Nail Art</div>
+          <div class="svc-col-desc">Stamping, stickers, paillettes, pinceaux, d&eacute;co</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#boutique" class="svc-col" style="--tc: var(--rainbow-orange);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=800&fit=crop&q=80" alt="Maquillage" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Nouveau</div>
+          <div class="svc-col-name">Maquillage</div>
+          <div class="svc-col-desc">Hypoallerg&eacute;nique et biosourc&eacute;, prix chic</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#boutique" class="svc-col" style="--tc: var(--rainbow-green);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=600&h=800&fit=crop&q=80" alt="Soins" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Essentiel</div>
+          <div class="svc-col-name">Soins</div>
+          <div class="svc-col-desc">Manucure, p&eacute;dicure, huiles, traitements Trind</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#boutique" class="svc-col" style="--tc: var(--rainbow-blue);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=600&h=800&fit=crop&q=80" alt="Materiel" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Pro</div>
+          <div class="svc-col-name">Mat&eacute;riel</div>
+          <div class="svc-col-desc">Lampes UV/LED, ponceuses, accessoires pro</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     NEW PRODUCTS
+     ════════════════════════════════════════════════════════════ -->
+<section class="products-section" id="boutique">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">&mdash; Nouveaut&eacute;s</div>
+        <h2>Les <span>derniers</span> produits</h2>
+      </div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">-30%</span>
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=500&fit=crop&crop=center" alt="Gel UV Color Rose" loading="lazy">
+          <button class="product-quick">Voir le produit</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Makear</div>
+          <h3>Gel UV Color Rose</h3>
+          <div class="product-price-row">
+            <div class="product-price">12,90&euro;</div>
+            <div class="product-price-old">18,90&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">-27%</span>
+          <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=600&h=500&fit=crop&crop=center" alt="Vernis Semi-Permanent Nude" loading="lazy">
+          <button class="product-quick">Voir le produit</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">SoPRO</div>
+          <h3>Vernis Semi-Permanent Nude</h3>
+          <div class="product-price-row">
+            <div class="product-price">14,50&euro;</div>
+            <div class="product-price-old">19,90&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">-34%</span>
+          <img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=500&fit=crop&crop=center" alt="Kit Nail Art Strass" loading="lazy">
+          <button class="product-quick">Voir le produit</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Makear</div>
+          <h3>Kit Nail Art Strass &amp; Paillettes</h3>
+          <div class="product-price-row">
+            <div class="product-price">22,90&euro;</div>
+            <div class="product-price-old">34,90&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=600&h=500&fit=crop&crop=center" alt="Soin Fortifiant Natural" loading="lazy">
+          <button class="product-quick">Voir le produit</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Trind</div>
+          <h3>Soin Fortifiant Natural</h3>
+          <div class="product-price-row">
+            <div class="product-price">16,90&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">-33%</span>
+          <img src="https://images.unsplash.com/photo-1585128792020-803d29415281?w=600&h=500&fit=crop&crop=center" alt="Base Coat Polygel" loading="lazy">
+          <button class="product-quick">Voir le produit</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Silcare</div>
+          <h3>Base Coat Polygel</h3>
+          <div class="product-price-row">
+            <div class="product-price">9,90&euro;</div>
+            <div class="product-price-old">14,90&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">-33%</span>
+          <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=600&h=500&fit=crop&crop=center" alt="Dip Powder Starter Kit" loading="lazy">
+          <button class="product-quick">Voir le produit</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Makear</div>
+          <h3>Dip Powder Starter Kit</h3>
+          <div class="product-price-row">
+            <div class="product-price">39,90&euro;</div>
+            <div class="product-price-old">59,90&euro;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PROMO BANNER
+     ════════════════════════════════════════════════════════════ -->
+<section class="promo-banner">
+  <div class="promo-inner">
+    <h2>-5% sur votre premi&egrave;re commande</h2>
+    <p>Utilisez le code promo ci-dessous lors de votre passage en caisse.</p>
+    <div class="promo-code">BLOG5PN</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     BLOG
+     ════════════════════════════════════════════════════════════ -->
+<section class="blog-section" id="articles">
+  <div class="section-inner">
+    <div class="section-eyebrow">&mdash; Le journal</div>
+    <h2>Nos derniers <span>articles</span></h2>
+    <div class="blog-grid">
+      <a class="blog-card blog-featured reveal" href="#">
+        <div class="blog-cover">
+          <span class="blog-tag">Tendances</span>
+          <span class="blog-read-time">8 min</span>
+          <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&h=600&fit=crop&crop=center" alt="Nail art tendance" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-date">13 novembre 2025</div>
+          <h3>Polygel &amp; Gels de la marque Makear</h3>
+          <p>D&eacute;couvrez les nouveaut&eacute;s Makear : gels UV, polygels et couleurs tendance de la saison.</p>
+          <span class="blog-read-link">Lire l'article &rarr;</span>
+        </div>
+      </a>
+      <a class="blog-card reveal" href="#">
+        <div class="blog-cover">
+          <span class="blog-tag">Tuto</span>
+          <span class="blog-read-time">5 min</span>
+          <img src="https://images.unsplash.com/photo-1595867818082-083862f3d630?w=600&h=400&fit=crop&crop=center" alt="Manucure professionnelle" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-date">20 f&eacute;vrier 2025</div>
+          <h3>La Pose de Dip Powder</h3>
+          <p>Guide complet pour r&eacute;ussir votre pose &agrave; la maison comme une pro.</p>
+          <span class="blog-read-link">Lire &rarr;</span>
+        </div>
+      </a>
+      <a class="blog-card reveal" href="#">
+        <div class="blog-cover">
+          <span class="blog-tag">Marques</span>
+          <span class="blog-read-time">4 min</span>
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop&crop=center" alt="Vernis de qualit&eacute;" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-date">6 d&eacute;cembre 2024</div>
+          <h3>Pr&eacute;sentation de nos marques</h3>
+          <p>Makear, SoPRO, Trind Cosmetics : pourquoi nous les avons choisies.</p>
+          <span class="blog-read-link">Lire &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     TRUST
+     ════════════════════════════════════════════════════════════ -->
+<section class="trust-section">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">&#128666;</div>
+      <h4>Livraison gratuite</h4>
+      <p>D&egrave;s 49&euro; d'achat. Retours gratuits sous 14 jours.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#128274;</div>
+      <h4>Paiement s&eacute;curis&eacute;</h4>
+      <p>PayPal, Klarna, Google Pay, Apple Pay, Amazon Pay.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#128179;</div>
+      <h4>Paiement en 4x</h4>
+      <p>Payez en 4 fois sans frais d&egrave;s 30&euro; d'achat.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#128172;</div>
+      <h4>Service client</h4>
+      <p>WhatsApp, Messenger, email. R&eacute;ponse sous 24h.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     BOOKING / RDV
+     ════════════════════════════════════════════════════════════ -->
+<section class="booking-section" id="rdv">
+  <div class="booking-photo">
+    <img src="hero-bg.png" alt="Manucure professionnelle" loading="lazy">
+  </div>
+  <div class="booking-body">
+    <p class="booking-eyebrow">Rendez-vous</p>
+    <h2 class="booking-title">R&eacute;servez votre cr&eacute;neau</h2>
+    <p class="booking-desc">Choisissez votre prestation et votre horaire. Confirmation par SMS sous 30 minutes.</p>
+    <ul class="booking-perks">
+      <li>Annulation gratuite 24h avant</li>
+      <li>Rappel SMS la veille</li>
+      <li>1&egrave;re visite : diagnostic offert</li>
+      <li>Parking gratuit</li>
+    </ul>
+    <form class="booking-form" onsubmit="event.preventDefault(); this.querySelector('.booking-submit').textContent='Demande envoyée ✓'; this.querySelector('.booking-submit').style.background='#22c55e';">
+      <div class="booking-row">
+        <label>
+          Pr&eacute;nom
+          <input type="text" placeholder="Marie" required>
+        </label>
+        <label>
+          T&eacute;l&eacute;phone
+          <input type="tel" placeholder="06 12 34 56 78" required>
+        </label>
+      </div>
+      <label>
+        Prestation
+        <select required>
+          <option value="" disabled selected>Choisir une prestation</option>
+          <option>Pose gel compl&egrave;te</option>
+          <option>Remplissage gel</option>
+          <option>Manucure classique</option>
+          <option>Nail Art sur mesure</option>
+          <option>D&eacute;pose + soin</option>
+          <option>Maquillage jour</option>
+          <option>Maquillage soir&eacute;e / &eacute;v&eacute;nement</option>
+          <option>Soin des mains</option>
+        </select>
+      </label>
+      <div class="booking-row">
+        <label>
+          Date souhait&eacute;e
+          <input type="date" required>
+        </label>
+        <label>
+          Cr&eacute;neau
+          <select required>
+            <option value="" disabled selected>Horaire</option>
+            <option>09:00</option>
+            <option>09:30</option>
+            <option>10:00</option>
+            <option>10:30</option>
+            <option>11:00</option>
+            <option>11:30</option>
+            <option>14:00</option>
+            <option>14:30</option>
+            <option>15:00</option>
+            <option>15:30</option>
+            <option>16:00</option>
+            <option>16:30</option>
+            <option>17:00</option>
+          </select>
+        </label>
+      </div>
+      <button type="submit" class="booking-submit">Confirmer mon rendez-vous</button>
+    </form>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg viewBox="0 0 200 200" fill="none">
+        <path d="M100 100 Q60 30 20 60 Q-10 85 40 110 Q60 125 100 100Z" fill="currentColor" opacity="0.95"/>
+        <path d="M100 100 Q140 30 180 60 Q210 85 160 110 Q140 125 100 100Z" fill="currentColor" opacity="0.95"/>
+        <path d="M100 100 Q70 130 50 170 Q40 195 80 180 Q95 170 100 100Z" fill="currentColor" opacity="0.7"/>
+        <path d="M100 100 Q130 130 150 170 Q160 195 120 180 Q105 170 100 100Z" fill="currentColor" opacity="0.7"/>
+        <ellipse cx="100" cy="100" rx="4" ry="30" fill="currentColor"/>
+      </svg>
+      <span>Papillo'&amp; Cie</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Mentions l&eacute;gales</a>
+      <a href="#">CGV</a>
+      <a href="#">Confidentialit&eacute;</a>
+      <a href="#">Annuaire</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" aria-label="YouTube">&#9654;</a>
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">&#9901;</a>
+      <a href="#" aria-label="Pinterest">P</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Hero staged reveal
+(function() {
+  var els = document.querySelectorAll('[data-delay]');
+  els.forEach(function(el) {
+    var delay = parseInt(el.dataset.delay, 10) || 0;
+    setTimeout(function() {
+      el.classList.add('revealed');
+      if (el.classList.contains('payoff')) {
+        setTimeout(function() { el.classList.add('shimmer'); }, 600);
+      }
+    }, delay);
+  });
+})();
+
+// Scroll reveal for sections
+(function() {
+  var els = document.querySelectorAll('.reveal:not([data-delay])');
+  if (!els.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(function(el) { observer.observe(el); });
+})();
+
+// Place orbit tags
+(function() {
+  var container = document.getElementById('orbit-container');
+  if (!container) return;
+  var tags = container.querySelectorAll('.product-tag');
+  var rings = [155, 220, 285];
+  var counts = [0, 0, 0];
+
+  tags.forEach(function(tag) {
+    var ring = parseInt(tag.dataset.ring, 10);
+    counts[ring]++;
+  });
+
+  var indices = [0, 0, 0];
+  tags.forEach(function(tag) {
+    var ring = parseInt(tag.dataset.ring, 10);
+    var i = indices[ring]++;
+    var total = counts[ring];
+    var angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+    var r = rings[ring];
+    var x = Math.cos(angle) * r;
+    var y = Math.sin(angle) * r;
+
+    tag.style.left = x + 'px';
+    tag.style.top = y + 'px';
+    tag.style.transform = 'translate(-50%, -50%)';
+
+    var depth = ring / 2;
+    tag.style.setProperty('--tag-opacity', Math.max(0.6, 1 - depth * 0.2));
+    tag.style.setProperty('--tag-scale', Math.max(0.75, 1 - depth * 0.12));
+  });
+})();
+
+// Mobile burger menu
+var burger = document.querySelector('.mobile-burger');
+var mobileNav = document.getElementById('mobile-nav');
+if (burger && mobileNav) {
+  burger.addEventListener('click', function() {
+    var isOpen = mobileNav.classList.toggle('open');
+    burger.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+  });
+}
+function closeMobileNav() {
+  if (mobileNav) mobileNav.classList.remove('open');
+  if (burger) burger.innerHTML = '&#9776;';
+}
+
+// Prevent scroll on # links
+document.querySelectorAll('a[href="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>
