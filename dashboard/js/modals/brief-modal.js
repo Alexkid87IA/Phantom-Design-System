@@ -711,7 +711,7 @@ export function openBriefModal() {
   openModal(
     '<div class="modal-header">'
       + '<span class="modal-title">Nouveau brief agent</span>'
-      + '<button class="modal-close" data-action="close-modal">&times;</button>'
+      + '<button class="modal-close" data-action="close-modal" aria-label="Fermer">&times;</button>'
     + '</div>'
     + '<div class="modal-body"></div>'
     + '<div class="modal-footer"></div>'

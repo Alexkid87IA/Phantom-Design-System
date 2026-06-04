@@ -122,7 +122,7 @@
   btn.addEventListener('click', function() {
     var isExpanded = grid.classList.toggle('expanded');
     btn.classList.toggle('expanded', isExpanded);
-    textEl.textContent = isExpanded ? 'Voir moins' : 'Voir les 20 agents';
+    textEl.textContent = isExpanded ? 'Voir moins' : 'Voir les 100+ agents';
   });
 })();
 

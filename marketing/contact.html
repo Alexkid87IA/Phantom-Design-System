@@ -90,15 +90,15 @@
       <form class="contact-form" onsubmit="event.preventDefault();this.querySelector('.contact-submit').textContent='Message envoyé !';this.querySelector('.contact-submit').disabled=true;">
         <div class="contact-field">
           <label class="contact-label" for="contact-name">Nom</label>
-          <input class="contact-input" id="contact-name" type="text" placeholder="Jean Dupont" required>
+          <input class="contact-input" id="contact-name" type="text" placeholder="Jean Dupont" required autocomplete="name">
         </div>
         <div class="contact-field">
           <label class="contact-label" for="contact-email">Email</label>
-          <input class="contact-input" id="contact-email" type="email" placeholder="jean@moncommerce.fr" required>
+          <input class="contact-input" id="contact-email" type="email" placeholder="jean@moncommerce.fr" required autocomplete="email">
         </div>
         <div class="contact-field">
           <label class="contact-label" for="contact-commerce">Commerce (optionnel)</label>
-          <input class="contact-input" id="contact-commerce" type="text" placeholder="Nom de ton commerce">
+          <input class="contact-input" id="contact-commerce" type="text" placeholder="Nom de ton commerce" autocomplete="organization">
         </div>
         <div class="contact-field">
           <label class="contact-label" for="contact-message">Message</label>

@@ -102,7 +102,7 @@ export function openApprovalModal(itemId) {
           + '<span class="approval-agent-badge" style="background:' + agentColor + '">' + agentName + '</span>'
         + '</div>'
       + '</div>'
-      + '<button class="modal-close" data-action="close-modal">&times;</button>'
+      + '<button class="modal-close" data-action="close-modal" aria-label="Fermer">&times;</button>'
     + '</div>'
     + '<div class="modal-body">'
       + bodyHtml

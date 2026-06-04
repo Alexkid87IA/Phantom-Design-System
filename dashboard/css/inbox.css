@@ -47,6 +47,7 @@
   border: 1.5px solid var(--border-input); appearance: none;
   cursor: pointer; transition: all 0.15s var(--ease); background: var(--paper);
 }
+.inbox-checkbox:focus-visible { outline: 2px solid var(--phantom-violet); outline-offset: 2px; }
 .inbox-checkbox:checked {
   background: var(--phantom-violet); border-color: var(--phantom-violet);
   background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");

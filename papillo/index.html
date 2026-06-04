@@ -1423,6 +1423,98 @@ a { color: inherit; }
   box-shadow: 6px 6px 0 0 var(--papillo-pink-900);
 }
 
+/* ═══════ FOUNDER ═══════ */
+.founder-section {
+  padding: clamp(80px, 10vw, 120px) 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.founder-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,45,135,0.06) 0%, transparent 50%, rgba(255,212,0,0.04) 100%);
+  pointer-events: none;
+}
+.founder-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+.founder-photo {
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.6;
+}
+.founder-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--papillo-pink);
+  margin-bottom: 16px;
+}
+.founder-name {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.founder-role {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.founder-bio {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+.founder-bio strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+.founder-stats {
+  display: flex;
+  gap: 40px;
+}
+.founder-stat-val {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 800;
+  color: var(--papillo-pink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.founder-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+}
+
 /* Trust section */
 .trust-section {
   padding: 60px 48px;
@@ -1594,68 +1686,121 @@ a { color: inherit; }
   box-shadow: 2px 2px 0 0 var(--papillo-pink-900);
 }
 
-/* Footer */
+/* ═══════ FOOTER ═══════ */
 .footer {
-  padding: 48px;
-  background: var(--ink-90);
+  padding: 80px 48px 40px;
+  background: var(--ink);
   color: rgba(255,255,255,0.5);
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
-.footer-inner {
+.footer-top {
   max-width: 1100px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+.footer-about {}
 .footer-brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 16px;
 }
-.footer-brand svg { width: 24px; height: 24px; color: var(--papillo-pink); }
+.footer-brand svg { width: 28px; height: 28px; color: var(--papillo-pink); }
 .footer-brand span {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 16px;
-  color: var(--paper);
+  font-size: 18px;
+  color: #fff;
 }
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-.footer-links a {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.footer-about p {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
   color: rgba(255,255,255,0.4);
-  text-decoration: none;
-  transition: color 0.2s var(--ease);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  max-width: 280px;
 }
-.footer-links a:hover { color: var(--paper); }
 .footer-social {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 .footer-social a {
   width: 36px; height: 36px;
   border-radius: var(--r-full);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
   text-decoration: none;
   font-size: 14px;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  transition: all 0.2s var(--ease);
 }
 .footer-social a:hover {
   background: var(--papillo-pink);
-  color: var(--paper);
+  color: #fff;
   border-color: var(--papillo-pink);
+  transform: translateY(-2px);
 }
+.footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin: 0 0 20px;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-col ul a {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.footer-col ul a:hover { color: #fff; }
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.25);
+}
+.footer-legal {
+  display: flex;
+  gap: 20px;
+}
+.footer-legal a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: rgba(255,255,255,0.6); }
 
 /* Mobile burger */
 .mobile-burger {
@@ -1705,45 +1850,42 @@ a { color: inherit; }
 }
 
 /* ═══════ RESPONSIVE ═══════ */
+
+/* Tablet */
 @media (max-width: 1100px) {
-  .hero-right {
-    width: min(39vw, 460px);
-    flex-basis: min(39vw, 460px);
-    min-height: 540px;
-  }
-  .payoff { font-size: clamp(48px, 7vw, 72px); }
-  .product-tag { font-size: 10px; padding: 6px 10px; }
-  .orbit-paths { width: 390px; height: 390px; }
-  .orbit-path.ring-2,
-  .product-tag[data-ring="2"] { display: none !important; }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Mobile large */
 @media (max-width: 960px) {
-  .hero-main { flex-direction: column; text-align: center; padding: 0 24px; gap: 0; }
-  .hero-content { padding: 40px 0 0; max-width: 600px; margin: 0 auto; }
-  .hero-content::before { display: none; }
-  .hero-content::after { left: 50%; transform: translateX(-50%); }
-  .hero-sub { margin: 0 auto 24px; }
-  .hero-proof { justify-content: center; }
-  .hero-proof-text { justify-content: center; }
-  .payoff strong { max-width: none; }
-  .payoff em { margin-left: auto; margin-right: auto; }
-  .hero-ctas { justify-content: center; }
-  .hero-right { display: none; }
-  .hero-ticker { display: none; }
+  /* Hero */
   .hero-nav { padding: 20px 24px; }
   .nav-right { display: none; }
   .mobile-burger { display: flex; }
-  .hero-proof-bar { gap: 20px; padding: 16px 24px; }
+  .hero-main { padding: 0 24px 24px; }
+  .hero-headline { font-size: clamp(36px, 9vw, 52px); }
+  .hero-tagline { font-size: 15px; margin-bottom: 24px; }
+  .hero-eyebrow { margin-left: auto; margin-right: auto; transform: scale(0.9); }
+
+  /* Ticker */
+  .hero-ticker-track { padding: 10px 0; }
+  .ticker-item, .ticker-item-brand { font-size: 11px; }
+  .hero-ticker-track.reverse { display: none; }
+
+  /* Proof bar */
+  .hero-proof-bar { gap: 16px; padding: 14px 20px; flex-wrap: wrap; justify-content: center; }
   .proof-divider { display: none; }
-  .hero-eyebrow { margin-left: auto; margin-right: auto; }
-  .brands-section, .products-section, .blog-section, .booking-section { padding: 60px 24px; }
-  .booking-section { grid-template-columns: 1fr; }
-  .booking-photo { height: 300px; }
-  .booking-body { padding: 40px 24px 60px; }
-  .booking-perks { grid-template-columns: 1fr; }
-  .brands-inner { flex-wrap: wrap; justify-content: center; gap: 16px; }
-  .brands-label { width: 100%; text-align: center; }
+  .proof-value { font-size: 16px; }
+  .proof-item { font-size: 9px; gap: 6px; }
+
+  /* Brands */
+  .brands-section { padding: 32px 24px; }
+  .brands-inner { flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .brands-label { width: 100%; text-align: center; margin-bottom: 4px; }
+  .brands-list a { padding: 6px 14px; font-size: 12px; }
+
+  /* Services columns */
+  .services-cols-header { padding: 48px 24px 0; }
   .svc-grid {
     flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 20px;
@@ -1751,35 +1893,96 @@ a { color: inherit; }
   .svc-grid::-webkit-scrollbar { display: none; }
   .svc-col { flex: 0 0 75%; min-width: 75%; scroll-snap-align: center; }
   .svc-col:hover { flex-grow: 1; }
-  .services-cols-header { padding: 48px 24px 0; }
-  .products-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-  .blog-grid { grid-template-columns: 1fr; }
+
+  /* Products */
+  .products-section { padding: 60px 24px; }
+  .products-section .section-header { margin-bottom: 32px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .product-card .product-img { height: 200px; }
+  .product-card h3 { font-size: 13px; }
+  .product-card .product-price { font-size: var(--fs-base); }
+
+  /* Blog */
+  .blog-section { padding: 60px 24px; }
+  .blog-grid { grid-template-columns: 1fr; gap: 20px; }
   .blog-card.blog-featured { grid-row: auto; }
   .blog-card.blog-featured .blog-cover { height: 220px; }
   .blog-card.blog-featured h3 { font-size: var(--fs-lg); }
   .blog-card.blog-featured p { font-size: var(--fs-sm); }
-  .trust-grid { grid-template-columns: repeat(2, 1fr); }
-  .footer-inner { flex-direction: column; text-align: center; }
-  .footer-links { flex-wrap: wrap; justify-content: center; }
-}
-@media (max-width: 560px) {
-  .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin: 0 auto; }
-  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
-  .payoff { font-size: clamp(42px, 12vw, 56px); line-height: 0.94; }
-  .payoff em { font-size: 0.21em; }
-  .hero-proof-text { width: 100%; max-width: 360px; margin: 0 auto; }
-  .hero-proof-text strong,
-  .hero-proof-text span { flex: 1 1 100%; justify-content: center; }
-  .svc-col { flex: 0 0 85%; min-width: 85%; }
-  .trust-grid { grid-template-columns: 1fr; }
+  .blog-card .blog-cover { height: 180px; }
+
+  /* Promo */
+  .promo-banner { padding: 40px 24px; }
   .promo-banner h2 { font-size: var(--fs-2xl); }
+
+  /* Trust */
+  .trust-section { padding: 48px 24px; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+  /* Booking */
+  .booking-section { grid-template-columns: 1fr; padding: 0; }
+  .booking-photo { height: 280px; }
+  .booking-body { padding: 40px 24px 60px; }
+  .booking-perks { grid-template-columns: 1fr; }
+  .booking-title { font-size: var(--fs-2xl); }
+
+  /* Footer */
+  .footer { padding: 60px 24px 32px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer-about { grid-column: 1 / -1; text-align: center; }
+  .footer-about p { max-width: none; margin: 0 auto 16px; }
+  .footer-social { justify-content: center; }
+  .footer-col { text-align: center; }
+  .footer-col h4 { margin-bottom: 14px; }
+  .footer-bottom { justify-content: center; flex-direction: column; text-align: center; gap: 12px; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; }
+}
+
+/* Mobile small */
+@media (max-width: 560px) {
+  /* Hero */
+  .hero-headline { font-size: clamp(30px, 10vw, 42px); }
+  .hero-tagline { font-size: 14px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 320px; margin: 0 auto; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+
+  /* Proof bar */
+  .hero-proof-bar { gap: 12px; padding: 12px 16px; }
+  .proof-item { font-size: 8px; }
+  .proof-value { font-size: 14px; }
+
+  /* Services */
+  .svc-col { flex: 0 0 85%; min-width: 85%; }
+
+  /* Products */
+  .products-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .product-card .product-img { height: 240px; }
+  .product-card h3 { font-size: var(--fs-base); }
+
+  /* Blog */
+  .blog-card .blog-cover { height: 180px; }
+  .blog-card h3 { font-size: var(--fs-base); }
+
+  /* Founder */
+  .founder-grid { grid-template-columns: 1fr; text-align: center; }
+  .founder-photo { max-width: 280px; margin: 0 auto; aspect-ratio: 1; }
+  .founder-stats { justify-content: center; }
+
+  /* Trust */
+  .trust-grid { grid-template-columns: 1fr; }
+  .trust-item { padding: 16px; }
+
+  /* Booking */
+  .booking-photo { height: 220px; }
   .booking-row { grid-template-columns: 1fr; }
+  .booking-body { padding: 32px 20px 48px; }
+  .booking-title { font-size: var(--fs-xl); }
+  .booking-desc { font-size: var(--fs-xs); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-right::before,
-  .butterfly-wrapper::before,
-  .butterfly-wrapper::after {
+  .hero-ticker-track,
+  .hero-ticker-track.reverse {
     animation: none !important;
   }
 }
@@ -2191,6 +2394,37 @@ a { color: inherit; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
+     FOUNDER
+     ════════════════════════════════════════════════════════════ -->
+<section class="founder-section" id="fondatrice">
+  <div class="founder-inner">
+    <div class="founder-grid reveal">
+      <div class="founder-photo">Photo de la<br>fondatrice</div>
+      <div class="founder-info">
+        <p class="founder-eyebrow">La fondatrice</p>
+        <h2 class="founder-name">Aur&eacute;lie</h2>
+        <p class="founder-role">Fondatrice &amp; Proth&eacute;siste ongulaire — Papillo'&amp; Cie</p>
+        <p class="founder-bio">Passionn&eacute;e par la beaut&eacute; des mains depuis toujours, <strong>Aur&eacute;lie</strong> a cr&eacute;&eacute; Papillo'&amp; Cie pour r&eacute;unir son amour du nail art et son exigence de qualit&eacute;. Form&eacute;e aux techniques les plus pointues et certifi&eacute;e par les plus grandes marques, elle s&eacute;lectionne chaque produit avec soin — <strong>des formules vegan, cruelty-free et longue tenue</strong> — pour offrir &agrave; ses clientes le meilleur de la cosm&eacute;tique ongulaire. Son institut, c'est un cocon o&ugrave; chaque d&eacute;tail compte.</p>
+        <div class="founder-stats">
+          <div>
+            <div class="founder-stat-val">5+</div>
+            <div class="founder-stat-label">ann&eacute;es d'exp&eacute;rience</div>
+          </div>
+          <div>
+            <div class="founder-stat-val">2 000+</div>
+            <div class="founder-stat-label">clientes satisfaites</div>
+          </div>
+          <div>
+            <div class="founder-stat-val">4.9/5</div>
+            <div class="founder-stat-label">note moyenne</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
      TRUST
      ════════════════════════════════════════════════════════════ -->
 <section class="trust-section">
@@ -2294,29 +2528,63 @@ a { color: inherit; }
      FOOTER
      ════════════════════════════════════════════════════════════ -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <svg viewBox="0 0 200 200" fill="none">
-        <path d="M100 100 Q60 30 20 60 Q-10 85 40 110 Q60 125 100 100Z" fill="currentColor" opacity="0.95"/>
-        <path d="M100 100 Q140 30 180 60 Q210 85 160 110 Q140 125 100 100Z" fill="currentColor" opacity="0.95"/>
-        <path d="M100 100 Q70 130 50 170 Q40 195 80 180 Q95 170 100 100Z" fill="currentColor" opacity="0.7"/>
-        <path d="M100 100 Q130 130 150 170 Q160 195 120 180 Q105 170 100 100Z" fill="currentColor" opacity="0.7"/>
-        <ellipse cx="100" cy="100" rx="4" ry="30" fill="currentColor"/>
-      </svg>
-      <span>Papillo'&amp; Cie</span>
+  <div class="footer-top">
+    <div class="footer-about">
+      <div class="footer-brand">
+        <svg viewBox="0 0 200 200" fill="none">
+          <path d="M100 100 Q60 30 20 60 Q-10 85 40 110 Q60 125 100 100Z" fill="currentColor" opacity="0.95"/>
+          <path d="M100 100 Q140 30 180 60 Q210 85 160 110 Q140 125 100 100Z" fill="currentColor" opacity="0.95"/>
+          <path d="M100 100 Q70 130 50 170 Q40 195 80 180 Q95 170 100 100Z" fill="currentColor" opacity="0.7"/>
+          <path d="M100 100 Q130 130 150 170 Q160 195 120 180 Q105 170 100 100Z" fill="currentColor" opacity="0.7"/>
+          <ellipse cx="100" cy="100" rx="4" ry="30" fill="currentColor"/>
+        </svg>
+        <span>Papillo'&amp; Cie</span>
+      </div>
+      <p>Cosm&eacute;tiques pour ongles professionnels. Vernis gel, nail art, soins &mdash; le meilleur pour vos ongles.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">&#9901;</a>
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
     </div>
-    <div class="footer-links">
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <ul>
+        <li><a href="#boutique">Nouveaut&eacute;s</a></li>
+        <li><a href="#boutique">Vernis gel</a></li>
+        <li><a href="#boutique">Nail art</a></li>
+        <li><a href="#boutique">Soins ongles</a></li>
+        <li><a href="#boutique">Maquillage</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Marques</h4>
+      <ul>
+        <li><a href="#marques">Makear</a></li>
+        <li><a href="#marques">SoPRO</a></li>
+        <li><a href="#marques">Trind Cosmetics</a></li>
+        <li><a href="#marques">China Glaze</a></li>
+        <li><a href="#marques">Silcare</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Infos</h4>
+      <ul>
+        <li><a href="#rdv">Prendre rendez-vous</a></li>
+        <li><a href="#articles">Blog</a></li>
+        <li><a href="#">Livraison &amp; retours</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 Papillo'&amp; Cie. Tous droits r&eacute;serv&eacute;s.</span>
+    <div class="footer-legal">
       <a href="#">Mentions l&eacute;gales</a>
       <a href="#">CGV</a>
       <a href="#">Confidentialit&eacute;</a>
-      <a href="#">Annuaire</a>
-      <a href="#">Contact</a>
-    </div>
-    <div class="footer-social">
-      <a href="#" aria-label="YouTube">&#9654;</a>
-      <a href="#" aria-label="Facebook">f</a>
-      <a href="#" aria-label="Instagram">&#9901;</a>
-      <a href="#" aria-label="Pinterest">P</a>
     </div>
   </div>
 </footer>

@@ -8,3 +8,4 @@ build/
 .claude/
 *.log
 uploads/
+.vercel

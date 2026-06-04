@@ -18,7 +18,7 @@ export function openModal(title, bodyHtml, footerHtml) {
     + '<div class="admin-modal-box">'
       + '<div class="admin-modal-header">'
         + '<div class="admin-modal-title">' + esc(title) + '</div>'
-        + '<button class="admin-modal-close" data-modal-close>&times;</button>'
+        + '<button class="admin-modal-close" data-modal-close aria-label="Fermer">&times;</button>'
       + '</div>'
       + '<div class="admin-modal-body">'
         + bodyHtml

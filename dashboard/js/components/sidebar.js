@@ -61,7 +61,7 @@ export function renderSidebar() {
 
       <div class="section-title">
         <span>&mdash; Agents actifs</span>
-        <button class="add-agent-btn" data-action="add-agent">${ICONS.plus}</button>
+        <button class="add-agent-btn" data-action="add-agent" aria-label="Ajouter un agent">${ICONS.plus}</button>
       </div>
 
       ${AGENTS.map(a => {

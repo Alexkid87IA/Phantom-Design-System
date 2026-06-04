@@ -5,7 +5,7 @@
 .tour-overlay {
   position: fixed; inset: 0;
   background: rgba(10, 10, 10, 0.6);
-  z-index: 300;
+  z-index: 400;
   animation: fadeIn 0.3s var(--ease);
 }
 
@@ -19,7 +19,7 @@
   box-shadow: 0 0 0 9999px rgba(10, 10, 10, 0.6);
   background: transparent;
   transition: all 0.3s var(--ease);
-  z-index: 301;
+  z-index: 401;
   pointer-events: none;
 }
 
@@ -31,7 +31,7 @@
   border-radius: var(--r-card);
   padding: 20px 22px;
   box-shadow: var(--shadow-pop-lg);
-  z-index: 302;
+  z-index: 402;
   animation: tourTooltipIn 0.25s var(--ease);
 }
 

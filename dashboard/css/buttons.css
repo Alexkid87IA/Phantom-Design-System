@@ -49,7 +49,7 @@
 }
 .send-btn:hover { opacity: 0.85; }
 .send-btn:active { transform: scale(0.92); }
-.send-btn:disabled { opacity: 0.4; cursor: default; }
+.send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .send-btn:focus-visible { outline: 2px solid var(--phantom-violet); outline-offset: 2px; }
 
 /* ══════════════════════════════════════

@@ -111,7 +111,7 @@ export function renderAgentChat() {
         + '</div>'
         + '<div class="agent-chat-input-row">'
           + '<input type="text" class="composer-field" id="agent-composer" placeholder="Dis ce que tu veux à ' + escapeHtml(a.name) + '..." data-agent="' + a.id + '" />'
-          + '<button class="send-btn" id="agent-send" data-agent="' + a.id + '">' + ICONS.send + '</button>'
+          + '<button class="send-btn" id="agent-send" data-agent="' + a.id + '" aria-label="Envoyer">' + ICONS.send + '</button>'
         + '</div>'
       + '</div>';
   } else if (STATE.agentTab === 'info') {
@@ -202,7 +202,7 @@ export function renderAgentChat() {
   return ''
     + '<div class="agent-chat-view">'
       + '<div class="agent-chat-header">'
-        + '<button class="agent-back" data-action="back">' + ICONS.back + '</button>'
+        + '<button class="agent-back" data-action="back" aria-label="Retour">' + ICONS.back + '</button>'
         + ghostSvg(a.color, 32)
         + '<div class="agent-chat-info">'
           + '<div class="agent-breadcrumb">Accueil <span class="agent-breadcrumb-sep">›</span> ' + escapeHtml(a.name) + '</div>'

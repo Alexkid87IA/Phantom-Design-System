@@ -18,7 +18,7 @@ export function openEditBriefModal() {
   openModal(
     '<div class="modal-header">'
       + '<span class="modal-title">Modifier le brief &mdash; ' + escapeHtml(a.name) + '</span>'
-      + '<button class="modal-close" data-action="close-modal">&times;</button>'
+      + '<button class="modal-close" data-action="close-modal" aria-label="Fermer">&times;</button>'
     + '</div>'
     + '<div class="modal-body">'
       + '<div class="form-group">'

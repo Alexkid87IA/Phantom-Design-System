@@ -70,7 +70,7 @@ export function renderMorningSummaryCard() {
           + '<div class="ms-inline-greeting">Bonjour ' + firstName + '.</div>'
           + '<div class="ms-inline-subtitle">Pendant la nuit, tes agents ont fait grandir ton business.</div>'
         + '</div>'
-        + '<button class="ms-inline-dismiss" data-action="dismiss-morning">&times;</button>'
+        + '<button class="ms-inline-dismiss" data-action="dismiss-morning" aria-label="Fermer">&times;</button>'
       + '</div>'
       + '<div class="ms-inline-growth ms-stagger">'
         + '<div class="ms-inline-growth-pill ms-stagger-item" style="animation-delay:0.25s"><span class="ms-inline-growth-val">+142</span><span class="ms-inline-growth-label">followers</span></div>'

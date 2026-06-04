@@ -79,7 +79,7 @@ function renderMilestoneModal(milestone) {
   return ''
     + '<div class="modal-header">'
       + '<div></div>'
-      + '<button class="modal-close" data-action="close-modal">&times;</button>'
+      + '<button class="modal-close" data-action="close-modal" aria-label="Fermer">&times;</button>'
     + '</div>'
     + '<div class="modal-body" style="text-align:center;padding:12px 24px 28px">'
       + '<div class="milestone-hero-emoji">' + milestone.emoji + '</div>'
