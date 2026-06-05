@@ -3328,25 +3328,62 @@ img { max-width: 100%; height: auto; }
   margin-top: 2px;
 }
 .svc-card-more {
-  background: transparent;
-  border: 0;
-  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  border: 1.5px solid var(--maniaci-300, rgba(196,162,101,0.55));
+  padding: 6px 11px 6px 9px;
+  border-radius: var(--r-full);
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-40);
+  color: var(--maniaci-800, #8a6f3f);
   cursor: pointer;
-  transition: color 0.15s var(--ease), transform 0.15s var(--ease);
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease), transform 0.15s var(--ease);
   flex-shrink: 0;
   white-space: nowrap;
 }
-.svc-card-more:hover {
-  color: var(--maniaci-800);
-  transform: translateX(2px);
+.svc-card-more svg {
+  width: 12px;
+  height: 12px;
+  color: var(--maniaci);
+  flex-shrink: 0;
 }
-.svc-card.selected .svc-card-more { color: rgba(0,0,0,0.55); }
+.svc-card-more-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 4px;
+  background: var(--maniaci);
+  color: var(--ink);
+  border-radius: var(--r-full);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.svc-card-more:hover {
+  background: var(--maniaci);
+  border-color: var(--maniaci);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.svc-card-more:hover svg { color: var(--ink); }
+.svc-card-more:hover .svc-card-more-count {
+  background: var(--ink);
+  color: var(--maniaci);
+}
+.svc-card.selected .svc-card-more {
+  background: transparent;
+  border-color: rgba(0,0,0,0.18);
+  color: rgba(0,0,0,0.55);
+}
+.svc-card.selected .svc-card-more svg { color: rgba(0,0,0,0.55); }
 
 /* Modal */
 .svc-modal {
@@ -7093,7 +7130,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">A&eacute;roport Nice</div>
           <div class="svc-card-desc" itemprop="description">Accueil panneau, bagages, suivi vol.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="90"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">90&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="90"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">90&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7105,7 +7142,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Monaco</div>
           <div class="svc-card-desc" itemprop="description">Monte-Carlo, h&eacute;liport, Port Hercule.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="150"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">150&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="150"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">150&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7117,7 +7154,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Cannes &amp; Antibes</div>
           <div class="svc-card-desc" itemprop="description">Croisette, Palais, h&ocirc;tels, ports.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="120"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">120&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="120"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">120&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7129,7 +7166,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Mise &agrave; disposition</div>
           <div class="svc-card-desc" itemprop="description">Chauffeur d&eacute;di&eacute; toute la journ&eacute;e.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="450"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">450&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="450"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">450&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7141,7 +7178,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Gala &amp; &eacute;v&eacute;nements</div>
           <div class="svc-card-desc" itemprop="description">Festival, GP Monaco, soir&eacute;es priv&eacute;es.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="200"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">200&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="200"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">200&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7153,7 +7190,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Longue distance</div>
           <div class="svc-card-desc" itemprop="description">Milan, Gen&egrave;ve, Z&uuml;rich, porte &agrave; porte.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="600"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">600&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="600"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">600&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7165,7 +7202,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Mercedes Classe&nbsp;S</div>
           <div class="svc-card-desc" itemprop="description">Berline prestige, confort absolu.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="350"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">350&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="350"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">350&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7177,7 +7214,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Porsche 911</div>
           <div class="svc-card-desc" itemprop="description">Sportive iconique de la Riviera.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="490"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">490&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="490"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">490&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7189,7 +7226,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Porsche Cayenne</div>
           <div class="svc-card-desc" itemprop="description">SUV sportif, 5 places.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="380"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">380&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="380"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">380&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7201,7 +7238,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Range Rover</div>
           <div class="svc-card-desc" itemprop="description">SUV premium, pr&eacute;sence imposante.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="390"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">390&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="390"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">390&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7213,7 +7250,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Mercedes Classe&nbsp;V VIP</div>
           <div class="svc-card-desc" itemprop="description">Van de luxe 7 places.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="420"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">420&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="420"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">420&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7225,7 +7262,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Audi RS e-tron GT</div>
           <div class="svc-card-desc" itemprop="description">&Eacute;lectrique, silencieuse, 646&nbsp;ch.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="520"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">520&nbsp;&euro;/jour</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="520"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">520&nbsp;&euro;/jour</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7237,7 +7274,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Villa vue mer Cannes</div>
           <div class="svc-card-desc" itemprop="description">Piscine, jardin, vue panoramique.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="2500"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 2&nbsp;500&nbsp;&euro;/sem</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="2500"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 2&nbsp;500&nbsp;&euro;/sem</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7249,7 +7286,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Penthouse Monaco</div>
           <div class="svc-card-desc" itemprop="description">Vue port, standing exceptionnel.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7261,7 +7298,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Bastide proven&ccedil;ale</div>
           <div class="svc-card-desc" itemprop="description">Charme authentique, oliviers.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="1800"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">1&nbsp;800&nbsp;&euro;/sem</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="1800"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">1&nbsp;800&nbsp;&euro;/sem</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7273,7 +7310,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Gestion de propri&eacute;t&eacute;</div>
           <div class="svc-card-desc" itemprop="description">Check-in, m&eacute;nage, maintenance.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7285,7 +7322,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Charter journ&eacute;e</div>
           <div class="svc-card-desc" itemprop="description">&Icirc;les de L&eacute;rins, &eacute;quipage inclus.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="1500"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 1&nbsp;500&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="1500"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 1&nbsp;500&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7297,7 +7334,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Sunset cruise</div>
           <div class="svc-card-desc" itemprop="description">Coucher de soleil, champagne, 3h.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="800"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">800&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="800"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">800&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7309,7 +7346,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Transfert maritime</div>
           <div class="svc-card-desc" itemprop="description">Port &agrave; port, rapide et discret.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7321,7 +7358,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Yacht semaine</div>
           <div class="svc-card-desc" itemprop="description">Croisi&egrave;re sur mesure.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7333,7 +7370,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Table &eacute;toil&eacute;e</div>
           <div class="svc-card-desc" itemprop="description">Les meilleures tables, m&ecirc;me en haute saison.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Offert</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Offert</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7345,7 +7382,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Chef priv&eacute; &agrave; domicile</div>
           <div class="svc-card-desc" itemprop="description">Menu sur mesure, produits locaux.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="350"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 350&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="350"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 350&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7357,7 +7394,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Wine tour Provence</div>
           <div class="svc-card-desc" itemprop="description">Domaines viticoles, transport inclus.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="280"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">280&nbsp;&euro;/pers</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="280"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">280&nbsp;&euro;/pers</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7369,7 +7406,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">D&eacute;gustation priv&eacute;e</div>
           <div class="svc-card-desc" itemprop="description">Sommelier, accords mets &amp; vins.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7381,7 +7418,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">H&eacute;licopt&egrave;re Nice-Monaco</div>
           <div class="svc-card-desc" itemprop="description">Vol panoramique 7 minutes.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="180"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 180&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="180"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 180&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7393,7 +7430,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Shopping VIP</div>
           <div class="svc-card-desc" itemprop="description">Personal shopper, acc&egrave;s VIP boutiques.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Offert</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Offert</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7405,7 +7442,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">Spa &amp; bien-&ecirc;tre</div>
           <div class="svc-card-desc" itemprop="description">Praticien &agrave; domicile ou villa.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="200"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 200&nbsp;&euro;</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="200"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">d&egrave;s 200&nbsp;&euro;</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -7417,7 +7454,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <div class="svc-card-body">
           <div class="svc-card-name" itemprop="name">&Eacute;v&eacute;nement priv&eacute;</div>
           <div class="svc-card-desc" itemprop="description">Organisation compl&egrave;te, mariage, s&eacute;minaire.</div>
-          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more">Voir plus &rarr;</button></div>
+          <div class="svc-card-foot"><div class="svc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><meta itemprop="availability" content="https://schema.org/InStock">Sur devis</div><button type="button" class="svc-card-more" aria-label="Voir les photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg><span class="svc-card-more-label">Photos</span><span class="svc-card-more-count">3</span></button></div>
         </div>
         <div class="svc-card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
@@ -8474,7 +8511,7 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
 <script>
 // ═══════ MPL AI Concierge widget ═══════
 (function() {
-  var PROXY_URL = window.MPL_AI_PROXY_URL || '/api/chat';
+  var PROXY_URL = window.MPL_AI_PROXY_URL || (location.hostname === 'localhost' || location.hostname === '127.0.0.1' ? 'https://myprivatelimo.vercel.app/api/chat' : '/api/chat');
   var bubble = document.getElementById('mplAiBubble');
   var modal = document.getElementById('mplAiModal');
   var closeBtn = document.getElementById('mplAiClose');
@@ -8661,7 +8698,7 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
 <script>
 // ═══════ MPL AI Inline concierge (wizard step) ═══════
 (function() {
-  var PROXY_URL = window.MPL_AI_PROXY_URL || '/api/chat';
+  var PROXY_URL = window.MPL_AI_PROXY_URL || (location.hostname === 'localhost' || location.hostname === '127.0.0.1' ? 'https://myprivatelimo.vercel.app/api/chat' : '/api/chat');
   var chat = document.getElementById('svcAiChat');
   var form = document.getElementById('svcAiForm');
   var input = document.getElementById('svcAiInput');
@@ -9753,12 +9790,12 @@ window.mplT = function(key) {
       ar: "التجارب",
     },
     ".svc-card-more": {
-      en: "See more →",
-      ru: "Подробнее →",
-      it: "Vedi di più →",
-      de: "Mehr ansehen →",
-      nl: "Bekijk meer →",
-      ar: "عرض المزيد ←",
+      en: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"2\"/><circle cx=\"12\" cy=\"12.5\" r=\"3.2\"/><path d=\"M8 6l1.5-2h5L16 6\"/></svg><span class=\"svc-card-more-label\">Photos</span><span class=\"svc-card-more-count\">3</span>",
+      ru: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"2\"/><circle cx=\"12\" cy=\"12.5\" r=\"3.2\"/><path d=\"M8 6l1.5-2h5L16 6\"/></svg><span class=\"svc-card-more-label\">Фото</span><span class=\"svc-card-more-count\">3</span>",
+      it: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"2\"/><circle cx=\"12\" cy=\"12.5\" r=\"3.2\"/><path d=\"M8 6l1.5-2h5L16 6\"/></svg><span class=\"svc-card-more-label\">Foto</span><span class=\"svc-card-more-count\">3</span>",
+      de: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"2\"/><circle cx=\"12\" cy=\"12.5\" r=\"3.2\"/><path d=\"M8 6l1.5-2h5L16 6\"/></svg><span class=\"svc-card-more-label\">Fotos</span><span class=\"svc-card-more-count\">3</span>",
+      nl: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"2\"/><circle cx=\"12\" cy=\"12.5\" r=\"3.2\"/><path d=\"M8 6l1.5-2h5L16 6\"/></svg><span class=\"svc-card-more-label\">Foto's</span><span class=\"svc-card-more-count\">3</span>",
+      ar: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"13\" rx=\"2\"/><circle cx=\"12\" cy=\"12.5\" r=\"3.2\"/><path d=\"M8 6l1.5-2h5L16 6\"/></svg><span class=\"svc-card-more-label\">الصور</span><span class=\"svc-card-more-count\">3</span>",
     },
     ".svc-recap-header-text": {
       en: "Your selection",
