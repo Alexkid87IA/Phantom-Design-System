@@ -6818,17 +6818,39 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     border-radius: 50%;
     border: 2px solid var(--maniaci);
     background: var(--ink);
-    overflow: hidden;
+    overflow: visible;
     cursor: pointer;
     padding: 0;
     position: relative;
-    box-shadow: 0 0 0 3px rgba(123,157,183,0.15);
+    animation: mobileAvatarPulse 2.4s ease-out infinite;
   }
   .mpl-mobile-bar-ai img {
     width: 100%; height: 100%;
     object-fit: cover;
     object-position: 80% 30%;
     transform: scale(1.05);
+    border-radius: 50%;
+    animation: mobileAvatarWiggle 6s ease-in-out infinite;
+    transform-origin: center 75%;
+  }
+  /* Pulsing gold ring — invites the user to tap */
+  @keyframes mobileAvatarPulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(196,162,101, 0.65), 0 0 0 0 rgba(196,162,101, 0.45);
+    }
+    65% {
+      box-shadow: 0 0 0 10px rgba(196,162,101, 0), 0 0 0 16px rgba(196,162,101, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(196,162,101, 0), 0 0 0 0 rgba(196,162,101, 0);
+    }
+  }
+  /* Subtle head-shake every 6s */
+  @keyframes mobileAvatarWiggle {
+    0%, 88%, 100% { transform: scale(1.05) rotate(0deg); }
+    91% { transform: scale(1.05) rotate(-7deg); }
+    94% { transform: scale(1.05) rotate(5deg); }
+    97% { transform: scale(1.05) rotate(-3deg); }
   }
   .mpl-mobile-bar-ai::after {
     content: "";
@@ -6840,12 +6862,48 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     border: 2.5px solid var(--ink);
     box-shadow: 0 0 8px rgba(34,197,94,0.6);
     animation: mobileDotPulse 2.5s ease-in-out infinite;
+    z-index: 2;
   }
   @keyframes mobileDotPulse {
     0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.4); }
-    50% { box-shadow: 0 0 12px rgba(34,197,94,0.8); }
+    50% { box-shadow: 0 0 12px rgba(34,197,94,0.9); }
   }
-  .mpl-mobile-bar-ai:active { transform: scale(0.92); }
+  .mpl-mobile-bar-ai:active { transform: scale(0.92); animation-play-state: paused; }
+
+  /* Speech bubble that appears above the avatar to explicitly invite chat */
+  .mpl-mobile-bar-tip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    transform: translateY(8px) scale(0.94);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 14px;
+    border-radius: var(--r-md);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    letter-spacing: 0.01em;
+  }
+  .mpl-mobile-bar-tip::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 18px;
+    width: 8px;
+    height: 8px;
+    background: var(--ink);
+    transform: rotate(45deg);
+  }
+  .mpl-mobile-bar-tip.is-shown {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 
   .mpl-mobile-bar-cta {
     display: flex;
@@ -11035,6 +11093,7 @@ window.mplT = function(key) {
 <div class="mpl-mobile-bar">
   <button type="button" class="mpl-mobile-bar-ai" id="mplMobileBarAi" aria-label="Concierge IA">
     <img src="concierge-v4.png" alt="Michel — Concierge">
+    <span class="mpl-mobile-bar-tip" id="mplMobileBarTip">Discutez avec Michel</span>
   </button>
   <a href="#svcSelector" class="mpl-mobile-bar-cta" data-compose="all" aria-label="Réserver maintenant">
     <span>Réserver maintenant</span>
