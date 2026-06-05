@@ -3413,20 +3413,24 @@ img { max-width: 100%; height: auto; }
 
 /* Gallery side */
 .svc-modal-gallery {
-  background: var(--ink);
-  padding: 14px;
+  background: var(--paper);
+  padding: clamp(20px, 3vw, 32px);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
   min-height: 100%;
+  border-right: 1px solid var(--maniaci-100, rgba(196,162,101,0.18));
 }
 .svc-modal-main-img {
   aspect-ratio: 16 / 9;
   border-radius: var(--r-md);
   overflow: hidden;
   position: relative;
-  background: var(--ink-90);
+  background: var(--ink-05, rgba(0,0,0,0.04));
   width: 100%;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid var(--ink-05, rgba(0,0,0,0.06));
 }
 .svc-modal-main-img img {
   width: 100%;
@@ -3434,33 +3438,33 @@ img { max-width: 100%; height: auto; }
   object-fit: cover;
   display: block;
 }
-.svc-modal-main-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.5) 100%);
-  pointer-events: none;
-}
 .svc-modal-thumbs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 .svc-modal-thumbs button {
-  height: 72px;
-  border: 2px solid rgba(255,255,255,0.15);
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 1.5px solid var(--ink-05, rgba(0,0,0,0.08));
   border-radius: var(--r-sm);
   overflow: hidden;
   cursor: pointer;
   padding: 0;
-  background: transparent;
-  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+  background: var(--paper);
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  opacity: 0.72;
+}
+.svc-modal-thumbs button:hover {
+  border-color: var(--maniaci-300, rgba(196,162,101,0.55));
+  opacity: 1;
 }
 .svc-modal-thumbs button.active {
   border-color: var(--maniaci);
-  transform: translateY(-2px);
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(196,162,101,0.25);
 }
-.svc-modal-thumbs button:hover { border-color: rgba(196,162,101,0.7); }
 .svc-modal-thumbs img {
   width: 100%; height: 100%;
   object-fit: cover;
