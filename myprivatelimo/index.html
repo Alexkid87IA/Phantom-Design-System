@@ -9721,7 +9721,7 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
   ar: {"flag": "🇸🇦", "code": "AR", "name": "العربية"},
 };
   var DEFAULT_LANG = 'fr';
-  var STORAGE_KEY = 'mpl-lang';
+  var STORAGE_KEY = 'mpl-lang-v2';  // bumped: forces EN default for everyone, old prefs discarded
   var originals = new Map();
 
   function captureOriginals() {
@@ -9800,13 +9800,13 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
   function init() {
     captureOriginals();
     initSwitcher();
+    var INITIAL_LANG = 'en';  // Site shown in English by default on first visit
     var saved = null;
     try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-    if (saved && LANG_META[saved] && saved !== DEFAULT_LANG) {
+    if (saved && LANG_META[saved]) {
       applyLang(saved);
     } else {
-      // Default state — just update switcher to show FR active
-      applyLang(DEFAULT_LANG);
+      applyLang(INITIAL_LANG);
     }
   }
 
