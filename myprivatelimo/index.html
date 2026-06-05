@@ -2272,7 +2272,378 @@ img { max-width: 100%; height: auto; }
   font-size: 11px;
 }
 
-/* ─── Step 3: Premium Recap Layout ─── */
+/* ─── Step 3: Details (dates & voyageurs) ─── */
+.svc-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  padding: 0 20px;
+}
+.svc-detail-field label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  margin-bottom: 8px;
+}
+.svc-detail-field label svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--maniaci);
+  flex-shrink: 0;
+}
+.svc-detail-field input,
+.svc-detail-field select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--ink-10);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.svc-detail-field input:focus,
+.svc-detail-field select:focus {
+  outline: none;
+  border-color: var(--maniaci);
+  box-shadow: 0 0 0 3px rgba(196, 162, 101, 0.15);
+}
+.svc-detail-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.svc-step-next--details {
+  background: var(--maniaci);
+  color: var(--ink);
+  border: 0;
+  padding: 14px 28px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.svc-step-next--details:hover {
+  background: #d4b574;
+  box-shadow: 0 4px 16px rgba(196, 162, 101, 0.35);
+}
+@media (max-width: 600px) {
+  .svc-details-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Step AI: Inline concierge chat ─── */
+.svc-ai-inline.active {
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  margin: 0 auto;
+  border: 2px solid var(--ink-10);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+}
+.svc-ai-inline-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  border-bottom: 2px solid var(--ink-05);
+  background: var(--paper);
+}
+.svc-ai-inline-avatar {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.svc-ai-inline-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid var(--maniaci);
+}
+.svc-ai-inline-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2.5px solid var(--paper);
+}
+.svc-ai-inline-info { flex: 1; min-width: 0; }
+.svc-ai-inline-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maniaci);
+  margin-bottom: 2px;
+}
+.svc-ai-inline-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+.svc-ai-inline-back {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: var(--r-full);
+  border: 1.5px solid var(--ink-10);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s, background 0.2s;
+}
+.svc-ai-inline-back:hover {
+  border-color: var(--ink);
+  background: var(--ink-05);
+}
+
+.svc-ai-inline-chat {
+  flex: 1;
+  min-height: 320px;
+  max-height: 460px;
+  overflow-y: auto;
+  padding: 20px 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--ink-05);
+}
+
+.svc-ai-inline-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 24px 14px;
+  background: var(--ink-05);
+  border-top: 1px solid var(--ink-10);
+}
+.svc-ai-suggest {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border-radius: var(--r-full);
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.svc-ai-suggest:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 0 var(--maniaci);
+}
+
+.svc-ai-inline-form {
+  display: flex;
+  gap: 8px;
+  padding: 14px 20px;
+  border-top: 2px solid var(--ink-05);
+  background: var(--paper);
+}
+.svc-ai-inline-form input {
+  flex: 1;
+  padding: 11px 14px;
+  border: 1.5px solid var(--ink-10);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.svc-ai-inline-form input:focus { border-color: var(--maniaci); }
+.svc-ai-inline-form input::placeholder { color: var(--ink-30); }
+.svc-ai-inline-send {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--maniaci);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+.svc-ai-inline-send svg { width: 18px; height: 18px; }
+.svc-ai-inline-send:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--ink);
+}
+.svc-ai-inline-send:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  background: var(--ink-20);
+}
+
+.svc-ai-inline-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 12px;
+  background: var(--paper);
+  border-top: 1px solid var(--ink-05);
+}
+.svc-ai-inline-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--r-full);
+  border: 2px solid #25D366;
+  background: #25D366;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  white-space: nowrap;
+}
+.svc-ai-inline-wa:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--ink);
+}
+.svc-ai-inline-wa svg { width: 13px; height: 13px; }
+.svc-ai-inline-disclaimer {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--ink-30);
+}
+
+.svc-ai-inline .mpl-ai-msg {
+  max-width: 88%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.svc-ai-inline .mpl-ai-msg--user {
+  align-self: flex-end;
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom-right-radius: 4px;
+}
+.svc-ai-inline .mpl-ai-msg--assistant {
+  align-self: flex-start;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--ink-10);
+  border-bottom-left-radius: 4px;
+}
+.svc-ai-inline .mpl-ai-msg--assistant a {
+  color: var(--maniaci-800);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.svc-ai-inline .mpl-ai-msg--error {
+  background: var(--maniaci-50);
+  border-color: var(--maniaci-200);
+}
+.svc-ai-inline .mpl-ai-msg.typing::after {
+  content: '\25CF';
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--maniaci);
+  animation: mplAiTypingDot 1.1s ease-in-out infinite;
+}
+.svc-ai-inline .mpl-ai-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0 4px;
+  align-self: flex-start;
+  max-width: 88%;
+}
+.svc-ai-inline .mpl-ai-choice {
+  text-align: left;
+  background: var(--paper);
+  border: 1.5px solid var(--maniaci-200);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), border-color 0.15s var(--ease), background 0.15s var(--ease);
+  line-height: 1.4;
+  font-weight: 500;
+}
+.svc-ai-inline .mpl-ai-choice:hover {
+  background: var(--maniaci-50);
+  border-color: var(--maniaci);
+  transform: translateX(3px);
+}
+.svc-ai-inline .mpl-ai-choice:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  background: var(--ink-05);
+}
+.svc-ai-inline .mpl-ai-choice--picked {
+  background: var(--maniaci) !important;
+  border-color: var(--maniaci-800) !important;
+  color: var(--ink) !important;
+  font-weight: 700;
+}
+
+.svc-stepper.hidden { display: none; }
+
+@media (max-width: 600px) {
+  .svc-ai-inline-header { flex-wrap: wrap; gap: 10px; padding: 16px; }
+  .svc-ai-inline-back { order: 3; width: 100%; text-align: center; }
+  .svc-ai-inline-title { font-size: 17px; }
+  .svc-ai-inline-chat { min-height: 260px; max-height: 380px; padding: 14px 16px 10px; }
+  .svc-ai-inline-form { padding: 10px 14px; }
+  .svc-ai-inline-footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ─── Step 4: Premium Recap Layout ─── */
 .svc-recap-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3050,12 +3421,12 @@ img { max-width: 100%; height: auto; }
   min-height: 100%;
 }
 .svc-modal-main-img {
-  flex: 1;
+  aspect-ratio: 16 / 9;
   border-radius: var(--r-md);
   overflow: hidden;
   position: relative;
-  min-height: 280px;
   background: var(--ink-90);
+  width: 100%;
 }
 .svc-modal-main-img img {
   width: 100%;
@@ -3233,7 +3604,7 @@ img { max-width: 100%; height: auto; }
     -webkit-overflow-scrolling: touch;
   }
   .svc-modal-gallery { padding: 10px; gap: 8px; }
-  .svc-modal-main-img { min-height: 200px; max-height: 45vh; }
+  .svc-modal-main-img { aspect-ratio: 16 / 9; }
   .svc-modal-thumbs button { height: 52px; }
   .svc-modal-content { padding: 24px 20px 32px; }
   .svc-modal-title { font-size: 22px; }
@@ -6618,7 +6989,9 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
       <span class="svc-step-divider"></span>
       <button class="svc-step" data-step="2" role="tab"><span class="svc-step-num">2</span><span class="svc-step-label">Services</span></button>
       <span class="svc-step-divider"></span>
-      <button class="svc-step" data-step="3" role="tab"><span class="svc-step-num">3</span><span class="svc-step-label">Envoi</span></button>
+      <button class="svc-step" data-step="3" role="tab"><span class="svc-step-num">3</span><span class="svc-step-label">D&eacute;tails</span></button>
+      <span class="svc-step-divider"></span>
+      <button class="svc-step" data-step="4" role="tab"><span class="svc-step-num">4</span><span class="svc-step-label">Envoi</span></button>
     </div>
 
     <!-- STEP 1: choose mode -->
@@ -6655,6 +7028,40 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
           <span class="svc-choice-cta">Commencer la composition &rarr;</span>
         </button>
 
+      </div>
+    </div>
+
+    <!-- STEP AI: inline concierge chat -->
+    <div class="svc-step-content svc-ai-inline" data-step-content="ai">
+      <div class="svc-ai-inline-header">
+        <div class="svc-ai-inline-avatar">
+          <img src="concierge-v3.png" alt="Concierge MPL">
+          <span class="svc-ai-inline-dot"></span>
+        </div>
+        <div class="svc-ai-inline-info">
+          <div class="svc-ai-inline-eyebrow">&#9670; Concierge IA &middot; en ligne</div>
+          <h3 class="svc-ai-inline-title" id="svcAiTitle">Composons votre s&eacute;jour ensemble</h3>
+        </div>
+        <button class="svc-ai-inline-back" type="button" id="svcAiBack">&larr; Revenir au choix</button>
+      </div>
+      <div class="svc-ai-inline-chat" id="svcAiChat" aria-live="polite"></div>
+      <div class="svc-ai-inline-suggestions" id="svcAiSuggestions">
+        <button type="button" class="svc-ai-suggest" data-q="Je viens 4 jours &agrave; Cannes en couple, qu'est-ce que vous proposez ?">S&eacute;jour Cannes 4j</button>
+        <button type="button" class="svc-ai-suggest" data-q="J'ai besoin d'un chauffeur pour un gala &agrave; Monaco">Gala Monaco</button>
+        <button type="button" class="svc-ai-suggest" data-q="Je cherche une villa avec vue mer pour une semaine">Villa vue mer</button>
+      </div>
+      <form class="svc-ai-inline-form" id="svcAiForm" autocomplete="off">
+        <input type="text" id="svcAiInput" placeholder="Posez votre question..." maxlength="500" required>
+        <button type="submit" class="svc-ai-inline-send" id="svcAiSend" aria-label="Envoyer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </button>
+      </form>
+      <div class="svc-ai-inline-footer">
+        <a class="svc-ai-inline-wa" href="https://wa.me/33668896078" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.4A11.7 11.7 0 0012.1.8C5.9.8.8 5.8.8 12c0 2 .5 4 1.6 5.7L.7 23.2l5.7-1.5a11.2 11.2 0 005.7 1.5h.1c6.3 0 11.4-5 11.4-11.2a11 11 0 00-3.1-8.6z"/></svg>
+          <span>Continuer sur WhatsApp</span>
+        </a>
+        <span class="svc-ai-inline-disclaimer">Propuls&eacute; par Claude &middot; ne stocke pas vos donn&eacute;es</span>
       </div>
     </div>
 
@@ -7015,13 +7422,53 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
         <button class="svc-step-back" type="button" data-go="1">&larr; Retour</button>
         <button class="svc-step-next" type="button" data-go="3" disabled>
           <span class="count" id="svcSelectedCount">0</span>
-          <span>S&eacute;lection &middot; Voir le r&eacute;cap &rarr;</span>
+          <span>S&eacute;lection &middot; Continuer &rarr;</span>
         </button>
       </div>
     </div>
 
-    <!-- STEP 3: review and send -->
+    <!-- STEP 3: dates & details -->
     <div class="svc-step-content" data-step-content="3">
+      <div class="svc-step-instructions">
+        <span class="svc-step-instructions-num">03</span>
+        <p>Pr&eacute;cisez les <strong>dates et le nombre de voyageurs</strong> pour votre s&eacute;jour. Ces informations permettent &agrave; notre concierge de vous r&eacute;pondre pr&eacute;cis&eacute;ment.</p>
+      </div>
+
+      <div class="svc-details-grid">
+        <div class="svc-detail-field">
+          <label for="svcDateArrive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Date d'arriv&eacute;e</span></label>
+          <input type="date" id="svcDateArrive" required>
+        </div>
+        <div class="svc-detail-field">
+          <label for="svcDateDepart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Date de d&eacute;part</span></label>
+          <input type="date" id="svcDateDepart" required>
+        </div>
+        <div class="svc-detail-field">
+          <label for="svcVoyageurs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Voyageurs</span></label>
+          <select id="svcVoyageurs">
+            <option value="1">1 personne</option>
+            <option value="2" selected>2 personnes</option>
+            <option value="3">3 personnes</option>
+            <option value="4">4 personnes</option>
+            <option value="5">5 personnes</option>
+            <option value="6">6 personnes</option>
+            <option value="7+">7+ personnes</option>
+          </select>
+        </div>
+        <div class="svc-detail-field">
+          <label for="svcName3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Votre pr&eacute;nom</span></label>
+          <input type="text" id="svcName3" placeholder="Ex : Alexandre" autocomplete="given-name">
+        </div>
+      </div>
+
+      <div class="svc-step-actions">
+        <button class="svc-step-back" type="button" data-go="2">&larr; Modifier la s&eacute;lection</button>
+        <button class="svc-step-next svc-step-next--details" type="button" data-go="4">Voir le r&eacute;cap &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: review and send -->
+    <div class="svc-step-content" data-step-content="4">
 
       <div class="svc-recap-layout">
         <!-- Left: order recap -->
@@ -7036,7 +7483,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
             <ul class="svc-summary-list" id="svcSummaryList"></ul>
             <div class="svc-summary-total" id="svcSummaryTotal"></div>
           </div>
-          <button class="svc-step-back" type="button" data-go="2" style="margin-top:20px">&larr; Modifier la s&eacute;lection</button>
+          <button class="svc-step-back" type="button" data-go="3" style="margin-top:20px">&larr; Modifier les d&eacute;tails</button>
         </div>
 
         <!-- Right: send CTA -->
@@ -7268,8 +7715,12 @@ document.addEventListener("DOMContentLoaded", function() {
   var summaryEmpty = document.getElementById('svcSummaryEmpty');
   var sendBtn = document.getElementById('svcSendBtn');
   var nameInput = document.getElementById('svcName');
+  var nameInput3 = document.getElementById('svcName3');
   var phoneInput = document.getElementById('svcPhone');
   var noteInput = document.getElementById('svcNote');
+  var dateArriveInput = document.getElementById('svcDateArrive');
+  var dateDepartInput = document.getElementById('svcDateDepart');
+  var voyageursSelect = document.getElementById('svcVoyageurs');
   var loader = document.getElementById('svcLoader');
   var loaderStep = document.getElementById('svcLoaderStep');
   var loaderTitle = document.getElementById('svcLoaderTitle');
@@ -7317,8 +7768,18 @@ document.addEventListener("DOMContentLoaded", function() {
     if (defaultTab) defaultTab.click();
   }
 
+  var stepper = section.querySelector('.svc-stepper');
+  var aiPanel = section.querySelector('[data-step-content="ai"]');
+
   function goStep(n) {
+    if (n === 'ai') {
+      stepper.classList.add('hidden');
+      stepContents.forEach(function(c) { c.classList.remove('active'); });
+      if (aiPanel) aiPanel.classList.add('active');
+      return;
+    }
     n = parseInt(n);
+    stepper.classList.remove('hidden');
     steps.forEach(function(s) {
       var sn = parseInt(s.dataset.step);
       s.classList.toggle('active', sn === n);
@@ -7327,7 +7788,7 @@ document.addEventListener("DOMContentLoaded", function() {
     stepContents.forEach(function(c) {
       c.classList.toggle('active', parseInt(c.dataset.stepContent) === n);
     });
-    if (n === 3) updateSummary();
+    if (n === 4) updateSummary();
   }
 
   steps.forEach(function(s) {
@@ -7346,15 +7807,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var directBtn = section.querySelector('[data-mode="direct"]');
   var cfgBtn = section.querySelector('[data-mode="configurator"]');
   if (directBtn) directBtn.addEventListener('click', function() {
-    // Open AI concierge widget instead of WhatsApp
-    var aiBubble = document.getElementById('mplAiBubble');
-    if (aiBubble) {
-      aiBubble.click();
-    } else {
-      // Fallback : WhatsApp direct if widget not loaded
-      var msg = 'Bonjour My Private Limousine, je souhaite r\u00e9server une prestation.';
-      window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
-    }
+    goStep('ai');
+    scrollToSection();
   });
   if (cfgBtn) cfgBtn.addEventListener('click', function() { goStep(2); scrollToSection(); });
 
@@ -7546,9 +8000,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function rebuildSendLink() {
     if (!sendBtn) return;
-    var name = (nameInput && nameInput.value || '').trim();
+    var name = (nameInput3 && nameInput3.value || nameInput && nameInput.value || '').trim();
     var phone = (phoneInput && phoneInput.value || '').trim();
     var note = (noteInput && noteInput.value || '').trim();
+    var dateArrive = (dateArriveInput && dateArriveInput.value || '').trim();
+    var dateDepart = (dateDepartInput && dateDepartInput.value || '').trim();
+    var voyageurs = (voyageursSelect && voyageursSelect.value || '').trim();
     var selected = section.querySelectorAll('.svc-card.selected');
     var lines = [];
     var total = 0;
@@ -7562,7 +8019,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var ctxLabel = { chauffeur: 'Chauffeur priv\u00e9', vehicules: 'V\u00e9hicules prestige', conciergerie: 'Conciergerie priv\u00e9e', all: 'S\u00e9jour combin\u00e9' }[ctxName];
     var msg = 'Bonjour My Private Limousine,\n\n';
     if (name) msg += 'Je suis ' + name + '.\n';
-    msg += 'Demande \u00ab\u00a0' + ctxLabel + '\u00a0\u00bb :\n\n' + lines.join('\n');
+    if (dateArrive || dateDepart) msg += 'Dates : ' + (dateArrive || '?') + ' \u2192 ' + (dateDepart || '?') + '\n';
+    if (voyageurs) msg += 'Voyageurs : ' + voyageurs + '\n';
+    msg += '\nDemande \u00ab\u00a0' + ctxLabel + '\u00a0\u00bb :\n\n' + lines.join('\n');
     if (total > 0) {
       msg += '\n\nEstimation : ' + total + ' \u20ac';
       if (hasDevis) msg += ' + prestations sur devis';
@@ -7585,14 +8044,26 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   ['input', 'change'].forEach(function(evt) {
-    [nameInput, phoneInput, noteInput].forEach(function(el) {
+    [nameInput, nameInput3, phoneInput, noteInput, dateArriveInput, dateDepartInput, voyageursSelect].forEach(function(el) {
       if (el) el.addEventListener(evt, rebuildSendLink);
     });
+  });
+  if (nameInput3) nameInput3.addEventListener('input', function() {
+    if (nameInput) nameInput.value = nameInput3.value;
   });
 
   document.addEventListener('mpl:langchange', function() {
     updateSummary();
     refreshCartSidebar(null);
+    if (voyageursSelect) {
+      var opts = voyageursSelect.options;
+      for (var i = 0; i < opts.length; i++) {
+        var v = opts[i].value;
+        if (v === '7+') opts[i].textContent = '7+ ' + mplT('persons');
+        else if (v === '1') opts[i].textContent = '1 ' + mplT('person');
+        else opts[i].textContent = v + ' ' + mplT('persons');
+      }
+    }
   });
 
   // ═══ Loader-driven reveal ═══
@@ -7620,7 +8091,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {
       section.classList.remove('is-hidden');
       setContext(contextName);
-      goStep(2);
+      goStep(1);
 
       // Clear any prior selection when switching contexts
       cards.forEach(function(c) { c.classList.remove('selected'); });
@@ -8184,11 +8655,210 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
 })();
 </script>
 <script>
+// ═══════ MPL AI Inline concierge (wizard step) ═══════
+(function() {
+  var PROXY_URL = window.MPL_AI_PROXY_URL || '/api/chat';
+  var chat = document.getElementById('svcAiChat');
+  var form = document.getElementById('svcAiForm');
+  var input = document.getElementById('svcAiInput');
+  var sendBtn = document.getElementById('svcAiSend');
+  var suggestions = document.getElementById('svcAiSuggestions');
+  var backBtn = document.getElementById('svcAiBack');
+  var waLink = document.querySelector('.svc-ai-inline-wa');
+  if (!chat || !form) return;
+
+  var messages = [];
+  var streaming = false;
+  var welcomed = false;
+
+  function finalizeAssistantMessage(aiDiv, fullText) {
+    var choixMatch = fullText.match(/\[CHOIX\]/);
+    if (!choixMatch) return;
+    var splitIdx = choixMatch.index;
+    var mainText = fullText.slice(0, splitIdx).trim();
+    var afterMarker = fullText.slice(splitIdx + choixMatch[0].length).trim();
+    var lines = afterMarker.split('\n');
+    var options = [];
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i].trim();
+      var m = line.match(/^(?:\d+\.|[-•])\s*(.+)$/);
+      if (m) options.push(m[1].trim());
+      else if (options.length > 0) break;
+    }
+    if (options.length === 0) return;
+    aiDiv.textContent = mainText;
+    var container = document.createElement('div');
+    container.className = 'mpl-ai-choices';
+    options.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mpl-ai-choice';
+      btn.textContent = opt;
+      btn.addEventListener('click', function() {
+        if (streaming) return;
+        container.querySelectorAll('button').forEach(function(b) { b.disabled = true; });
+        btn.classList.add('mpl-ai-choice--picked');
+        input.value = opt;
+        form.requestSubmit();
+      });
+      container.appendChild(btn);
+    });
+    aiDiv.parentNode.insertBefore(container, aiDiv.nextSibling);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function rebuildInlineWaLink() {
+    if (!waLink) return;
+    var summary = messages.map(function(m) {
+      var prefix = m.role === 'user' ? '→ Vous : ' : '« MPL AI » : ';
+      return prefix + m.content;
+    }).join('\n\n');
+    var prefill = 'Bonjour, je continue ma conversation entamée avec le concierge IA :\n\n' + summary + '\n\n---\nMerci de me recontacter.';
+    waLink.href = 'https://wa.me/33668896078?text=' + encodeURIComponent(prefill);
+  }
+
+  function addMsg(role, text) {
+    var div = document.createElement('div');
+    div.className = 'mpl-ai-msg mpl-ai-msg--' + role;
+    div.textContent = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+    return div;
+  }
+
+  function showWelcome() {
+    if (welcomed) return;
+    welcomed = true;
+    var lang = window.MPL_LANG || 'fr';
+    var welcomeMsgs = {
+      fr: "Bonjour ! Je suis votre concierge virtuel My Private Limousine. Quelques questions rapides pour vous proposer la prestation idéale sur la Côte d'Azur.",
+      en: "Hello! I'm your virtual concierge at My Private Limousine. A few quick questions to find the perfect experience for you on the French Riviera.",
+      ru: "Здравствуйте! Я ваш виртуальный консьерж. Несколько вопросов, чтобы подобрать идеальный отдых на Лазурном Берегу.",
+      it: "Buongiorno! Sono il vostro concierge virtuale. Qualche domanda rapida per proporvi l'esperienza ideale in Costa Azzurra.",
+      de: "Guten Tag! Ich bin Ihr virtueller Concierge. Einige kurze Fragen, um Ihnen das perfekte Erlebnis an der Côte d'Azur vorzuschlagen.",
+      nl: "Goedendag! Ik ben uw virtuele conciërge. Een paar snelle vragen om u de ideale ervaring aan de Côte d'Azur voor te stellen.",
+      ar: "مرحباً! أنا الكونسيرج الافتراضي الخاص بكم. بضع أسئلة سريعة لنقدم لكم التجربة المثالية على الريفييرا الفرنسية."
+    };
+    addMsg('assistant', welcomeMsgs[lang] || welcomeMsgs.fr);
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.target === document.querySelector('[data-step-content="ai"]') && m.target.classList.contains('active')) {
+        showWelcome();
+        setTimeout(function() { input.focus(); }, 100);
+      }
+    });
+  });
+  var aiPanel = document.querySelector('[data-step-content="ai"]');
+  if (aiPanel) observer.observe(aiPanel, { attributes: true, attributeFilter: ['class'] });
+
+  if (backBtn) {
+    backBtn.addEventListener('click', function() {
+      var section = document.getElementById('svcSelector');
+      if (!section) return;
+      var stepper = section.querySelector('.svc-stepper');
+      if (stepper) stepper.classList.remove('hidden');
+      var stepContents = section.querySelectorAll('.svc-step-content');
+      stepContents.forEach(function(c) {
+        c.classList.toggle('active', c.dataset.stepContent === '1');
+      });
+      var steps = section.querySelectorAll('.svc-step');
+      steps.forEach(function(s) {
+        s.classList.toggle('active', s.dataset.step === '1');
+        s.classList.remove('completed');
+      });
+    });
+  }
+
+  suggestions.querySelectorAll('.svc-ai-suggest').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      input.value = btn.dataset.q;
+      form.requestSubmit();
+    });
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (streaming) return;
+    var text = input.value.trim();
+    if (!text) return;
+
+    addMsg('user', text);
+    messages.push({ role: 'user', content: text });
+    input.value = '';
+    suggestions.style.display = 'none';
+
+    streaming = true;
+    sendBtn.disabled = true;
+    var aiDiv = addMsg('assistant', '');
+    aiDiv.classList.add('typing');
+    var fullText = '';
+
+    try {
+      var response = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: messages })
+      });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+
+      var reader = response.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = '';
+
+      while (true) {
+        var chunk = await reader.read();
+        if (chunk.done) break;
+        buffer += decoder.decode(chunk.value, { stream: true });
+        var lines = buffer.split('\n\n');
+        buffer = lines.pop();
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          if (!line.startsWith('data: ')) continue;
+          var data;
+          try { data = JSON.parse(line.slice(6)); } catch (err) { continue; }
+          if (data.text) {
+            fullText += data.text;
+            aiDiv.textContent = fullText;
+            chat.scrollTop = chat.scrollHeight;
+          }
+          if (data.error) throw new Error(data.error);
+          if (data.done) break;
+        }
+      }
+
+      aiDiv.classList.remove('typing');
+      if (fullText) {
+        messages.push({ role: 'assistant', content: fullText });
+        finalizeAssistantMessage(aiDiv, fullText);
+        rebuildInlineWaLink();
+      } else {
+        aiDiv.textContent = 'Aucune réponse reçue.';
+        aiDiv.classList.add('mpl-ai-msg--error');
+      }
+    } catch (error) {
+      aiDiv.classList.remove('typing');
+      aiDiv.classList.add('mpl-ai-msg--error');
+      aiDiv.innerHTML = "Le concierge IA est hors ligne pour l'instant. Contactez-nous directement : <a href=\"https://wa.me/33668896078\" target=\"_blank\" rel=\"noopener\">WhatsApp +33 6 68 89 60 78</a>";
+      console.error('[MPL AI inline]', error);
+    } finally {
+      streaming = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  });
+})();
+</script>
+<script>
 // ═══════ MPL i18n — dynamic text helpers ═══════
 window.MPL_T = {
   estimation: { fr: "Estimation", en: "Estimate", ru: "Оценка", it: "Stima", de: "Schätzung", nl: "Schatting", ar: "تقدير" },
   sur_devis: { fr: "Sur devis", en: "On request", ru: "По запросу", it: "Su preventivo", de: "Auf Anfrage", nl: "Op offerte", ar: "حسب الطلب" },
   devis_suffix: { fr: "+ devis", en: "+ quote", ru: "+ запрос", it: "+ preventivo", de: "+ Anfrage", nl: "+ offerte", ar: "+ طلب" },
+  person: { fr: "personne", en: "person", ru: "человек", it: "persona", de: "Person", nl: "persoon", ar: "شخص" },
+  persons: { fr: "personnes", en: "people", ru: "человек", it: "persone", de: "Personen", nl: "personen", ar: "أشخاص" },
 };
 window.mplT = function(key) {
   var lang = window.MPL_LANG || 'fr';
@@ -8815,12 +9485,84 @@ window.mplT = function(key) {
       ar: "الخدمات",
     },
     ".svc-step[data-step=\"3\"] .svc-step-label": {
+      en: "Details",
+      ru: "Детали",
+      it: "Dettagli",
+      de: "Details",
+      nl: "Details",
+      ar: "التفاصيل",
+    },
+    ".svc-step[data-step=\"4\"] .svc-step-label": {
       en: "Send",
       ru: "Отправка",
       it: "Invio",
       de: "Senden",
       nl: "Versturen",
       ar: "الإرسال",
+    },
+    "[data-step-content=\"3\"] .svc-step-instructions p": {
+      en: "Specify <strong>dates and number of travellers</strong> for your stay. This information helps our concierge respond precisely.",
+      ru: "Укажите <strong>даты и количество путешественников</strong>. Эта информация поможет нашему консьержу ответить точнее.",
+      it: "Indicate <strong>date e numero di viaggiatori</strong> per il vostro soggiorno. Queste informazioni aiutano il concierge a rispondere con precisione.",
+      de: "Geben Sie <strong>Daten und Reisende</strong> für Ihren Aufenthalt an. Diese Angaben helfen unserem Concierge, Ihnen präzise zu antworten.",
+      nl: "Geef <strong>data en aantal reizigers</strong> op voor uw verblijf. Deze informatie helpt onze conciërge u nauwkeurig te antwoorden.",
+      ar: "حددوا <strong>التواريخ وعدد المسافرين</strong> لإقامتكم. تساعد هذه المعلومات الكونسيرج على الرد بدقة.",
+    },
+    "[data-step-content=\"3\"] .svc-detail-field:nth-of-type(1) label span": {
+      en: "Arrival date",
+      ru: "Дата прибытия",
+      it: "Data di arrivo",
+      de: "Anreisedatum",
+      nl: "Aankomstdatum",
+      ar: "تاريخ الوصول",
+    },
+    "[data-step-content=\"3\"] .svc-detail-field:nth-of-type(2) label span": {
+      en: "Departure date",
+      ru: "Дата отъезда",
+      it: "Data di partenza",
+      de: "Abreisedatum",
+      nl: "Vertrekdatum",
+      ar: "تاريخ المغادرة",
+    },
+    "[data-step-content=\"3\"] .svc-detail-field:nth-of-type(3) label span": {
+      en: "Travellers",
+      ru: "Путешественники",
+      it: "Viaggiatori",
+      de: "Reisende",
+      nl: "Reizigers",
+      ar: "المسافرون",
+    },
+    "[data-step-content=\"3\"] .svc-detail-field:nth-of-type(4) label span": {
+      en: "Your first name",
+      ru: "Ваше имя",
+      it: "Il tuo nome",
+      de: "Ihr Vorname",
+      nl: "Uw voornaam",
+      ar: "اسمك",
+    },
+    "[data-step-content=\"3\"] .svc-step-next--details": {
+      en: "See summary →",
+      ru: "Итого →",
+      it: "Riepilogo →",
+      de: "Übersicht →",
+      nl: "Overzicht →",
+      ar: "← ملخص",
+    },
+    "[data-step-content=\"3\"] .svc-step-back": {
+      en: "← Modify selection",
+      ru: "← Изменить подборку",
+      it: "← Modifica selezione",
+      de: "← Auswahl ändern",
+      nl: "← Selectie wijzigen",
+      ar: "→ تعديل الاختيار",
+    },
+    ".svc-step-next span:last-child": {
+      en: "Selection · Continue →",
+      ru: "Подборка · Продолжить →",
+      it: "Selezione · Continua →",
+      de: "Auswahl · Weiter →",
+      nl: "Selectie · Doorgaan →",
+      ar: "← الاختيار · متابعة",
     },
     "[data-step-content=\"1\"] .svc-step-instructions p": {
       en: "Welcome. <strong>How would you like to book?</strong> Choose your method below — quick via our AI concierge, or bespoke with our configurator.",
@@ -9062,13 +9804,13 @@ window.mplT = function(key) {
       nl: "Voeg details toe (optioneel)",
       ar: "إضافة تفاصيل (اختياري)",
     },
-    ".svc-step-back[data-go=\"2\"]": {
-      en: "← Modify selection",
-      ru: "← Изменить подборку",
-      it: "← Modifica selezione",
-      de: "← Auswahl ändern",
-      nl: "← Selectie wijzigen",
-      ar: "→ تعديل الاختيار",
+    ".svc-step-back[data-go=\"3\"]": {
+      en: "← Modify details",
+      ru: "← Изменить детали",
+      it: "← Modifica dettagli",
+      de: "← Details ändern",
+      nl: "← Details wijzigen",
+      ar: "→ تعديل التفاصيل",
     },
     "label[for=\"svcName\"] span, .svc-summary-form label:nth-of-type(1) span": {
       en: "Your first name",
@@ -9710,6 +10452,54 @@ window.mplT = function(key) {
       nl: "Stel uw vraag...",
       ar: "اطرح سؤالك...",
     },
+    ".svc-ai-inline-eyebrow": {
+      en: "◆ AI Concierge · online",
+      ru: "◆ ИИ-Консьерж · онлайн",
+      it: "◆ Concierge IA · online",
+      de: "◆ KI-Concierge · online",
+      nl: "◆ AI-Conciërge · online",
+      ar: "◆ كونسيرج الذكاء الاصطناعي · متصل",
+    },
+    "#svcAiTitle": {
+      en: "Let’s compose your stay together",
+      ru: "Составим ваш отдых вместе",
+      it: "Componiamo il vostro soggiorno insieme",
+      de: "Gestalten wir Ihren Aufenthalt gemeinsam",
+      nl: "Laten we samen uw verblijf samenstellen",
+      ar: "لنُنظّم إقامتكم معاً",
+    },
+    "#svcAiBack": {
+      en: "← Back to choice",
+      ru: "← Назад к выбору",
+      it: "← Torna alla scelta",
+      de: "← Zurück zur Auswahl",
+      nl: "← Terug naar keuze",
+      ar: "→ العودة إلى الاختيار",
+    },
+    ".svc-ai-inline-wa span": {
+      en: "Continue on WhatsApp",
+      ru: "Продолжить в WhatsApp",
+      it: "Continua su WhatsApp",
+      de: "Auf WhatsApp fortfahren",
+      nl: "Doorgaan op WhatsApp",
+      ar: "تابِع على واتساب",
+    },
+    ".svc-ai-inline-disclaimer": {
+      en: "Powered by Claude · does not store your data",
+      ru: "На базе Claude · не хранит ваши данные",
+      it: "Alimentato da Claude · non memorizza i tuoi dati",
+      de: "Unterstützt von Claude · speichert keine Daten",
+      nl: "Aangedreven door Claude · slaat uw gegevens niet op",
+      ar: "مدعوم من Claude · لا تُخزَّن بياناتكم",
+    },
+    "ai-inline.placeholder": {
+      en: "Ask your question...",
+      ru: "Задайте вопрос...",
+      it: "Poni la tua domanda...",
+      de: "Stellen Sie Ihre Frage...",
+      nl: "Stel uw vraag...",
+      ar: "اطرح سؤالك...",
+    },
     ".svc-col-arrow span": {
       en: "Compose",
       ru: "Составить",
@@ -9822,12 +10612,20 @@ window.mplT = function(key) {
       } catch (e) { /* skip */ }
     });
 
-    // AI widget — placeholder + welcome message
+    // AI widget — placeholder
     var aiInput = document.getElementById('mplAiInput');
     if (aiInput) {
       var ph = I18N['ai.placeholder'] && I18N['ai.placeholder'][lang];
       if (ph) aiInput.setAttribute('placeholder', ph);
       else aiInput.setAttribute('placeholder', 'Posez votre question...');
+    }
+
+    // AI inline — placeholder
+    var aiInlineInput = document.getElementById('svcAiInput');
+    if (aiInlineInput) {
+      var ph2 = I18N['ai-inline.placeholder'] && I18N['ai-inline.placeholder'][lang];
+      if (ph2) aiInlineInput.setAttribute('placeholder', ph2);
+      else aiInlineInput.setAttribute('placeholder', 'Posez votre question...');
     }
 
     // Toggle RTL for Arabic
