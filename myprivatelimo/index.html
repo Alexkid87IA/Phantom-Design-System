@@ -5926,12 +5926,13 @@ img { max-width: 100%; height: auto; }
   justify-content: center;
   color: var(--ink);
   transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
-  animation: mplAiPulse 2.4s ease-in-out infinite;
+  animation: mplAiBounce 2.2s ease-in-out infinite;
   padding: 0;
 }
 .mpl-ai-bubble:hover {
-  transform: translate(-3px, -3px);
+  transform: translate(-3px, -3px) scale(1.04);
   box-shadow: 8px 8px 0 0 var(--ink);
+  animation-play-state: paused;
 }
 .mpl-ai-bubble svg { width: 28px; height: 28px; }
 .mpl-ai-bubble-img {
@@ -5940,9 +5941,53 @@ img { max-width: 100%; height: auto; }
   object-position: top center;
   border-radius: 50%;
 }
-@keyframes mplAiPulse {
-  0%, 100% { box-shadow: 5px 5px 0 0 var(--ink); }
-  50%      { box-shadow: 5px 5px 0 0 var(--ink), 0 0 0 10px rgba(123,157,183,0.3); }
+/* Two stacked expanding rings — clearly signal interactivity */
+.mpl-ai-bubble::before,
+.mpl-ai-bubble::after {
+  content: "";
+  position: absolute;
+  inset: -2.5px;
+  border-radius: 50%;
+  border: 2px solid var(--maniaci);
+  pointer-events: none;
+  animation: mplAiRing 2.2s cubic-bezier(0.15, 0.6, 0.3, 1) infinite;
+  opacity: 0;
+  z-index: -1;
+}
+.mpl-ai-bubble::after { animation-delay: 1.1s; }
+@keyframes mplAiRing {
+  0%   { transform: scale(0.92); opacity: 0.8; border-width: 3px; }
+  70%  { transform: scale(1.7);  opacity: 0;   border-width: 1px; }
+  100% { transform: scale(1.7);  opacity: 0;   border-width: 1px; }
+}
+@keyframes mplAiBounce {
+  0%, 100% { transform: translateY(0)    scale(1); }
+  50%      { transform: translateY(-3px) scale(1.04); }
+}
+/* Notification dot — there's something to discover */
+.mpl-ai-bubble-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background: #ef4444;
+  color: #fff;
+  border: 2.5px solid var(--paper);
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  animation: mplAiBadgePulse 1.6s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes mplAiBadgePulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50%      { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(239,68,68,0); }
 }
 .mpl-ai-bubble-label {
   position: absolute;
@@ -6822,7 +6867,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     cursor: pointer;
     padding: 0;
     position: relative;
-    animation: mobileAvatarPulse 2.4s ease-out infinite;
+    animation: mobileAvatarPulse 1.8s cubic-bezier(0.15, 0.6, 0.3, 1) infinite;
   }
   .mpl-mobile-bar-ai img {
     width: 100%; height: 100%;
@@ -6833,16 +6878,22 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     animation: mobileAvatarWiggle 6s ease-in-out infinite;
     transform-origin: center 75%;
   }
-  /* Pulsing gold ring — invites the user to tap */
+  /* Pulsing gold rings — clearly signal that the avatar is tappable */
   @keyframes mobileAvatarPulse {
     0% {
-      box-shadow: 0 0 0 0 rgba(196,162,101, 0.65), 0 0 0 0 rgba(196,162,101, 0.45);
+      box-shadow:
+        0 0 0 0 rgba(196,162,101, 0.85),
+        0 0 0 0 rgba(196,162,101, 0.55);
     }
-    65% {
-      box-shadow: 0 0 0 10px rgba(196,162,101, 0), 0 0 0 16px rgba(196,162,101, 0);
+    50% {
+      box-shadow:
+        0 0 0 12px rgba(196,162,101, 0.25),
+        0 0 0 20px rgba(196,162,101, 0.10);
     }
     100% {
-      box-shadow: 0 0 0 0 rgba(196,162,101, 0), 0 0 0 0 rgba(196,162,101, 0);
+      box-shadow:
+        0 0 0 22px rgba(196,162,101, 0),
+        0 0 0 30px rgba(196,162,101, 0);
     }
   }
   /* Subtle head-shake every 6s */
@@ -6863,6 +6914,31 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     box-shadow: 0 0 8px rgba(34,197,94,0.6);
     animation: mobileDotPulse 2.5s ease-in-out infinite;
     z-index: 2;
+  }
+
+  .mpl-mobile-bar-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 18px;
+    height: 18px;
+    background: #ef4444;
+    color: #fff;
+    border: 2.5px solid var(--paper);
+    border-radius: 50%;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    animation: mobileBadgePulse 1.6s ease-in-out infinite;
+    z-index: 3;
+  }
+  @keyframes mobileBadgePulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(239,68,68,0.55); }
+    50%      { transform: scale(1.18); box-shadow: 0 0 0 6px rgba(239,68,68,0); }
   }
   @keyframes mobileDotPulse {
     0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.4); }
@@ -11093,6 +11169,7 @@ window.mplT = function(key) {
 <div class="mpl-mobile-bar">
   <button type="button" class="mpl-mobile-bar-ai" id="mplMobileBarAi" aria-label="Concierge IA">
     <img src="concierge-v4.png" alt="Michel — Concierge">
+    <span class="mpl-mobile-bar-badge">1</span>
     <span class="mpl-mobile-bar-tip" id="mplMobileBarTip">Discutez avec Michel</span>
   </button>
   <a href="#svcSelector" class="mpl-mobile-bar-cta" data-compose="all" aria-label="Réserver maintenant">
