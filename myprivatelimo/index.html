@@ -5357,63 +5357,183 @@ img { max-width: 100%; height: auto; }
   box-shadow: 3px 3px 0 0 var(--maniaci);
   transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.15s;
 }
+.mobile-burger.is-open {
+  background: var(--ink);
+  color: var(--maniaci);
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: none;
+}
 .mobile-burger:active {
   transform: translate(1px, 1px);
   box-shadow: 1px 1px 0 0 var(--maniaci-900);
+}
+.mobile-burger.is-open:active {
+  box-shadow: none;
 }
 .mobile-nav-overlay {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--ink);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s var(--ease);
+  transition: opacity 0.35s var(--ease);
+  overflow: hidden;
 }
 .mobile-nav-overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
-.mobile-nav-overlay a {
-  font-family: var(--font-display);
-  font-size: var(--fs-2xl);
-  font-weight: 700;
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.2s, transform 0.2s;
-  opacity: 0;
-  transform: translateY(12px);
+.mobile-nav-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 100px 36px 48px;
 }
-.mobile-nav-overlay.open a {
+.mobile-nav-deco {
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,162,101,0.12) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mobile-nav-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s 0.1s var(--ease), transform 0.4s 0.1s var(--ease);
+}
+.mobile-nav-overlay.open .mobile-nav-brand {
   opacity: 1;
   transform: translateY(0);
 }
-.mobile-nav-overlay.open a:nth-child(1) { transition-delay: 0.05s; }
-.mobile-nav-overlay.open a:nth-child(2) { transition-delay: 0.1s; }
-.mobile-nav-overlay.open a:nth-child(3) { transition-delay: 0.15s; }
-.mobile-nav-overlay.open a:nth-child(4) { transition-delay: 0.2s; }
-.mobile-nav-overlay.open a:nth-child(5) { transition-delay: 0.25s; }
-.mobile-nav-overlay.open a:nth-child(6) { transition-delay: 0.3s; }
-.mobile-nav-overlay.open a:nth-child(7) { transition-delay: 0.35s; }
-.mobile-nav-overlay a:hover {
+.mobile-nav-monogram {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--maniaci);
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+.mobile-nav-tagline {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+.mobile-nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--paper);
+  text-decoration: none;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), color 0.2s;
+}
+.mobile-nav-overlay.open .mobile-nav-links a {
+  opacity: 1;
+  transform: translateX(0);
+}
+.mobile-nav-overlay.open .mobile-nav-links a:nth-child(1) { transition-delay: 0.12s; }
+.mobile-nav-overlay.open .mobile-nav-links a:nth-child(2) { transition-delay: 0.18s; }
+.mobile-nav-overlay.open .mobile-nav-links a:nth-child(3) { transition-delay: 0.24s; }
+.mobile-nav-links a:active {
   color: var(--maniaci);
 }
+.mobile-nav-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--maniaci);
+  min-width: 28px;
+}
+
+.mobile-nav-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s 0.3s var(--ease), transform 0.4s 0.3s var(--ease);
+}
+.mobile-nav-overlay.open .mobile-nav-bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .mobile-nav-cta {
-  margin-top: 12px;
-  padding: 12px 32px !important;
+  display: block;
+  text-align: center;
+  padding: 16px 32px;
   border-radius: var(--r-full);
   background: var(--maniaci);
-  color: #fff !important;
-  font-size: var(--fs-lg) !important;
+  color: var(--ink) !important;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
   border: 2.5px solid var(--maniaci);
-  box-shadow: 4px 4px 0 0 rgba(255,255,255,0.2);
+  box-shadow: 4px 4px 0 0 rgba(196,162,101,0.3);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.mobile-nav-cta:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 rgba(196,162,101,0.3);
+}
+
+.mobile-nav-contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.mobile-nav-phone {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--paper);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.mobile-nav-avail {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maniaci);
 }
 
 /* ═══════ RESPONSIVE ═══════ */
@@ -6790,10 +6910,25 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
   </nav>
 
   <div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="#services" onclick="closeMobileNav()">Services</a>
-    <a href="#svcSelector" onclick="closeMobileNav()" data-compose="all">Composer mon s&eacute;jour</a>
-    <a href="https://wa.me/33668896078" target="_blank" rel="noopener" onclick="closeMobileNav()">WhatsApp</a>
-    <a href="#svcSelector" onclick="closeMobileNav()" data-compose="all" class="mobile-nav-cta">R&eacute;server &rarr;</a>
+    <div class="mobile-nav-inner">
+      <div class="mobile-nav-brand">
+        <span class="mobile-nav-monogram">MPL</span>
+        <span class="mobile-nav-tagline">My Private Limousine</span>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="#services" onclick="closeMobileNav()"><span class="mobile-nav-num">01</span>Services</a>
+        <a href="#svcSelector" onclick="closeMobileNav()" data-compose="all"><span class="mobile-nav-num">02</span>Composer mon s&eacute;jour</a>
+        <a href="https://wa.me/33668896078" target="_blank" rel="noopener" onclick="closeMobileNav()"><span class="mobile-nav-num">03</span>WhatsApp</a>
+      </div>
+      <div class="mobile-nav-bottom">
+        <a href="#svcSelector" onclick="closeMobileNav()" data-compose="all" class="mobile-nav-cta">R&eacute;server &rarr;</a>
+        <div class="mobile-nav-contact">
+          <a href="tel:+33668896078" class="mobile-nav-phone">+33 6 68 89 60 78</a>
+          <span class="mobile-nav-avail">Disponible 7j/7</span>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-nav-deco"></div>
   </div>
 
   <div class="hero-main">
@@ -8171,14 +8306,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Composer button → all
-  var composer = document.querySelector('[data-compose="all"]');
-  if (composer) {
-    composer.addEventListener('click', function(e) {
+  // Composer triggers — every element with data-compose="all" opens the wizard
+  document.querySelectorAll('[data-compose="all"]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
       e.preventDefault();
       openWizard('all');
     });
-  }
+  });
 
   // ═══ Product detail modal ═══
   var CARD_DATA = {
@@ -8392,12 +8526,13 @@ var mobileNav = document.getElementById('mobile-nav');
 if (burger && mobileNav) {
   burger.addEventListener('click', function() {
     var isOpen = mobileNav.classList.toggle('open');
+    burger.classList.toggle('is-open', isOpen);
     burger.innerHTML = isOpen ? '&#10005;' : '&#9776;';
   });
 }
 function closeMobileNav() {
   if (mobileNav) mobileNav.classList.remove('open');
-  if (burger) burger.innerHTML = '&#9776;';
+  if (burger) { burger.classList.remove('is-open'); burger.innerHTML = '&#9776;'; }
 }
 
 // Prevent scroll on # links
