@@ -11104,8 +11104,11 @@ window.mplT = function(key) {
 (function() {
   function init() {
     var ai = document.getElementById('mplMobileBarAi');
+    var tip = document.getElementById('mplMobileBarTip');
     if (ai) {
       ai.addEventListener('click', function() {
+        if (tip) tip.classList.remove('is-shown');
+        try { sessionStorage.setItem('mpl-aibar-tipped', '1'); } catch (e) {}
         var b = document.getElementById('mplAiBubble');
         if (b) b.click();
       });
@@ -11114,8 +11117,25 @@ window.mplT = function(key) {
     var bar = document.querySelector('.mpl-mobile-bar');
     var hero = document.querySelector('.hero');
     if (!bar || !hero) return;
+    var tipShown = false;
+    function maybeShowTip() {
+      if (tipShown || !tip) return;
+      try { if (sessionStorage.getItem('mpl-aibar-tipped')) return; } catch (e) {}
+      tipShown = true;
+      var t = (window.MPL_LANG === 'en') ? 'Chat with Michel' :
+              (window.MPL_LANG === 'ru') ? 'Чат с Мишелем' :
+              (window.MPL_LANG === 'it') ? 'Chatta con Michel' :
+              (window.MPL_LANG === 'de') ? 'Chat mit Michel' :
+              (window.MPL_LANG === 'nl') ? 'Chat met Michel' :
+              (window.MPL_LANG === 'ar') ? 'تحدث مع ميشيل' :
+              'Discutez avec Michel';
+      tip.textContent = t;
+      setTimeout(function() { tip.classList.add('is-shown'); }, 600);
+      setTimeout(function() { tip.classList.remove('is-shown'); }, 5000);
+    }
     if (!window.IntersectionObserver) {
       bar.classList.add('is-visible');
+      maybeShowTip();
       return;
     }
     var io = new IntersectionObserver(function(entries) {
@@ -11124,6 +11144,7 @@ window.mplT = function(key) {
           bar.classList.remove('is-visible');
         } else {
           bar.classList.add('is-visible');
+          maybeShowTip();
         }
       });
     }, { threshold: 0, rootMargin: '0px 0px -50% 0px' });
