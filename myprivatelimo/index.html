@@ -1363,6 +1363,11 @@ img { max-width: 100%; height: auto; }
   object-position: top center;
   transition: transform 0.6s var(--ease);
 }
+/* Keep the car visible at every state on the "location" card (the car
+   sits at the bottom of svc-vehicules.png; "top center" hid it on hover). */
+.svc-col[data-svc="location"] .svc-col-image img {
+  object-position: center 65%;
+}
 .svc-col:hover .svc-col-image img { transform: scale(1.06); }
 
 .svc-col::after {
@@ -7036,7 +7041,7 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
 
         <!-- Right: send CTA -->
         <div class="svc-recap-right">
-          <div class="svc-send-badge"><span class="svc-send-badge-dot"></span> Concierge en ligne</div>
+          <div class="svc-send-badge"><span class="svc-send-badge-dot"></span> <span class="svc-send-badge-text">Concierge en ligne</span></div>
           <div class="svc-send-title">Un clic,<br>on s'occupe de <em>tout</em></div>
           <p class="svc-send-subtitle">Appuyez sur Envoyer et recevez votre devis personnalis&eacute; sous 24h directement sur WhatsApp.</p>
           <div class="svc-send-cta">
@@ -7046,9 +7051,9 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
             </a>
           </div>
           <div class="svc-send-trust">
-            <span class="svc-send-trust-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sans engagement</span>
-            <span class="svc-send-trust-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>R&eacute;ponse &lt; 24h</span>
-            <span class="svc-send-trust-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Pas de compte</span>
+            <span class="svc-send-trust-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Sans engagement</span></span>
+            <span class="svc-send-trust-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>R&eacute;ponse &lt; 24h</span></span>
+            <span class="svc-send-trust-item"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Pas de compte</span></span>
           </div>
         </div>
       </div>
@@ -7269,39 +7274,44 @@ document.addEventListener("DOMContentLoaded", function() {
   var loaderStep = document.getElementById('svcLoaderStep');
   var loaderTitle = document.getElementById('svcLoaderTitle');
 
-  // Context definitions
+  // Context definitions \u2014 multilingual
   var CONTEXTS = {
     chauffeur: {
-      title: 'R\u00e9servez votre <em>chauffeur</em>',
-      sub: 'A\u00e9roport, Monaco, Cannes, gala, longue distance \u2014 choisissez vos trajets, multi-s\u00e9lection possible.',
+      title: { fr: 'R\u00e9servez votre <em>chauffeur</em>', en: 'Book your <em>chauffeur</em>', ru: '\u0417\u0430\u043a\u0430\u0436\u0438\u0442\u0435 <em>\u0448\u043e\u0444\u0451\u0440\u0430</em>', it: 'Prenota il tuo <em>autista</em>', de: 'Buchen Sie Ihren <em>Chauffeur</em>', nl: 'Boek uw <em>chauffeur</em>', ar: '\u0627\u062d\u062c\u0632 <em>\u0633\u0627\u0626\u0642\u0643</em>' },
+      sub: { fr: 'A\u00e9roport, Monaco, Cannes, gala, longue distance \u2014 choisissez vos trajets, multi-s\u00e9lection possible.', en: 'Airport, Monaco, Cannes, galas, long-distance \u2014 choose your journeys, multi-selection possible.', ru: '\u0410\u044d\u0440\u043e\u043f\u043e\u0440\u0442, \u041c\u043e\u043d\u0430\u043a\u043e, \u041a\u0430\u043d\u043d\u044b, \u0433\u0430\u043b\u0430, \u0434\u0430\u043b\u044c\u043d\u0438\u0435 \u043f\u043e\u0435\u0437\u0434\u043a\u0438 \u2014 \u0432\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043c\u0430\u0440\u0448\u0440\u0443\u0442\u044b.', it: 'Aeroporto, Monaco, Cannes, gala, lunga distanza \u2014 scegliete i vostri percorsi.', de: 'Flughafen, Monaco, Cannes, Gala, Langstrecke \u2014 w\u00e4hlen Sie Ihre Fahrten.', nl: 'Luchthaven, Monaco, Cannes, gala, lange afstand \u2014 kies uw trajecten.', ar: '\u0627\u0644\u0645\u0637\u0627\u0631\u060c \u0645\u0648\u0646\u0627\u0643\u0648\u060c \u0643\u0627\u0646\u060c \u062d\u0641\u0644\u0627\u062a\u060c \u0645\u0633\u0627\u0641\u0627\u062a \u0637\u0648\u064a\u0644\u0629 \u2014 \u0627\u062e\u062a\u0627\u0631\u0648\u0627 \u0631\u062d\u0644\u0627\u062a\u0643\u0645.' },
       defaultTab: 'transferts',
-      loaderTitle: 'Pr\u00e9paration : Chauffeur priv\u00e9'
+      loaderTitle: { fr: 'Pr\u00e9paration : Chauffeur priv\u00e9', en: 'Loading: Private chauffeur', ru: '\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430: \u041b\u0438\u0447\u043d\u044b\u0439 \u0448\u043e\u0444\u0451\u0440', it: 'Preparazione: Autista privato', de: 'Vorbereitung: Privatchauffeur', nl: 'Laden: Priv\u00e9chauffeur', ar: '\u062a\u062d\u0636\u064a\u0631: \u0633\u0627\u0626\u0642 \u062e\u0627\u0635' }
     },
     vehicules: {
-      title: 'Choisissez votre <em>v\u00e9hicule</em>',
-      sub: 'Berlines, sportives, SUV, vans VIP, \u00e9lectrique \u2014 louez avec ou sans chauffeur, livraison incluse.',
+      title: { fr: 'Choisissez votre <em>v\u00e9hicule</em>', en: 'Choose your <em>vehicle</em>', ru: '\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 <em>\u0430\u0432\u0442\u043e\u043c\u043e\u0431\u0438\u043b\u044c</em>', it: 'Scegliete il vostro <em>veicolo</em>', de: 'W\u00e4hlen Sie Ihr <em>Fahrzeug</em>', nl: 'Kies uw <em>voertuig</em>', ar: '\u0627\u062e\u062a\u0627\u0631\u0648\u0627 <em>\u0645\u0631\u0643\u0628\u062a\u0643\u0645</em>' },
+      sub: { fr: 'Berlines, sportives, SUV, vans VIP, \u00e9lectrique \u2014 louez avec ou sans chauffeur, livraison incluse.', en: 'Sedans, sports cars, SUVs, VIP vans, electric \u2014 rent with or without chauffeur, delivery included.', ru: '\u0421\u0435\u0434\u0430\u043d\u044b, \u0441\u043f\u043e\u0440\u0442\u043a\u0430\u0440\u044b, SUV, VIP-\u0432\u044d\u043d\u044b, \u044d\u043b\u0435\u043a\u0442\u0440\u043e \u2014 \u0441 \u0448\u043e\u0444\u0451\u0440\u043e\u043c \u0438\u043b\u0438 \u0431\u0435\u0437, \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0430 \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u0430.', it: 'Berline, sportive, SUV, van VIP, elettriche \u2014 noleggiate con o senza autista.', de: 'Limousinen, Sportwagen, SUVs, VIP-Vans, Elektro \u2014 mit oder ohne Chauffeur, Lieferung inklusive.', nl: 'Sedans, sportwagens, SUV\u2019s, VIP-busjes, elektrisch \u2014 met of zonder chauffeur, levering inbegrepen.', ar: '\u0633\u064a\u0627\u0631\u0627\u062a \u0633\u064a\u062f\u0627\u0646\u060c \u0631\u064a\u0627\u0636\u064a\u0629\u060c \u062f\u0641\u0639 \u0631\u0628\u0627\u0639\u064a\u060c \u0641\u0627\u0646 VIP\u060c \u0643\u0647\u0631\u0628\u0627\u0626\u064a\u0629 \u2014 \u0645\u0639 \u0623\u0648 \u0628\u062f\u0648\u0646 \u0633\u0627\u0626\u0642.' },
       defaultTab: 'vehicules',
-      loaderTitle: 'Pr\u00e9paration : V\u00e9hicules prestige'
+      loaderTitle: { fr: 'Pr\u00e9paration : V\u00e9hicules prestige', en: 'Loading: Prestige vehicles', ru: '\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430: \u041f\u0440\u0435\u043c\u0438\u0443\u043c-\u0430\u0432\u0442\u043e', it: 'Preparazione: Veicoli di prestigio', de: 'Vorbereitung: Prestige-Fahrzeuge', nl: 'Laden: Prestige voertuigen', ar: '\u062a\u062d\u0636\u064a\u0631: \u0645\u0631\u0643\u0628\u0627\u062a \u0641\u0627\u062e\u0631\u0629' }
     },
     conciergerie: {
-      title: 'Composez votre <em>conciergerie</em>',
-      sub: 'Villas, yachts, gastronomie, exp\u00e9riences exclusives \u2014 votre concierge orchestre tout, de la r\u00e9servation au check-out.',
+      title: { fr: 'Composez votre <em>conciergerie</em>', en: 'Compose your <em>concierge</em>', ru: '\u0421\u043e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 <em>\u043a\u043e\u043d\u0441\u044c\u0435\u0440\u0436</em>', it: 'Componete il vostro <em>concierge</em>', de: 'Stellen Sie Ihren <em>Concierge</em> zusammen', nl: 'Stel uw <em>conci\u00ebrge</em> samen', ar: '\u0643\u0648\u0651\u0646\u0648\u0627 <em>\u0643\u0648\u0646\u0633\u064a\u0631\u062c\u0643\u0645</em>' },
+      sub: { fr: 'Villas, yachts, gastronomie, exp\u00e9riences exclusives \u2014 votre concierge orchestre tout, de la r\u00e9servation au check-out.', en: 'Villas, yachts, gastronomy, exclusive experiences \u2014 your concierge handles everything, from booking to check-out.', ru: '\u0412\u0438\u043b\u043b\u044b, \u044f\u0445\u0442\u044b, \u0433\u0430\u0441\u0442\u0440\u043e\u043d\u043e\u043c\u0438\u044f, \u044d\u043a\u0441\u043a\u043b\u044e\u0437\u0438\u0432\u043d\u044b\u0435 \u0432\u043f\u0435\u0447\u0430\u0442\u043b\u0435\u043d\u0438\u044f \u2014 \u0432\u0430\u0448 \u043a\u043e\u043d\u0441\u044c\u0435\u0440\u0436 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0443\u0435\u0442 \u0432\u0441\u0451.', it: 'Ville, yacht, gastronomia, esperienze esclusive \u2014 il vostro concierge gestisce tutto.', de: 'Villen, Yachten, Gastronomie, exklusive Erlebnisse \u2014 Ihr Concierge organisiert alles.', nl: 'Villa\u2019s, jachten, gastronomie, exclusieve ervaringen \u2014 uw conci\u00ebrge regelt alles.', ar: '\u0641\u064a\u0644\u0627\u062a\u060c \u064a\u062e\u0648\u062a\u060c \u0641\u0646 \u0627\u0644\u0637\u0647\u064a\u060c \u062a\u062c\u0627\u0631\u0628 \u062d\u0635\u0631\u064a\u0629 \u2014 \u0627\u0644\u0643\u0648\u0646\u0633\u064a\u0631\u062c \u064a\u0646\u0638\u0645 \u0643\u0644 \u0634\u064a\u0621.' },
       defaultTab: 'tout',
-      loaderTitle: 'Pr\u00e9paration : Conciergerie priv\u00e9e'
+      loaderTitle: { fr: 'Pr\u00e9paration : Conciergerie priv\u00e9e', en: 'Loading: Private concierge', ru: '\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430: \u041b\u0438\u0447\u043d\u044b\u0439 \u043a\u043e\u043d\u0441\u044c\u0435\u0440\u0436', it: 'Preparazione: Concierge privato', de: 'Vorbereitung: Privater Concierge', nl: 'Laden: Priv\u00e9 conci\u00ebrge', ar: '\u062a\u062d\u0636\u064a\u0631: \u0643\u0648\u0646\u0633\u064a\u0631\u062c \u062e\u0627\u0635' }
     },
     all: {
-      title: 'Composez votre <em>s\u00e9jour</em>',
-      sub: 'S\u00e9lectionnez vos prestations parmi nos 6 univers. Recevez une proposition sur mesure en moins de 24\u00a0heures.',
+      title: { fr: 'Composez votre <em>s\u00e9jour</em>', en: 'Compose your <em>stay</em>', ru: '\u0421\u043e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0432\u0430\u0448\u0443 <em>\u043f\u043e\u0435\u0437\u0434\u043a\u0443</em>', it: 'Componi il tuo <em>soggiorno</em>', de: 'Stellen Sie Ihren <em>Aufenthalt</em> zusammen', nl: 'Stel uw <em>verblijf</em> samen', ar: '\u0643\u0648\u0651\u0646\u0648\u0627 <em>\u0625\u0642\u0627\u0645\u062a\u0643\u0645</em>' },
+      sub: { fr: 'S\u00e9lectionnez vos prestations parmi nos 6 univers. Recevez une proposition sur mesure en moins de 24\u00a0heures.', en: 'Select services from our 6 universes. Receive a bespoke proposal within 24\u00a0hours.', ru: '\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0443\u0441\u043b\u0443\u0433\u0438 \u0438\u0437 6 \u0432\u0441\u0435\u043b\u0435\u043d\u043d\u044b\u0445. \u041f\u043e\u043b\u0443\u0447\u0438\u0442\u0435 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u043e\u0435 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0437\u0430 24\u00a0\u0447\u0430\u0441\u0430.', it: 'Selezionate prestazioni dai nostri 6 universi. Ricevete una proposta su misura entro 24\u00a0ore.', de: 'W\u00e4hlen Sie Leistungen aus unseren 6 Universen. Erhalten Sie ein ma\u00dfgeschneidertes Angebot in weniger als 24\u00a0Stunden.', nl: 'Selecteer diensten uit onze 6 universa. Ontvang een voorstel op maat binnen 24\u00a0uur.', ar: '\u0627\u062e\u062a\u0627\u0631\u0648\u0627 \u062e\u062f\u0645\u0627\u062a \u0645\u0646 \u0639\u0648\u0627\u0644\u0645\u0646\u0627 \u0627\u0644\u0633\u062a\u0629. \u0627\u0633\u062a\u0644\u0645\u0648\u0627 \u0639\u0631\u0636\u0627\u064b \u0645\u062e\u0635\u0635\u0627\u064b \u062e\u0644\u0627\u0644 24\u00a0\u0633\u0627\u0639\u0629.' },
       defaultTab: 'tout',
-      loaderTitle: 'Pr\u00e9paration : s\u00e9jour combin\u00e9'
+      loaderTitle: { fr: 'Pr\u00e9paration : s\u00e9jour combin\u00e9', en: 'Loading: combined stay', ru: '\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430: \u043a\u043e\u043c\u0431\u0438\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u043e\u0442\u0434\u044b\u0445', it: 'Preparazione: soggiorno combinato', de: 'Vorbereitung: kombinierter Aufenthalt', nl: 'Laden: gecombineerd verblijf', ar: '\u062a\u062d\u0636\u064a\u0631: \u0625\u0642\u0627\u0645\u0629 \u0645\u062f\u0645\u062c\u0629' }
     }
   };
+
+  function ctxT(obj) {
+    var lang = window.MPL_LANG || 'fr';
+    return (typeof obj === 'object') ? (obj[lang] || obj['fr']) : obj;
+  }
 
   function setContext(name) {
     var ctx = CONTEXTS[name] || CONTEXTS.all;
     section.dataset.context = name;
-    if (titleEl) titleEl.innerHTML = ctx.title;
-    if (subEl) subEl.textContent = ctx.sub;
+    if (titleEl) titleEl.innerHTML = ctxT(ctx.title);
+    if (subEl) subEl.textContent = ctxT(ctx.sub);
     // Activate the relevant tab
     var defaultTab = section.querySelector('.svc-tab[data-tab="' + ctx.defaultTab + '"]');
     if (defaultTab) defaultTab.click();
@@ -7425,7 +7435,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var price = parseInt(card.dataset.price) || 0;
       var priceTxt;
       if (price > 0) { total += price; priceTxt = price + ' €'; }
-      else { hasDevis = true; priceTxt = 'Sur devis'; }
+      else { hasDevis = true; priceTxt = mplT('sur_devis'); }
       var isNew = (cName === newItemName) ? ' cart-item-new' : '';
       html += '<li class="' + isNew + '">';
       html += '<span class="cs-num">' + idx + '</span>';
@@ -7449,9 +7459,9 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
     var totalTxt;
-    if (total > 0 && hasDevis) totalTxt = total + ' € + devis';
+    if (total > 0 && hasDevis) totalTxt = total + ' € ' + mplT('devis_suffix');
     else if (total > 0) totalTxt = total + ' €';
-    else totalTxt = 'Sur devis';
+    else totalTxt = mplT('sur_devis');
     if (cartSidebarTotal) cartSidebarTotal.innerHTML = totalTxt;
   }
 
@@ -7510,7 +7520,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var price = parseInt(card.dataset.price) || 0;
       var priceTxt;
       if (price > 0) { total += price; priceTxt = price + ' \u20ac'; }
-      else { hasDevis = true; priceTxt = 'Sur devis'; }
+      else { hasDevis = true; priceTxt = mplT('sur_devis'); }
       html += '<li style="animation-delay:' + (idx * 0.06) + 's">';
       html += '<span class="item-num">' + idx + '</span>';
       html += '<span class="item-name">' + cName + '</span>';
@@ -7527,10 +7537,10 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
     var totalTxt;
-    if (total > 0 && hasDevis) totalTxt = total + ' \u20ac + devis';
+    if (total > 0 && hasDevis) totalTxt = total + ' \u20ac ' + mplT('devis_suffix');
     else if (total > 0) totalTxt = total + ' \u20ac';
-    else totalTxt = 'Sur devis';
-    summaryTotal.innerHTML = '<span class="lbl">Estimation</span><span class="val">' + totalTxt + '</span>';
+    else totalTxt = mplT('sur_devis');
+    summaryTotal.innerHTML = '<span class="lbl">' + mplT('estimation') + '</span><span class="val">' + totalTxt + '</span>';
     rebuildSendLink();
   }
 
@@ -7580,17 +7590,32 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  document.addEventListener('mpl:langchange', function() {
+    updateSummary();
+    refreshCartSidebar(null);
+  });
+
   // ═══ Loader-driven reveal ═══
   function openWizard(contextName) {
     var ctx = CONTEXTS[contextName] || CONTEXTS.all;
     if (!loader) return;
     loader.classList.add('active');
     document.body.style.overflow = 'hidden';
-    if (loaderTitle) loaderTitle.textContent = ctx.loaderTitle;
-    if (loaderStep) loaderStep.textContent = 'Chargement des prestations';
+    if (loaderTitle) loaderTitle.textContent = ctxT(ctx.loaderTitle);
+    var loaderSteps = {
+      fr: ['Chargement des prestations', 'Composition de votre s\u00e9jour', 'Pr\u00eat'],
+      en: ['Loading services', 'Composing your stay', 'Ready'],
+      ru: ['\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0443\u0441\u043b\u0443\u0433', '\u0421\u043e\u0441\u0442\u0430\u0432\u043b\u044f\u0435\u043c \u043f\u043e\u0435\u0437\u0434\u043a\u0443', '\u0413\u043e\u0442\u043e\u0432\u043e'],
+      it: ['Caricamento servizi', 'Composizione del soggiorno', 'Pronto'],
+      de: ['Leistungen laden', 'Aufenthalt zusammenstellen', 'Fertig'],
+      nl: ['Diensten laden', 'Verblijf samenstellen', 'Klaar'],
+      ar: ['\u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u062e\u062f\u0645\u0627\u062a', '\u062a\u0643\u0648\u064a\u0646 \u0625\u0642\u0627\u0645\u062a\u0643\u0645', '\u062c\u0627\u0647\u0632'],
+    };
+    var ls = loaderSteps[window.MPL_LANG] || loaderSteps['fr'];
+    if (loaderStep) loaderStep.textContent = ls[0];
 
-    setTimeout(function() { if (loaderStep) loaderStep.textContent = 'Composition de votre s\u00e9jour'; }, 700);
-    setTimeout(function() { if (loaderStep) loaderStep.textContent = 'Pr\u00eat'; }, 1400);
+    setTimeout(function() { if (loaderStep) loaderStep.textContent = ls[1]; }, 700);
+    setTimeout(function() { if (loaderStep) loaderStep.textContent = ls[2]; }, 1400);
 
     setTimeout(function() {
       section.classList.remove('is-hidden');
@@ -8159,6 +8184,17 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
 })();
 </script>
 <script>
+// ═══════ MPL i18n — dynamic text helpers ═══════
+window.MPL_T = {
+  estimation: { fr: "Estimation", en: "Estimate", ru: "Оценка", it: "Stima", de: "Schätzung", nl: "Schatting", ar: "تقدير" },
+  sur_devis: { fr: "Sur devis", en: "On request", ru: "По запросу", it: "Su preventivo", de: "Auf Anfrage", nl: "Op offerte", ar: "حسب الطلب" },
+  devis_suffix: { fr: "+ devis", en: "+ quote", ru: "+ запрос", it: "+ preventivo", de: "+ Anfrage", nl: "+ offerte", ar: "+ طلب" },
+};
+window.mplT = function(key) {
+  var lang = window.MPL_LANG || 'fr';
+  return (MPL_T[key] && MPL_T[key][lang]) || (MPL_T[key] && MPL_T[key]['fr']) || key;
+};
+
 // ═══════ MPL i18n — 7 languages ═══════
 (function() {
   var I18N = {
@@ -8249,6 +8285,14 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
       de: "Aufenthalt zusammenstellen",
       nl: "Mijn verblijf samenstellen",
       ar: "تنظيم إقامتي",
+    },
+    ".mpl-final-cta-or span": {
+      en: "or",
+      ru: "или",
+      it: "oppure",
+      de: "oder",
+      nl: "of",
+      ar: "أو",
     },
     ".mpl-fcta-wa span": {
       en: "Direct WhatsApp",
@@ -8346,38 +8390,6 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
       nl: "Uw offerte op WhatsApp",
       ar: "عرض السعر عبر واتساب",
     },
-    ".nav-link[href=\"#services\"]": {
-      en: "Services",
-      ru: "Услуги",
-      it: "Servizi",
-      de: "Leistungen",
-      nl: "Diensten",
-      ar: "الخدمات",
-    },
-    ".nav-link[href=\"#flotte\"]": {
-      en: "Fleet",
-      ru: "Автопарк",
-      it: "Flotta",
-      de: "Fuhrpark",
-      nl: "Vloot",
-      ar: "الأسطول",
-    },
-    ".nav-link[href=\"#conciergerie\"]": {
-      en: "Concierge",
-      ru: "Консьерж",
-      it: "Concierge",
-      de: "Concierge",
-      nl: "Conciërge",
-      ar: "الكونسيرج",
-    },
-    ".nav-cta": {
-      en: "Book →",
-      ru: "Бронь →",
-      it: "Prenota →",
-      de: "Buchen →",
-      nl: "Boeken →",
-      ar: "احجز ←",
-    },
     ".mobile-nav-overlay a[href=\"#services\"]": {
       en: "Services",
       ru: "Услуги",
@@ -8386,37 +8398,21 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
       nl: "Diensten",
       ar: "الخدمات",
     },
-    ".mobile-nav-overlay a[href=\"#flotte\"]": {
-      en: "Fleet",
-      ru: "Автопарк",
-      it: "Flotta",
-      de: "Fuhrpark",
-      nl: "Vloot",
-      ar: "الأسطول",
+    ".mobile-nav-overlay a[href=\"#svcSelector\"]:not(.mobile-nav-cta)": {
+      en: "Compose my stay",
+      ru: "Составить поездку",
+      it: "Componi il mio soggiorno",
+      de: "Aufenthalt zusammenstellen",
+      nl: "Mijn verblijf samenstellen",
+      ar: "تنظيم إقامتي",
     },
-    ".mobile-nav-overlay a[href=\"#conciergerie\"]": {
-      en: "Concierge",
-      ru: "Консьерж",
-      it: "Concierge",
-      de: "Concierge",
-      nl: "Conciërge",
-      ar: "الكونسيرج",
-    },
-    ".mobile-nav-overlay a[href=\"#process\"]": {
-      en: "Process",
-      ru: "Процесс",
-      it: "Processo",
-      de: "Ablauf",
-      nl: "Proces",
-      ar: "العملية",
-    },
-    ".mobile-nav-overlay a[href=\"#avis\"]": {
-      en: "Reviews",
-      ru: "Отзывы",
-      it: "Recensioni",
-      de: "Bewertungen",
-      nl: "Reviews",
-      ar: "التقييمات",
+    ".mobile-nav-overlay a[href*=\"wa.me\"]": {
+      en: "WhatsApp",
+      ru: "WhatsApp",
+      it: "WhatsApp",
+      de: "WhatsApp",
+      nl: "WhatsApp",
+      ar: "واتساب",
     },
     ".mobile-nav-cta": {
       en: "Book →",
@@ -9713,6 +9709,78 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
       de: "Stellen Sie Ihre Frage...",
       nl: "Stel uw vraag...",
       ar: "اطرح سؤالك...",
+    },
+    ".svc-col-arrow span": {
+      en: "Compose",
+      ru: "Составить",
+      it: "Componi",
+      de: "Komponieren",
+      nl: "Samenstellen",
+      ar: "كوّن",
+    },
+    ".svc-send-badge-text": {
+      en: "Concierge online",
+      ru: "Консьерж онлайн",
+      it: "Concierge online",
+      de: "Concierge online",
+      nl: "Conciërge online",
+      ar: "الكونسيرج متصل",
+    },
+    ".svc-send-trust-item:nth-of-type(1) > span": {
+      en: "No commitment",
+      ru: "Без обязательств",
+      it: "Senza impegno",
+      de: "Unverbindlich",
+      nl: "Vrijblijvend",
+      ar: "بدون التزام",
+    },
+    ".svc-send-trust-item:nth-of-type(2) > span": {
+      en: "Response &lt; 24h",
+      ru: "Ответ &lt; 24ч",
+      it: "Risposta &lt; 24h",
+      de: "Antwort &lt; 24h",
+      nl: "Antwoord &lt; 24u",
+      ar: "الرد &lt; 24 ساعة",
+    },
+    ".svc-send-trust-item:nth-of-type(3) > span": {
+      en: "No account needed",
+      ru: "Без регистрации",
+      it: "Nessun account",
+      de: "Kein Konto nötig",
+      nl: "Geen account nodig",
+      ar: "بدون حساب",
+    },
+    ".cart-sidebar-title": {
+      en: "Selection",
+      ru: "Подборка",
+      it: "Selezione",
+      de: "Auswahl",
+      nl: "Selectie",
+      ar: "الاختيار",
+    },
+    "#cartSidebarNext": {
+      en: "Summary →",
+      ru: "Итого →",
+      it: "Riepilogo →",
+      de: "Übersicht →",
+      nl: "Overzicht →",
+      ar: "← ملخص",
+    },
+    ".svc-summary-form label:nth-of-type(2) span": {
+      en: "Phone",
+      ru: "Телефон",
+      it: "Telefono",
+      de: "Telefon",
+      nl: "Telefoon",
+      ar: "الهاتف",
+    },
+    ".svc-summary-form label.--full span": {
+      en: "Dates, flight number, details…",
+      ru: "Даты, номер рейса, уточнения…",
+      it: "Date, numero volo, dettagli…",
+      de: "Daten, Flugnummer, Details…",
+      nl: "Data, vluchtnummer, details…",
+      ar: "…التواريخ، رقم الرحلة، تفاصيل",
     },
   };
   var LANG_META = {
