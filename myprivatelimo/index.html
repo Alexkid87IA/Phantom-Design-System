@@ -6152,18 +6152,17 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
   .mpl-mobile-bar {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 800;
-    background: var(--paper);
-    border-top: 1.5px solid var(--maniaci-200, rgba(196,162,101,0.32));
-    box-shadow: 0 -6px 22px rgba(0,0,0,0.10);
-    padding: 10px 12px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    /* Hidden until user scrolls past the hero (avoids stacking with hero CTAs) */
+    z-index: 9400;
+    background: var(--ink);
+    border-top: 1px solid rgba(196,162,101,0.25);
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.35);
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     transform: translateY(calc(100% + 12px));
     pointer-events: none;
     visibility: hidden;
@@ -6175,20 +6174,20 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     visibility: visible;
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
   }
-  /* Integrated AI avatar (replaces the floating bubble on mobile) */
   .mpl-mobile-bar-ai {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px; height: 50px;
+    width: 52px; height: 52px;
     flex-shrink: 0;
     border-radius: 50%;
-    border: 1.5px solid var(--maniaci);
-    background: var(--paper);
+    border: 2px solid var(--maniaci);
+    background: var(--ink);
     overflow: hidden;
     cursor: pointer;
     padding: 0;
     position: relative;
+    box-shadow: 0 0 0 3px rgba(196,162,101,0.15);
   }
   .mpl-mobile-bar-ai img {
     width: 100%; height: 100%;
@@ -6199,16 +6198,20 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
   .mpl-mobile-bar-ai::after {
     content: "";
     position: absolute;
-    bottom: 2px; right: 2px;
-    width: 11px; height: 11px;
+    bottom: 1px; right: 1px;
+    width: 12px; height: 12px;
     border-radius: 50%;
     background: #22c55e;
-    border: 2px solid var(--paper);
-    box-shadow: 0 0 6px rgba(34,197,94,0.6);
+    border: 2.5px solid var(--ink);
+    box-shadow: 0 0 8px rgba(34,197,94,0.6);
+    animation: mobileDotPulse 2.5s ease-in-out infinite;
   }
-  .mpl-mobile-bar-ai:active { transform: scale(0.95); }
+  @keyframes mobileDotPulse {
+    0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.4); }
+    50% { box-shadow: 0 0 12px rgba(34,197,94,0.8); }
+  }
+  .mpl-mobile-bar-ai:active { transform: scale(0.92); }
 
-  /* Gold CTA pill — fills remaining width */
   .mpl-mobile-bar-cta {
     display: flex;
     align-items: center;
@@ -6217,16 +6220,16 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
     flex: 1;
     background: var(--maniaci);
     color: var(--ink);
-    border: 1.5px solid var(--maniaci-800, #8a6f3f);
-    border-radius: var(--r-full);
-    padding: 14px 18px;
-    font-family: var(--font-body);
-    font-size: 13.5px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+    border: none;
+    border-radius: var(--r-lg);
+    padding: 15px 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgba(196,162,101,0.32);
+    box-shadow: 0 4px 18px rgba(196,162,101,0.3);
     transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
   }
   .mpl-mobile-bar-cta svg { width: 14px; height: 14px; }
@@ -6240,8 +6243,8 @@ html[dir="rtl"] .mpl-manifesto-photo img { transform: scaleX(-1); }
 
   /* Ensure no element gets hidden behind the bar */
   body { padding-bottom: 0; }
-  .footer { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important; }
-  .mpl-final-cta { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
+  .footer { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important; }
+  .mpl-final-cta { padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important; }
 }
 
 
@@ -9866,7 +9869,7 @@ document.querySelectorAll('a[href="#"]').forEach(function(a) {
           bar.classList.add('is-visible');
         }
       });
-    }, { threshold: 0, rootMargin: '0px 0px -90% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -50% 0px' });
     io.observe(hero);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
